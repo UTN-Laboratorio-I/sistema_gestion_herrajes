@@ -127,7 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Categoria.cpp" />
     <ClCompile Include="sistema_gestion_herrajes.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Categoria.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
