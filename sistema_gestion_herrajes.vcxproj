@@ -128,10 +128,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Categoria.cpp" />
+    <ClCompile Include="IngresoCaja.cpp" />
     <ClCompile Include="sistema_gestion_herrajes.cpp" />
+    <ClCompile Include="Transaccion.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Categoria.h" />
+    <ClInclude Include="IngresoCaja.h" />
+    <ClInclude Include="Transaccion.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="readme.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
