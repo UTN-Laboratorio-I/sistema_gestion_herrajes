@@ -13,8 +13,17 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="TESTING">
-      <UniqueIdentifier>{8eada473-a575-49e0-82ba-823a19d79ecd}</UniqueIdentifier>
+    <Filter Include="Archivos de encabezado\Fecha">
+      <UniqueIdentifier>{f1d30fe3-41f7-47fe-9c41-82ccf22a0a66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Sistema">
+      <UniqueIdentifier>{9eb47e72-d16c-4fb4-b748-e313d3ab393b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Fecha">
+      <UniqueIdentifier>{2dfca40c-bab0-4785-9f30-b9976ee930ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Sistema">
+      <UniqueIdentifier>{d640bc47-b6dd-4a88-aa7a-e4add368754c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -28,19 +37,19 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Fecha.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Horario.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\Fecha</Filter>
     </ClCompile>
     <ClCompile Include="FechaHorario.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\Fecha</Filter>
     </ClCompile>
-    <ClCompile Include="Archivo.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="Horario.cpp">
+      <Filter>Archivos de origen\Fecha</Filter>
     </ClCompile>
     <ClCompile Include="Sistema.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\Sistema</Filter>
+    </ClCompile>
+    <ClCompile Include="Archivo.cpp">
+      <Filter>Archivos de origen\Sistema</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -50,20 +59,20 @@
     <ClInclude Include="Producto.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Fecha.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Horario.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="FechaHorario.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Fecha</Filter>
     </ClInclude>
-    <ClInclude Include="Archivo.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="Fecha.h">
+      <Filter>Archivos de encabezado\Fecha</Filter>
     </ClInclude>
     <ClInclude Include="Sistema.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Sistema</Filter>
+    </ClInclude>
+    <ClInclude Include="Horario.h">
+      <Filter>Archivos de encabezado\Fecha</Filter>
+    </ClInclude>
+    <ClInclude Include="Archivo.h">
+      <Filter>Archivos de encabezado\Sistema</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
