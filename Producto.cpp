@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include "Producto.h"
 
 Producto::Producto(){
@@ -54,7 +53,6 @@ void cargarProductos() {
 	std::string nombreProducto, descripcionProducto;
 
 	std::cout << "NOMBRE DE PRODUCTO: ";
-	std::
 	std::cout << "PRECIO DE COSTO: ";
 	std::cin >> pCosto;
 	std::cout << "PRECIO DE VENTA: ";

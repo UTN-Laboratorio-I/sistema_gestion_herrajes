@@ -1,23 +1,23 @@
 #pragma once
-
 #include "Producto.h"
 
+template <class T>
 class Archivo
 {
 public:
-	Archivo();
+	Archivo() = default;
 	
-	bool listarRegistroProducto(Producto prod);
-	bool grabarRegistroProducto(Producto prod);
+	bool listarRegistroProducto(const T& objeto, const char* archivo);
+	bool grabarRegistroProducto(const T& objeto, const char* archivo);
 
 private:
 
 };
 
-Archivo::Archivo()
-{
-}
-
-Archivo::~Archivo()
-{
-}
+//Archivo::Archivo()
+//{
+//}
+//
+//Archivo::~Archivo()
+//{
+//}

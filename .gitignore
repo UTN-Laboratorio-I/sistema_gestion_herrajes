@@ -365,3 +365,6 @@ FodyWeavers.xsd
 #TESTING
 test.cpp
 test.exe
+
+#Formatos de archivos
+*.dat
