@@ -1,36 +1,35 @@
 #include <iostream>
-
+#pragma warning (disable : 4996)
 #include "Archivo.h"
 
-Archivo::Archivo() {
-
-}
-
-bool Archivo::grabarRegistroProducto(Producto prod) {
+template <class T>
+bool Archivo<T>::grabarRegistroProducto(const T& objeto, const char* archivo) {
 
 	FILE *p;
-	p = fopen("producto.dat", "ab");
+	p = fopen(archivo, "ab");
 
 	if (p == NULL) {
 		return false;
 	}
 
-	bool escribio = fwrite(&prod, sizeof(prod), 1, p);
+	bool escribio = fwrite(&objeto, sizeof(objeto), 1, p);
 
 	return escribio;
 
 }
 
-bool Archivo::listarRegistroProducto(Producto prod) {
+template <class T>
+bool Archivo<T>::listarRegistroProducto(const T& objeto, const char* archivo) {
 
 	FILE* p;
-	p = fopen("producto.dat", "rb");
+	p = fopen(archivo, "rb");
 
 	if (p == NULL) {
 		return false;
 	}
+	T reg;
 
-	bool pudoLeer = fread(&prod, sizeof(prod), 1, p);
-
+	bool pudoLeer = fread(&reg, sizeof(objeto), 1, p);
+	
 	return pudoLeer;
 }
