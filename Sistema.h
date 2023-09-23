@@ -6,5 +6,6 @@ private:
 	char usuario_logged[20];
 public:
 	void guardarProducto();
+	void administrarPrograma();
 };
 
