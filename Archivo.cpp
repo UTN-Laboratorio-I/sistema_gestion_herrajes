@@ -2,14 +2,14 @@
 
 #include "Archivo.h"
 
-Archivo::Archivo() {
-
+Archivo::Archivo(std::string nombre){
+	strcrp()
 }
 
-bool Archivo::grabarRegistroProducto(Producto prod) {
+bool Archivo::grabarRegistroProducto(nombre) {
 
 	FILE *p;
-	p = fopen("producto.dat", "ab");
+	p = fopen(nombre, "ab");
 
 	if (p == NULL) {
 		return false;
