@@ -132,6 +132,7 @@
     <ClCompile Include="Fecha.cpp" />
     <ClCompile Include="FechaHorario.cpp" />
     <ClCompile Include="Horario.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Producto.cpp" />
     <ClCompile Include="Sistema.cpp" />
     <ClCompile Include="sistema_gestion_herrajes.cpp" />
@@ -142,7 +143,9 @@
     <ClInclude Include="Fecha.h" />
     <ClInclude Include="FechaHorario.h" />
     <ClInclude Include="Horario.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Producto.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Sistema.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

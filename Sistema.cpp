@@ -3,6 +3,7 @@
 #include "Archivo.h"
 #include "Archivo.cpp"
 
+
 void Sistema::guardarProducto() {
 	Producto producto;
 	producto.setIdProducto(2);
@@ -16,4 +17,8 @@ void Sistema::guardarProducto() {
 	Producto prod;
 	archivo.grabarRegistroProducto(producto, "produc.dat");
 	archivo.listarRegistroProducto(prod, "produc.dat");
+}
+
+void Sistema::administrarPrograma() {
+
 }
