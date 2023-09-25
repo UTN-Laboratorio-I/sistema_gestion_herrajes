@@ -10,6 +10,7 @@ int main() {
 
 	sistema.administrarPrograma();
 
+
 	system("pause");
 	return 0;
 }

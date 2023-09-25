@@ -3,7 +3,7 @@
 #include "Archivo.h"
 
 template <class T>
-bool Archivo<T>::grabarRegistroProducto(const T& objeto, const char* archivo) {
+bool Archivo<T>::grabarRegistroArchivo(const T& objeto, const char* archivo) {
 
 	FILE *p;
 	p = fopen(archivo, "ab");
@@ -19,7 +19,7 @@ bool Archivo<T>::grabarRegistroProducto(const T& objeto, const char* archivo) {
 }
 
 template <class T>
-bool Archivo<T>::listarRegistroProducto(const T& objeto, const char* archivo) {
+bool Archivo<T>::listarRegistroArchivo(const T& objeto, const char* archivo) {
 
 	FILE* p;
 	p = fopen(archivo, "rb");
@@ -27,9 +27,8 @@ bool Archivo<T>::listarRegistroProducto(const T& objeto, const char* archivo) {
 	if (p == NULL) {
 		return false;
 	}
-	T reg;
 
-	bool pudoLeer = fread(&reg, sizeof(objeto), 1, p);
+	bool pudoLeer = fread(&objeto, sizeof(objeto), 1, p);
 	
 	return pudoLeer;
 }

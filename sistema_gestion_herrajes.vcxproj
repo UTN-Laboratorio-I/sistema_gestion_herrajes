@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="AdminABM.cpp" />
     <ClCompile Include="AdminCompras.cpp" />
+    <ClCompile Include="AdminLogin.cpp" />
     <ClCompile Include="AdminVentas.cpp" />
     <ClCompile Include="Archivo.cpp" />
     <ClCompile Include="Categoria.cpp" />
@@ -143,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="AdminABM.h" />
     <ClInclude Include="AdminCompras.h" />
+    <ClInclude Include="AdminLogin.h" />
     <ClInclude Include="AdminVentas.h" />
     <ClInclude Include="Archivo.h" />
     <ClInclude Include="Categoria.h" />

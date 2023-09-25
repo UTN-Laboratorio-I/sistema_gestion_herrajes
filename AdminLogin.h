@@ -1,11 +1,14 @@
 #pragma once
 #include "Sistema.h"
-class AdminLogin : 
-	public Sistema
+
+class AdminLogin
 {
 private:
+	//Declaramos la variable _sistema, que es un puntero a la instancia
+	Sistema* _sistema;
 public:
+	AdminLogin(Sistema* sistema);
 	//métodos para manejar login.
-	void verificarLogin();
+	bool verificarLogin();
 };
 

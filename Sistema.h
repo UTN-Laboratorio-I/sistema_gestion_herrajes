@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 using namespace std;
+
 class Sistema
 {
 protected:
@@ -9,17 +10,14 @@ protected:
 	std::string _usuarioLogged;
 
 	//Handler de errores:
-	struct _error {
-		bool _err;
-		std::string _mensajeError;
-	};
+
 
 public:
-	Sistema() {
-		_encendido = true;
-		_pantalla = 0;
-		_usuarioLogged = "";
-	}
+#pragma region Constructor
+	Sistema();
+#pragma endregion
+
+#pragma region Setters/Getters
 	void setEncendido(bool set);
 	bool getEncendido();
 
@@ -28,10 +26,11 @@ public:
 
 	void setPantalla(int opc);
 	int getPantalla();
+#pragma endregion
 
-	void login();
+#pragma region Métodos
 	void administrarPrograma();
+#pragma endregion
 
-	void guardarProducto();
 };
 
