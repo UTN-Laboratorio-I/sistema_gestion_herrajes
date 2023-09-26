@@ -10,6 +10,8 @@ void header(string usuario = "") {
 }
 #pragma endregion
 
+//InterfazUI::InterfazUI() {}
+InterfazUI::InterfazUI(Sistema* sistema) : _sistema(sistema){}
 
 void InterfazUI::vistaLogin() {
 	header();
@@ -17,14 +19,14 @@ void InterfazUI::vistaLogin() {
 	cout << "Ingrese su nombre: ";
 	cin >> usuario;
 
-	setUsuarioLogged(usuario);
+	_sistema->setUsuarioLogged(usuario);
 
 	system("cls");
 	cout << "Bienvenido " << usuario << endl;
 }
 
 void InterfazUI::menuPrincipal() {
-	string usuario = getUsuarioLogged();
+	string usuario = _sistema->getUsuarioLogged();
 	int opc;
 	header(usuario);
 	cout << "1) Compras - Stock" << endl;
@@ -32,10 +34,12 @@ void InterfazUI::menuPrincipal() {
 	cout << "3) ABM" << endl;
 	cout << "4) Reportes" << endl;
 	cout << "5) Configuracion" << endl;
-	cout << "0) Salir" << endl;
+	cout << "6) Reporte" << endl;
+	cout << "7) Reporte" << endl;
+		cout << "0) Salir" << endl;
 	cin >> opc;
 	//Añadir validación opciones pantalla.
-	setPantalla(opc);
+	_sistema->setPantalla(opc);
 }
 
 void InterfazUI::subMenuCompras() {

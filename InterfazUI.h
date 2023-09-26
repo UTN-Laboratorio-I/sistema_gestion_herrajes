@@ -1,12 +1,12 @@
 #pragma once
 #include "Sistema.h"
-class InterfazUI : 
-	public Sistema
+class InterfazUI
 {
 private:
-
+	Sistema* _sistema;
 public:
-
+	//InterfazUI();
+	InterfazUI(Sistema* sistema);
 	void vistaLogin();
 
 	void menuPrincipal();

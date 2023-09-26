@@ -10,7 +10,10 @@ protected:
 	std::string _usuarioLogged;
 
 	//Handler de errores:
-
+	struct _error {
+		bool _err;
+		std::string _mensajeError;
+	};
 
 public:
 #pragma region Constructor

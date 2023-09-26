@@ -5,8 +5,8 @@
 AdminLogin::AdminLogin(Sistema* sistema) : _sistema(sistema) {}
 
 bool AdminLogin::verificarLogin() {
-	InterfazUI UI;
-	UI.vistaLogin();
+	InterfazUI UI_login(_sistema);
+	UI_login.vistaLogin();
 	//Retorno true hasta añadir lógica de login
 	int opc = 1;
 	_sistema->setPantalla(opc);

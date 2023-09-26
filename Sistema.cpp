@@ -5,8 +5,8 @@
 #include "Archivo.cpp"
 #include "InterfazUI.h"
 #include "AdminLogin.h"
-#include "AdminCompras.h"
-#include "AdminVentas.h"
+#include "AdminCompra.h"
+#include "AdminVenta.h"
 #include "AdminABM.h"
 
 #pragma region Setters/Getters
@@ -28,7 +28,7 @@ int Sistema::getPantalla() { return _pantalla; }
 #pragma endregion
 
 void Sistema::administrarPrograma() {
-	InterfazUI UI;
+	InterfazUI UI(this);
 	AdminLogin adm_login(this); //Facilitamos un puntero a la instancia de sistema para acceder a sus métodos.  
 	AdminCompras adm_compras;
 	AdminVentas adm_ventas;
@@ -41,18 +41,34 @@ void Sistema::administrarPrograma() {
 			break;
 		case 1: //Menú principal:
 			UI.menuPrincipal();
+
 			break;
 		case 2: //Submenú Compras/stock:
+			//adm_compras.;
 			break;
 		case 3: //Submenú Ventas:
+			cout << "Ventas";
+
 			break;
 		case 4: //Submenú ABM:
+			cout << "ABM";
+
 			break;
 		case 5: //Submenú Reportes:
+			cout << "Reportes";
+
 			break;
 		case 6: //Submenú Configuración:
+			cout << "Config";
+
+			break;
+		case 7: //Submenú Configuración:
+			cout << "USUARIOS";
+
 			break;
 		case 999: //Salir
+			cout << "Salir";
+
 			break;
 		}
 	}
