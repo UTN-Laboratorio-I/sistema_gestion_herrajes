@@ -51,6 +51,9 @@
     <ClCompile Include="Archivo.cpp">
       <Filter>Archivos de origen\Sistema</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Categoria.h">
@@ -73,6 +76,12 @@
     </ClInclude>
     <ClInclude Include="Archivo.h">
       <Filter>Archivos de encabezado\Sistema</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
