@@ -25,12 +25,17 @@ std::string Sistema::getUsuarioLogged() { return _usuarioLogged; }
 void Sistema::setPantalla(int opc) { _pantalla = opc; }
 int Sistema::getPantalla() { return _pantalla; }
 
+void Sistema::setError(std::string mensaje) { _error.setError(true, mensaje); }
+std::string Sistema::getError() { return _error.getErrorMensaje(); }
+bool Sistema::hasError() { return _error.hasError(); }
+void Sistema::limpiarError() { _error.limpiarErrores(); }
+
 #pragma endregion
 
 void Sistema::administrarPrograma() {
 	InterfazUI UI(this);
 	AdminLogin adm_login(this); //Facilitamos un puntero a la instancia de sistema para acceder a sus métodos.  
-	AdminCompras adm_compras;
+	AdminCompra adm_compras;
 	AdminVentas adm_ventas;
 	AdminABM adm_ABM;
 
@@ -44,7 +49,7 @@ void Sistema::administrarPrograma() {
 
 			break;
 		case 2: //Submenú Compras/stock:
-			//adm_compras.;
+			UI.subMenuCompras();
 			break;
 		case 3: //Submenú Ventas:
 			cout << "Ventas";

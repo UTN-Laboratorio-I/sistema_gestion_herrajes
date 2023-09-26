@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "ErrorDto.h"
 using namespace std;
 
 class Sistema
@@ -8,12 +9,7 @@ protected:
 	bool _encendido;
 	int _pantalla;
 	std::string _usuarioLogged;
-
-	//Handler de errores:
-	struct _error {
-		bool _err;
-		std::string _mensajeError;
-	};
+	ErrorDto _error;
 
 public:
 #pragma region Constructor
@@ -29,6 +25,12 @@ public:
 
 	void setPantalla(int opc);
 	int getPantalla();
+
+	void setError(std::string mensaje);
+	std::string getError();
+	bool hasError();
+	void limpiarError();
+
 #pragma endregion
 
 #pragma region Métodos

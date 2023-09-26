@@ -7,11 +7,16 @@ private:
 public:
 	//InterfazUI();
 	InterfazUI(Sistema* sistema);
+
+	void headerDinamico();
+
+	bool opcionesValidasMenu(int inicio, int fin, int seleccion, bool imprimir = false, bool admiteAtras = true);
+
 	void vistaLogin();
 
 	void menuPrincipal();
 
-	void subMenuCompras();
+	int subMenuCompras();
 
 	void subMenuVentas();
 
