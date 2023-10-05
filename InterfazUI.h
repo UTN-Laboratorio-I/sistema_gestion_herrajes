@@ -6,7 +6,10 @@ private:
 	Sistema* _sistema;
 public:
 	//InterfazUI();
+	InterfazUI();
+
 	InterfazUI(Sistema* sistema);
+
 
 	void headerDinamico();
 
@@ -14,9 +17,11 @@ public:
 
 	void vistaLogin();
 
-	void menuPrincipal();
+	void ver_MenuPrincipal();
 
-	int subMenuCompras();
+	int ver_MenuCompras();
+
+	int ver_menuCrearCompraProducto();
 
 	void subMenuVentas();
 

@@ -7,13 +7,21 @@
 using namespace std;
 
 #pragma region HelpersInterfaz
+/// <summary>
+/// Limpia la consola entre pantalla y pantalla.
+/// </summary>
 void limpiarConsola() {
 	system("cls");
 }
 #pragma endregion
 
+//Constructores:
 InterfazUI::InterfazUI(Sistema* sistema) : _sistema(sistema) {}
 
+/// <summary>
+/// Header utilizado en todas las vistas.
+/// El mismo muestra info del usuario, hora y errores.
+/// </summary>
 void InterfazUI::headerDinamico() 
 {
 	Fecha fecha;
@@ -34,7 +42,7 @@ void InterfazUI::headerDinamico()
 	cout << "------------------" << endl << endl;
 }
 /// <summary>
-/// Se controla que la opción seleccionada sea válida.
+/// Controla que la opción seleccionada por el menú sea válida.
 /// </summary>
 bool InterfazUI::opcionesValidasMenu(int inicio, int fin, int seleccion, bool imprimir, bool admiteAtras)
 {
@@ -48,10 +56,10 @@ bool InterfazUI::opcionesValidasMenu(int inicio, int fin, int seleccion, bool im
 	return true;
 }
 
-//InterfazUI::InterfazUI() {}
-
+/// <summary>
+/// Vista de login principal.
+/// </summary>
 void InterfazUI::vistaLogin() {
-	limpiarConsola();
 	headerDinamico();
 	std::string usuario;
 	cout << "Ingrese su nombre: ";
@@ -62,7 +70,7 @@ void InterfazUI::vistaLogin() {
 	system("cls");
 }
 
-void InterfazUI::menuPrincipal() {
+void InterfazUI::ver_MenuPrincipal() {
 	limpiarConsola();
 		string usuario = _sistema->getUsuarioLogged();
 	int opc;
@@ -84,7 +92,13 @@ void InterfazUI::menuPrincipal() {
 	_sistema->setPantalla(opc);
 }
 
-int InterfazUI::subMenuCompras() {
+#pragma region UI_Compras
+
+/// <summary>
+/// 
+/// </summary>
+/// <returns></returns>
+int InterfazUI::ver_MenuCompras() {
 	string usuario = _sistema->getUsuarioLogged();
 	int opc;
 	bool verificado = false;
@@ -94,12 +108,27 @@ int InterfazUI::subMenuCompras() {
 	cout << "1) Compra Productos" << endl;
 	cout << "2) Listar Productos" << endl;
 	cout << "3) Buscar Producto" << endl << endl;
-	cout << "0) <- Atras";
+	cout << "0) <- Atras" << endl;
 	cin >> opc;
 	verificado = opcionesValidasMenu(1, 3, opc);
 	}
 	return opc;
 }
+
+int InterfazUI::ver_menuCrearCompraProducto() {
+	int opc;
+	bool verificado = false;
+	
+	while (!verificado) {
+		headerDinamico();
+		cout << "Mostrar opciones para comprar productos" << endl;
+		cin >> opc;
+		verificado = opcionesValidasMenu(1, 1, opc);
+	}
+	return opc;
+}
+
+#pragma endregion UI_Compras
 
 void InterfazUI::subMenuVentas() {
 

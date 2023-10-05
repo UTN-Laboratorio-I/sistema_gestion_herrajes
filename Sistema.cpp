@@ -35,7 +35,7 @@ void Sistema::limpiarError() { _error.limpiarErrores(); }
 void Sistema::administrarPrograma() {
 	InterfazUI UI(this);
 	AdminLogin adm_login(this); //Facilitamos un puntero a la instancia de sistema para acceder a sus métodos.  
-	AdminCompra adm_compras;
+	AdminCompra adm_compras(this);
 	AdminVentas adm_ventas;
 	AdminABM adm_ABM;
 
@@ -45,11 +45,11 @@ void Sistema::administrarPrograma() {
 			adm_login.verificarLogin();
 			break;
 		case 1: //Menú principal:
-			UI.menuPrincipal();
+			UI.ver_MenuPrincipal();
 
 			break;
 		case 2: //Submenú Compras/stock:
-			UI.subMenuCompras();
+			adm_compras.administrarModuloCompra();
 			break;
 		case 3: //Submenú Ventas:
 			cout << "Ventas";

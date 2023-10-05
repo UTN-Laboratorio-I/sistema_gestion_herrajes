@@ -27,7 +27,6 @@ std::string Producto::getNombreProducto() {
 std::string Producto::getDescripcionProducto() {
 	return _descripcionProducto;
 }
-
 void Producto::setIdProducto(int id) {
 	_idProducto = id;
 }

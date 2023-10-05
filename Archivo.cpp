@@ -32,3 +32,19 @@ bool Archivo<T>::listarRegistroArchivo(const T& objeto, const char* archivo) {
 	
 	return pudoLeer;
 }
+
+//template <class T>
+//bool Archivo<T>::listarRegistroByParametro(const T& objeto, const char* archivo, []) {
+//
+//	FILE* p;
+//	p = fopen(archivo, "rb");
+//
+//	if (p == NULL) {
+//		return false;
+//	}
+//
+//	bool pudoLeer = fread(&objeto, sizeof(objeto), 1, p);
+//
+//	return pudoLeer;
+//}
+
