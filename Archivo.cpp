@@ -7,7 +7,7 @@ bool Archivo<T>::grabarRegistroArchivo(const T& objeto, const char* archivo) {
 
 	FILE *p;
 	p = fopen(archivo, "ab");
-
+	
 	if (p == NULL) {
 		return false;
 	}
@@ -20,7 +20,7 @@ bool Archivo<T>::grabarRegistroArchivo(const T& objeto, const char* archivo) {
 
 template <class T>
 bool Archivo<T>::listarRegistroArchivo(const T& objeto, const char* archivo) {
-
+	
 	FILE* p;
 	p = fopen(archivo, "rb");
 

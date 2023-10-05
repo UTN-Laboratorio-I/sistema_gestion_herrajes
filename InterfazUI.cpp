@@ -22,7 +22,7 @@ InterfazUI::InterfazUI(Sistema* sistema) : _sistema(sistema) {}
 /// Header utilizado en todas las vistas.
 /// El mismo muestra info del usuario, hora y errores.
 /// </summary>
-void InterfazUI::headerDinamico() 
+void InterfazUI::headerDinamico()
 {
 	Fecha fecha;
 	string ahora = fecha.hoy();
@@ -36,16 +36,17 @@ void InterfazUI::headerDinamico()
 	}
 	if (error) {
 		std::string error = _sistema->getError();
-		cout << "------------------" << endl;
+		cout << "---------------------------------" << endl;
 		cout << "Error: " << error << endl;
 	}
-	cout << "------------------" << endl << endl;
+	cout << "---------------------------------" << endl << endl;
 }
 /// <summary>
 /// Controla que la opción seleccionada por el menú sea válida.
 /// </summary>
 bool InterfazUI::opcionesValidasMenu(int inicio, int fin, int seleccion, bool imprimir, bool admiteAtras)
 {
+	//Considerar un typeof para evitar otros tipos de caracteres.
 	bool error = _sistema->hasError();
 	if ((seleccion < inicio && !admiteAtras) || (seleccion > fin && !imprimir)) {
 		std::string mensaje = "Seleccione una opcion entre "+std::to_string(inicio)+" y "+std::to_string(fin);
@@ -83,11 +84,10 @@ void InterfazUI::ver_MenuPrincipal() {
 	cout << "3) ABM" << endl;
 	cout << "4) Reportes" << endl;
 	cout << "5) Configuracion" << endl;
-	cout << "6) Reporte" << endl;
-	cout << "7) USUARIO" << endl;
+	cout << "6) USUARIO" << endl;
 	cout << "0) Salir" << endl;
 	cin >> opc;
-	verificado = opcionesValidasMenu(1, 7, opc);
+	verificado = opcionesValidasMenu(1, 6, opc);
 	}
 	_sistema->setPantalla(opc);
 }
