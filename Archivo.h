@@ -7,8 +7,8 @@ class Archivo
 public:
 	Archivo() = default;
 	
-	bool listarRegistroProducto(const T& objeto, const char* archivo);
-	bool grabarRegistroProducto(const T& objeto, const char* archivo);
+	bool listarRegistroArchivo(const T& objeto, const char* archivo);
+	bool grabarRegistroArchivo(const T& objeto, const char* archivo);
 
 private:
 

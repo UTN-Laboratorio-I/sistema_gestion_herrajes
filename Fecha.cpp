@@ -1,5 +1,7 @@
+#pragma warning(disable : 4996) //_CRT_SECURE_NO_WARNINGS
 #include <ctime>
 #include <iostream>
+#include <chrono>
 #include "fecha.h"
 
 int Fecha::getDia() {
@@ -46,4 +48,23 @@ std::string Fecha::getNombreDia() {
         return nombres[_diaSemana];
     }
     return "";
+}
+
+std::string Fecha::hoy() {
+    std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+
+    // Convierte el punto de tiempo actual a un objeto de tiempo local
+    std::time_t currentTime = std::chrono::system_clock::to_time_t(now);
+
+    // Convierte el tiempo local a una estructura tm para extraer la fecha
+    std::tm* localTime = std::localtime(&currentTime);
+
+    // Obtén los componentes de la fecha
+    _anio = localTime->tm_year + 1900;  // Añade 1900 al año
+    _mes = localTime->tm_mon + 1;      // Los meses comienzan desde 0
+    _dia = localTime->tm_mday;           // Día del mes
+
+    // Imprime la fecha actual
+    std::string fecha =""+ std::to_string(_anio) + "/" + std::to_string(_mes) + "/"+ std::to_string(_dia)+"";
+    return fecha;
 }
