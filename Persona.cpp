@@ -5,6 +5,10 @@ void Persona::setDni(int d)
 {
 	_dni = d;
 }
+void Persona::setId(int id)
+{
+	_idPersona = id;
+}
 void Persona::setNombre(const char* nombre)
 {
 	strcpy_s(_nombre, nombre);
@@ -20,6 +24,23 @@ void Persona::setDomicilio(const char* domicilio)
 void Persona::seteEamil(const char* email)
 {
 	strcpy_s(_email, email);
+}
+void Persona::setFechaAlta(Fecha fechaAlta)
+{
+	int d, m, a;
+	cout << "dia de alta: ";
+	cin >> d;
+	cout << endl;
+	cout << "mes de alta: ";
+	cin >> m;
+	cout << endl;
+	cout << "anio de alta: ";
+	cin >> a;
+	cout << endl;
+	fechaAlta.setDia(d);
+	fechaAlta.setDia(m);
+	fechaAlta.setDia(a);
+
 }
 void Persona::setFechaNacimiento(Fecha fechaNacimiento)
 {
@@ -55,6 +76,10 @@ int Persona::getDNI()
 {
 	return _dni;
 }
+int Persona::getId()
+{
+	return _idPersona;
+}
 char* Persona::getNombre()
 {
 	return _nombre;
@@ -75,6 +100,11 @@ char* Persona::geteEamil()
 Fecha Persona::getFechaNacimiento()
 {
 	return _fechaNacimiento;
+}
+
+Fecha Persona::getFechaAlta()
+{
+	return _fechaAlta;
 }
 
 Persona::Persona()

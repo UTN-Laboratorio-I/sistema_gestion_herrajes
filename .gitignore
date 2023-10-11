@@ -365,6 +365,7 @@ FodyWeavers.xsd
 #TESTING
 test.cpp
 test.exe
+mainSasha.cpp
 
 #Formatos de archivos
 *.dat
