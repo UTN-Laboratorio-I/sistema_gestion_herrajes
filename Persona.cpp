@@ -1,24 +1,25 @@
 #include "Persona.h"
 
+
 void Persona::setDni(int d)
 {
 	_dni = d;
 }
 void Persona::setNombre(const char* nombre)
 {
-	strcpy(_nombre, nombre);
+	strcpy_s(_nombre, nombre);
 }
 void Persona::setApellido(const char* apellido)
 {
-	strcpy(_apellido, apellido);
+	strcpy_s(_apellido, apellido);
 }
 void Persona::setDomicilio(const char* domicilio)
 {
-	strcpy(_domicilio, domicilio);
+	strcpy_s(_direccion, domicilio);
 }
 void Persona::seteEamil(const char* email)
 {
-	strcpy(_email, email);
+	strcpy_s(_email, email);
 }
 void Persona::setFechaNacimiento(Fecha fechaNacimiento)
 {
@@ -64,7 +65,7 @@ char* Persona::getApellido()
 }
 char* Persona::getDomicilio()
 {
-	return _domicilio;
+	return _direccion;
 }
 char* Persona::geteEamil()
 {
@@ -79,10 +80,10 @@ Fecha Persona::getFechaNacimiento()
 Persona::Persona()
 {
 	_dni = 0;
-	strcpy(_nombre, "");
-	strcpy(_apellido, "");
-	strcpy(_domicilio, "");
-	strcpy(_email, "");
+	strcpy_s(_nombre, "");
+	strcpy_s(_apellido, "");
+	strcpy_s(_direccion, "");
+	strcpy_s(_email, "");
 	_fechaNacimiento = Fecha(0, 0, 0);
 	_estado = 0;
 }

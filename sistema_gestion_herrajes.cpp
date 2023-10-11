@@ -6,10 +6,6 @@ using namespace std;
 
 
 int main() {
-	Sistema sistema;
-
-	sistema.administrarPrograma();
-
-	system("pause");
+	cout << "hola";
 	return 0;
 }

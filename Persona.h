@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include "Fecha.h"
-#include <cstring>
+#include <cstdio>
 using namespace std;
 
 class Persona
@@ -29,7 +29,7 @@ public:
 protected:
 	int _dni;
 	char _nombre[40], _apellido[40];
-	char _domicilio[100], _email[50];
+	char _direccion[100], _email[50];
 	Fecha _fechaNacimiento;
 	bool _estado;
 
