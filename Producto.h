@@ -27,8 +27,8 @@ public:
     void mostrarProductos();
 
 
-private:
 
+private:
     int _idProducto;
     float _precioCosto, _precioVenta;
     int _cantidad;

@@ -14,6 +14,8 @@ bool Archivo<T>::grabarRegistroArchivo(const T& objeto, const char* archivo) {
 
 	bool escribio = fwrite(&objeto, sizeof(objeto), 1, p);
 
+	fclose(p);
+
 	return escribio;
 
 }
@@ -29,6 +31,8 @@ bool Archivo<T>::listarRegistroArchivo(const T& objeto, const char* archivo) {
 	}
 
 	bool pudoLeer = fread(&objeto, sizeof(objeto), 1, p);
+
+	fclose(p);
 	
 	return pudoLeer;
 }

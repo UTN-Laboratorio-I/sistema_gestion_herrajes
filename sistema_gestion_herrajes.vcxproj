@@ -140,8 +140,15 @@
     <ClCompile Include="InterfazUI.cpp" />
     <ClCompile Include="Producto.cpp" />
     <ClCompile Include="AdminReporte.cpp" />
-    <ClCompile Include="Sistema.cpp" />
-    <ClCompile Include="sistema_gestion_herrajes.cpp" />
+    <ClCompile Include="Sistema.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="sistema_gestion_herrajes.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdminABM.h" />

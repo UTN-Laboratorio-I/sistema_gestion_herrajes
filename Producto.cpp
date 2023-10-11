@@ -1,5 +1,8 @@
 #include <iostream>
+using namespace std;
+
 #include "Producto.h"
+
 
 Producto::Producto(){
 	_idProducto = 0;
@@ -47,20 +50,50 @@ void Producto::setDescripcionProducto(std::string descripcion) {
 	strcpy_s(_descripcionProducto, descripcion.c_str());
 }
 
-void cargarProductos() {
+void Producto::cargarProductos()
+{	
+	Producto prod;
 	float pCosto, pVenta;
 	int cantidad;
-	std::string nombreProducto, descripcionProducto;
+	string nombreProducto, descripcionProducto;
 
-	std::cout << "NOMBRE DE PRODUCTO: ";
-	std::cout << "PRECIO DE COSTO: ";
-	std::cin >> pCosto;
-	std::cout << "PRECIO DE VENTA: ";
-	std::cin >> pVenta;
-	std::cout << "CANTIDAD: ";
-	std::cin >> cantidad;
+	cout << "NOMBRE DE PRODUCTO: ";
+	cin >> nombreProducto;
+	cout << "DESCRIPCION PRODUCTO: ";
+	cin >> descripcionProducto;
+	cout << "PRECIO DE COSTO: ";
+	cin >> pCosto;
+	/*cout << "PRECIO DE VENTA: ";
+	cin >> pVenta;*/
+	cout << "CANTIDAD: ";
+	cin >> cantidad;
+	
+	prod.setNombreProducto(nombreProducto);
+	prod.setDescripcionProducto(descripcionProducto);
+	prod.setPrecioCosto(pCosto);
+	//setPrecioVenta(pVenta);
+	prod.setCantidad(cantidad);
+	Archivo <Producto> archivo;
+	archivo.grabarRegistroArchivo(prod, "producto.dat");
 
 }
-void mostrarProductos() {
+
+void Producto::mostrarProductos()
+{	
+	Producto prod;
+	Archivo <Producto> archivo;
+	archivo.listarRegistroArchivo(prod, "producto.dat");
+
+
+	//cout << "NOMBRE DE PRODUCTO: ";
+	//cout << getNombreProducto() << endl;
+	//cout << "DESCRIPCION PRODUCTO: ";
+	//cout << getDescripcionProducto() << endl;
+	//cout << "PRECIO DE COSTO: ";
+	//cout << getPrecioCosto() << endl;
+	////cout << "PRECIO DE VENTA: ";
+	////cout << pVenta;
+	//cout << "CANTIDAD: ";
+	//cout << getCantidad() << endl;
 
 }
