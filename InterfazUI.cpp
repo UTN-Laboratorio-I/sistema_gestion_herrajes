@@ -98,7 +98,8 @@ void InterfazUI::ver_MenuPrincipal() {
 /// 
 /// </summary>
 /// <returns></returns>
-int InterfazUI::ver_MenuCompras() {
+void InterfazUI::ver_MenuCompras() {
+	limpiarConsola();
 	string usuario = _sistema->getUsuarioLogged();
 	int opc;
 	bool verificado = false;
@@ -112,10 +113,11 @@ int InterfazUI::ver_MenuCompras() {
 	cin >> opc;
 	verificado = opcionesValidasMenu(1, 3, opc);
 	}
-	return opc;
+	_sistema->setModuloPantalla("compras", opc);
 }
 
-int InterfazUI::ver_menuCrearCompraProducto() {
+void InterfazUI::ver_menuCrearCompraProducto() {
+	limpiarConsola();
 	int opc;
 	bool verificado = false;
 	
@@ -125,14 +127,18 @@ int InterfazUI::ver_menuCrearCompraProducto() {
 		cin >> opc;
 		verificado = opcionesValidasMenu(1, 1, opc);
 	}
-	return opc;
+	_sistema->setModuloPantalla("compras", opc);
 }
 
 #pragma endregion UI_Compras
 
+#pragma region UI_Ventas
 void InterfazUI::subMenuVentas() {
 
 }
+
+
+#pragma endregion UI_Ventas
 
 void InterfazUI::subMenuAbm() {
 

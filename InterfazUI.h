@@ -19,9 +19,9 @@ public:
 
 	void ver_MenuPrincipal();
 
-	int ver_MenuCompras();
+	void ver_MenuCompras();
 
-	int ver_menuCrearCompraProducto();
+	void ver_menuCrearCompraProducto();
 
 	void subMenuVentas();
 

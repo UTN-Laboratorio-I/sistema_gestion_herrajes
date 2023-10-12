@@ -5,12 +5,14 @@ class AdminCompra
 {
 private:
 	Sistema* _sistema;
-	bool modulo_compra_activo;
+	string _nombreModulo;
 public:
 
 	AdminCompra(Sistema* sistema);
 
-	void setModuloCompraActivo(bool);
+	bool moduloCompraActivo();
+
+	void moduloCompraSalir();
 
 	void administrarModuloCompra();
 

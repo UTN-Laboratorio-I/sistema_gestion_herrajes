@@ -8,6 +8,7 @@ class Sistema
 protected:
 	bool _encendido;
 	int _pantalla;
+	string _modulo;
 	std::string _usuarioLogged;
 	ErrorDto _error;
 
@@ -26,6 +27,9 @@ public:
 	void setPantalla(int opc);
 	int getPantalla();
 
+	void setModulo(std::string modulo);
+	string getModulo();
+
 	void setError(std::string mensaje);
 	std::string getError();
 	bool hasError();
@@ -35,6 +39,10 @@ public:
 
 #pragma region Métodos
 	void administrarPrograma();
+
+	//Administra modulo y pantalla:
+	void setModuloPantalla(string modulo, int pantalla);
+
 #pragma endregion
 
 };

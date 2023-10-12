@@ -46,20 +46,38 @@ void Producto::setDescripcionProducto(std::string descripcion) {
 	strcpy_s(_descripcionProducto, descripcion.c_str());
 }
 
-void cargarProductos() {
-	float pCosto, pVenta;
-	int cantidad;
-	std::string nombreProducto, descripcionProducto;
+void Producto::cargarProductos() {
+	const char* nombreArchivo = "productos.dat";
+	Producto producto;
+	Producto* productoLeido;
+	//Archivo<Producto> archivo;
+	//Archivo<Producto> leer;
 
-	std::cout << "NOMBRE DE PRODUCTO: ";
-	std::cout << "PRECIO DE COSTO: ";
-	std::cin >> pCosto;
-	std::cout << "PRECIO DE VENTA: ";
-	std::cin >> pVenta;
-	std::cout << "CANTIDAD: ";
-	std::cin >> cantidad;
+	//producto.setCantidad(10);
+	//producto.setDescripcionProducto("Producto de prueba");
+	//producto.setNombreProducto("Producto 1");
+	//producto.setPrecioCosto(100);
+
+	//bool grabo = archivo.grabarRegistroArchivo(producto, nombreArchivo);
+
+	//if (grabo) {
+	//	std::cout << "Grabo el producto" << std::endl;
+	//	
+	//	bool productoLeido = leer.listarRegistroArchivo(nombreArchivo);
+	//	std::cout << productoLeido << std::endl;
+	//	//std::cout << "ID: " << productoLeido[0].getIdProducto() << std::endl;
+	//	//std::cout << "Nombre: " << productoLeido[0].getNombreProducto() << std::endl;
+	//	//std::cout << "Descripcion: " << productoLeido[0].getDescripcionProducto() << std::endl;
+	//	//std::cout << "Precio Costo: " << productoLeido[0].getPrecioCosto() << std::endl;
+	//	//std::cout << "Precio Venta: " << productoLeido[0].getPrecioVenta() << std::endl;
+
+	//}
+	//else {
+	//	std::cout << "No se grabo el registro" << std::endl;
+	//}
+
 
 }
-void mostrarProductos() {
+void Producto::mostrarProductos() {
 
 }

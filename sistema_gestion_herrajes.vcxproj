@@ -131,7 +131,9 @@
     <ClCompile Include="AdminCompra.cpp" />
     <ClCompile Include="AdminLogin.cpp" />
     <ClCompile Include="AdminVenta.cpp" />
-    <ClCompile Include="Archivo.cpp" />
+    <ClCompile Include="Archivo.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Categoria.cpp" />
     <ClCompile Include="ErrorDto.cpp" />
     <ClCompile Include="Fecha.cpp" />

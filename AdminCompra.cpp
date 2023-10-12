@@ -3,33 +3,55 @@
 #include "InterfazUI.h"
 #include "Producto.h"
 
-AdminCompra::AdminCompra(Sistema* sistema) : _sistema(sistema){}
+//Constructor:
+AdminCompra::AdminCompra(Sistema* sistema) : _sistema(sistema){
+	_nombreModulo = "compras";
+}
 
+//Verifica si el módulo compras está activo:
+bool AdminCompra::moduloCompraActivo() {
+	if (_sistema->getModulo() == _nombreModulo) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
 
+//Sale del modulo compra hacia el principal:
+void AdminCompra::moduloCompraSalir() {
+	_sistema->setModuloPantalla("principal", 888);
+}
+
+//Administra el módulo compras:
 void AdminCompra::administrarModuloCompra() {
 	InterfazUI compras_UI(_sistema);
-	modulo_compra_activo = true;
-	while (modulo_compra_activo) {
-		int opc = compras_UI.ver_MenuCompras();
+
+	while (moduloCompraActivo()) {
+		compras_UI.ver_MenuCompras();
+		int opc = _sistema->getPantalla();
 
 		switch (opc) {
-		case 0:
-			modulo_compra_activo = false;
-			break;
 		case 1:
-			compras_UI.ver_menuCrearCompraProducto();
+			//_sistema->setModuloPantalla("compras", 1);
+			//compras_UI.ver_menuCrearCompraProducto();
 			crearCompraProducto();
 			break;
 		case 2:
-
+			//_sistema->setModuloPantalla("compras", 2);
+			
+			break;
+		case 0: //SALIR DEL MÓDULO COMPRA:
+			moduloCompraSalir();
 			break;
 		}
-		opc = -1;
 	}
+	return;
 }
 
 void AdminCompra::crearCompraProducto() {
 	Producto producto;
-	//producto.cargarProductos();
+	producto.cargarProductos();
 
 }
+
