@@ -52,15 +52,14 @@ void Producto::setDescripcionProducto(std::string descripcion) {
 
 void Producto::cargarProductos()
 {	
-	Producto prod;
 	float pCosto, pVenta;
 	int cantidad;
 	string nombreProducto, descripcionProducto;
 
 	cout << "NOMBRE DE PRODUCTO: ";
-	cin >> nombreProducto;
+	getline(cin, nombreProducto);
 	cout << "DESCRIPCION PRODUCTO: ";
-	cin >> descripcionProducto;
+	getline(cin,descripcionProducto);
 	cout << "PRECIO DE COSTO: ";
 	cin >> pCosto;
 	/*cout << "PRECIO DE VENTA: ";
@@ -68,32 +67,24 @@ void Producto::cargarProductos()
 	cout << "CANTIDAD: ";
 	cin >> cantidad;
 	
-	prod.setNombreProducto(nombreProducto);
-	prod.setDescripcionProducto(descripcionProducto);
-	prod.setPrecioCosto(pCosto);
+	setNombreProducto(nombreProducto);
+	setDescripcionProducto(descripcionProducto);
+	setPrecioCosto(pCosto);
 	//setPrecioVenta(pVenta);
-	prod.setCantidad(cantidad);
-	Archivo <Producto> archivo;
-	archivo.grabarRegistroArchivo(prod, "producto.dat");
-
+	setCantidad(cantidad);
 }
 
 void Producto::mostrarProductos()
 {	
-	Producto prod;
-	Archivo <Producto> archivo;
-	archivo.listarRegistroArchivo(prod, "producto.dat");
-
-
-	//cout << "NOMBRE DE PRODUCTO: ";
-	//cout << getNombreProducto() << endl;
-	//cout << "DESCRIPCION PRODUCTO: ";
-	//cout << getDescripcionProducto() << endl;
-	//cout << "PRECIO DE COSTO: ";
-	//cout << getPrecioCosto() << endl;
-	////cout << "PRECIO DE VENTA: ";
-	////cout << pVenta;
-	//cout << "CANTIDAD: ";
-	//cout << getCantidad() << endl;
+	cout << "NOMBRE DE PRODUCTO: ";
+	cout << getNombreProducto() << endl;
+	cout << "DESCRIPCION PRODUCTO: ";
+	cout << getDescripcionProducto() << endl;
+	cout << "PRECIO DE COSTO: ";
+	cout << getPrecioCosto() << endl;
+	/*cout << "PRECIO DE VENTA: ";
+	cout << pVenta;*/
+	cout << "CANTIDAD: ";
+	cout << getCantidad() << endl;
 
 }

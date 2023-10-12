@@ -50,7 +50,7 @@ void Sistema::administrarPrograma() {
 			break;
 		case 2: //Submenú Compras/stock:
 			UI.subMenuCompras();
-			adm_compras.compraProducto();
+			//adm_compras.compraProducto();
 			break;
 		case 3: //Submenú Ventas:
 			cout << "Ventas";

@@ -132,6 +132,7 @@
     <ClCompile Include="AdminLogin.cpp" />
     <ClCompile Include="AdminVenta.cpp" />
     <ClCompile Include="Archivo.cpp" />
+    <ClCompile Include="ArchivoProducto.cpp" />
     <ClCompile Include="Categoria.cpp" />
     <ClCompile Include="ErrorDto.cpp" />
     <ClCompile Include="Fecha.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="AdminLogin.h" />
     <ClInclude Include="AdminVenta.h" />
     <ClInclude Include="Archivo.h" />
+    <ClInclude Include="ArchivoProducto.h" />
     <ClInclude Include="Categoria.h" />
     <ClInclude Include="ErrorDto.h" />
     <ClInclude Include="Fecha.h" />

@@ -3,6 +3,7 @@
 #include <string>
 #include <cstring>
 #include "Archivo.h"
+#pragma warning(disable: 4996)
 
 class Producto
 {
@@ -25,8 +26,6 @@ public:
 
     void cargarProductos();
     void mostrarProductos();
-
-
 
 private:
     int _idProducto;
