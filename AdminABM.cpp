@@ -15,39 +15,6 @@ AdminABM::AdminABM(Sistema* sistema) : _sistema(sistema)
 	_nombreSubModuloProducto = "ABM Productos";
 }
 
-bool AdminABM::moduloABMActivo()
-{
-	if (_sistema->getModulo() == _nombreModulo) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}
-
-bool AdminABM::subModuloABMActivo(string subModulo)
-{
-	if (_sistema->getModulo() == subModulo) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}
-
-void AdminABM::moduloABMSalir()
-{
-	_sistema->setModuloPantalla("principal", 888);
-	return;
-}
-
-
-void AdminABM::subModuloABMSalir()
-{
-	_sistema->setModuloPantalla("ABM", -1);
-	return;
-}
-
 void AdminABM::administrarModuloABM()
 {
 	InterfazUI ABM_UI(_sistema);
@@ -58,9 +25,9 @@ void AdminABM::administrarModuloABM()
 
 		switch (opc) {
 		case 1:
-			ABM_UI.ver_SubMenuABMCliente();
-			pantallaABMClientes();
-			
+			_sistema->setModuloPantalla("ABM Clientes", -1);
+			administrarSubModuloABMCliente();
+
 			break;
 		case 2:
 
@@ -95,5 +62,40 @@ void AdminABM::administrarSubModuloABMCliente() {
 		}
 	}
 }
+
+bool AdminABM::moduloABMActivo()
+{
+	if (_sistema->getModulo() == _nombreModulo) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+bool AdminABM::subModuloABMActivo(string subModulo)
+{
+	if (_sistema->getModulo() == subModulo) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+void AdminABM::moduloABMSalir()
+{
+	_sistema->setModuloPantalla("principal", 888);
+	return;
+}
+
+
+void AdminABM::subModuloABMSalir()
+{
+	_sistema->setModuloPantalla("ABM", -1);
+	return;
+}
+
+
 
 void AdminABM::pantallaABMClientes(){}

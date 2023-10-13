@@ -266,14 +266,80 @@ void InterfazUI::ver_MenuReportes() {
 		cout << "1) Reporte Clientes" << endl;
 		cout << "2) Reporte Proveedores" << endl;
 		cout << "3) Reporte Productos" << endl;
-		cout << "4) Reporte Ventas" << endl;
+		cout << "4) Reporte Caja" << endl;
 		cout << "4) Reporte Usuarios" << endl << endl;
 		cout << "0) <- Atras" << endl;
 		cin >> opc;
 		verificado = opcionesValidasMenu(1, 4, opc);
 	}
-	_sistema->setModuloPantalla("compras", opc);
+	_sistema->setModuloPantalla("Reporte", opc);
 }
+
+void InterfazUI::ver_SubMenuReportesCliente() {
+	limpiarConsola();
+	int opc;
+	bool verificado = false;
+
+	while (!verificado) {
+		headerDinamico();
+		cout << "1) Listar Clientes" << endl;
+		cout << "2) Buscar Cliente" << endl << endl;
+		cout << "0) <- Atras" << endl;
+		cin >> opc;
+		verificado = opcionesValidasMenu(1, 2, opc);
+	}
+	_sistema->setModuloPantalla("Reporte Clientes", opc);
+}
+
+void InterfazUI::ver_SubMenuReportesProveedor() {
+	limpiarConsola();
+	int opc;
+	bool verificado = false;
+
+	while (!verificado) {
+		headerDinamico();
+		cout << "1) Listar Proveedores" << endl;
+		cout << "2) Buscar Proveedor" << endl << endl;
+		cout << "0) <- Atras" << endl;
+		cin >> opc;
+		verificado = opcionesValidasMenu(1, 2, opc);
+	}
+	_sistema->setModuloPantalla("Reporte Proveedores", opc);
+}
+
+void InterfazUI::ver_SubMenuReportesProducto() {
+	limpiarConsola();
+	int opc;
+	bool verificado = false;
+
+	while (!verificado) {
+		headerDinamico();
+		cout << "1) Listar Productos" << endl;
+		cout << "2) Buscar Producto" << endl << endl;
+		cout << "0) <- Atras" << endl;
+		cin >> opc;
+		verificado = opcionesValidasMenu(1, 2, opc);
+	}
+	_sistema->setModuloPantalla("Reporte Productos", opc);
+}
+
+void InterfazUI::ver_SubMenuReportesCaja() {
+	limpiarConsola();
+	int opc;
+	bool verificado = false;
+
+	while (!verificado) {
+		headerDinamico();
+		cout << "1) Listar Ventas" << endl;
+		cout << "2) Buscar Venta" << endl << endl;
+		cout << "0) <- Atras" << endl;
+		cin >> opc;
+		verificado = opcionesValidasMenu(1, 2, opc);
+	}
+	_sistema->setModuloPantalla("Reporte Ventas", opc);
+}
+
+
 #pragma endregion UI_Reportes
 
 #pragma region UI_Usuario

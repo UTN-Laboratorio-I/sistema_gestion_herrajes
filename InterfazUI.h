@@ -20,7 +20,6 @@ public:
 	void ver_MenuPrincipal();
 
 	void ver_MenuCompras();
-
 	void ver_MenuCrearCompraProducto();
 
 	void ver_MenuABM();
@@ -29,6 +28,10 @@ public:
 	void ver_SubMenuABMProducto();
 
 	void ver_MenuReportes();
+	void ver_SubMenuReportesCliente();
+	void ver_SubMenuReportesProveedor();
+	void ver_SubMenuReportesProducto();
+	void ver_SubMenuReportesCaja();
 
 	void ver_MenuConfiguracion();
 

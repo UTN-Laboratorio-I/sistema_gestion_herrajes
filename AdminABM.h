@@ -9,22 +9,27 @@ private:
 	string _nombreSubModuloProveedor;
 	string _nombreSubModuloProducto;
 public:
+	//Constructor:
 	AdminABM(Sistema* sistema);
 
 	//Getters/Setters:
 	string getNombreModulo();
 
-	bool moduloABMActivo();
-	bool subModuloABMActivo(string subModulo);
-	
-	void moduloABMSalir();
-	void subModuloABMSalir();
-
+	//Administradores de módulo y submódulos:
 	void administrarModuloABM();
 	void administrarSubModuloABMCliente();
 	void administrarSubModuloABMProveedor();
 	void administrarSubModuloABMProducto();
 
+	//Verificadores de estado del módulo:
+	bool moduloABMActivo();
+	bool subModuloABMActivo(string subModulo);
+	
+	//Salir de módulo y submódulos:
+	void moduloABMSalir();
+	void subModuloABMSalir();
+
+	//Lógica del submódulos:
 	void pantallaABMClientes();
 	void pantallaABMProveedores();
 	void pantallaABMProductos();
