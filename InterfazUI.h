@@ -21,7 +21,15 @@ public:
 
 	void ver_MenuCompras();
 
-	void ver_menuCrearCompraProducto();
+	void ver_MenuCrearCompraProducto();
+
+	void ver_MenuABM();
+
+	void ver_MenuReportes();
+
+	void ver_MenuConfiguracion();
+
+	void ver_MenuUsuario();
 
 	void subMenuVentas();
 

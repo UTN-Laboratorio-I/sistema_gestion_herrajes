@@ -51,7 +51,7 @@ void AdminCompra::administrarModuloCompra() {
 
 void AdminCompra::crearCompraProducto() {
 	Producto producto;
-	producto.cargarProductos();
+	//producto.cargarProductos();
 
 }
 
