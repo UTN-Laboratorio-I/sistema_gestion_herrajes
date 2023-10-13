@@ -24,6 +24,9 @@ public:
 	void ver_MenuCrearCompraProducto();
 
 	void ver_MenuABM();
+	void ver_SubMenuABMCliente();
+	void ver_SubMenuABMProveedor();
+	void ver_SubMenuABMProducto();
 
 	void ver_MenuReportes();
 
@@ -33,9 +36,6 @@ public:
 
 	void ver_MenuVentas();
 
-	void subMenuAbm();
-
-	void subMenuReportes();
 
 };
 

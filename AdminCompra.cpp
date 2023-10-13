@@ -3,6 +3,8 @@
 #include "InterfazUI.h"
 #include "Producto.h"
 
+
+
 //Constructor:
 AdminCompra::AdminCompra(Sistema* sistema) : _sistema(sistema){
 	_nombreModulo = "compras";
