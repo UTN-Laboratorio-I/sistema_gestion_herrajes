@@ -48,9 +48,6 @@
     <ClCompile Include="Sistema.cpp">
       <Filter>Archivos de origen\Sistema</Filter>
     </ClCompile>
-    <ClCompile Include="Archivo.cpp">
-      <Filter>Archivos de origen\Sistema</Filter>
-    </ClCompile>
     <ClCompile Include="AdminABM.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
