@@ -25,7 +25,7 @@ public:
     }
 
     std::vector<T> listarRegistroArchivo(const char* archivo) {
-        std::vector<T> registros; // Vector para almacenar los objetos leídos de tipo T
+        std::vector<T> registros; 
 
         FILE* p;
         p = fopen(archivo, "rb");

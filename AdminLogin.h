@@ -10,5 +10,6 @@ public:
 	AdminLogin(Sistema* sistema);
 	//métodos para manejar login.
 	bool verificarLogin();
+	bool cerrarSesion();
 };
 
