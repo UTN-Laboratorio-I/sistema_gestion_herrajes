@@ -31,7 +31,7 @@ public:
 
 	void ver_MenuUsuario();
 
-	void subMenuVentas();
+	void ver_MenuVentas();
 
 	void subMenuAbm();
 

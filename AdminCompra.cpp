@@ -33,7 +33,6 @@ void AdminCompra::administrarModuloCompra() {
 
 		switch (opc) {
 		case 1:
-			//_sistema->setModuloPantalla("compras", 1);
 			//compras_UI.ver_menuCrearCompraProducto();
 			crearCompraProducto();
 			break;

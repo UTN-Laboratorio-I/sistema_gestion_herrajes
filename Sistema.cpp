@@ -13,6 +13,7 @@ Sistema::Sistema() {
 	_pantalla = 0;
 	_usuarioLogged = "";
 	_modulo = "principal";
+	_subModulo = "";
 }
 
 void Sistema::setEncendido(bool set) { _encendido = set; }
@@ -27,6 +28,9 @@ int Sistema::getPantalla() { return _pantalla; }
 void Sistema::setModulo(std::string modulo) { _modulo = modulo; }
 string Sistema::getModulo() { return _modulo; }
 
+void Sistema::setSubModulo(std::string modulo) {};
+string Sistema::getSubModulo() { return _subModulo; };
+
 void Sistema::setError(std::string mensaje) { _error.setError(true, mensaje); }
 std::string Sistema::getError() { return _error.getErrorMensaje(); }
 bool Sistema::hasError() { return _error.hasError(); }
@@ -38,6 +42,7 @@ void Sistema::administrarPrograma() {
 	InterfazUI UI(this);
 	AdminLogin adm_login(this); //Facilitamos un puntero a la instancia de sistema para acceder a sus métodos.  
 	AdminCompra adm_compras(this);
+	AdminVenta adm_ventas(this);
 
 	while (_encendido) {
 		while (_modulo == "principal") {
@@ -53,8 +58,8 @@ void Sistema::administrarPrograma() {
 				adm_compras.administrarModuloCompra();
 				break;
 			case 2: //Submenú Ventas:
-				cout << "Ventas";
-
+				setModuloPantalla("ventas", -1);
+				adm_ventas.administrarModuloVenta();
 				break;
 			case 3: //Submenú ABM:
 				cout << "ABM";

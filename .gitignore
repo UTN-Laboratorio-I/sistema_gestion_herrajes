@@ -368,3 +368,6 @@ test.exe
 
 #Formatos de archivos
 *.dat
+
+#Archivos de configuracion
+enc_temp_folder/*

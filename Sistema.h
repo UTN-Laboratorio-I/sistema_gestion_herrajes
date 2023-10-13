@@ -9,6 +9,7 @@ protected:
 	bool _encendido;
 	int _pantalla;
 	string _modulo;
+	string _subModulo;
 	std::string _usuarioLogged;
 	ErrorDto _error;
 
@@ -29,6 +30,9 @@ public:
 
 	void setModulo(std::string modulo);
 	string getModulo();
+
+	void setSubModulo(std::string modulo);
+	string getSubModulo();
 
 	void setError(std::string mensaje);
 	std::string getError();

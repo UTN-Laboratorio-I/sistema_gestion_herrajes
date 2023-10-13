@@ -34,6 +34,8 @@ void InterfazUI::headerDinamico()
 	if (usuario != "") {
 		cout << "User: " << usuario << endl;
 	}
+	cout << "MENU " <<_sistema->getModulo() << endl;
+
 	if (error) {
 		std::string error = _sistema->getError();
 		cout << "---------------------------------" << endl;
@@ -83,7 +85,7 @@ void InterfazUI::ver_MenuPrincipal() {
 	cout << "3) ABM" << endl;
 	cout << "4) Reportes" << endl;
 	cout << "5) Configuracion" << endl;
-	cout << "6) USUARIO" << endl;
+	cout << "6) USUARIO" << endl<<endl;
 	cout << "0) Salir" << endl;
 	cin >> opc;
 	verificado = opcionesValidasMenu(1, 6, opc);
@@ -138,7 +140,7 @@ void InterfazUI::ver_MenuVentas() {
 
 	while (!verificado) {
 		headerDinamico();
-		cout << "1) Registrar venta" << endl;
+		cout << "1) Registrar venta" << endl << endl;
 		cout << "0) <- Atras" << endl;
 		cin >> opc;
 		verificado = opcionesValidasMenu(1, 1, opc);
@@ -148,6 +150,9 @@ void InterfazUI::ver_MenuVentas() {
 
 
 #pragma endregion UI_Ventas
+
+#pragma region UI_ABM
+
 
 void InterfazUI::ver_MenuABM() {
 	limpiarConsola();
@@ -166,6 +171,9 @@ void InterfazUI::ver_MenuABM() {
 	_sistema->setPantalla(opc);
 }
 
+#pragma endregion UI_ABM
+
+#pragma region UI_Reportes
 void InterfazUI::ver_MenuReportes() {
 	limpiarConsola();
 	int opc;
@@ -177,14 +185,16 @@ void InterfazUI::ver_MenuReportes() {
 		cout << "2) Reporte Proveedores" << endl;
 		cout << "3) Reporte Productos" << endl;
 		cout << "4) Reporte Ventas" << endl;
-		cout << "4) Reporte Usuarios" << endl;
+		cout << "4) Reporte Usuarios" << endl << endl;
 		cout << "0) <- Atras" << endl;
 		cin >> opc;
 		verificado = opcionesValidasMenu(1, 4, opc);
 	}
 	_sistema->setModuloPantalla("compras", opc);
 }
+#pragma endregion UI_Reportes
 
+#pragma region UI_Usuario
 void InterfazUI::ver_MenuUsuario() {
 	limpiarConsola();
 	int opc;
@@ -196,10 +206,30 @@ void InterfazUI::ver_MenuUsuario() {
 		cout << "2) Reporte Proveedores" << endl;
 		cout << "3) Reporte Productos" << endl;
 		cout << "4) Reporte Ventas" << endl;
-		cout << "4) Reporte Usuarios" << endl;
+		cout << "4) Reporte Usuarios" << endl << endl;
 		cout << "0) <- Atras" << endl;
 		cin >> opc;
 		verificado = opcionesValidasMenu(1, 4, opc);
 	}
 	_sistema->setModuloPantalla("compras", opc);
 }
+#pragma endregion UI_Usuario
+
+#pragma region UI_Configuracion
+void InterfazUI::ver_MenuConfiguracion() {
+	limpiarConsola();
+	int opc;
+	bool verificado = false;
+
+	while (!verificado) {
+		headerDinamico();
+		cout << "1) Configurar fecha/hora" << endl;
+		cout << "2) Configurar margen de utilidad " << endl;
+		cout << "3) Configurar ruta archivo" << endl << endl;
+		cout << "0) <- Atras" << endl;
+		cin >> opc;
+		verificado = opcionesValidasMenu(1, 4, opc);
+	}
+	_sistema->setModuloPantalla("compras", opc);
+}
+#pragma endregion UI_Configuracion

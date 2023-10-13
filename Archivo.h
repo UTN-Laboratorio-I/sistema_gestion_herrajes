@@ -12,11 +12,3 @@ public:
 private:
 
 };
-
-//Archivo::Archivo()
-//{
-//}
-//
-//Archivo::~Archivo()
-//{
-//}
