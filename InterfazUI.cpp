@@ -171,6 +171,88 @@ void InterfazUI::ver_MenuABM() {
 	_sistema->setPantalla(opc);
 }
 
+void InterfazUI::ver_SubMenuABMCliente() {
+	limpiarConsola();
+	bool verificado = false;
+	int opc;
+	while (!verificado) {
+		headerDinamico();
+			cout << "1) Crear Cliente" << endl;
+			cout << "2) Modificar Cliente" << endl;
+			cout << "3) Eliminar Cliente" << endl;
+			cout << "4) Listar Clientes" << endl;
+			cout << "5) Buscar Cliente" << endl << endl;
+			cout << "0) <- Atras" << endl;
+
+		/*	break;
+		case 2:
+			cout << "1) Crear Proveedor" << endl;
+			cout << "2) Modificar Proveedor" << endl;
+			cout << "3) Eliminar Proveedor" << endl;
+			cout << "4) Listar Proveedores" << endl;
+			cout << "5) Buscar Proveedor" << endl << endl;
+			cout << "0) <- Atras" << endl;
+
+			_sistema->setModuloPantalla("ABM Proveedor", opc);
+
+			break;
+		case 3:
+			cout << "1) Crear Producto" << endl;
+			cout << "2) Modificar Producto" << endl;
+			cout << "3) Eliminar Producto" << endl;
+			cout << "4) Listar Productos" << endl;
+			cout << "5) Buscar Producto" << endl << endl;
+			cout << "0) <- Atras" << endl;
+
+			_sistema->setModuloPantalla("ABM Producto", opc);
+
+			break;
+		}*/
+		cin >> opc;
+		verificado = opcionesValidasMenu(1, 5, opc);
+	}
+	_sistema->setModuloPantalla("ABM Clientes", opc);
+
+}
+	void InterfazUI::ver_SubMenuABMProveedor() {
+		limpiarConsola();
+		int opc;
+		bool verificado = false;
+
+		while (!verificado) {
+			headerDinamico();
+			cout << "1) Crear Proveedor" << endl;
+			cout << "2) Modificar Proveedor" << endl;
+			cout << "3) Eliminar Proveedor" << endl;
+			cout << "4) Listar Proveedores" << endl;
+			cout << "5) Buscar Proveedor" << endl << endl;
+			cout << "0) <- Atras" << endl;
+			cin >> opc;
+			verificado = opcionesValidasMenu(1, 5, opc);
+		}
+		_sistema->setModuloPantalla("ABM Proveedor", opc);
+	}
+
+	void InterfazUI::ver_SubMenuABMProducto() {
+		limpiarConsola();
+		int opc;
+		bool verificado = false;
+
+		while (!verificado) {
+			headerDinamico();
+			cout << "1) Crear Producto" << endl;
+			cout << "2) Modificar Producto" << endl;
+			cout << "3) Eliminar Producto" << endl;
+			cout << "4) Listar Productos" << endl;
+			cout << "5) Buscar Producto" << endl << endl;
+			cout << "0) <- Atras" << endl;
+			cin >> opc;
+			verificado = opcionesValidasMenu(1, 5, opc);
+		}
+		_sistema->setModuloPantalla("ABM Producto", opc);
+	}
+
+
 #pragma endregion UI_ABM
 
 #pragma region UI_Reportes
@@ -184,14 +266,80 @@ void InterfazUI::ver_MenuReportes() {
 		cout << "1) Reporte Clientes" << endl;
 		cout << "2) Reporte Proveedores" << endl;
 		cout << "3) Reporte Productos" << endl;
-		cout << "4) Reporte Ventas" << endl;
+		cout << "4) Reporte Caja" << endl;
 		cout << "4) Reporte Usuarios" << endl << endl;
 		cout << "0) <- Atras" << endl;
 		cin >> opc;
 		verificado = opcionesValidasMenu(1, 4, opc);
 	}
-	_sistema->setModuloPantalla("compras", opc);
+	_sistema->setModuloPantalla("Reporte", opc);
 }
+
+void InterfazUI::ver_SubMenuReportesCliente() {
+	limpiarConsola();
+	int opc;
+	bool verificado = false;
+
+	while (!verificado) {
+		headerDinamico();
+		cout << "1) Listar Clientes" << endl;
+		cout << "2) Buscar Cliente" << endl << endl;
+		cout << "0) <- Atras" << endl;
+		cin >> opc;
+		verificado = opcionesValidasMenu(1, 2, opc);
+	}
+	_sistema->setModuloPantalla("Reporte Clientes", opc);
+}
+
+void InterfazUI::ver_SubMenuReportesProveedor() {
+	limpiarConsola();
+	int opc;
+	bool verificado = false;
+
+	while (!verificado) {
+		headerDinamico();
+		cout << "1) Listar Proveedores" << endl;
+		cout << "2) Buscar Proveedor" << endl << endl;
+		cout << "0) <- Atras" << endl;
+		cin >> opc;
+		verificado = opcionesValidasMenu(1, 2, opc);
+	}
+	_sistema->setModuloPantalla("Reporte Proveedores", opc);
+}
+
+void InterfazUI::ver_SubMenuReportesProducto() {
+	limpiarConsola();
+	int opc;
+	bool verificado = false;
+
+	while (!verificado) {
+		headerDinamico();
+		cout << "1) Listar Productos" << endl;
+		cout << "2) Buscar Producto" << endl << endl;
+		cout << "0) <- Atras" << endl;
+		cin >> opc;
+		verificado = opcionesValidasMenu(1, 2, opc);
+	}
+	_sistema->setModuloPantalla("Reporte Productos", opc);
+}
+
+void InterfazUI::ver_SubMenuReportesCaja() {
+	limpiarConsola();
+	int opc;
+	bool verificado = false;
+
+	while (!verificado) {
+		headerDinamico();
+		cout << "1) Listar Ventas" << endl;
+		cout << "2) Buscar Venta" << endl << endl;
+		cout << "0) <- Atras" << endl;
+		cin >> opc;
+		verificado = opcionesValidasMenu(1, 2, opc);
+	}
+	_sistema->setModuloPantalla("Reporte Ventas", opc);
+}
+
+
 #pragma endregion UI_Reportes
 
 #pragma region UI_Usuario

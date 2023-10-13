@@ -6,6 +6,7 @@
 #include "AdminCompra.h"
 #include "AdminVenta.h"
 #include "AdminABM.h"
+#include "AdminReporte.h"
 
 #pragma region Setters/Getters
 Sistema::Sistema() {
@@ -43,6 +44,8 @@ void Sistema::administrarPrograma() {
 	AdminLogin adm_login(this); //Facilitamos un puntero a la instancia de sistema para acceder a sus métodos.  
 	AdminCompra adm_compras(this);
 	AdminVenta adm_ventas(this);
+	AdminABM adm_abm(this);
+	AdminReporte adm_reporte(this);
 
 	while (_encendido) {
 		while (_modulo == "principal") {
@@ -62,12 +65,12 @@ void Sistema::administrarPrograma() {
 				adm_ventas.administrarModuloVenta();
 				break;
 			case 3: //Submenú ABM:
-				cout << "ABM";
-
+				setModuloPantalla("ABM", -1);
+				adm_abm.administrarModuloABM();
 				break;
 			case 4: //Submenú Reportes:
-				cout << "Reportes";
-
+				setModuloPantalla("Reportes", -1);
+				adm_reporte.administrarModuloReporte();
 				break;
 			case 5: //Submenú Configuración:
 				cout << "Config";
@@ -93,5 +96,6 @@ void Sistema::setModuloPantalla(string modulo, int pantalla) {
 	setModulo(modulo);
 	setPantalla(pantalla);
 }
+
 
 

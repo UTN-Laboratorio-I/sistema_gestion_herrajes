@@ -47,6 +47,7 @@ public:
 	//Administra modulo y pantalla:
 	void setModuloPantalla(string modulo, int pantalla);
 
+
 #pragma endregion
 
 };
