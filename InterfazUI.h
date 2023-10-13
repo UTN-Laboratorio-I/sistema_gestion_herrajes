@@ -10,7 +10,6 @@ public:
 
 	InterfazUI(Sistema* sistema);
 
-
 	void headerDinamico();
 
 	bool opcionesValidasMenu(int inicio, int fin, int seleccion, bool imprimir = false, bool admiteAtras = true);
