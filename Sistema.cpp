@@ -1,8 +1,6 @@
 #include <iostream>
 #include "Sistema.h"
 #include "Producto.h"
-#include "Archivo.h"
-#include "Archivo.cpp"
 #include "InterfazUI.h"
 #include "AdminLogin.h"
 #include "AdminCompra.h"
@@ -14,6 +12,8 @@ Sistema::Sistema() {
 	_encendido = true;
 	_pantalla = 0;
 	_usuarioLogged = "";
+	_modulo = "principal";
+	_subModulo = "";
 }
 
 void Sistema::setEncendido(bool set) { _encendido = set; }
@@ -25,6 +25,12 @@ std::string Sistema::getUsuarioLogged() { return _usuarioLogged; }
 void Sistema::setPantalla(int opc) { _pantalla = opc; }
 int Sistema::getPantalla() { return _pantalla; }
 
+void Sistema::setModulo(std::string modulo) { _modulo = modulo; }
+string Sistema::getModulo() { return _modulo; }
+
+void Sistema::setSubModulo(std::string modulo) {};
+string Sistema::getSubModulo() { return _subModulo; };
+
 void Sistema::setError(std::string mensaje) { _error.setError(true, mensaje); }
 std::string Sistema::getError() { return _error.getErrorMensaje(); }
 bool Sistema::hasError() { return _error.hasError(); }
@@ -35,47 +41,57 @@ void Sistema::limpiarError() { _error.limpiarErrores(); }
 void Sistema::administrarPrograma() {
 	InterfazUI UI(this);
 	AdminLogin adm_login(this); //Facilitamos un puntero a la instancia de sistema para acceder a sus métodos.  
-	AdminCompra adm_compras;
-	AdminVentas adm_ventas;
-	AdminABM adm_ABM;
+	AdminCompra adm_compras(this);
+	AdminVenta adm_ventas(this);
 
 	while (_encendido) {
-		switch (_pantalla) {
-		case 0: //Login
-			adm_login.verificarLogin();
-			break;
-		case 1: //Menú principal:
-			UI.menuPrincipal();
+		while (_modulo == "principal") {
+			switch (_pantalla) {
+			case 0: //Login
+				adm_login.verificarLogin();
+				break;
+			case 888: //Menú principal:
+				UI.ver_MenuPrincipal();
+				break;
+			case 1: //Submenú Compras/stock:
+				setModuloPantalla("compras", -1);
+				adm_compras.administrarModuloCompra();
+				break;
+			case 2: //Submenú Ventas:
+				setModuloPantalla("ventas", -1);
+				adm_ventas.administrarModuloVenta();
+				break;
+			case 3: //Submenú ABM:
+				cout << "ABM";
 
-			break;
-		case 2: //Submenú Compras/stock:
-			UI.subMenuCompras();
-			break;
-		case 3: //Submenú Ventas:
-			cout << "Ventas";
+				break;
+			case 4: //Submenú Reportes:
+				cout << "Reportes";
 
-			break;
-		case 4: //Submenú ABM:
-			cout << "ABM";
+				break;
+			case 5: //Submenú Configuración:
+				cout << "Config";
 
-			break;
-		case 5: //Submenú Reportes:
-			cout << "Reportes";
+				break;
+			case 6: //Submenú Configuración:
+				cout << "USUARIOS";
 
-			break;
-		case 6: //Submenú Configuración:
-			cout << "Config";
-
-			break;
-		case 7: //Submenú Configuración:
-			cout << "USUARIOS";
-
-			break;
-		case 999: //Salir
-			cout << "Salir";
-
-			break;
+				break;
+			case 999: //Salir
+				cout << "Salir";
+				break;
+			}
 		}
+		//Si el programa sigue encendido, mostramos el menú principal nuevamente:
+		if(_encendido ==true) setModuloPantalla("principal",1); 
 	}
 	
+
 }
+
+void Sistema::setModuloPantalla(string modulo, int pantalla) {
+	setModulo(modulo);
+	setPantalla(pantalla);
+}
+
+

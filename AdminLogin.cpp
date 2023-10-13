@@ -8,7 +8,6 @@ bool AdminLogin::verificarLogin() {
 	InterfazUI UI_login(_sistema);
 	UI_login.vistaLogin();
 	//Retorno true hasta añadir lógica de login
-	int opc = 1;
-	_sistema->setPantalla(opc);
+	_sistema->setModuloPantalla("principal",888);
 	return true;
 }

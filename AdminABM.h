@@ -1,7 +1,11 @@
 #pragma once
 #include "Sistema.h"
-class AdminABM : 
-	public Sistema
+class AdminABM
 {
+private:
+	string _nombreModulo;
+	Sistema* _sistema;
+public:
+
 };
 
