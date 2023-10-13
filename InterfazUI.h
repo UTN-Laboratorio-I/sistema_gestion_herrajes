@@ -39,7 +39,5 @@ public:
 	void ver_MenuUsuario();
 
 	void ver_MenuVentas();
-
-
 };
 

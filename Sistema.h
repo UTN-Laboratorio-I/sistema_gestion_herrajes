@@ -11,6 +11,7 @@ protected:
 	string _modulo;
 	string _subModulo;
 	std::string _usuarioLogged;
+	bool _isAdmin;
 	ErrorDto _error;
 
 public:
@@ -24,6 +25,9 @@ public:
 
 	void setUsuarioLogged(std::string nombre);
 	std::string getUsuarioLogged();
+
+	void setIsAdmin(bool set);
+	bool getIsAdmin();
 
 	void setPantalla(int opc);
 	int getPantalla();

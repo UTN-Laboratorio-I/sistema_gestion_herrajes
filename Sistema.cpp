@@ -13,6 +13,7 @@ Sistema::Sistema() {
 	_encendido = true;
 	_pantalla = 0;
 	_usuarioLogged = "";
+	_isAdmin = false;
 	_modulo = "login";
 	_subModulo = "";
 }
@@ -22,6 +23,9 @@ bool Sistema::getEncendido() { return _encendido; }
 
 void Sistema::setUsuarioLogged(std::string nombre) { _usuarioLogged = nombre; }
 std::string Sistema::getUsuarioLogged() { return _usuarioLogged; }
+
+void Sistema::setIsAdmin(bool set) { _isAdmin = set; }
+bool Sistema::getIsAdmin() { return _isAdmin; }
 
 void Sistema::setPantalla(int opc) { _pantalla = opc; }
 int Sistema::getPantalla() { return _pantalla; }
