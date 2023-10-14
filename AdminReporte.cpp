@@ -175,7 +175,7 @@ bool AdminReporte::subModuloReporteActivo(string subModulo)
 
 void AdminReporte::moduloReporteSalir()
 {
-	_sistema->setModuloPantalla("principal", 888);
+	_sistema->setModuloPantalla("Principal", 888);
 	return;
 }
 

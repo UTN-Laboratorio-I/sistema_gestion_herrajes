@@ -129,7 +129,9 @@
   <ItemGroup>
     <ClCompile Include="AdminABM.cpp" />
     <ClCompile Include="AdminCompra.cpp" />
+    <ClCompile Include="AdminConfig.cpp" />
     <ClCompile Include="AdminLogin.cpp" />
+    <ClCompile Include="AdminUsuario.cpp" />
     <ClCompile Include="AdminVenta.cpp" />
     <ClCompile Include="Categoria.cpp" />
     <ClCompile Include="ErrorDto.cpp" />
@@ -141,11 +143,14 @@
     <ClCompile Include="AdminReporte.cpp" />
     <ClCompile Include="Sistema.cpp" />
     <ClCompile Include="sistema_gestion_herrajes.cpp" />
+    <ClCompile Include="Usuario.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdminABM.h" />
     <ClInclude Include="AdminCompra.h" />
+    <ClInclude Include="AdminConfig.h" />
     <ClInclude Include="AdminLogin.h" />
+    <ClInclude Include="AdminUsuario.h" />
     <ClInclude Include="AdminVenta.h" />
     <ClInclude Include="Archivo.h" />
     <ClInclude Include="Categoria.h" />
@@ -157,6 +162,7 @@
     <ClInclude Include="Producto.h" />
     <ClInclude Include="AdminReporte.h" />
     <ClInclude Include="Sistema.h" />
+    <ClInclude Include="Usuario.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

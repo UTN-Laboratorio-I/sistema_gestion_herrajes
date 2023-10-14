@@ -8,6 +8,7 @@ private:
 	string _nombreSubModuloCliente;
 	string _nombreSubModuloProveedor;
 	string _nombreSubModuloProducto;
+
 public:
 	//Constructor:
 	AdminABM(Sistema* sistema);

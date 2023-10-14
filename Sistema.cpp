@@ -7,77 +7,86 @@
 #include "AdminVenta.h"
 #include "AdminABM.h"
 #include "AdminReporte.h"
+#include "AdminUsuario.h"
+#include "AdminConfig.h"
 
+using namespace std;
 #pragma region Setters/Getters
 Sistema::Sistema() {
 	_encendido = true;
 	_pantalla = 0;
-	_usuarioLogged = "";
-	_modulo = "login";
-	_subModulo = "";
+	_modulo = "Login";
+	_usuario;
 }
 
 void Sistema::setEncendido(bool set) { _encendido = set; }
 bool Sistema::getEncendido() { return _encendido; }
 
-void Sistema::setUsuarioLogged(std::string nombre) { _usuarioLogged = nombre; }
-std::string Sistema::getUsuarioLogged() { return _usuarioLogged; }
+void Sistema::setUsuarioLogged(string usuario, string nombre, string rol, bool isAdmin) { _usuario.setDatosUsuario(usuario, nombre, rol, isAdmin,""); }
+string Sistema::getUsuarioLogged() { return _usuario.getUsuario(); }
+string Sistema::getNombreUsuarioLogged() { return _usuario.getNombre(); }
+string Sistema::getRolUsuarioLogged() { return _usuario.getRol(); }
+bool Sistema::getIsAdminUsuarioLogged() { return _usuario.getIsAdmin(); }
+void Sistema::limpiarUsuario(){ _usuario.setDatosUsuario("", "", "", false,""); }
 
 void Sistema::setPantalla(int opc) { _pantalla = opc; }
 int Sistema::getPantalla() { return _pantalla; }
 
-void Sistema::setModulo(std::string modulo) { _modulo = modulo; }
+void Sistema::setModulo(string modulo) { _modulo = modulo; }
 string Sistema::getModulo() { return _modulo; }
 
-void Sistema::setSubModulo(std::string modulo) {};
-string Sistema::getSubModulo() { return _subModulo; };
-
-void Sistema::setError(std::string mensaje) { _error.setError(true, mensaje); }
-std::string Sistema::getError() { return _error.getErrorMensaje(); }
+void Sistema::setError(string mensaje) { _error.setError(true, mensaje); }
+string Sistema::getError() { return _error.getErrorMensaje(); }
 bool Sistema::hasError() { return _error.hasError(); }
 void Sistema::limpiarError() { _error.limpiarErrores(); }
 
 #pragma endregion
 
 void Sistema::administrarPrograma() {
+	//En todos los casos, pasamos como parametro esta misma instancia de Sistema
+	//Para poder hacer uso de sus métodos y atributos
 	InterfazUI UI(this);
-	AdminLogin adm_login(this); //Facilitamos un puntero a la instancia de sistema para acceder a sus métodos.  
+	AdminLogin adm_login(this); 
 	AdminCompra adm_compras(this);
 	AdminVenta adm_ventas(this);
 	AdminABM adm_abm(this);
 	AdminReporte adm_reporte(this);
+	AdminUsuario adm_usuario(this);
+	AdminConfig adm_config(this);
+
 	bool logged = false;
 
 	while (_encendido) {
 		logged = adm_login.verificarLogin();
 		if(logged)
-			while (_modulo == "principal") {
+			while (_modulo == "Principal") {
 				switch (_pantalla) {
 				case 888: //Menú principal:
 					UI.ver_MenuPrincipal();
 					break;
 				case 1: //Submenú Compras/stock:
-					setModuloPantalla("compras", -1);
+					setModulo("Compras");
 					adm_compras.administrarModuloCompra();
 					break;
 				case 2: //Submenú Ventas:
-					setModuloPantalla("ventas", -1);
+					setModulo("Ventas");
 					adm_ventas.administrarModuloVenta();
 					break;
 				case 3: //Submenú ABM:
-					setModuloPantalla("ABM", -1);
+					setModulo("ABM");
 					adm_abm.administrarModuloABM();
 					break;
 				case 4: //Submenú Reportes:
-					setModuloPantalla("Reportes", -1);
+					setModulo("Reportes");
 					adm_reporte.administrarModuloReporte();
 					break;
 				case 5: //Submenú Configuración:
-					cout << "Config";
-
+					setModulo("Configuracion");
+					adm_config.administrarModuloConfig();
 					break;
 				case 6: //Submenú Configuración:
-					cout << "USUARIOS";
+					setModulo("Usuarios");
+					adm_usuario.administrarModuloUsuario();
 					break;
 				case 0: //Apagar o cerrar sesión:
 					apagarOCerrarSesion();
@@ -85,8 +94,6 @@ void Sistema::administrarPrograma() {
 				}
 			}
 	}
-	
-
 }
 
 void Sistema::setModuloPantalla(string modulo, int pantalla) {
@@ -100,7 +107,7 @@ void Sistema::apagarOCerrarSesion() {
 		switch (opc) {
 		case 0:
 			//Cancelar:
-			setModuloPantalla("principal", 888);
+			setModuloPantalla("Principal", 888);
 			break;
 		case 1:
 			//Apagar:
@@ -110,7 +117,9 @@ void Sistema::apagarOCerrarSesion() {
 			break;
 		case 2:
 			//Re-loguear:
-			setModulo("login");
+			AdminLogin login(this);
+			login.cerrarSesion();
+			setModulo("Login");
 		}
 }
 
