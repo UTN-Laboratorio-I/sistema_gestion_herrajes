@@ -5,7 +5,7 @@
 
 //Constructor:
 AdminCompra::AdminCompra(Sistema* sistema) : _sistema(sistema){
-	_nombreModulo = "compras";
+	_nombreModulo = "Compras";
 }
 
 //Verifica si el módulo compras está activo:
@@ -20,7 +20,7 @@ bool AdminCompra::moduloCompraActivo() {
 
 //Sale del modulo compra hacia el principal:
 void AdminCompra::moduloCompraSalir() {
-	_sistema->setModuloPantalla("principal", 888);
+	_sistema->setModuloPantalla("Principal", 888);
 }
 
 //Administra el módulo compras:

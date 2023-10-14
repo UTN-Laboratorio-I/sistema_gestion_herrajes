@@ -15,7 +15,7 @@ bool AdminLogin::verificarLogin() {
 	bool validar_login = login();
 
 	if (validar_login) {
-		_sistema->setModuloPantalla("principal",888);
+		_sistema->setModuloPantalla("Principal",888);
 		_sistema->limpiarError();
 		return true;
 	}

@@ -3,22 +3,17 @@
 
 //Constructor:
 AdminVenta::AdminVenta(Sistema* sistema) : _sistema(sistema) {
-	_nombreModulo = "ventas";
+	_nombreModulo = "Ventas";
 }
 
 //Verifica si el módulo ventas está activo:
 bool AdminVenta::moduloVentaActivo() {
-	if (_sistema->getModulo() == _nombreModulo) {
-		return true;
-	}
-	else {
-		return false;
-	}
+	return _sistema->getModulo() == _nombreModulo;
 }
 
 //Sale del modulo venta hacia el principal:
 void AdminVenta::moduloVentaSalir() {
-	_sistema->setModuloPantalla("principal", 888);
+	_sistema->setModuloPantalla("Principal", 888);
 }
 
 //Administra el módulo ventas:

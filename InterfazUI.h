@@ -34,7 +34,7 @@ public:
 	void ver_SubMenuReportesProducto();
 	void ver_SubMenuReportesCaja();
 
-	void ver_MenuConfiguracion();
+	void ver_MenuConfig();
 
 	void ver_MenuUsuario();
 

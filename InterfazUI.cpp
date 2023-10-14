@@ -133,7 +133,7 @@ void InterfazUI::ver_MenuCompras() {
 	cin >> opc;
 	verificado = opcionesValidasMenu(1, 3, opc);
 	}
-	_sistema->setModuloPantalla("compras", opc);
+	_sistema->setModuloPantalla("Compras", opc);
 }
 
 void InterfazUI::ver_MenuCrearCompraProducto() {
@@ -147,7 +147,7 @@ void InterfazUI::ver_MenuCrearCompraProducto() {
 		cin >> opc;
 		verificado = opcionesValidasMenu(1, 1, opc);
 	}
-	_sistema->setModuloPantalla("compras", opc);
+	_sistema->setModuloPantalla("Compras", opc);
 }
 
 #pragma endregion UI_Compras
@@ -370,21 +370,20 @@ void InterfazUI::ver_MenuUsuario() {
 
 	while (!verificado) {
 		headerDinamico();
-		cout << "1) Reporte Clientes" << endl;
-		cout << "2) Reporte Proveedores" << endl;
-		cout << "3) Reporte Productos" << endl;
-		cout << "4) Reporte Ventas" << endl;
-		cout << "4) Reporte Usuarios" << endl << endl;
+		cout << "1) Listar usuarios" << endl;
+		cout << "2) Crear nuevo usuario" << endl;
+		cout << "3) Modificar usuario" << endl;
+		cout << "4) Eliminar usuario" << endl;
 		cout << "0) <- Atras" << endl;
 		cin >> opc;
-		verificado = opcionesValidasMenu(1, 4, opc);
+		verificado = opcionesValidasMenu(1, 3, opc);
 	}
-	_sistema->setModuloPantalla("compras", opc);
+	_sistema->setModuloPantalla("Usuarios", opc);
 }
 #pragma endregion UI_Usuario
 
 #pragma region UI_Configuracion
-void InterfazUI::ver_MenuConfiguracion() {
+void InterfazUI::ver_MenuConfig() {
 	limpiarConsola();
 	int opc;
 	bool verificado = false;
@@ -398,6 +397,6 @@ void InterfazUI::ver_MenuConfiguracion() {
 		cin >> opc;
 		verificado = opcionesValidasMenu(1, 4, opc);
 	}
-	_sistema->setModuloPantalla("compras", opc);
+	_sistema->setModuloPantalla("Configuracion", opc);
 }
 #pragma endregion UI_Configuracion
