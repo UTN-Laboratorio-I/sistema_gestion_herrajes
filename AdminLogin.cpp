@@ -26,6 +26,11 @@ bool AdminLogin::verificarLogin() {
 	//Retorno true hasta añadir lógica de login
 }
 
+void AdminLogin::cerrarSesion() {
+	_sistema->setUsuarioLogged("");
+	_sistema->setIsAdmin(false);
+}
+
 bool AdminLogin::login() {
 	//Validar usuarios y contraseñas
 	if(_usuario == "admin" && _password == "admin")

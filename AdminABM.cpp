@@ -25,7 +25,7 @@ void AdminABM::administrarModuloABM()
 
 		switch (opc) {
 		case 1:
-			_sistema->setModuloPantalla("ABM Clientes", -1);
+			_sistema->setModulo("ABM Clientes");
 			administrarSubModuloABMCliente();
 
 			break;
