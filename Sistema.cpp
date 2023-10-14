@@ -13,8 +13,8 @@ Sistema::Sistema() {
 	_encendido = true;
 	_pantalla = 0;
 	_usuarioLogged = "";
-	_modulo = "principal";
-	_subModulo = "";
+	_isAdmin = false;
+	_modulo = "login";
 }
 
 void Sistema::setEncendido(bool set) { _encendido = set; }
@@ -23,14 +23,14 @@ bool Sistema::getEncendido() { return _encendido; }
 void Sistema::setUsuarioLogged(std::string nombre) { _usuarioLogged = nombre; }
 std::string Sistema::getUsuarioLogged() { return _usuarioLogged; }
 
+void Sistema::setIsAdmin(bool set) { _isAdmin = set; }
+bool Sistema::getIsAdmin() { return _isAdmin; }
+
 void Sistema::setPantalla(int opc) { _pantalla = opc; }
 int Sistema::getPantalla() { return _pantalla; }
 
 void Sistema::setModulo(std::string modulo) { _modulo = modulo; }
 string Sistema::getModulo() { return _modulo; }
-
-void Sistema::setSubModulo(std::string modulo) {};
-string Sistema::getSubModulo() { return _subModulo; };
 
 void Sistema::setError(std::string mensaje) { _error.setError(true, mensaje); }
 std::string Sistema::getError() { return _error.getErrorMensaje(); }
@@ -46,50 +46,45 @@ void Sistema::administrarPrograma() {
 	AdminVenta adm_ventas(this);
 	AdminABM adm_abm(this);
 	AdminReporte adm_reporte(this);
+	bool logged = false;
 
 	while (_encendido) {
-		while (_modulo == "principal") {
-			switch (_pantalla) {
-			case 0: //Login
-				adm_login.verificarLogin();
-				break;
-			case 888: //Menú principal:
-				UI.ver_MenuPrincipal();
-				break;
-			case 1: //Submenú Compras/stock:
-				setModuloPantalla("compras", -1);
-				adm_compras.administrarModuloCompra();
-				break;
-			case 2: //Submenú Ventas:
-				setModuloPantalla("ventas", -1);
-				adm_ventas.administrarModuloVenta();
-				break;
-			case 3: //Submenú ABM:
-				setModuloPantalla("ABM", -1);
-				adm_abm.administrarModuloABM();
-				break;
-			case 4: //Submenú Reportes:
-				setModuloPantalla("Reportes", -1);
-				adm_reporte.administrarModuloReporte();
-				break;
-			case 5: //Submenú Configuración:
-				cout << "Config";
+		logged = adm_login.verificarLogin();
+		if(logged)
+			while (_modulo == "principal") {
+				switch (_pantalla) {
+				case 888: //Menú principal:
+					UI.ver_MenuPrincipal();
+					break;
+				case 1: //Submenú Compras/stock:
+					setModuloPantalla("compras", -1);
+					adm_compras.administrarModuloCompra();
+					break;
+				case 2: //Submenú Ventas:
+					setModuloPantalla("ventas", -1);
+					adm_ventas.administrarModuloVenta();
+					break;
+				case 3: //Submenú ABM:
+					setModuloPantalla("ABM", -1);
+					adm_abm.administrarModuloABM();
+					break;
+				case 4: //Submenú Reportes:
+					setModuloPantalla("Reportes", -1);
+					adm_reporte.administrarModuloReporte();
+					break;
+				case 5: //Submenú Configuración:
+					cout << "Config";
 
-				break;
-			case 6: //Submenú Configuración:
-				cout << "USUARIOS";
-
-				break;
-			case 999: //Salir
-				cout << "Salir";
-				break;
+					break;
+				case 6: //Submenú Configuración:
+					cout << "USUARIOS";
+					break;
+				case 0: //Apagar o cerrar sesión:
+					apagarOCerrarSesion();
+					break;
+				}
 			}
-		}
-		//Si el programa sigue encendido, mostramos el menú principal nuevamente:
-		if(_encendido ==true) setModuloPantalla("principal",1); 
 	}
-	
-
 }
 
 void Sistema::setModuloPantalla(string modulo, int pantalla) {
@@ -97,5 +92,26 @@ void Sistema::setModuloPantalla(string modulo, int pantalla) {
 	setPantalla(pantalla);
 }
 
+void Sistema::apagarOCerrarSesion() {
+	InterfazUI UI(this);
+		int opc = UI.apagarOCerrarSesion();
+		switch (opc) {
+		case 0:
+			//Cancelar:
+			setModuloPantalla("principal", 888);
+			break;
+		case 1:
+			//Apagar:
+			setModulo("end");
+			setEncendido(false);
+			UI.mensajeCierrePrograma();
+			break;
+		case 2:
+			//Re-loguear:
+			AdminLogin login(this);
+			login.cerrarSesion();
+			setModulo("login");
+		}
+}
 
 

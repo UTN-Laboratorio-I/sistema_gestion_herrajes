@@ -6,12 +6,15 @@
 template <class T>
 class Archivo
 {
-public:
-    Archivo() = default;
+private:
+    const char* _nombreArchivo;
 
-    bool grabarRegistroArchivo(T objeto, const char* archivo) {
+public:
+    Archivo(const char* nombreArchivo){ _nombreArchivo = nombreArchivo; }
+
+    bool grabarRegistroArchivo(T objeto) {
         FILE* p;
-        p = fopen(archivo, "ab");
+        p = fopen(_nombreArchivo, "ab");
 
         if (p == NULL) {
             return false;
@@ -24,11 +27,11 @@ public:
         return escribio;
     }
 
-    std::vector<T> listarRegistroArchivo(const char* archivo) {
-        std::vector<T> registros; // Vector para almacenar los objetos leídos de tipo T
+    std::vector<T> listarRegistroArchivo() {
+        std::vector<T> registros; 
 
         FILE* p;
-        p = fopen(archivo, "rb");
+        p = fopen(_nombreArchivo, "rb");
 
         if (p == NULL) {
 
@@ -49,3 +52,5 @@ public:
 private:
 
 };
+
+

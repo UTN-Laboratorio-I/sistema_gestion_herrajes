@@ -47,37 +47,6 @@ void Producto::setDescripcionProducto(std::string descripcion) {
 }
 
 void Producto::cargarProductos() {
-	const char* nombreArchivo = "productos.dat";
-	Producto producto;
-	Producto* productoLeido;
-	Archivo<Producto> archivo;
-	Archivo<Producto> leer;
-
-	producto.setCantidad(10);
-	producto.setDescripcionProducto("Producto de prueba");
-	producto.setNombreProducto("Producto 1");
-	producto.setPrecioCosto(100);
-
-	bool grabo = archivo.grabarRegistroArchivo(producto, nombreArchivo);
-
-	if (grabo) {
-		std::cout << "Grabo el producto" << std::endl;
-		
-		std::vector<Producto> productoLeido = leer.listarRegistroArchivo(nombreArchivo);
-		
-		for (Producto p : productoLeido) {
-			std::cout << p.getNombreProducto() << std::endl;
-			std::cout << p.getDescripcionProducto() << std::endl;
-			std::cout << p.getPrecioCosto() << std::endl;
-			std::cout << p.getCantidad() << std::endl;
-
-		}
-
-	}
-	else {
-		std::cout << "No se grabo el registro" << std::endl;
-	}
-
 
 }
 void Producto::mostrarProductos() {

@@ -59,20 +59,39 @@ bool InterfazUI::opcionesValidasMenu(int inicio, int fin, int seleccion, bool im
 	return true;
 }
 
+#pragma region Login/Sesion
 /// <summary>
 /// Vista de login principal.
 /// </summary>
 void InterfazUI::vistaLogin() {
 	headerDinamico();
 	std::string usuario;
-	cout << "Ingrese su nombre: ";
-	cin >> usuario;
-
-	_sistema->setUsuarioLogged(usuario);
-
-	system("cls");
+	cout << "Ingrese User/Password " << endl<<endl;
 }
 
+int InterfazUI::apagarOCerrarSesion() {
+	limpiarConsola();
+	int opc;
+	bool verificado = false;
+
+	while (!verificado) {
+		headerDinamico();
+		cout << "1) Apagar" << endl;
+		cout << "2) Cerrar sesion" << endl << endl;
+		cout << "0) <- Cancelar" << endl;
+		cin >> opc;
+		verificado = opcionesValidasMenu(1, 2, opc);
+	}
+	return opc;
+}
+
+void InterfazUI::mensajeCierrePrograma() {
+	limpiarConsola();
+	cout << "Cerrando programa..." << endl;
+}
+#pragma endregion Login/Sesion
+
+#pragma region UI_Principal
 void InterfazUI::ver_MenuPrincipal() {
 	limpiarConsola();
 	int opc;
@@ -92,6 +111,7 @@ void InterfazUI::ver_MenuPrincipal() {
 	}
 	_sistema->setPantalla(opc);
 }
+#pragma endregion UI_Principal
 
 #pragma region UI_Compras
 

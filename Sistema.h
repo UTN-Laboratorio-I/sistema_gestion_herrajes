@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "ErrorDto.h"
+#include "Usuario.h"
 using namespace std;
 
 class Sistema
@@ -9,10 +10,10 @@ protected:
 	bool _encendido;
 	int _pantalla;
 	string _modulo;
-	string _subModulo;
 	std::string _usuarioLogged;
+	Usuario _usuario;
+	bool _isAdmin;
 	ErrorDto _error;
-
 public:
 #pragma region Constructor
 	Sistema();
@@ -25,14 +26,14 @@ public:
 	void setUsuarioLogged(std::string nombre);
 	std::string getUsuarioLogged();
 
+	void setIsAdmin(bool set);
+	bool getIsAdmin();
+
 	void setPantalla(int opc);
 	int getPantalla();
 
 	void setModulo(std::string modulo);
 	string getModulo();
-
-	void setSubModulo(std::string modulo);
-	string getSubModulo();
 
 	void setError(std::string mensaje);
 	std::string getError();
@@ -47,7 +48,7 @@ public:
 	//Administra modulo y pantalla:
 	void setModuloPantalla(string modulo, int pantalla);
 
-
+	void apagarOCerrarSesion();
 #pragma endregion
 
 };
