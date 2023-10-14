@@ -1,5 +1,6 @@
 #include "AdminLogin.h"
 #include "InterfazUI.h"
+#include "Helper.h"
 
 //Utilizamos el puntero de la instancia de Sistema para acceder a ella.
 AdminLogin::AdminLogin(Sistema* sistema) : _sistema(sistema) {}

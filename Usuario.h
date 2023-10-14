@@ -1,40 +1,35 @@
-#include <iostream>
-#include <functional>
 #pragma once
-using namespace std;
+#include <string>
+#include <vector>
+#include "ResponseDto.h"
+#include "Archivo.h"
 
-class Usuario
-{
+class Usuario {
 private:
-	string _usuario;
-	string _password;
-	string _nombre;
-	string _rol;
-	bool _isAdmin;
+    std::string _usuario;
+    std::string _password;
+    std::string _nombre;
+    std::string _rol;
+    bool _isAdmin;
+
 public:
-	Usuario();
-	Usuario(string usuario, string nombre, string rol, bool isAdmin, string password);
-	~Usuario();
+    Usuario();
+    Usuario(const std::string& usuario, const std::string& nombre, const std::string& rol, bool isAdmin, const std::string& password = "");
 
-	void setUsuario(string usuario);
-	string getUsuario();
+    void setUsuario(const std::string& usuario);
+    const std::string& getUsuario() const;
+    void setPassword(const std::string& password);
+    const std::string& getPassword() const;
+    void setNombre(const std::string& nombre);
+    const std::string& getNombre() const;
+    void setIsAdmin(bool isAdmin);
+    bool getIsAdmin() const;
+    void setRol(const std::string& rol);
+    const std::string& getRol() const;
+    void setDatosUsuario(const std::string& usuario, const std::string& nombre, const std::string& rol, bool isAdmin, const std::string& password);
 
-	void setPassword(string password);
-	string getPassword();
-	
-	void setNombre(string nombre);
-	string getNombre();
-	
-	void setIsAdmin(bool isAdmin);
-	bool getIsAdmin();
+    Usuario obtenerDatosUsuario();
 
-	void setRol(string rol);
-	string getRol();
-
-	void setDatosUsuario(string usuario, string nombre, string rol, bool isAdmin, string password);
-	Usuario getDatosUsuario();
-
-	bool crearNuevoUsuario();
-	Usuario obtenerDatosUsuario();
+    Response crearNuevoUsuario();
+    std::vector<Usuario> listarUsuarios();
 };
-
