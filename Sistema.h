@@ -10,9 +10,7 @@ protected:
 	bool _encendido;
 	int _pantalla;
 	string _modulo;
-	std::string _usuarioLogged;
 	Usuario _usuario;
-	bool _isAdmin;
 	ErrorDto _error;
 public:
 #pragma region Constructor
@@ -23,8 +21,13 @@ public:
 	void setEncendido(bool set);
 	bool getEncendido();
 
-	void setUsuarioLogged(std::string nombre);
-	std::string getUsuarioLogged();
+	void setUsuarioLogged(std::string usuario, std::string nombre, std::string rol, bool isAdmin);
+	string getUsuarioLogged();
+	string getNombreUsuarioLogged();
+	string getRolUsuarioLogged();
+	bool getIsAdminUsuarioLogged();
+
+	void limpiarUsuario();
 
 	void setIsAdmin(bool set);
 	bool getIsAdmin();

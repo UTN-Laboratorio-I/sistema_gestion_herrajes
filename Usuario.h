@@ -13,7 +13,7 @@ private:
 	bool _isAdmin;
 public:
 	Usuario();
-	Usuario(string usuario, string password, string nombre, string rol, bool isAdmin);
+	Usuario(string usuario, string nombre, string rol, bool isAdmin, string password);
 	~Usuario();
 
 	void setUsuario(string usuario);
@@ -27,7 +27,13 @@ public:
 	
 	void setIsAdmin(bool isAdmin);
 	bool getIsAdmin();
-	
+
+	void setRol(string rol);
+	string getRol();
+
+	void setDatosUsuario(string usuario, string nombre, string rol, bool isAdmin, string password);
+	Usuario getDatosUsuario();
+
 	bool crearNuevoUsuario();
 	Usuario obtenerDatosUsuario();
 };

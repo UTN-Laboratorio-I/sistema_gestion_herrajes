@@ -10,7 +10,7 @@ Usuario::Usuario()
 	_isAdmin = false;
 }
 
-Usuario::Usuario(string usuario, string password, string nombre, string rol, bool isAdmin)
+Usuario::Usuario(string usuario, string nombre, string rol, bool isAdmin, string password="")
 {
 	_usuario = usuario;
 	_password = password;
@@ -30,8 +30,20 @@ string Usuario::getPassword(){return _password;}
 void Usuario::setNombre(string nombre){_nombre = nombre;}
 string Usuario::getNombre(){return _nombre;}
 
+void Usuario::setRol(string rol){_rol = rol;}
+string Usuario::getRol(){return _rol;}
+
 void Usuario::setIsAdmin(bool isAdmin){_isAdmin = isAdmin;}
 bool Usuario::getIsAdmin(){return _isAdmin;}
+
+void Usuario::setDatosUsuario(string usuario, string nombre, string rol, bool isAdmin, string password = "") {
+	_usuario = usuario;
+	_password = password;
+	_nombre = nombre;
+	_rol = rol;
+	_isAdmin = isAdmin;
+}
+
 
 bool Usuario::crearNuevoUsuario() {
 	Archivo<Usuario> archivo("usuarios.dat");

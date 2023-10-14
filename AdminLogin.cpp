@@ -27,16 +27,14 @@ bool AdminLogin::verificarLogin() {
 }
 
 void AdminLogin::cerrarSesion() {
-	_sistema->setUsuarioLogged("");
-	_sistema->setIsAdmin(false);
+	_sistema->limpiarUsuario();
 }
 
 bool AdminLogin::login() {
 	//Validar usuarios y contraseñas
 	if(_usuario == "admin" && _password == "admin")
 	{
-		_sistema->setUsuarioLogged(_usuario);
-		_sistema->setIsAdmin(true);
+		_sistema->setUsuarioLogged("admin", "admin","admin",true);
 		return true;
 	}
 	else

@@ -96,6 +96,10 @@ void InterfazUI::ver_MenuPrincipal() {
 	limpiarConsola();
 	int opc;
 	bool verificado=false;
+	string user = _sistema->getUsuarioLogged();
+	bool isAdmin = _sistema->getIsAdminUsuarioLogged();
+	int opcMax; //Si el usuario es admin, se muestra la opcion de usuario, sino se oculta.a
+	opcMax = isAdmin? 6 : 5;
 
 	while (!verificado) {
 	headerDinamico();
@@ -104,10 +108,10 @@ void InterfazUI::ver_MenuPrincipal() {
 	cout << "3) ABM" << endl;
 	cout << "4) Reportes" << endl;
 	cout << "5) Configuracion" << endl;
-	cout << "6) USUARIO" << endl<<endl;
+	if(isAdmin){ cout << "6) USUARIO" << endl << endl; }
 	cout << "0) Salir" << endl;
 	cin >> opc;
-	verificado = opcionesValidasMenu(1, 6, opc);
+	verificado = opcionesValidasMenu(1, opcMax, opc);
 	}
 	_sistema->setPantalla(opc);
 }

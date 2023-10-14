@@ -10,32 +10,33 @@
 #include "AdminUsuario.h"
 #include "AdminConfig.h"
 
+using namespace std;
 #pragma region Setters/Getters
 Sistema::Sistema() {
 	_encendido = true;
 	_pantalla = 0;
-	_usuarioLogged = "";
-	_isAdmin = false;
 	_modulo = "Login";
+	_usuario;
 }
 
 void Sistema::setEncendido(bool set) { _encendido = set; }
 bool Sistema::getEncendido() { return _encendido; }
 
-void Sistema::setUsuarioLogged(std::string nombre) { _usuarioLogged = nombre; }
-std::string Sistema::getUsuarioLogged() { return _usuarioLogged; }
-
-void Sistema::setIsAdmin(bool set) { _isAdmin = set; }
-bool Sistema::getIsAdmin() { return _isAdmin; }
+void Sistema::setUsuarioLogged(string usuario, string nombre, string rol, bool isAdmin) { _usuario.setDatosUsuario(usuario, nombre, rol, isAdmin,""); }
+string Sistema::getUsuarioLogged() { return _usuario.getUsuario(); }
+string Sistema::getNombreUsuarioLogged() { return _usuario.getNombre(); }
+string Sistema::getRolUsuarioLogged() { return _usuario.getRol(); }
+bool Sistema::getIsAdminUsuarioLogged() { return _usuario.getIsAdmin(); }
+void Sistema::limpiarUsuario(){ _usuario.setDatosUsuario("", "", "", false,""); }
 
 void Sistema::setPantalla(int opc) { _pantalla = opc; }
 int Sistema::getPantalla() { return _pantalla; }
 
-void Sistema::setModulo(std::string modulo) { _modulo = modulo; }
+void Sistema::setModulo(string modulo) { _modulo = modulo; }
 string Sistema::getModulo() { return _modulo; }
 
-void Sistema::setError(std::string mensaje) { _error.setError(true, mensaje); }
-std::string Sistema::getError() { return _error.getErrorMensaje(); }
+void Sistema::setError(string mensaje) { _error.setError(true, mensaje); }
+string Sistema::getError() { return _error.getErrorMensaje(); }
 bool Sistema::hasError() { return _error.hasError(); }
 void Sistema::limpiarError() { _error.limpiarErrores(); }
 
