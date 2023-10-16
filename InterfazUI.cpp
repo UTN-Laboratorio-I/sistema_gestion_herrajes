@@ -2,18 +2,10 @@
 #include "InterfazUI.h"
 #include <string>
 #include "Fecha.h"
+#include "Helper.h"
 #pragma warning (disable : 4996)
 
 using namespace std;
-
-#pragma region HelpersInterfaz
-/// <summary>
-/// Limpia la consola entre pantalla y pantalla.
-/// </summary>
-void limpiarConsola() {
-	system("cls");
-}
-#pragma endregion
 
 //Constructores:
 InterfazUI::InterfazUI(Sistema* sistema) : _sistema(sistema) {}
@@ -24,10 +16,11 @@ InterfazUI::InterfazUI(Sistema* sistema) : _sistema(sistema) {}
 /// </summary>
 void InterfazUI::headerDinamico()
 {
+	Helper helper;
 	Fecha fecha;
 	string ahora = fecha.hoy();
 
-	limpiarConsola();
+	helper.limpiarConsola();
 	string usuario = _sistema->getUsuarioLogged();
 	bool error = _sistema->hasError();
 	cout << "Sistema de Gestion" << " - " << ahora << endl;
@@ -59,6 +52,27 @@ bool InterfazUI::opcionesValidasMenu(int inicio, int fin, int seleccion, bool im
 	return true;
 }
 
+bool InterfazUI::mensajeCancelarEjecucion(string ejecucion) {
+	headerDinamico();
+	int opc;
+	bool verificado = false;
+
+	while (verificado) {
+	cout << "Desea salir de " << ejecucion << "?" << endl;
+	cout << "1) Si" << endl;
+	cout << "2) No" << endl << endl;
+	cin >> opc;
+	verificado = opcionesValidasMenu(1, 2, opc, false, false);
+	}
+
+	if (opc == 1) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 #pragma region Login/Sesion
 /// <summary>
 /// Vista de login principal.
@@ -70,7 +84,8 @@ void InterfazUI::vistaLogin() {
 }
 
 int InterfazUI::apagarOCerrarSesion() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
@@ -86,16 +101,22 @@ int InterfazUI::apagarOCerrarSesion() {
 }
 
 void InterfazUI::mensajeCierrePrograma() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	cout << "Cerrando programa..." << endl;
 }
 #pragma endregion Login/Sesion
 
 #pragma region UI_Principal
 void InterfazUI::ver_MenuPrincipal() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado=false;
+	string user = _sistema->getUsuarioLogged();
+	bool isAdmin = _sistema->getIsAdminUsuarioLogged();
+	int opcMax; //Si el usuario es admin, se muestra la opcion de usuario, sino se oculta.a
+	opcMax = isAdmin? 6 : 5;
 
 	while (!verificado) {
 	headerDinamico();
@@ -104,10 +125,10 @@ void InterfazUI::ver_MenuPrincipal() {
 	cout << "3) ABM" << endl;
 	cout << "4) Reportes" << endl;
 	cout << "5) Configuracion" << endl;
-	cout << "6) USUARIO" << endl<<endl;
+	if(isAdmin){ cout << "6) USUARIO" << endl << endl; }
 	cout << "0) Salir" << endl;
 	cin >> opc;
-	verificado = opcionesValidasMenu(1, 6, opc);
+	verificado = opcionesValidasMenu(1, opcMax, opc);
 	}
 	_sistema->setPantalla(opc);
 }
@@ -120,7 +141,8 @@ void InterfazUI::ver_MenuPrincipal() {
 /// </summary>
 /// <returns></returns>
 void InterfazUI::ver_MenuCompras() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
@@ -133,11 +155,12 @@ void InterfazUI::ver_MenuCompras() {
 	cin >> opc;
 	verificado = opcionesValidasMenu(1, 3, opc);
 	}
-	_sistema->setModuloPantalla("compras", opc);
+	_sistema->setModuloPantalla("Compras", opc);
 }
 
 void InterfazUI::ver_MenuCrearCompraProducto() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 	
@@ -147,14 +170,15 @@ void InterfazUI::ver_MenuCrearCompraProducto() {
 		cin >> opc;
 		verificado = opcionesValidasMenu(1, 1, opc);
 	}
-	_sistema->setModuloPantalla("compras", opc);
+	_sistema->setModuloPantalla("Compras", opc);
 }
 
 #pragma endregion UI_Compras
 
 #pragma region UI_Ventas
 void InterfazUI::ver_MenuVentas() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
@@ -175,7 +199,8 @@ void InterfazUI::ver_MenuVentas() {
 
 
 void InterfazUI::ver_MenuABM() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
@@ -192,7 +217,8 @@ void InterfazUI::ver_MenuABM() {
 }
 
 void InterfazUI::ver_SubMenuABMCliente() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	bool verificado = false;
 	int opc;
 	while (!verificado) {
@@ -235,7 +261,8 @@ void InterfazUI::ver_SubMenuABMCliente() {
 
 }
 	void InterfazUI::ver_SubMenuABMProveedor() {
-		limpiarConsola();
+		Helper helper;
+		helper.limpiarConsola();
 		int opc;
 		bool verificado = false;
 
@@ -254,7 +281,8 @@ void InterfazUI::ver_SubMenuABMCliente() {
 	}
 
 	void InterfazUI::ver_SubMenuABMProducto() {
-		limpiarConsola();
+		Helper helper;
+		helper.limpiarConsola();
 		int opc;
 		bool verificado = false;
 
@@ -277,7 +305,8 @@ void InterfazUI::ver_SubMenuABMCliente() {
 
 #pragma region UI_Reportes
 void InterfazUI::ver_MenuReportes() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
@@ -296,7 +325,8 @@ void InterfazUI::ver_MenuReportes() {
 }
 
 void InterfazUI::ver_SubMenuReportesCliente() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
@@ -312,7 +342,8 @@ void InterfazUI::ver_SubMenuReportesCliente() {
 }
 
 void InterfazUI::ver_SubMenuReportesProveedor() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
@@ -328,7 +359,8 @@ void InterfazUI::ver_SubMenuReportesProveedor() {
 }
 
 void InterfazUI::ver_SubMenuReportesProducto() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
@@ -344,7 +376,8 @@ void InterfazUI::ver_SubMenuReportesProducto() {
 }
 
 void InterfazUI::ver_SubMenuReportesCaja() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
@@ -364,28 +397,29 @@ void InterfazUI::ver_SubMenuReportesCaja() {
 
 #pragma region UI_Usuario
 void InterfazUI::ver_MenuUsuario() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
 	while (!verificado) {
 		headerDinamico();
-		cout << "1) Reporte Clientes" << endl;
-		cout << "2) Reporte Proveedores" << endl;
-		cout << "3) Reporte Productos" << endl;
-		cout << "4) Reporte Ventas" << endl;
-		cout << "4) Reporte Usuarios" << endl << endl;
+		cout << "1) Listar usuarios" << endl;
+		cout << "2) Crear nuevo usuario" << endl;
+		cout << "3) Modificar usuario" << endl;
+		cout << "4) Eliminar usuario" << endl;
 		cout << "0) <- Atras" << endl;
 		cin >> opc;
-		verificado = opcionesValidasMenu(1, 4, opc);
+		verificado = opcionesValidasMenu(1, 3, opc);
 	}
-	_sistema->setModuloPantalla("compras", opc);
+	_sistema->setModuloPantalla("Usuarios", opc);
 }
 #pragma endregion UI_Usuario
 
 #pragma region UI_Configuracion
-void InterfazUI::ver_MenuConfiguracion() {
-	limpiarConsola();
+void InterfazUI::ver_MenuConfig() {
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
@@ -398,6 +432,6 @@ void InterfazUI::ver_MenuConfiguracion() {
 		cin >> opc;
 		verificado = opcionesValidasMenu(1, 4, opc);
 	}
-	_sistema->setModuloPantalla("compras", opc);
+	_sistema->setModuloPantalla("Configuracion", opc);
 }
 #pragma endregion UI_Configuracion

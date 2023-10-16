@@ -11,8 +11,8 @@ public:
 	InterfazUI(Sistema* sistema);
 
 	void headerDinamico();
-
 	bool opcionesValidasMenu(int inicio, int fin, int seleccion, bool imprimir = false, bool admiteAtras = true);
+	bool mensajeCancelarEjecucion(string ejecucion);
 
 	void vistaLogin();
 	int apagarOCerrarSesion();
@@ -34,7 +34,7 @@ public:
 	void ver_SubMenuReportesProducto();
 	void ver_SubMenuReportesCaja();
 
-	void ver_MenuConfiguracion();
+	void ver_MenuConfig();
 
 	void ver_MenuUsuario();
 

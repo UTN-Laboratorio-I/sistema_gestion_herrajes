@@ -2,10 +2,11 @@
 #include "AdminCompra.h"
 #include "InterfazUI.h"
 #include "Producto.h"
+#include "Helper.h"
 
 //Constructor:
 AdminCompra::AdminCompra(Sistema* sistema) : _sistema(sistema){
-	_nombreModulo = "compras";
+	_nombreModulo = "Compras";
 }
 
 //Verifica si el módulo compras está activo:
@@ -20,11 +21,12 @@ bool AdminCompra::moduloCompraActivo() {
 
 //Sale del modulo compra hacia el principal:
 void AdminCompra::moduloCompraSalir() {
-	_sistema->setModuloPantalla("principal", 888);
+	_sistema->setModuloPantalla("Principal", 888);
 }
 
 //Administra el módulo compras:
 void AdminCompra::administrarModuloCompra() {
+	Producto prod;
 	InterfazUI compras_UI(_sistema);
 
 	while (moduloCompraActivo()) {
@@ -33,12 +35,13 @@ void AdminCompra::administrarModuloCompra() {
 
 		switch (opc) {
 		case 1:
+			compras_UI.headerDinamico();
 			//compras_UI.ver_menuCrearCompraProducto();
 			crearCompraProducto();
 			break;
 		case 2:
-			//_sistema->setModuloPantalla("compras", 2);
-			
+			compras_UI.headerDinamico();
+			//mostrarProductos();
 			break;
 		case 0: //SALIR DEL MÓDULO COMPRA:
 			moduloCompraSalir();
@@ -49,8 +52,11 @@ void AdminCompra::administrarModuloCompra() {
 }
 
 void AdminCompra::crearCompraProducto() {
-	Producto producto;
-	producto.cargarProductos();
+	Archivo <Producto> Archivo("productos.dat");
+	Producto prod;
 
+	prod.cargarProductos();
+	Archivo.grabarRegistroArchivo(prod);
 }
+
 
