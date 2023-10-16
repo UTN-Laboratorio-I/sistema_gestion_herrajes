@@ -41,11 +41,12 @@ bool AdminLogin::validar(Usuario user) {
 		return false;
 }
 
-typedef bool (AdminLogin:: *FuncionValidar)(Usuario);
+typedef bool (AdminLogin:: *FuncionValidar)(Usuario); //Esto lo utilizamos para poder hacer referencia
+//al puntero de UNA FUNCIÓN X.
 Usuario AdminLogin::buscarUsuario() {
 	Archivo<Usuario> archivo("usuarios.dat");
 	Usuario usuario;
-	auto fn = [this](Usuario u) { return this->validar(u); };
+	auto fn = [this](Usuario user) { return this->validar(user); };
 	usuario = archivo.buscarRegistroByParametro(fn);
 	return usuario;
 }

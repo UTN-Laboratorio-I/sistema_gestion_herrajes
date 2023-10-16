@@ -11,8 +11,6 @@ private:
 public:
 	AdminLogin(Sistema* sistema);
 
-
-
 	//métodos para manejar login.
 	bool verificarLogin();
 	void cerrarSesion();
