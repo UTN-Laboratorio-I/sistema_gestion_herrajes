@@ -38,7 +38,6 @@ void AdminCompra::administrarModuloCompra() {
 			crearCompraProducto();
 			break;
 		case 2:
-			prod.mostrarProductos();
 			
 			break;
 		case 0: //SALIR DEL MÓDULO COMPRA:
@@ -50,8 +49,6 @@ void AdminCompra::administrarModuloCompra() {
 }
 
 void AdminCompra::crearCompraProducto() {
-	Producto producto;
-	producto.cargarProductos();
 
 }
 
