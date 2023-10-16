@@ -28,8 +28,6 @@ public:
     const char* getRol() const;
     void setDatosUsuario(char* usuario, char* nombre, char* rol, bool isAdmin, char* password);
 
-    Usuario obtenerDatosUsuario();
-
-    Response crearNuevoUsuario();
+    Response<Usuario> crearNuevoUsuario();
     std::vector<Usuario> listarUsuarios();
 };
