@@ -71,6 +71,7 @@ Producto ArchivoProducto::leerRegistro(int pos)
 	return reg;
 }
 
+
 int ArchivoProducto::contarRegistros()
 {
 	FILE* p = fopen(_nombre, "rb");
@@ -82,3 +83,8 @@ int ArchivoProducto::contarRegistros()
 
 	return tamanio / sizeof(Producto);
 }
+
+//bool ArchivoProducto::modificarRegistro(int pos)
+//{
+//
+//}

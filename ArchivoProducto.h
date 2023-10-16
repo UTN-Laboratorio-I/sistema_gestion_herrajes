@@ -12,4 +12,5 @@ public:
 	bool listarRegistros();
 	Producto leerRegistro(int pos);
 	int contarRegistros();
+	//bool modificarRegistro(int pos);
 };
