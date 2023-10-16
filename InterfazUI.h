@@ -6,23 +6,38 @@ private:
 	Sistema* _sistema;
 public:
 	//InterfazUI();
+	InterfazUI();
+
 	InterfazUI(Sistema* sistema);
 
 	void headerDinamico();
-
 	bool opcionesValidasMenu(int inicio, int fin, int seleccion, bool imprimir = false, bool admiteAtras = true);
+	bool mensajeCancelarEjecucion(string ejecucion);
 
 	void vistaLogin();
+	int apagarOCerrarSesion();
+	void mensajeCierrePrograma();
 
-	void menuPrincipal();
+	void ver_MenuPrincipal();
 
-	int subMenuCompras();
+	void ver_MenuCompras();
+	void ver_MenuCrearCompraProducto();
 
-	void subMenuVentas();
+	void ver_MenuABM();
+	void ver_SubMenuABMCliente();
+	void ver_SubMenuABMProveedor();
+	void ver_SubMenuABMProducto();
 
-	void subMenuAbm();
+	void ver_MenuReportes();
+	void ver_SubMenuReportesCliente();
+	void ver_SubMenuReportesProveedor();
+	void ver_SubMenuReportesProducto();
+	void ver_SubMenuReportesCaja();
 
-	void subMenuReportes();
+	void ver_MenuConfig();
 
+	void ver_MenuUsuario();
+
+	void ver_MenuVentas();
 };
 

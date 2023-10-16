@@ -129,32 +129,28 @@
   <ItemGroup>
     <ClCompile Include="AdminABM.cpp" />
     <ClCompile Include="AdminCompra.cpp" />
+    <ClCompile Include="AdminConfig.cpp" />
     <ClCompile Include="AdminLogin.cpp" />
+    <ClCompile Include="AdminUsuario.cpp" />
     <ClCompile Include="AdminVenta.cpp" />
-    <ClCompile Include="Archivo.cpp" />
-    <ClCompile Include="ArchivoProducto.cpp" />
     <ClCompile Include="Categoria.cpp" />
     <ClCompile Include="ErrorDto.cpp" />
     <ClCompile Include="Fecha.cpp" />
     <ClCompile Include="FechaHorario.cpp" />
+    <ClCompile Include="Helper.cpp" />
     <ClCompile Include="Horario.cpp" />
     <ClCompile Include="InterfazUI.cpp" />
     <ClCompile Include="Producto.cpp" />
     <ClCompile Include="AdminReporte.cpp" />
-    <ClCompile Include="Sistema.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="sistema_gestion_herrajes.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="test.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="Sistema.cpp" />
+    <ClCompile Include="sistema_gestion_herrajes.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdminABM.h" />
     <ClInclude Include="AdminCompra.h" />
+    <ClInclude Include="AdminConfig.h" />
     <ClInclude Include="AdminLogin.h" />
+    <ClInclude Include="AdminUsuario.h" />
     <ClInclude Include="AdminVenta.h" />
     <ClInclude Include="Archivo.h" />
     <ClInclude Include="ArchivoProducto.h" />
@@ -162,11 +158,14 @@
     <ClInclude Include="ErrorDto.h" />
     <ClInclude Include="Fecha.h" />
     <ClInclude Include="FechaHorario.h" />
+    <ClInclude Include="Helper.h" />
     <ClInclude Include="Horario.h" />
     <ClInclude Include="InterfazUI.h" />
     <ClInclude Include="Producto.h" />
     <ClInclude Include="AdminReporte.h" />
+    <ClInclude Include="ResponseDto.h" />
     <ClInclude Include="Sistema.h" />
+    <ClInclude Include="Usuario.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

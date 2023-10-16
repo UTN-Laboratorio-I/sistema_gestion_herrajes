@@ -48,12 +48,15 @@
     <ClCompile Include="Sistema.cpp">
       <Filter>Archivos de origen\Sistema</Filter>
     </ClCompile>
-    <ClCompile Include="Archivo.cpp">
-      <Filter>Archivos de origen\Sistema</Filter>
-    </ClCompile>
     <ClCompile Include="AdminABM.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="AdminABM.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+=======
+>>>>>>> develop
     <ClCompile Include="AdminCompra.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
@@ -72,10 +75,17 @@
     <ClCompile Include="AdminReporte.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="test.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="ArchivoProducto.cpp">
+=======
+    <ClCompile Include="Usuario.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="AdminUsuario.cpp">
+>>>>>>> develop
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -122,7 +132,14 @@
     <ClInclude Include="AdminReporte.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="ArchivoProducto.h">
+=======
+    <ClInclude Include="Usuario.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="AdminUsuario.h">
+>>>>>>> develop
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

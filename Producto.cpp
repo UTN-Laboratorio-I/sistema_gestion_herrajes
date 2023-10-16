@@ -30,7 +30,6 @@ std::string Producto::getNombreProducto() {
 std::string Producto::getDescripcionProducto() {
 	return _descripcionProducto;
 }
-
 void Producto::setIdProducto(int id) {
 	_idProducto = id;
 }
@@ -50,6 +49,7 @@ void Producto::setDescripcionProducto(std::string descripcion) {
 	strcpy_s(_descripcionProducto, descripcion.c_str());
 }
 
+<<<<<<< HEAD
 void Producto::cargarProductos()
 {	
 	float pCosto, pVenta;
@@ -88,3 +88,7 @@ void Producto::mostrarProductos()
 	cout << getCantidad() << endl;
 
 }
+=======
+void Producto::cargarProductos() {
+}
+>>>>>>> develop
