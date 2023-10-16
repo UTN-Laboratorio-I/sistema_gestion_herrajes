@@ -368,6 +368,7 @@ test.exe
 
 #Formatos de archivos
 *.dat
+*.bak
 
 #Archivos de configuracion
 enc_temp_folder/*
