@@ -22,12 +22,23 @@ Sistema::Sistema() {
 void Sistema::setEncendido(bool set) { _encendido = set; }
 bool Sistema::getEncendido() { return _encendido; }
 
-void Sistema::setUsuarioLogged(string usuario, string nombre, string rol, bool isAdmin) { _usuario.setDatosUsuario(usuario, nombre, rol, isAdmin,""); }
+void Sistema::setUsuarioLogged(const char* usuario, const char* nombre, const char* rol, bool isAdmin) {
+	char emptyPassword[] = "";
+	_usuario.setDatosUsuario(const_cast<char*>(usuario), const_cast<char*>(nombre), const_cast<char*>(rol), isAdmin, emptyPassword);
+}
+
 string Sistema::getUsuarioLogged() { return _usuario.getUsuario(); }
 string Sistema::getNombreUsuarioLogged() { return _usuario.getNombre(); }
 string Sistema::getRolUsuarioLogged() { return _usuario.getRol(); }
 bool Sistema::getIsAdminUsuarioLogged() { return _usuario.getIsAdmin(); }
-void Sistema::limpiarUsuario(){ _usuario.setDatosUsuario("", "", "", false,""); }
+void Sistema::limpiarUsuario() {
+	char usuarioVacio[] = "";
+	char nombreVacio[] = "";
+	char rolVacio[] = "";
+	char passwordVacio[] = "";
+
+	_usuario.setDatosUsuario(usuarioVacio, nombreVacio, rolVacio, false, passwordVacio);
+}
 
 void Sistema::setPantalla(int opc) { _pantalla = opc; }
 int Sistema::getPantalla() { return _pantalla; }

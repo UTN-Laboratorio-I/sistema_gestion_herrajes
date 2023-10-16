@@ -1,37 +1,70 @@
 #include "Usuario.h"
 #include <iostream>
+#include <cstring>
 
 Usuario::Usuario()
-    : _isAdmin(false) {}
+    : _isAdmin(false) {
+    // Inicializar los arreglos de char
+    std::memset(_usuario, 0, sizeof(_usuario));
+    std::memset(_password, 0, sizeof(_password));
+    std::memset(_nombre, 0, sizeof(_nombre));
+    std::memset(_rol, 0, sizeof(_rol));
+}
 
-Usuario::Usuario(const std::string& usuario, const std::string& nombre, const std::string& rol, bool isAdmin, const std::string& password)
-    : _usuario(usuario), _password(password), _nombre(nombre), _rol(rol), _isAdmin(isAdmin) {}
-
-void Usuario::setUsuario(const std::string& usuario) { _usuario = usuario; }
-const std::string& Usuario::getUsuario() const { return _usuario; }
-
-void Usuario::setPassword(const std::string& password) { _password = password; }
-const std::string& Usuario::getPassword() const { return _password; }
-
-void Usuario::setNombre(const std::string& nombre) { _nombre = nombre; }
-const std::string& Usuario::getNombre() const { return _nombre; }
-
-void Usuario::setRol(const std::string& rol) { _rol = rol; }
-const std::string& Usuario::getRol() const { return _rol; }
-
-void Usuario::setIsAdmin(bool isAdmin) { _isAdmin = isAdmin; }
-bool Usuario::getIsAdmin() const { return _isAdmin; }
-
-void Usuario::setDatosUsuario(const std::string& usuario, const std::string& nombre, const std::string& rol, bool isAdmin, const std::string& password) {
-    _usuario = usuario;
-    _password = password;
-    _nombre = nombre;
-    _rol = rol;
+Usuario::Usuario(char* usuario, char* nombre, char* rol, bool isAdmin, const char* password) {
+    std::strncpy(_usuario, usuario, sizeof(_usuario) - 1);
+    std::strncpy(_password, password, sizeof(_password) - 1);
+    std::strncpy(_nombre, nombre, sizeof(_nombre) - 1);
+    std::strncpy(_rol, rol, sizeof(_rol) - 1);
     _isAdmin = isAdmin;
 }
 
-Usuario Usuario::obtenerDatosUsuario() {
-    return Usuario(_usuario, _nombre, _rol, _isAdmin, _password);
+void Usuario::setUsuario(char* usuario) {
+    std::strncpy(_usuario, usuario, sizeof(_usuario) - 1);
+}
+
+const char* Usuario::getUsuario() const {
+    return _usuario;
+}
+
+void Usuario::setPassword(char* password) {
+    std::strncpy(_password, password, sizeof(_password) - 1);
+}
+
+const char* Usuario::getPassword() const {
+    return _password;
+}
+
+void Usuario::setNombre(char* nombre) {
+    std::strncpy(_nombre, nombre, sizeof(_nombre) - 1);
+}
+
+const char* Usuario::getNombre() const {
+    return _nombre;
+}
+
+void Usuario::setRol(char* rol) {
+    std::strncpy(_rol, rol, sizeof(_rol) - 1);
+}
+
+const char* Usuario::getRol() const {
+    return _rol;
+}
+
+void Usuario::setIsAdmin(bool isAdmin) {
+    _isAdmin = isAdmin;
+}
+
+bool Usuario::getIsAdmin() const {
+    return _isAdmin;
+}
+
+void Usuario::setDatosUsuario(char* usuario, char* nombre, char* rol, bool isAdmin, char* password) {
+    std::strncpy(_usuario, usuario, sizeof(_usuario) - 1);
+    std::strncpy(_password, password, sizeof(_password) - 1);
+    std::strncpy(_nombre, nombre, sizeof(_nombre) - 1);
+    std::strncpy(_rol, rol, sizeof(_rol) - 1);
+    _isAdmin = isAdmin;
 }
 
 Response Usuario::crearNuevoUsuario() {
@@ -41,20 +74,21 @@ Response Usuario::crearNuevoUsuario() {
     Archivo<Usuario> archivo(nombreArchivo);
 
     std::cout << "Ingrese nuevo usuario: ";
-    std::cin >> nuevoUser._usuario;
+    std::cin.ignore();  // Limpiar el buffer del teclado antes de leer la cadena
+    std::cin.getline(nuevoUser._usuario, sizeof(nuevoUser._usuario));
+
     std::cout << "Ingrese password: ";
-    std::cin >> nuevoUser._password;
-    std::cin.ignore();  // Para manejar el '\n' en el buffer
+    std::cin.getline(nuevoUser._password, sizeof(nuevoUser._password));
 
     std::cout << "Ingrese 1 si es admin, 0 si no lo es: ";
     std::cin >> nuevoUser._isAdmin;
     std::cin.ignore();  // Para manejar el '\n' en el buffer
 
     std::cout << "Ingrese nombre del Usuario: ";
-    std::getline(std::cin, nuevoUser._nombre);
+    std::cin.getline(nuevoUser._nombre, sizeof(nuevoUser._nombre));
 
     std::cout << "Ingrese rol del Usuario: ";
-    std::getline(std::cin, nuevoUser._rol);
+    std::cin.getline(nuevoUser._rol, sizeof(nuevoUser._rol));
 
     bool registro = archivo.grabarRegistroArchivo(nuevoUser);
 

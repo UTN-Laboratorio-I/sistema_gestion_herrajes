@@ -6,27 +6,27 @@
 
 class Usuario {
 private:
-    std::string _usuario;
-    std::string _password;
-    std::string _nombre;
-    std::string _rol;
+    char _usuario[30];
+    char _password[30];
+    char _nombre[50];
+    char _rol[30];
     bool _isAdmin;
 
 public:
     Usuario();
-    Usuario(const std::string& usuario, const std::string& nombre, const std::string& rol, bool isAdmin, const std::string& password = "");
+    Usuario(char* usuario, char* nombre, char* rol, bool isAdmin, const char* password = "");
 
-    void setUsuario(const std::string& usuario);
-    const std::string& getUsuario() const;
-    void setPassword(const std::string& password);
-    const std::string& getPassword() const;
-    void setNombre(const std::string& nombre);
-    const std::string& getNombre() const;
+    void setUsuario(char* usuario);
+    const char* getUsuario() const;
+    void setPassword(char* password);
+    const char* getPassword() const;
+    void setNombre(char* nombre);
+    const char* getNombre() const;
     void setIsAdmin(bool isAdmin);
     bool getIsAdmin() const;
-    void setRol(const std::string& rol);
-    const std::string& getRol() const;
-    void setDatosUsuario(const std::string& usuario, const std::string& nombre, const std::string& rol, bool isAdmin, const std::string& password);
+    void setRol(char* rol);
+    const char* getRol() const;
+    void setDatosUsuario(char* usuario, char* nombre, char* rol, bool isAdmin, char* password);
 
     Usuario obtenerDatosUsuario();
 
