@@ -6,6 +6,5 @@ public:
 	~Helper();
 
 	static void limpiarConsola();
-
 };
 
