@@ -1,5 +1,8 @@
 #include <iostream>
+#include <cstring>
 #include "Producto.h"
+
+using namespace std;
 
 Producto::Producto(){
 	_idProducto = 0;
@@ -8,7 +11,11 @@ Producto::Producto(){
 	_cantidad = 0;
 	*_nombreProducto = {};
 	*_descripcionProducto = {};
+	_estado = false;
 }
+
+#pragma region GETTERS
+
 int Producto::getIdProducto() {
 	return _idProducto;
 }
@@ -27,6 +34,13 @@ std::string Producto::getNombreProducto() {
 std::string Producto::getDescripcionProducto() {
 	return _descripcionProducto;
 }
+
+bool Producto::getEstado() { return _estado; }
+
+#pragma endregion
+
+#pragma region SETTERS
+
 void Producto::setIdProducto(int id) {
 	_idProducto = id;
 }
@@ -46,5 +60,46 @@ void Producto::setDescripcionProducto(std::string descripcion) {
 	strcpy_s(_descripcionProducto, descripcion.c_str());
 }
 
+void Producto::setEstado(bool estado){ _estado = estado;}
+
+#pragma endregion
+
 void Producto::cargarProductos() {
+	float pCosto, pVenta;
+	int cantidad;
+	string nombreProducto, descripcionProducto;
+
+	cout << "NOMBRE DE PRODUCTO: ";
+	cin.ignore();
+	getline(cin, nombreProducto);
+	cout << "DESCRIPCION PRODUCTO: ";
+	getline(cin, descripcionProducto);
+	cout << "PRECIO DE COSTO: ";
+	cin >> pCosto;
+	/*cout << "PRECIO DE VENTA: ";
+	cin >> pVenta;*/
+	cout << "CANTIDAD: ";
+	cin >> cantidad;
+
+	setNombreProducto(nombreProducto);
+	setDescripcionProducto(descripcionProducto);
+	setPrecioCosto(pCosto);
+	//setPrecioVenta(pVenta);
+	setCantidad(cantidad);
+	setEstado(true);
+}
+
+void Producto::mostrarProductos()
+{
+	cout << "NOMBRE DE PRODUCTO: ";
+	cout << getNombreProducto() << endl;
+	cout << "DESCRIPCION PRODUCTO: ";
+	cout << getDescripcionProducto() << endl;
+	cout << "PRECIO DE COSTO: ";
+	cout << getPrecioCosto() << endl;
+	/*cout << "PRECIO DE VENTA: ";
+	cout << pVenta;*/
+	cout << "CANTIDAD: ";
+	cout << getCantidad() << endl;
+
 }

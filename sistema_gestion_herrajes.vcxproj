@@ -143,7 +143,13 @@
     <ClCompile Include="Producto.cpp" />
     <ClCompile Include="AdminReporte.cpp" />
     <ClCompile Include="Sistema.cpp" />
-    <ClCompile Include="sistema_gestion_herrajes.cpp" />
+    <ClCompile Include="sistema_gestion_herrajes.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Stock.cpp" />
+    <ClCompile Include="test.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Usuario.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +160,7 @@
     <ClInclude Include="AdminUsuario.h" />
     <ClInclude Include="AdminVenta.h" />
     <ClInclude Include="Archivo.h" />
+    <ClInclude Include="Backup.h" />
     <ClInclude Include="Categoria.h" />
     <ClInclude Include="ErrorDto.h" />
     <ClInclude Include="Fecha.h" />
@@ -165,6 +172,7 @@
     <ClInclude Include="AdminReporte.h" />
     <ClInclude Include="ResponseDto.h" />
     <ClInclude Include="Sistema.h" />
+    <ClInclude Include="Stock.h" />
     <ClInclude Include="Usuario.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
