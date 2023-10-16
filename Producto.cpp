@@ -47,8 +47,4 @@ void Producto::setDescripcionProducto(std::string descripcion) {
 }
 
 void Producto::cargarProductos() {
-
-}
-void Producto::mostrarProductos() {
-
 }

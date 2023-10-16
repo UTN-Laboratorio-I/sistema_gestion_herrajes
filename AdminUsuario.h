@@ -6,6 +6,7 @@ class AdminUsuario
 private:
 	Sistema* _sistema;
 	string _nombreModulo;
+	const char* _nombreArchivo;
 public:
 	AdminUsuario(Sistema* sistema);
 	~AdminUsuario();
@@ -15,9 +16,10 @@ public:
 
 	void administrarModuloUsuario();
 
-	bool crearNuevoUsuario();
-	bool modificarUsuario();
-	bool eliminarUsuario();
+	void listarUsuarios();
+	void creacionNuevoUsuario();
+	void modificarUsuario();
+	void eliminarUsuario();
 
 };
 

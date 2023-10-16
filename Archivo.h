@@ -28,23 +28,20 @@ public:
     }
 
     std::vector<T> listarRegistroArchivo() {
-        std::vector<T> registros; 
+        std::vector<T> registros;
 
-        FILE* p;
-        p = fopen(_nombreArchivo, "rb");
-
-        if (p == NULL) {
-
+        FILE* p = fopen(_nombreArchivo, "rb");
+        if (p == nullptr) {
+            std::cerr << "Error al abrir el archivo." << std::endl;
             return registros;
         }
 
         T objeto;
         while (fread(&objeto, sizeof(T), 1, p) == 1) {
-
             registros.push_back(objeto);
         }
 
-        fclose(p); 
+        fclose(p);
 
         return registros;
     }

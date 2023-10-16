@@ -21,7 +21,7 @@ public:
 	void setEncendido(bool set);
 	bool getEncendido();
 
-	void setUsuarioLogged(std::string usuario, std::string nombre, std::string rol, bool isAdmin);
+	void setUsuarioLogged(const char* usuario, const char* nombre, const char* rol, bool isAdmin);
 	string getUsuarioLogged();
 	string getNombreUsuarioLogged();
 	string getRolUsuarioLogged();

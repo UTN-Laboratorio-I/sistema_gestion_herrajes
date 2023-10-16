@@ -137,10 +137,12 @@
     <ClCompile Include="ErrorDto.cpp" />
     <ClCompile Include="Fecha.cpp" />
     <ClCompile Include="FechaHorario.cpp" />
+    <ClCompile Include="Helper.cpp" />
     <ClCompile Include="Horario.cpp" />
     <ClCompile Include="InterfazUI.cpp" />
     <ClCompile Include="Producto.cpp" />
     <ClCompile Include="AdminReporte.cpp" />
+    <ClCompile Include="ResponseDto.cpp" />
     <ClCompile Include="Sistema.cpp" />
     <ClCompile Include="sistema_gestion_herrajes.cpp" />
     <ClCompile Include="Usuario.cpp" />
@@ -157,10 +159,12 @@
     <ClInclude Include="ErrorDto.h" />
     <ClInclude Include="Fecha.h" />
     <ClInclude Include="FechaHorario.h" />
+    <ClInclude Include="Helper.h" />
     <ClInclude Include="Horario.h" />
     <ClInclude Include="InterfazUI.h" />
     <ClInclude Include="Producto.h" />
     <ClInclude Include="AdminReporte.h" />
+    <ClInclude Include="ResponseDto.h" />
     <ClInclude Include="Sistema.h" />
     <ClInclude Include="Usuario.h" />
   </ItemGroup>

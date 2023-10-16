@@ -25,6 +25,7 @@ void AdminCompra::moduloCompraSalir() {
 
 //Administra el módulo compras:
 void AdminCompra::administrarModuloCompra() {
+	Producto prod;
 	InterfazUI compras_UI(_sistema);
 
 	while (moduloCompraActivo()) {
@@ -37,7 +38,6 @@ void AdminCompra::administrarModuloCompra() {
 			crearCompraProducto();
 			break;
 		case 2:
-			//_sistema->setModuloPantalla("compras", 2);
 			
 			break;
 		case 0: //SALIR DEL MÓDULO COMPRA:
@@ -49,8 +49,6 @@ void AdminCompra::administrarModuloCompra() {
 }
 
 void AdminCompra::crearCompraProducto() {
-	Producto producto;
-	producto.cargarProductos();
 
 }
 

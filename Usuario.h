@@ -1,40 +1,35 @@
-#include <iostream>
-#include <functional>
 #pragma once
-using namespace std;
+#include <string>
+#include <vector>
+#include "ResponseDto.h"
+#include "Archivo.h"
 
-class Usuario
-{
+class Usuario {
 private:
-	string _usuario;
-	string _password;
-	string _nombre;
-	string _rol;
-	bool _isAdmin;
+    char _usuario[30];
+    char _password[30];
+    char _nombre[50];
+    char _rol[30];
+    bool _isAdmin;
+
 public:
-	Usuario();
-	Usuario(string usuario, string nombre, string rol, bool isAdmin, string password);
-	~Usuario();
+    Usuario();
+    Usuario(char* usuario, char* nombre, char* rol, bool isAdmin, const char* password = "");
 
-	void setUsuario(string usuario);
-	string getUsuario();
+    void setUsuario(char* usuario);
+    const char* getUsuario() const;
+    void setPassword(char* password);
+    const char* getPassword() const;
+    void setNombre(char* nombre);
+    const char* getNombre() const;
+    void setIsAdmin(bool isAdmin);
+    bool getIsAdmin() const;
+    void setRol(char* rol);
+    const char* getRol() const;
+    void setDatosUsuario(char* usuario, char* nombre, char* rol, bool isAdmin, char* password);
 
-	void setPassword(string password);
-	string getPassword();
-	
-	void setNombre(string nombre);
-	string getNombre();
-	
-	void setIsAdmin(bool isAdmin);
-	bool getIsAdmin();
+    Usuario obtenerDatosUsuario();
 
-	void setRol(string rol);
-	string getRol();
-
-	void setDatosUsuario(string usuario, string nombre, string rol, bool isAdmin, string password);
-	Usuario getDatosUsuario();
-
-	bool crearNuevoUsuario();
-	Usuario obtenerDatosUsuario();
+    Response crearNuevoUsuario();
+    std::vector<Usuario> listarUsuarios();
 };
-

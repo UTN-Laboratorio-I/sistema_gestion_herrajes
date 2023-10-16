@@ -2,18 +2,10 @@
 #include "InterfazUI.h"
 #include <string>
 #include "Fecha.h"
+#include "Helper.h"
 #pragma warning (disable : 4996)
 
 using namespace std;
-
-#pragma region HelpersInterfaz
-/// <summary>
-/// Limpia la consola entre pantalla y pantalla.
-/// </summary>
-void limpiarConsola() {
-	system("cls");
-}
-#pragma endregion
 
 //Constructores:
 InterfazUI::InterfazUI(Sistema* sistema) : _sistema(sistema) {}
@@ -24,10 +16,11 @@ InterfazUI::InterfazUI(Sistema* sistema) : _sistema(sistema) {}
 /// </summary>
 void InterfazUI::headerDinamico()
 {
+	Helper helper;
 	Fecha fecha;
 	string ahora = fecha.hoy();
 
-	limpiarConsola();
+	helper.limpiarConsola();
 	string usuario = _sistema->getUsuarioLogged();
 	bool error = _sistema->hasError();
 	cout << "Sistema de Gestion" << " - " << ahora << endl;
@@ -59,6 +52,27 @@ bool InterfazUI::opcionesValidasMenu(int inicio, int fin, int seleccion, bool im
 	return true;
 }
 
+bool InterfazUI::mensajeCancelarEjecucion(string ejecucion) {
+	headerDinamico();
+	int opc;
+	bool verificado = false;
+
+	while (verificado) {
+	cout << "Desea salir de " << ejecucion << "?" << endl;
+	cout << "1) Si" << endl;
+	cout << "2) No" << endl << endl;
+	cin >> opc;
+	verificado = opcionesValidasMenu(1, 2, opc, false, false);
+	}
+
+	if (opc == 1) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 #pragma region Login/Sesion
 /// <summary>
 /// Vista de login principal.
@@ -70,7 +84,8 @@ void InterfazUI::vistaLogin() {
 }
 
 int InterfazUI::apagarOCerrarSesion() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
@@ -86,14 +101,16 @@ int InterfazUI::apagarOCerrarSesion() {
 }
 
 void InterfazUI::mensajeCierrePrograma() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	cout << "Cerrando programa..." << endl;
 }
 #pragma endregion Login/Sesion
 
 #pragma region UI_Principal
 void InterfazUI::ver_MenuPrincipal() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado=false;
 	string user = _sistema->getUsuarioLogged();
@@ -124,7 +141,8 @@ void InterfazUI::ver_MenuPrincipal() {
 /// </summary>
 /// <returns></returns>
 void InterfazUI::ver_MenuCompras() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
@@ -141,7 +159,8 @@ void InterfazUI::ver_MenuCompras() {
 }
 
 void InterfazUI::ver_MenuCrearCompraProducto() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 	
@@ -158,7 +177,8 @@ void InterfazUI::ver_MenuCrearCompraProducto() {
 
 #pragma region UI_Ventas
 void InterfazUI::ver_MenuVentas() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
@@ -179,7 +199,8 @@ void InterfazUI::ver_MenuVentas() {
 
 
 void InterfazUI::ver_MenuABM() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
@@ -196,7 +217,8 @@ void InterfazUI::ver_MenuABM() {
 }
 
 void InterfazUI::ver_SubMenuABMCliente() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	bool verificado = false;
 	int opc;
 	while (!verificado) {
@@ -239,7 +261,8 @@ void InterfazUI::ver_SubMenuABMCliente() {
 
 }
 	void InterfazUI::ver_SubMenuABMProveedor() {
-		limpiarConsola();
+		Helper helper;
+		helper.limpiarConsola();
 		int opc;
 		bool verificado = false;
 
@@ -258,7 +281,8 @@ void InterfazUI::ver_SubMenuABMCliente() {
 	}
 
 	void InterfazUI::ver_SubMenuABMProducto() {
-		limpiarConsola();
+		Helper helper;
+		helper.limpiarConsola();
 		int opc;
 		bool verificado = false;
 
@@ -281,7 +305,8 @@ void InterfazUI::ver_SubMenuABMCliente() {
 
 #pragma region UI_Reportes
 void InterfazUI::ver_MenuReportes() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
@@ -300,7 +325,8 @@ void InterfazUI::ver_MenuReportes() {
 }
 
 void InterfazUI::ver_SubMenuReportesCliente() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
@@ -316,7 +342,8 @@ void InterfazUI::ver_SubMenuReportesCliente() {
 }
 
 void InterfazUI::ver_SubMenuReportesProveedor() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
@@ -332,7 +359,8 @@ void InterfazUI::ver_SubMenuReportesProveedor() {
 }
 
 void InterfazUI::ver_SubMenuReportesProducto() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
@@ -348,7 +376,8 @@ void InterfazUI::ver_SubMenuReportesProducto() {
 }
 
 void InterfazUI::ver_SubMenuReportesCaja() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
@@ -368,7 +397,8 @@ void InterfazUI::ver_SubMenuReportesCaja() {
 
 #pragma region UI_Usuario
 void InterfazUI::ver_MenuUsuario() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
@@ -388,7 +418,8 @@ void InterfazUI::ver_MenuUsuario() {
 
 #pragma region UI_Configuracion
 void InterfazUI::ver_MenuConfig() {
-	limpiarConsola();
+	Helper helper;
+	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
 
