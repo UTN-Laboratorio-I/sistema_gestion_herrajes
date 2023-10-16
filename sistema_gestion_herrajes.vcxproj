@@ -144,7 +144,10 @@
     <ClCompile Include="AdminReporte.cpp" />
     <ClCompile Include="ResponseDto.cpp" />
     <ClCompile Include="Sistema.cpp" />
-    <ClCompile Include="sistema_gestion_herrajes.cpp" />
+    <ClCompile Include="sistema_gestion_herrajes.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="test.cpp" />
     <ClCompile Include="Usuario.cpp" />
   </ItemGroup>
   <ItemGroup>
