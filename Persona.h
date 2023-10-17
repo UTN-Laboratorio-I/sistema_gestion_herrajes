@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Fecha.h"
 #include <cstdio>
+#include <iomanip>
 using namespace std;
 
 class Persona
@@ -9,13 +10,15 @@ class Persona
 
 public:
 
+	Persona();
+
 	void setDni(int d);
 	void setId(int id);
 	void setNombre(const char* nombre);
 	void setApellido(const char* apellido);
 	void setDomicilio(const char* domicilio);
-	void seteEamil(const char* email);
-	void setFechaAlta(Fecha fechaAlta);
+	void setEmail(const char* email);
+	void setFechaAlta();
 	void setFechaNacimiento(Fecha fechaNacimiento);
 	void setEstado(bool estado);
 
@@ -24,11 +27,15 @@ public:
 	char* getNombre();
 	char* getApellido();
 	char* getDomicilio();
-	char* geteEamil();
+	char* getEmail();
 	Fecha getFechaNacimiento();
 	Fecha getFechaAlta();
 
-	Persona();
+	void cargar();
+	void mostrar();
+
+	void mostrarEncabezado();
+	void mostrarContenido();
 
 protected:
 	int _dni, _idPersona;
@@ -36,6 +43,4 @@ protected:
 	char _direccion[100], _email[50];
 	Fecha _fechaNacimiento, _fechaAlta;
 	bool _estado;
-
-
 };

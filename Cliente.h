@@ -19,8 +19,6 @@ public:
 	/// <returns></returns>
 
 	int getIdCliente();
-	int getIdCliente();
-	int getIdCliente();
 	char getRazonSocial();
 
 	void setIdCliente(int id);
