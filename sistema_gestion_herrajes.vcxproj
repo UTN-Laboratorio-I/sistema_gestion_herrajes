@@ -144,12 +144,9 @@
     <ClCompile Include="AdminReporte.cpp" />
     <ClCompile Include="Sistema.cpp" />
     <ClCompile Include="sistema_gestion_herrajes.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Stock.cpp" />
-    <ClCompile Include="test.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Stock.cpp" />
     <ClCompile Include="Usuario.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +167,7 @@
     <ClInclude Include="InterfazUI.h" />
     <ClInclude Include="Producto.h" />
     <ClInclude Include="AdminReporte.h" />
+    <ClInclude Include="Reporte.h" />
     <ClInclude Include="ResponseDto.h" />
     <ClInclude Include="Sistema.h" />
     <ClInclude Include="Stock.h" />
