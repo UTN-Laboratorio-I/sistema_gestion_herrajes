@@ -77,7 +77,7 @@ void AdminUsuario::creacionNuevoUsuario() {
 
 		//AdminUsuario::creacionNuevoUsuario solo se encarga de 'gestionar' la creación y devolver
 		//si fue exitoso o no, no le importa que pasa dentro de nuevoUser.crearNuevoUsuario(), solo su respuesta.
-		Response res = nuevoUser.crearNuevoUsuario();
+		Response<Usuario> res = nuevoUser.crearNuevoUsuario();
 
 		//En caso de que la respuesta sea exitosa, permito la salida del bucle while:
 		if (res.getSuccess()) {
@@ -90,7 +90,6 @@ void AdminUsuario::creacionNuevoUsuario() {
 			continuar = user_UI.mensajeCancelarEjecucion("creacion de usuario");
 
 		}
-		_sistema->limpiarError();
 	}
 	//Si salgo del bucle while, es porque se creó el usuario correctamente o cancelé la carga por lo que limpio los errores:
 	_sistema->limpiarError();
