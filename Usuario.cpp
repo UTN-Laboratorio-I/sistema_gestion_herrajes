@@ -4,7 +4,6 @@
 
 Usuario::Usuario()
     : _isAdmin(false) {
-    // Inicializar los arreglos de char
     std::memset(_usuario, 0, sizeof(_usuario));
     std::memset(_password, 0, sizeof(_password));
     std::memset(_nombre, 0, sizeof(_nombre));
@@ -67,14 +66,14 @@ void Usuario::setDatosUsuario(char* usuario, char* nombre, char* rol, bool isAdm
     _isAdmin = isAdmin;
 }
 
-Response Usuario::crearNuevoUsuario() {
+Response<Usuario> Usuario::crearNuevoUsuario() {
     Usuario nuevoUser;
-    Response response;
+    Response<Usuario> response;
     const char* nombreArchivo = "usuarios.dat";
     Archivo<Usuario> archivo(nombreArchivo);
 
     std::cout << "Ingrese nuevo usuario: ";
-    std::cin.ignore();  // Limpiar el buffer del teclado antes de leer la cadena
+    std::cin.ignore();  
     std::cin.getline(nuevoUser._usuario, sizeof(nuevoUser._usuario));
 
     std::cout << "Ingrese password: ";
@@ -82,7 +81,7 @@ Response Usuario::crearNuevoUsuario() {
 
     std::cout << "Ingrese 1 si es admin, 0 si no lo es: ";
     std::cin >> nuevoUser._isAdmin;
-    std::cin.ignore();  // Para manejar el '\n' en el buffer
+    std::cin.ignore();  
 
     std::cout << "Ingrese nombre del Usuario: ";
     std::cin.getline(nuevoUser._nombre, sizeof(nuevoUser._nombre));
@@ -93,7 +92,7 @@ Response Usuario::crearNuevoUsuario() {
     bool registro = archivo.grabarRegistroArchivo(nuevoUser);
 
     if (registro) {
-        response.setSuccess("Usuario creado con éxito.");
+        response.setSuccess("Usuario creado con éxito.", nuevoUser);
     }
     else {
         response.setFailure("Error al crear usuario.");

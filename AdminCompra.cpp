@@ -2,6 +2,7 @@
 #include "AdminCompra.h"
 #include "InterfazUI.h"
 #include "Producto.h"
+#include "Helper.h"
 
 //Constructor:
 AdminCompra::AdminCompra(Sistema* sistema) : _sistema(sistema){
@@ -34,11 +35,13 @@ void AdminCompra::administrarModuloCompra() {
 
 		switch (opc) {
 		case 1:
+			compras_UI.headerDinamico();
 			//compras_UI.ver_menuCrearCompraProducto();
 			crearCompraProducto();
 			break;
 		case 2:
-			
+			compras_UI.headerDinamico();
+			//mostrarProductos();
 			break;
 		case 0: //SALIR DEL MÓDULO COMPRA:
 			moduloCompraSalir();
@@ -49,6 +52,11 @@ void AdminCompra::administrarModuloCompra() {
 }
 
 void AdminCompra::crearCompraProducto() {
+	Archivo <Producto> Archivo("productos.dat");
+	Producto prod;
 
+	prod.cargarProductos();
+	Archivo.grabarRegistroArchivo(prod);
 }
+
 
