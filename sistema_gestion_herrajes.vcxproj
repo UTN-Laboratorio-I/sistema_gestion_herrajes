@@ -170,6 +170,7 @@
     <ClInclude Include="InterfazUI.h" />
     <ClInclude Include="Producto.h" />
     <ClInclude Include="AdminReporte.h" />
+    <ClInclude Include="Reporte.h" />
     <ClInclude Include="ResponseDto.h" />
     <ClInclude Include="Sistema.h" />
     <ClInclude Include="Stock.h" />
