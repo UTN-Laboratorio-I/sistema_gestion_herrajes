@@ -10,7 +10,7 @@ public:
 	bool moduloVentaActivo();
 	void moduloVentaSalir();
 	void administrarModuloVenta();
-	void crearVentaProducto();
+	void registrarNuevaVenta();
 	void pantallaListarProducto();
 	void pantallaBuscarProducto();
 };

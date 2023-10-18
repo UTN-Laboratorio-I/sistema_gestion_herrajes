@@ -153,6 +153,7 @@
     </ClCompile>
     <ClCompile Include="Transaccion.cpp" />
     <ClCompile Include="Usuario.cpp" />
+    <ClCompile Include="Venta.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdminABM.h" />
@@ -179,6 +180,7 @@
     <ClInclude Include="Stock.h" />
     <ClInclude Include="Transaccion.h" />
     <ClInclude Include="Usuario.h" />
+    <ClInclude Include="Venta.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
