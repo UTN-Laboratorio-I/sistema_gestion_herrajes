@@ -11,11 +11,11 @@ private:
 public:
 	Compra();
 	
-	void setId(int id) { _id = id; };
-	void setIdCompra(int idCompra) { _idCompra = idCompra; };
+	void setId(int id);
+	void setIdCompra(int idCompra);
 
-	int getId() { return _id; }
-	int getIdCompra() { return _idCompra; }
+	int getId();
+	int getIdCompra();
 
 	bool crearNuevaCompra();
 
