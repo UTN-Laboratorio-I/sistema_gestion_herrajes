@@ -13,7 +13,7 @@ protected:
 	int _clienteId;
 	Fecha _fecha;
 	Usuario _usuario;
-	char Tipo;
+	char _tipoTransaccion;
 
 public:
 	Transaccion();
@@ -40,7 +40,7 @@ public:
 	void setTipo(char tipo);
 	char getTipo();
 
-	bool crearNuevaTransaccion(float monto, char tipo, const char* usuario ) {};
+	Response<Transaccion> crearNuevaTransaccion(float monto, char tipo, const char* usuario );
 
 };
 
