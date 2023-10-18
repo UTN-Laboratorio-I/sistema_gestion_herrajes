@@ -14,6 +14,6 @@ public:
 	void setProveedorId(int proveedorId);
 	int getProveedorId();
 
-	Response<Venta> crearNuevaVenta(float monto, char tipo, const char* usuario, int proveedorId);
+	Response<Venta> crearNuevaVenta();
 };
 

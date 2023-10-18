@@ -1,5 +1,6 @@
 #include "AdminVenta.h"
 #include "InterfazUI.h"
+#include "Venta.h"
 
 //Constructor:
 AdminVenta::AdminVenta(Sistema* sistema) : _sistema(sistema) {
@@ -43,9 +44,10 @@ void AdminVenta::administrarModuloVenta() {
 //Registra una nueva venta:
 void AdminVenta::registrarNuevaVenta() {
 	InterfazUI ventas_UI(_sistema);
-
+	Venta venta;
 	bool continuar = false;
 
 	while (!continuar) {
+		venta.crearNuevaVenta();
 	}
 }
