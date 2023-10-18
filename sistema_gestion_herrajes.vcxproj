@@ -134,6 +134,7 @@
     <ClCompile Include="AdminUsuario.cpp" />
     <ClCompile Include="AdminVenta.cpp" />
     <ClCompile Include="Categoria.cpp" />
+    <ClCompile Include="Compra.cpp" />
     <ClCompile Include="ErrorDto.cpp" />
     <ClCompile Include="Fecha.cpp" />
     <ClCompile Include="FechaHorario.cpp" />
@@ -147,6 +148,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Stock.cpp" />
+    <ClCompile Include="test.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Transaccion.cpp" />
     <ClCompile Include="Usuario.cpp" />
     <ClCompile Include="Venta.cpp" />
@@ -161,6 +165,7 @@
     <ClInclude Include="Archivo.h" />
     <ClInclude Include="Backup.h" />
     <ClInclude Include="Categoria.h" />
+    <ClInclude Include="Compra.h" />
     <ClInclude Include="ErrorDto.h" />
     <ClInclude Include="Fecha.h" />
     <ClInclude Include="FechaHorario.h" />
