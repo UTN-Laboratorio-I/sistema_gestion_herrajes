@@ -39,3 +39,13 @@ void AdminVenta::administrarModuloVenta() {
 	}
 	return;
 }
+
+//Registra una nueva venta:
+void AdminVenta::registrarNuevaVenta() {
+	InterfazUI ventas_UI(_sistema);
+
+	bool continuar = false;
+
+	while (!continuar) {
+	}
+}
