@@ -39,5 +39,6 @@ public:
 	void ver_MenuUsuario();
 
 	void ver_MenuVentas();
+	int ver_VentasClienteExistente();
 };
 

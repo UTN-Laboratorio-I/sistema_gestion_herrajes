@@ -192,6 +192,24 @@ void InterfazUI::ver_MenuVentas() {
 	_sistema->setPantalla(opc);
 }
 
+int InterfazUI::ver_VentasClienteExistente() {
+	Helper helper;
+	helper.limpiarConsola();
+	int opc;
+	bool verificado = false;
+
+	while (!verificado) {
+		headerDinamico();
+		cout << "CLIENTE" << endl;
+		cout << "--------" << endl;
+		cout << "1) Cliente existente" << endl;
+		cout << "2) Cliente nuevo" << endl << endl;
+		cout << "0) <- Cancelar" << endl;
+		cin >> opc;
+		verificado = opcionesValidasMenu(1, 2, opc);
+	}
+	return opc;
+}
 
 #pragma endregion UI_Ventas
 
@@ -230,30 +248,6 @@ void InterfazUI::ver_SubMenuABMCliente() {
 			cout << "5) Buscar Cliente" << endl << endl;
 			cout << "0) <- Atras" << endl;
 
-		/*	break;
-		case 2:
-			cout << "1) Crear Proveedor" << endl;
-			cout << "2) Modificar Proveedor" << endl;
-			cout << "3) Eliminar Proveedor" << endl;
-			cout << "4) Listar Proveedores" << endl;
-			cout << "5) Buscar Proveedor" << endl << endl;
-			cout << "0) <- Atras" << endl;
-
-			_sistema->setModuloPantalla("ABM Proveedor", opc);
-
-			break;
-		case 3:
-			cout << "1) Crear Producto" << endl;
-			cout << "2) Modificar Producto" << endl;
-			cout << "3) Eliminar Producto" << endl;
-			cout << "4) Listar Productos" << endl;
-			cout << "5) Buscar Producto" << endl << endl;
-			cout << "0) <- Atras" << endl;
-
-			_sistema->setModuloPantalla("ABM Producto", opc);
-
-			break;
-		}*/
 		cin >> opc;
 		verificado = opcionesValidasMenu(1, 5, opc);
 	}

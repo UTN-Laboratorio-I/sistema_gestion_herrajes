@@ -9,15 +9,15 @@ private:
 	int _idCompra;
 
 public:
-	Compra();
-	
-	void setId(int id);
-	void setIdCompra(int idCompra);
+	//Compra();
+	//
+	//void setId(int id);
+	//void setIdCompra(int idCompra);
 
-	int getId();
-	int getIdCompra();
+	//int getId();
+	//int getIdCompra();
 
-	bool crearNuevaCompra();
+	//bool crearNuevaCompra();
 
 };
 

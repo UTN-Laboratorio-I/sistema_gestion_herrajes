@@ -1,17 +1,7 @@
 #include "Transaccion.h"
+#include "Caja.h"
 
-Transaccion::Transaccion() {}
-
-Transaccion::Transaccion(int id, float monto, int productoId, int clienteId, Fecha fecha, Usuario usuario, char tipo) {
-		_id = id;
-	_monto = monto;
-	_productoId = productoId;
-	_clienteId = clienteId;
-	_fecha = fecha;
-	_usuario = usuario;
-	_tipoTransaccion = tipo;
-
-}
+Transaccion::Transaccion() {};
 
 void Transaccion::setId(int id) {
 	_id = id;
@@ -63,8 +53,8 @@ char Transaccion::getTipo() {
 	return _tipoTransaccion;
 }
 
-Response<Transaccion> Transaccion::crearNuevaTransaccion(float monto, char tipo, const char* usuario){
-	Response<Transaccion> response;
-
-	return response;
-}
+//Response<Transaccion> Transaccion::crearNuevaTransaccion(float monto, char tipo, const char* usuario){
+//	Response<Transaccion> response;
+//
+//	return response;
+//}
