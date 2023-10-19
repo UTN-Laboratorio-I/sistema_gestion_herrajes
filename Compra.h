@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Transaccion.h"
+#include "ResponseDto.h"
+#include "Proveedor.h"
 
 class Compra : private Transaccion 
 {

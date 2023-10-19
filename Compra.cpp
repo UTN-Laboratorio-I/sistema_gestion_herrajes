@@ -13,10 +13,13 @@ int Compra::getIdCompra() { return _idCompra; }
 
 bool Compra::crearNuevaCompra()
 {
-	Archivo <Compra> Archivo("compras.dat");
+	Archivo <Compra> Archivo("Compras.dat");
 	Compra compra;
+	Response <Proveedor> nuevaCompra;
+
 
 	Archivo.grabarRegistroArchivo(compra);
 
 	return true;
 }
+
