@@ -1,6 +1,10 @@
 #include "Venta.h"
+#include "InterfazUI.h"
+#include "Cliente.h"
+#include "Caja.h"
+#include "ResponseDto.h"
 
-Venta::Venta() {}
+Venta::Venta() {};
 
 void Venta::setId(int id) {
 	_id = id;
@@ -8,17 +12,9 @@ void Venta::setId(int id) {
 int Venta::getId() {
 	return _id;
 }
-void Venta::setProveedorId(int proveedorId) {
-	_proveedorId = proveedorId;
+void Venta::setClienteId(int clienteId) {
+	_clienteId = clienteId;
 }
-int Venta::getProveedorId() {
-	return _proveedorId;
-}
-
-Response<Venta> crearNuevaVenta() {
-	Archivo<Venta> archivo("Ventas.dat");
-	Venta venta;
-	Response<Venta> response;
-
-	return response;
+int Venta::getClienteId() {
+	return _clienteId;
 }
