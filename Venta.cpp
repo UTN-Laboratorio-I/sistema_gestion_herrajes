@@ -4,7 +4,10 @@
 #include "Caja.h"
 #include "ResponseDto.h"
 
-Venta::Venta() {};
+Venta::Venta() {
+	_clienteId = 0;
+	_tipo = 'v';
+};
 
 void Venta::setId(int id) {
 	_id = id;
@@ -17,4 +20,15 @@ void Venta::setClienteId(int clienteId) {
 }
 int Venta::getClienteId() {
 	return _clienteId;
+}
+
+void Venta::setTipoTransaccion(char tipoTransaccion) { _tipoTransaccion = tipoTransaccion; }
+char Venta::getTipoTransaccion() { return _tipoTransaccion; }
+
+Response<Venta> Venta::crearNuevaVenta() {
+	Response<Venta> response;
+
+	
+
+	return response;
 }

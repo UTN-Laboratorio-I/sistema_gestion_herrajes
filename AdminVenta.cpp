@@ -43,28 +43,32 @@ void AdminVenta::administrarModuloVenta() {
 }
 
 //Registra una nueva venta:
-//void AdminVenta::registrarNuevaVenta() {
-//	InterfazUI ventas_UI(_sistema);
-//	Venta venta;
-//	//Cliente cliente;
-//	//Transaccion transaccion(_sistema);
-//	bool continuar = false;
-//
-//	while (!continuar) {
-//		int opc;
-//		opc = ventas_UI.ver_VentasClienteExistente();
-//
-//		switch (opc) {
-//		case 1:
-//			//Cliente existente;
-//		case 2:
-//			//Nuevo cliente
-//			//Response<Cliente> responseNuevoCliente = cliente.crearNuevoCliente();
-//			//cliente = responseNuevoCliente.getData();
-//		case 0: //SALIR DEL REGISTRO DE NUEVA VENTA AL MENU VENTA:
-//			continuar = true;
-//			break;
-//		}
-//
-//	}
-//}
+void AdminVenta::registrarNuevaVenta() {
+	InterfazUI ventas_UI(_sistema);
+	Venta venta;
+	//Cliente cliente;
+	//Transaccion transaccion(_sistema);
+	bool continuar = false;
+
+	while (!continuar) {
+		int opc;
+		opc = ventas_UI.ver_VentasClienteExistente();
+
+		switch (opc) {
+		case 1:
+			//Cliente existente;
+			break;
+		case 2:
+			//Nuevo cliente
+			//Response<Cliente> responseNuevoCliente = cliente.crearNuevoCliente();
+			//cliente = responseNuevoCliente.getData();
+			break;
+		case 0: //SALIR DEL REGISTRO DE NUEVA VENTA AL MENU VENTA:
+			continuar = true;
+			break;
+		}
+
+		
+
+	}
+}

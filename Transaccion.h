@@ -10,9 +10,8 @@ protected:
 	int _id;
 	float _monto;
 	int _productoId;
-	int _clienteId;
 	Fecha _fecha;
-	Usuario _usuario;
+	char _usuario[30];
 	char _tipoTransaccion;
 
 public:
@@ -33,13 +32,13 @@ public:
 	void setFecha(Fecha fecha);
 	Fecha getFecha();
 
-	void setUsuario(Usuario usuario);
-	Usuario getUsuario();
+	void setUsuario(char* usuario);
+	const char* getUsuario();
 
 	void setTipo(char tipo);
 	char getTipo();
 
-	//Response<Transaccion> crearNuevaTransaccion(float monto, char tipo, const char* usuario);
+	Response<Transaccion> crearNuevaTransaccion(float monto, char tipo, const char* usuario, char tipoTransaccion);
 
 };
 
