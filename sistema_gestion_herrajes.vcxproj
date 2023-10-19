@@ -144,6 +144,7 @@
     <ClCompile Include="Persona.cpp" />
     <ClCompile Include="Producto.cpp" />
     <ClCompile Include="AdminReporte.cpp" />
+    <ClCompile Include="Proveedor.cpp" />
     <ClCompile Include="Sistema.cpp" />
     <ClCompile Include="sistema_gestion_herrajes.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -174,6 +175,7 @@
     <ClInclude Include="Persona.h" />
     <ClInclude Include="Producto.h" />
     <ClInclude Include="AdminReporte.h" />
+    <ClInclude Include="Proveedor.h" />
     <ClInclude Include="ResponseDto.h" />
     <ClInclude Include="Sistema.h" />
     <ClInclude Include="Stock.h" />

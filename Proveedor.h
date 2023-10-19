@@ -21,7 +21,7 @@ public:
 
 private:
 
-	int _idProveedo;
+	int _idProveedor;
 
 };
 

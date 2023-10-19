@@ -1,5 +1,6 @@
 #include "Cliente.h"
 
+
 void Cliente::cargarCliente()
 {
 	int cuit, idCliente;
@@ -39,4 +40,4 @@ int Cliente::getCuit(){return _cuit;}
 
 void Cliente::setIdCliente(int id){_idCliente = id;}
 void Cliente::setCuit(int cuit){cuit = cuit;}
-void Cliente::setRazonSocial(const char* razonSocial){strcpy(_razonSocial, razonSocial);}
+void Cliente::setRazonSocial(const char* razonSocial){strcpy_s(_razonSocial, razonSocial);}

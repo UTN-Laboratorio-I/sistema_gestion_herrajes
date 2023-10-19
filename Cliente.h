@@ -30,5 +30,4 @@ private:
 
 	int _idCliente, _cuit, _PersonaId;
 	char _razonSocial[50];
-
 };
