@@ -29,6 +29,6 @@ public:
 private:
 
 	int _idCliente, _cuit, _PersonaId;
-	cha _razonSocial[50];
+	char _razonSocial[50];
 
 };
