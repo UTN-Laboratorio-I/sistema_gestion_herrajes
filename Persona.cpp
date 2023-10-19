@@ -105,7 +105,7 @@ void Persona::cargar()
 
 void Persona::mostrar()
 {
-	cout << "INGRESE ID: " << getId() << endl;
+	cout << "ID PERSONA: " << getId() << endl;
 	cout << "DNI: " << getDNI() << endl;
 	cout << "NOMBRE: " << getNombre() << endl;
 	cout << "APELLIDO: " << getApellido() << endl;
@@ -118,6 +118,7 @@ void Persona::mostrar()
 	for (int i = 0; i < 1; i++) {
 		mostrarContenido();
 	}*/
+	cout << endl;
 }
 
 void Persona::mostrarEncabezado()

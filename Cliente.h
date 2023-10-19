@@ -19,17 +19,16 @@ public:
 	/// <returns></returns>
 
 	int getIdCliente();
-	char getRazonSocial();
+	char* getRazonSocial();
+	int getCuit();
 
 	void setIdCliente(int id);
 	void setCuit(int cuit);
 	void setRazonSocial(const char* razonSocial);
 
-
-
 private:
 
 	int _idCliente, _cuit, _PersonaId;
-	char _razonSocial[50];
+	cha _razonSocial[50];
 
 };

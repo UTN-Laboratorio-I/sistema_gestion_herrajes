@@ -8,14 +8,14 @@ using namespace std;
 
 
 int main() {
-	/*Sistema sistema;
+	Sistema sistema;
 
-	sistema.administrarPrograma();*/
+	sistema.administrarPrograma();
 
-	Persona persona;
+	/*Persona persona;
 	persona.cargar();
 
-	persona.mostrar();
+	persona.mostrar();*/
 
 
 
