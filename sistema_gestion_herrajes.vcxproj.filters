@@ -81,21 +81,27 @@
     <ClCompile Include="Helper.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Cliente.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Persona.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+=======
+>>>>>>> develop
     <ClCompile Include="Stock.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="test.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Proveedor.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+=======
+>>>>>>> develop
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Categoria.h">
@@ -158,6 +164,7 @@
     <ClInclude Include="Backup.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Cliente.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -170,5 +177,10 @@
     <ClInclude Include="Proveedor.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+=======
+    <ClInclude Include="Stock.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+>>>>>>> develop
   </ItemGroup>
 </Project>

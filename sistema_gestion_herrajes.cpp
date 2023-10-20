@@ -12,10 +12,6 @@ int main() {
 
 	sistema.administrarPrograma();
 
-	/*Persona persona;
-	persona.cargar();
-
-	persona.mostrar();*/
 
 
 
