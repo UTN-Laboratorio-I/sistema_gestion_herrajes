@@ -11,7 +11,7 @@ private:
 	int _idCompra;
 
 public:
-	Compra();
+	Compra() {};
 	
 	void setId(int id);
 	void setIdCompra(int idCompra);
@@ -19,7 +19,7 @@ public:
 	int getId();
 	int getIdCompra();
 
-	bool crearNuevaCompra();
+	bool registrarNuevaCompra();
 
 };
 

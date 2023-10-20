@@ -1,19 +1,20 @@
 #pragma once
 #include "Transaccion.h"
 class Venta :
-	private Transaccion
+	public Transaccion
 {
 private:
 	int _id;
-	int _proveedorId;
+	int _clienteId;
+
 public:
 	Venta();
 
 	void setId(int id);
 	int getId();
-	void setProveedorId(int proveedorId);
-	int getProveedorId();
+	void setClienteId(int clienteId);
+	int getClienteId();
 
-	Response<Venta> crearNuevaVenta(float monto, char tipo, const char* usuario, int proveedorId);
+	Response<Venta> crearNuevaVenta();
 };
 

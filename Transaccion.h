@@ -17,7 +17,6 @@ protected:
 
 public:
 	Transaccion();
-	Transaccion(int id, float monto, int productoId, int clienteId, Fecha fecha, Usuario usuario, char tipo);
 
 	void setId(int id);
 	int getId();
@@ -40,7 +39,7 @@ public:
 	void setTipo(char tipo);
 	char getTipo();
 
-	Response<Transaccion> crearNuevaTransaccion(float monto, char tipo, const char* usuario );
+	//Response<Transaccion> crearNuevaTransaccion(float monto, char tipo, const char* usuario);
 
 };
 

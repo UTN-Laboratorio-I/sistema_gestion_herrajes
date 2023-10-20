@@ -11,7 +11,5 @@ public:
 	void moduloVentaSalir();
 	void administrarModuloVenta();
 	void registrarNuevaVenta();
-	void pantallaListarProducto();
-	void pantallaBuscarProducto();
 };
 
