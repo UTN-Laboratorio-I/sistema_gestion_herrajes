@@ -38,7 +38,7 @@ public:
 	void mostrarContenido();
 
 protected:
-	int _dni, _idPersona;
+	int _dni, _id;
 	char _nombre[40], _apellido[40];
 	char _direccion[100], _email[50];
 	Fecha _fechaNacimiento, _fechaAlta;

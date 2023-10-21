@@ -86,7 +86,6 @@ void Persona::cargar()
 	setFechaAlta();
 	cout << endl;
 
-	setId(idPersona);
 	setDni(dni);
 	setNombre(nombre);
 	setApellido(apellido);
