@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cstring>
 #include "Producto.h"
+#include "Archivo.h"
+#include <vector>
 
 using namespace std;
 
@@ -68,6 +70,8 @@ void Producto::cargarProductos() {
 	float pCosto, pVenta;
 	int cantidad;
 	string nombreProducto, descripcionProducto;
+	vector <Producto> producto;
+	Archivo <Producto> archivo("productos.dat");
 
 	cout << "NOMBRE DE PRODUCTO: ";
 	//cin.ignore();
@@ -87,10 +91,13 @@ void Producto::cargarProductos() {
 	//setPrecioVenta(pVenta);
 	setCantidad(cantidad);
 	setEstado(true);
+	setIdProducto(archivo.contadorRegistros(producto, archivo));
 }
 
 void Producto::mostrarProductos()
 {
+	cout << "ID PRODUCTO: ";
+	cout << getIdProducto() << endl;
 	cout << "NOMBRE DE PRODUCTO: ";
 	cout << getNombreProducto() << endl;
 	cout << "DESCRIPCION PRODUCTO: ";
@@ -101,5 +108,21 @@ void Producto::mostrarProductos()
 	cout << pVenta;*/
 	cout << "CANTIDAD: ";
 	cout << getCantidad() << endl;
+}
 
+int Producto::funcion()
+{
+	vector <Producto> producto;
+	Archivo <Producto> archivo("productos.dat");
+
+	producto = archivo.listarRegistroArchivo();
+
+	int cantidadReg = 0;
+
+	for (Producto i : producto)
+	{
+		cantidadReg++;
+	}
+
+	return cantidadReg;
 }

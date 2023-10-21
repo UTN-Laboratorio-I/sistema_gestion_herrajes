@@ -1,11 +1,27 @@
 #pragma once
 #include "Persona.h"
-class Proveedor :
-	public Persona
+#include <iostream>
+#include <cstdio>
+
+class Proveedor : public Persona
 {
-private:
 public:
-	Proveedor();
-	//Response <Proveedor> crearNuevoProveedor();
+
+	void cargarProveedor();
+	void MostarProveedor();
+
+	/// <getters especiales>
+	/// agregar los getters del diagrama de clases 
+	/// </summary>
+	/// <returns></returns>
+
+	int getIdProveedor();
+
+	void setIdProveedor(int id);
+
+private:
+
+	int _idProveedor;
+
 };
 

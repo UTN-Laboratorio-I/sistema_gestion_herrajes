@@ -4,6 +4,7 @@
 #include <cstring>
 #include "Archivo.h"
 
+
 class Producto
 {
 public:
@@ -27,6 +28,7 @@ public:
 
     void cargarProductos();
     void mostrarProductos();
+    int funcion();
 
 
 private:

@@ -77,8 +77,27 @@ public:
 		else
 			return T();
     }
+
+    int contadorRegistros(vector <T> objeto, Archivo <T> archi)
+    {
+	    
+        //Archivo <T> archivo(nombreArchivo);
+
+	    objeto = archi.listarRegistroArchivo();
+
+	    int cantidadReg = 0;
+
+	    for (T i : objeto)
+	    {
+		    cantidadReg++;
+	    }
+
+	    return cantidadReg;
+    }
 private:
 
 };
+
+
 
 
