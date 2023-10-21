@@ -137,6 +137,8 @@
     <ClCompile Include="Categoria.cpp" />
     <ClCompile Include="Cliente.cpp" />
     <ClCompile Include="Compra.cpp" />
+    <ClCompile Include="Detalle.cpp" />
+    <ClCompile Include="DetalleDto.cpp" />
     <ClCompile Include="ErrorDto.cpp" />
     <ClCompile Include="Fecha.cpp" />
     <ClCompile Include="FechaHorario.cpp" />
@@ -156,6 +158,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Transaccion.cpp" />
+    <ClCompile Include="TransaccionDto.cpp" />
     <ClCompile Include="Usuario.cpp" />
     <ClCompile Include="Venta.cpp" />
   </ItemGroup>
@@ -172,6 +175,8 @@
     <ClInclude Include="Categoria.h" />
     <ClInclude Include="Cliente.h" />
     <ClInclude Include="Compra.h" />
+    <ClInclude Include="Detalle.h" />
+    <ClInclude Include="DetalleDto.h" />
     <ClInclude Include="ErrorDto.h" />
     <ClInclude Include="Fecha.h" />
     <ClInclude Include="FechaHorario.h" />
@@ -187,6 +192,7 @@
     <ClInclude Include="Sistema.h" />
     <ClInclude Include="Stock.h" />
     <ClInclude Include="Transaccion.h" />
+    <ClInclude Include="TransaccionDto.h" />
     <ClInclude Include="Usuario.h" />
     <ClInclude Include="Venta.h" />
   </ItemGroup>

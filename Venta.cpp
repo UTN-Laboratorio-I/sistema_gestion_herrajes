@@ -28,6 +28,8 @@ char Venta::getTipoTransaccion() { return _tipoTransaccion; }
 Response<Venta> Venta::crearNuevaVenta() {
 	Response<Venta> response;
 
+
+	//crearNuevaTransaccion(_monto, _tipo, _usuario, _tipo);
 	
 
 	return response;

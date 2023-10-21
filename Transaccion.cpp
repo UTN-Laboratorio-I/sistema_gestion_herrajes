@@ -2,6 +2,22 @@
 #include "Caja.h"
 
 Transaccion::Transaccion() {};
+Transaccion::Transaccion(
+	float monto,
+	const char* usuario,
+	char tipo,
+	int productoId,
+	int cantidad
+) {
+	Fecha fecha;
+	_monto = monto;
+	_tipoTransaccion = tipo;
+	std::strncpy(_usuario, usuario, sizeof(_usuario) - 1);
+	_fecha = fecha.now();
+	_productoId = productoId;
+	_cantidad = cantidad;
+};
+
 
 void Transaccion::setId(int id) {
 	_id = id;
@@ -46,13 +62,22 @@ char Transaccion::getTipo() {
 	return _tipoTransaccion;
 }
 
-Response<Transaccion> Transaccion::crearNuevaTransaccion(float monto, char tipo, const char* usuario, char tipoTransaccion){
+Response<Transaccion> Transaccion::crearNuevaTransaccion(
+	float monto, 
+	const char* usuario, 
+	char tipo, 
+	int productoId, 
+	int cantidad
+	){
 	Response<Transaccion> response;
-	Fecha fecha;
-	_monto = monto;
-	_tipoTransaccion = tipoTransaccion;
-	std::strncpy(_usuario, usuario, sizeof(_usuario) - 1);
-	_fecha = fecha.now();
+	Transaccion transaccion(
+		float monto,
+		const char* usuario,
+		char tipo,
+		int productoId,
+		int cantidad
+	);
+
 
 	return response;
 }

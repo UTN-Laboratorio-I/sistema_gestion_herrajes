@@ -13,9 +13,15 @@ protected:
 	Fecha _fecha;
 	char _usuario[30];
 	char _tipoTransaccion;
+	int _cantidad;
 
 public:
 	Transaccion();
+	Transaccion(float monto,
+		const char* usuario,
+		char tipo,
+		int productoId,
+		int cantidad);
 
 	void setId(int id);
 	int getId();
@@ -26,9 +32,6 @@ public:
 	void setProductoId(int productoId);
 	int getProductoId();
 
-	void setClienteId(int clienteId);
-	int getClienteId();
-
 	void setFecha(Fecha fecha);
 	Fecha getFecha();
 
@@ -38,7 +41,12 @@ public:
 	void setTipo(char tipo);
 	char getTipo();
 
-	Response<Transaccion> crearNuevaTransaccion(float monto, char tipo, const char* usuario, char tipoTransaccion);
-
+	Response<Transaccion> crearNuevaTransaccion(
+		float monto, 
+		const char* usuario, 
+		char tipo, 
+		int productoId, 
+		int cantidad
+	);
 };
 

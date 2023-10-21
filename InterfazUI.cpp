@@ -310,10 +310,10 @@ void InterfazUI::ver_MenuReportes() {
 		cout << "2) Reporte Proveedores" << endl;
 		cout << "3) Reporte Productos" << endl;
 		cout << "4) Reporte Caja" << endl;
-		cout << "4) Reporte Usuarios" << endl << endl;
+		cout << "5) Reporte Usuarios" << endl << endl;
 		cout << "0) <- Atras" << endl;
 		cin >> opc;
-		verificado = opcionesValidasMenu(1, 4, opc);
+		verificado = opcionesValidasMenu(1, 5, opc);
 	}
 	_sistema->setModuloPantalla("Reporte", opc);
 }

@@ -46,8 +46,8 @@ void AdminVenta::administrarModuloVenta() {
 void AdminVenta::registrarNuevaVenta() {
 	InterfazUI ventas_UI(_sistema);
 	Venta venta;
+	Response<Venta> responseVenta;
 	//Cliente cliente;
-	//Transaccion transaccion(_sistema);
 	bool continuar = false;
 
 	while (!continuar) {
@@ -68,7 +68,14 @@ void AdminVenta::registrarNuevaVenta() {
 			break;
 		}
 
-		
+		responseVenta = venta.crearNuevaVenta();
 
+		if (responseVenta.getSuccess()) {
+			continuar = true;
+		}
+		else {
+			_sistema->setError(responseVenta.getMessage());
+		}	
 	}
+	_sistema->limpiarError();
 }
