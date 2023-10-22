@@ -28,7 +28,6 @@ public:
 
     void cargarProductos();
     void mostrarProductos();
-    int funcion();
 
 
 private:

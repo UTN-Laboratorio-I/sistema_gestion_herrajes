@@ -5,7 +5,6 @@
 #include <cstring>
 #include <stdio.h>
 #include "Fecha.h"
-#include "ErrorDto.h"
 
 using namespace std;
 

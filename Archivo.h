@@ -78,21 +78,25 @@ public:
 			return T();
     }
 
-    int contadorRegistros(vector <T> objeto, Archivo <T> archi)
+    // Esta es una funcion que cuenta la cantidad de registros.
+    int contadorRegistros(T objeto)
     {
+
+        FILE* p = fopen(_nombreArchivo, "rb");
+
+        if (p == NULL)
+        {
+            return 0;
+        }
+
+        fseek(p, 0, SEEK_END);
+        int tam = ftell(p);
+
+        int cantidadReg = tam / sizeof(T);
 	    
-        //Archivo <T> archivo(nombreArchivo);
 
-	    objeto = archi.listarRegistroArchivo();
+        return cantidadReg;
 
-	    int cantidadReg = 0;
-
-	    for (T i : objeto)
-	    {
-		    cantidadReg++;
-	    }
-
-	    return cantidadReg;
     }
 private:
 
