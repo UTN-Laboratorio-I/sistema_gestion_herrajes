@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cstring>
 #include "Producto.h"
+#include "Archivo.h"
+#include <vector>
 
 using namespace std;
 
@@ -68,13 +70,15 @@ void Producto::cargarProductos() {
 	float pCosto, pVenta;
 	int cantidad;
 	string nombreProducto, descripcionProducto;
+	Producto producto;
+	Archivo <Producto> archivo("Productos.dat");
 
 	cout << "NOMBRE DE PRODUCTO: ";
-	cin.ignore();
+	//cin.ignore();
 	getline(cin, nombreProducto);
 	cout << "DESCRIPCION PRODUCTO: ";
 	getline(cin, descripcionProducto);
-	cout << "PRECIO DE COSTO: ";
+	cout << "PRECIO DE COSTO:$ ";
 	cin >> pCosto;
 	/*cout << "PRECIO DE VENTA: ";
 	cin >> pVenta;*/
@@ -87,19 +91,21 @@ void Producto::cargarProductos() {
 	//setPrecioVenta(pVenta);
 	setCantidad(cantidad);
 	setEstado(true);
+	setIdProducto(archivo.contadorRegistros(producto));
 }
 
 void Producto::mostrarProductos()
 {
+	cout << "ID PRODUCTO: ";
+	cout << getIdProducto() << endl;
 	cout << "NOMBRE DE PRODUCTO: ";
 	cout << getNombreProducto() << endl;
 	cout << "DESCRIPCION PRODUCTO: ";
 	cout << getDescripcionProducto() << endl;
-	cout << "PRECIO DE COSTO: ";
+	cout << "PRECIO DE COSTO:$ ";
 	cout << getPrecioCosto() << endl;
 	/*cout << "PRECIO DE VENTA: ";
 	cout << pVenta;*/
 	cout << "CANTIDAD: ";
 	cout << getCantidad() << endl;
-
 }

@@ -4,6 +4,7 @@
 #include <cstring>
 #include "Archivo.h"
 
+
 class Producto
 {
 public:

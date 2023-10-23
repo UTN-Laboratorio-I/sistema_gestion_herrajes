@@ -2,6 +2,7 @@
 #include "Persona.h"
 #include <iostream>
 #include <cstdio>
+#include "Archivo.h"
 
 class Proveedor : public Persona
 {
