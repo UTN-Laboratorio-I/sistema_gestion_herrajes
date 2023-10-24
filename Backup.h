@@ -5,7 +5,6 @@
 #include <cstring>
 #include <stdio.h>
 #include "Fecha.h"
-#include "ErrorDto.h"
 
 using namespace std;
 
@@ -15,8 +14,6 @@ class Backup
 private:
 	const char* _nombreArchivo;
 	const char* _nombreBackUp;
-	Fecha fecha;
-	ErrorDto error;
 
 public:
 #pragma region CONSTRUCTOR
@@ -64,7 +61,6 @@ public:
 		FILE* pBack;
 
 		bool cargo = true;
-		//error.setError(cargo, "No se puedo leer el archivo");
 		
 		pBack = fopen(_nombreBackUp, "rb");
 		p = fopen(_nombreArchivo, "wb");
