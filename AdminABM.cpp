@@ -1,5 +1,6 @@
 #include "AdminABM.h"
 #include "InterfazUI.h"
+#include "Cliente.h"
 
 #pragma region Getters/Setters
 string AdminABM::getNombreModulo(){return _nombreModulo;}

@@ -70,7 +70,7 @@ void AdminUsuario::creacionNuevoUsuario() {
 	while (!continuar) {
 		Usuario nuevoUser;
 		//Utilizo el método de usuario para crearlo:
-		//Response es un tipo de dato que contiene success y mensaje, y permite
+		//Response es un tipo de dato que contiene success y mensaje y data, y permite
 		//saber si la operación fue exitosa o no, y en caso de no serlo, manejar el error.
 
 		//Toda la creación de usuario y su guardado en el archivo se encarga el método de Usuario (crearNuevoUsuario())
@@ -90,6 +90,7 @@ void AdminUsuario::creacionNuevoUsuario() {
 			continuar = user_UI.mensajeCancelarEjecucion("creacion de usuario");
 
 		}
+
 	}
 	//Si salgo del bucle while, es porque se creó el usuario correctamente o cancelé la carga por lo que limpio los errores:
 	_sistema->limpiarError();

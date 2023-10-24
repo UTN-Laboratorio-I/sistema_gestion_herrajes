@@ -19,6 +19,7 @@ void InterfazUI::headerDinamico()
 	Helper helper;
 	Fecha fecha;
 	string ahora = fecha.hoy();
+	string subModulo = _sistema->getSubModulo();
 
 	helper.limpiarConsola();
 	string usuario = _sistema->getUsuarioLogged();
@@ -27,7 +28,9 @@ void InterfazUI::headerDinamico()
 	if (usuario != "") {
 		cout << "User: " << usuario << endl;
 	}
-	cout << "MENU " <<_sistema->getModulo() << endl;
+	cout << "MENU " << _sistema->getModulo();
+	subModulo != "" && cout << " - " << subModulo;
+	cout << endl;
 
 	if (error) {
 		std::string error = _sistema->getError();

@@ -28,8 +28,7 @@ void AdminVenta::administrarModuloVenta() {
 
 		switch (opc) {
 		case 1:
-			//ventas_UI.ver_menuCrearVentaProducto();
-			//registrarNuevaVenta();
+			registrarNuevaVenta();
 			break;
 		case 2:
 			//_sistema->setModuloPantalla("ventas", 2);
@@ -56,9 +55,13 @@ void AdminVenta::registrarNuevaVenta() {
 
 		switch (opc) {
 		case 1:
+			_sistema->setSubModulo("Seleccion cliente existente");
+
 			//Cliente existente;
 			break;
 		case 2:
+			_sistema->setSubModulo("Creacion nuevo cliente");
+
 			//Nuevo cliente
 			//Response<Cliente> responseNuevoCliente = cliente.crearNuevoCliente();
 			//cliente = responseNuevoCliente.getData();
@@ -68,14 +71,20 @@ void AdminVenta::registrarNuevaVenta() {
 			break;
 		}
 
-		responseVenta = venta.crearNuevaVenta();
+		if (!continuar) {
+			_sistema->setSubModulo("Nueva Venta");
+			venta.crearNuevaVenta(_sistema); //Le paso el parametro sistema para
+			//poder utilizar la UI (Sobre todo el limpiarConsola y headerDinamico)
 
-		if (responseVenta.getSuccess()) {
-			continuar = true;
+			if (responseVenta.getSuccess()) {
+				continuar = true;
+			}
+			else {
+				_sistema->setError(responseVenta.getMessage());
+			}	
 		}
-		else {
-			_sistema->setError(responseVenta.getMessage());
-		}	
+
 	}
 	_sistema->limpiarError();
+	_sistema->limpiarSubModulo();
 }

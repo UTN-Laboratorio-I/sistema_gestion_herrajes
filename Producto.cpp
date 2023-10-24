@@ -103,3 +103,22 @@ void Producto::mostrarProductos()
 	cout << getCantidad() << endl;
 
 }
+
+Producto Producto::listarYSeleccionarProductoVenta() {
+	Archivo<Producto> archivoProducto("productos.dat");
+	vector<Producto> listaProductos = archivoProducto.listarRegistroArchivo();
+
+	for (Producto prod : listaProductos) {
+		cout << prod.getIdProducto() << " - " << prod.getNombreProducto() << endl;
+	}
+
+	int idProducto;
+	cout << "Seleccione el producto: ";
+	cin >> idProducto;
+
+	for (Producto prod : listaProductos) {
+		if (prod.getIdProducto() == idProducto) {
+			return prod;
+		}
+	}
+}

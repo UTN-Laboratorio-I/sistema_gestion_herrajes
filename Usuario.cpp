@@ -69,6 +69,7 @@ void Usuario::setDatosUsuario(char* usuario, char* nombre, char* rol, bool isAdm
 Response<Usuario> Usuario::crearNuevoUsuario() {
     Usuario nuevoUser;
     Response<Usuario> response;
+
     const char* nombreArchivo = "usuarios.dat";
     Archivo<Usuario> archivo(nombreArchivo);
 

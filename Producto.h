@@ -28,6 +28,8 @@ public:
     void cargarProductos();
     void mostrarProductos();
 
+    Producto listarYSeleccionarProductoVenta();
+
 
 private:
 

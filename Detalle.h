@@ -8,7 +8,6 @@ private:
 public:
 	Detalle();
 	Detalle(Producto producto, int cantidad);
-	~Detalle();
 	Producto getProducto();
 	int getCantidad();
 	void setProducto(Producto producto);
