@@ -35,5 +35,9 @@ public:
 	void pantallaABMProveedores();
 	void pantallaABMProductos();
 
+	// Administrador de ABM clientes
+	void crearCliente();
+	void listarClientes();
+
 };
 

@@ -2,6 +2,10 @@
 #include "Persona.h"
 #include <iostream>
 #include <cstdio>
+#include <string>
+#include <vector>
+#include "ResponseDto.h"
+#include "Archivo.h"
 
 using namespace std;
 
@@ -25,6 +29,9 @@ public:
 	void setIdCliente(int id);
 	void setCuit(int cuit);
 	void setRazonSocial(const char* razonSocial);
+
+	Response<Cliente> crearNuevoCliente();
+
 
 private:
 

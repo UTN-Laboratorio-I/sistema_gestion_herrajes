@@ -26,12 +26,22 @@ void Cliente::cargarCliente()
 
 void Cliente::MostarCliente()
 {
-	mostrar();
+	Archivo <Cliente> reg("clientes.dat");
+	vector <Cliente> regCliente;
+	regCliente = reg.listarRegistroArchivo();
+
+	/*mostrar();
 
 	cout << "ID CLIENTE: " << getIdCliente() << endl;
 	cout << "CUIT: " << getCuit() << endl;
-	cout << "RAZON SOCIAL: " << getRazonSocial() << endl;
+	cout << "RAZON SOCIAL: " << getRazonSocial() << endl;*/
 
+	for (Cliente c : regCliente) {
+		c.mostrar();
+		cout << "ID CLIENTE: " << getIdCliente() << endl;
+		cout << "CUIT: " << getCuit() << endl;
+		cout << "RAZON SOCIAL: " << getRazonSocial() << endl;
+	}
 }
 
 int Cliente::getIdCliente() {return _idCliente; }
@@ -41,3 +51,24 @@ int Cliente::getCuit(){return _cuit;}
 void Cliente::setIdCliente(int id){_idCliente = id;}
 void Cliente::setCuit(int cuit){cuit = cuit;}
 void Cliente::setRazonSocial(const char* razonSocial){strcpy_s(_razonSocial, razonSocial);}
+
+Response<Cliente> Cliente::crearNuevoCliente()
+{
+    Cliente nuevoCliente;
+    Response<Cliente> response;
+    const char* nombreArchivo = "clientes.dat";
+    Archivo<Cliente> archivo(nombreArchivo);
+
+	nuevoCliente.cargarCliente();
+    
+    bool registro = archivo.grabarRegistroArchivo(nuevoCliente);
+
+    if (registro) {
+        response.setSuccess("cliente cargado con éxito.", nuevoCliente);
+    }
+    else {
+        response.setFailure("Error al cargar nuevo cliente.");
+    }
+
+    return response;
+}

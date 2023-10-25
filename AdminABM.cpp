@@ -1,5 +1,7 @@
 #include "AdminABM.h"
 #include "InterfazUI.h"
+#include "Cliente.h"
+#include "Archivo.h"
 
 #pragma region Getters/Setters
 string AdminABM::getNombreModulo(){return _nombreModulo;}
@@ -46,16 +48,22 @@ void AdminABM::administrarSubModuloABMCliente() {
 	while (subModuloABMActivo(_nombreSubModuloCliente)) {
 		ABM_UI.ver_SubMenuABMCliente();
 		int opc = _sistema->getPantalla();
-
+		
 		switch (opc) {
 		case 1:
-			//AGREGAR CLIENTE
+			crearCliente();
 			break;
 		case 2:
-			//ELIMINAR CLIENTE
+			//MODIFICAR CLIENTE
 			break;
 		case 3:
-			//MODIFICAR CLIENTE
+			//ELIMINAR CLIENTE
+			break;
+		case 4:
+			listarClientes();
+			break;
+		case 5:
+			//BUSCAR CLIENTE
 			break;
 		case 0:
 			subModuloABMSalir();
@@ -99,3 +107,33 @@ void AdminABM::subModuloABMSalir()
 
 
 void AdminABM::pantallaABMClientes(){}
+
+void AdminABM::crearCliente()
+{
+	InterfazUI cliente_UI(_sistema);
+	bool continuar = false;
+	while (!continuar) {
+		Cliente nuevoCliente;
+		Response<Cliente> res = nuevoCliente.crearNuevoCliente();
+		if (res.getSuccess()) {
+			continuar = true;
+		}
+		else {
+			_sistema->setError(res.getMessage());
+
+			continuar = cliente_UI.mensajeCancelarEjecucion("Alta de cliente");
+
+		}
+	}
+	_sistema->limpiarError();
+}
+
+void AdminABM::listarClientes()
+{
+	InterfazUI cliente_UI(_sistema);
+	Archivo<Cliente> archivo("clientes.dat");
+	Cliente cliente;
+	//vector<Cliente> clientes;
+	cliente.MostarCliente();
+	system("pause");
+}
