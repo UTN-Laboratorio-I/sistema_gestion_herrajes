@@ -76,8 +76,8 @@ void AdminVenta::registrarNuevaVenta() {
 			venta.crearNuevaVenta(_sistema); //Le paso el parametro sistema para
 			//poder utilizar la UI (Sobre todo el limpiarConsola y headerDinamico)
 
+
 			if (responseVenta.getSuccess()) {
-				continuar = true;
 			}
 			else {
 				_sistema->setError(responseVenta.getMessage());

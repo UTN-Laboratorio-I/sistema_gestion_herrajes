@@ -76,6 +76,7 @@ Response<Venta> Venta::crearNuevaVenta(Sistema* sistema) {
 			finalizarVenta = !finalizarVenta;
 			response.setSuccess("Venta creada correctamente", venta);
 		}
+		
 	}
 	return response;
 }

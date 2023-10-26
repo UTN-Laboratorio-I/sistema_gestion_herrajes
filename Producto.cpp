@@ -7,7 +7,7 @@
 using namespace std;
 
 Producto::Producto(){
-	_idProducto = 0;
+	_id = 0;
 	_precioCosto = 0;
 	_precioVenta = 0;
 	_cantidad = 0;
@@ -19,7 +19,7 @@ Producto::Producto(){
 #pragma region GETTERS
 
 int Producto::getIdProducto() {
-	return _idProducto;
+	return _id;
 }
 float Producto::getPrecioCosto() {
 	return _precioCosto;
@@ -43,8 +43,8 @@ bool Producto::getEstado() { return _estado; }
 
 #pragma region SETTERS
 
-void Producto::setIdProducto(int id) {
-	_idProducto = id;
+void Producto::setId(int id) {
+	_id = id;
 }
 void Producto::setPrecioCosto(float pCosto) {
 	_precioCosto = pCosto;
@@ -74,10 +74,13 @@ void Producto::cargarProductos() {
 	Archivo <Producto> archivo("Productos.dat");
 
 	cout << "NOMBRE DE PRODUCTO: ";
-	//cin.ignore();
 	getline(cin, nombreProducto);
+	cin.ignore();
+
 	cout << "DESCRIPCION PRODUCTO: ";
 	getline(cin, descripcionProducto);
+	cin.ignore();
+
 	cout << "PRECIO DE COSTO:$ ";
 	cin >> pCosto;
 	/*cout << "PRECIO DE VENTA: ";
@@ -91,7 +94,8 @@ void Producto::cargarProductos() {
 	//setPrecioVenta(pVenta);
 	setCantidad(cantidad);
 	setEstado(true);
-	setIdProducto(archivo.contadorRegistros(producto));
+	//setIdProducto(archivo.contadorRegistros(producto));
+	archivo.grabarRegistroArchivo(producto);
 }
 
 void Producto::mostrarProductos()

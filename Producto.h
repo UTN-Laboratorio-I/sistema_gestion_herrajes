@@ -18,7 +18,7 @@ public:
     std::string getDescripcionProducto();
     bool getEstado();
 
-    void setIdProducto(int id);
+    void setId(int id);
     void setPrecioCosto(float pCosto);
     void setPrecioVenta(float pVenta);
     void setCantidad(int cantidad);
@@ -34,7 +34,7 @@ public:
 
 private:
 
-    int _idProducto;
+    int _id;
     float _precioCosto, _precioVenta;
     int _cantidad;
     char _nombreProducto[30], _descripcionProducto[45];

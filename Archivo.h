@@ -22,6 +22,9 @@ public:
             return false;
         }
 
+        int id_secuencial = contadorRegistros(objeto) +1; //Armar esto en una fn especifica de "asignarID"
+
+        objeto.setId(id_secuencial);
         bool escribio = fwrite(&objeto, sizeof(objeto), 1, p);
 
         fclose(p); 

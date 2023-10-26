@@ -18,6 +18,14 @@ Usuario::Usuario(char* usuario, char* nombre, char* rol, bool isAdmin, const cha
     _isAdmin = isAdmin;
 }
 
+void Usuario::setId(int id) {
+	_id = id;
+}
+
+int Usuario::getId() const {
+	return _id;
+}
+
 void Usuario::setUsuario(char* usuario) {
     std::strncpy(_usuario, usuario, sizeof(_usuario) - 1);
 }
