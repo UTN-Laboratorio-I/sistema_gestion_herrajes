@@ -13,7 +13,7 @@ Persona::Persona()
 
 
 void Persona::setDni(int d){ _dni = d;}
-void Persona::setId(int id){ _idPersona = id; }
+void Persona::setId(int id){ _id = id; }
 void Persona::setNombre(const char* nombre){strcpy_s(_nombre, nombre);}
 void Persona::setApellido(const char* apellido){strcpy_s(_apellido, apellido);}
 void Persona::setDomicilio(const char* domicilio){strcpy_s(_direccion, domicilio);}
@@ -21,19 +21,9 @@ void Persona::setEmail(const char* email){strcpy_s(_email, email);}
 
 void Persona::setFechaAlta()
 {
-	int d, m, a;
-	cout << "dia de alta: ";
-	cin >> d;
-	cout << endl;
-	cout << "mes de alta: ";
-	cin >> m;
-	cout << endl;
-	cout << "anio de alta: ";
-	cin >> a;
-	cout << endl;
-	_fechaAlta.setDia(d);
-	_fechaAlta.setMes(m);
-	_fechaAlta.setAnio(a);
+	Fecha fecha;
+	
+	_fechaAlta = fecha.now();
 
 }
 void Persona::setFechaNacimiento(Fecha fechaNacimiento)
@@ -60,7 +50,7 @@ void Persona::setEstado(bool estado)
 }
 
 int Persona::getDNI(){return _dni;}
-int Persona::getId(){return _idPersona;}
+int Persona::getId(){return _id;}
 char* Persona::getNombre(){return _nombre;}
 char* Persona::getApellido(){return _apellido;}
 char* Persona::getDomicilio(){return _direccion;}
@@ -74,8 +64,9 @@ void Persona::cargar()
 	char nombre[40], apellido[40], direccion[100], email[50];
 	Fecha fechaAlta;
 	
-	cout << "INGRESE ID: ";
-	cin >> idPersona;
+	//Dato ID autoincremental asignado al crear nuevo registro:
+	//cout << "INGRESE ID: ";
+	//cin >> idPersona;
 	cout << endl;
 	cout << "DNI: ";
 	cin >> dni;
@@ -95,7 +86,6 @@ void Persona::cargar()
 	setFechaAlta();
 	cout << endl;
 
-	setId(idPersona);
 	setDni(dni);
 	setNombre(nombre);
 	setApellido(apellido);

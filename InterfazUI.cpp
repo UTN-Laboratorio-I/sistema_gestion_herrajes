@@ -19,6 +19,7 @@ void InterfazUI::headerDinamico()
 	Helper helper;
 	Fecha fecha;
 	string ahora = fecha.hoy();
+	string subModulo = _sistema->getSubModulo();
 
 	helper.limpiarConsola();
 	string usuario = _sistema->getUsuarioLogged();
@@ -27,7 +28,9 @@ void InterfazUI::headerDinamico()
 	if (usuario != "") {
 		cout << "User: " << usuario << endl;
 	}
-	cout << "MENU " <<_sistema->getModulo() << endl;
+	cout << "MENU " << _sistema->getModulo();
+	subModulo != "" && cout << " - " << subModulo;
+	cout << endl;
 
 	if (error) {
 		std::string error = _sistema->getError();
@@ -310,10 +313,10 @@ void InterfazUI::ver_MenuReportes() {
 		cout << "2) Reporte Proveedores" << endl;
 		cout << "3) Reporte Productos" << endl;
 		cout << "4) Reporte Caja" << endl;
-		cout << "4) Reporte Usuarios" << endl << endl;
+		cout << "5) Reporte Usuarios" << endl << endl;
 		cout << "0) <- Atras" << endl;
 		cin >> opc;
-		verificado = opcionesValidasMenu(1, 4, opc);
+		verificado = opcionesValidasMenu(1, 5, opc);
 	}
 	_sistema->setModuloPantalla("Reporte", opc);
 }

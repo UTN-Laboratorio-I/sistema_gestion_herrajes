@@ -2,6 +2,7 @@
 #include "Fecha.h"
 #include "Usuario.h"
 #include "Sistema.h"
+#include "Detalle.h"
 
 
 class Transaccion
@@ -9,14 +10,19 @@ class Transaccion
 protected:
 	int _id;
 	float _monto;
-	int _productoId;
-	int _clienteId;
 	Fecha _fecha;
-	Usuario _usuario;
+	char _usuario[30];
 	char _tipoTransaccion;
+	int _cantidad; //Cantidad total de productos
+	vector<Detalle> _detalle;
 
 public:
 	Transaccion();
+	Transaccion(float monto,
+		const char* usuario,
+		char tipo,
+		int cantidad
+	);
 
 	void setId(int id);
 	int getId();
@@ -27,19 +33,23 @@ public:
 	void setProductoId(int productoId);
 	int getProductoId();
 
-	void setClienteId(int clienteId);
-	int getClienteId();
-
 	void setFecha(Fecha fecha);
 	Fecha getFecha();
 
-	void setUsuario(Usuario usuario);
-	Usuario getUsuario();
+	void setUsuario(char* usuario);
+	const char* getUsuario();
 
 	void setTipo(char tipo);
 	char getTipo();
 
-	//Response<Transaccion> crearNuevaTransaccion(float monto, char tipo, const char* usuario);
+	vector<Detalle> getDetalle();
 
+	Response<Transaccion> crearNuevaTransaccion(
+		float monto, 
+		const char* usuario, 
+		char tipo, 
+		int productoId, 
+		int cantidad
+	);
 };
 

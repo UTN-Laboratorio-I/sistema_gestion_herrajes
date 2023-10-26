@@ -6,6 +6,8 @@ class Venta :
 private:
 	int _id;
 	int _clienteId;
+	char _tipo;
+	Producto _producto;
 
 public:
 	Venta();
@@ -14,7 +16,16 @@ public:
 	int getId();
 	void setClienteId(int clienteId);
 	int getClienteId();
+	void setTipoTransaccion(char tipoTransaccion);
+	char getTipoTransaccion();
 
-	Response<Venta> crearNuevaVenta();
+	void setProducto(Producto producto);
+	Producto getProducto();
+
+	void agregarADetalleVenta(Producto producto, int cantidad);
+
+	void agregarProducto(Producto producto);
+	
+	Response<Venta> crearNuevaVenta(Sistema* sistema);//Le paso el parametro sistema para poder utilizar la UI (Sobre todo el limpiarConsola y headerDinamico)
 };
 

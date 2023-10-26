@@ -38,7 +38,7 @@ void AdminCompra::administrarModuloCompra() {
 		case 1:
 			compras_UI.headerDinamico();
 			//compras_UI.ver_menuCrearCompraProducto();
-			//crearNuevaCompra();
+			prod.cargarProductos();
 			break;
 		case 2:
 			compras_UI.headerDinamico();
@@ -52,57 +52,57 @@ void AdminCompra::administrarModuloCompra() {
 	return;
 }
 
-/*void AdminCompra::crearNuevaCompra() {
-	Archivo <Producto> archivoProd ("Productos.dat");
-	Archivo <Proveedor> archivoProv ("Proveedores.dat");
-	Archivo <Compra> archivoComp ("Compras.dat");
-	Response <Proveedor> responseNuevoProveedor;
-	Response <Proveedor> proveedorExistente;
-	Producto producto;
-	Proveedor proveedor;
-	Compra Compra;
-
-	bool continuar = false;
-	int opc;
-
-	while (!continuar)
-	{
-		cin >> opc;
-		switch(opc)
-		{
-		case 1: proveedorExistente = buscarProveedor();
-			proveedor = proveedorExistente.getData();
-			producto.cargarProductos();
-			break;
-		case 2:
-			 responseNuevoProveedor = proveedor.crearNuevoProveedor();
-			 proveedor = responseNuevoProveedor.getData();
-			break;
-		case 0:
-			continuar = true;
-			continue;
-		default:
-			break;
-		}
-
-
-	}
-
-	archivoProd.grabarRegistroArchivo(producto);
-	archivoProv.grabarRegistroArchivo(proveedor);
-	archivoComp.grabraRegistroArchivo(compra);
-}
-
-Proveedor buscarProveedor(Archivo <Proveedor> arch)
-{
-	Proveedor proveedor;
-
-	int idProv;
-	cout << "INGRESE ID DE PROVEEDOR: ";
-	cin >> idProv;
-
-	//proveedor = arch.buscarProvID(idProv);
-
-	return proveedor;
-}*/
+//void AdminCompra::crearNuevaCompra() {
+//	Archivo <Producto> archivoProd ("Productos.dat");
+//	Archivo <Proveedor> archivoProv ("Proveedores.dat");
+//	Archivo <Compra> archivoComp ("Compras.dat");
+//	Response <Proveedor> responseNuevoProveedor;
+//	Response <Proveedor> proveedorExistente;
+//	Producto producto;
+//	Proveedor proveedor;
+//	Compra Compra;
+//
+//	bool continuar = false;
+//	int opc;
+//
+//	while (!continuar)
+//	{
+//		cin >> opc;
+//		switch(opc)
+//		{
+//		case 1: proveedorExistente = buscarProveedor();
+//			proveedor = proveedorExistente.getData();
+//			producto.cargarProductos();
+//			break;
+//		case 2:
+//			 responseNuevoProveedor = proveedor.crearNuevoProveedor();
+//			 proveedor = responseNuevoProveedor.getData();
+//			break;
+//		case 0:
+//			continuar = true;
+//			continue;
+//		default:
+//			break;
+//		}
+//
+//
+//	}
+//
+//	archivoProd.grabarRegistroArchivo(producto);
+//	archivoProv.grabarRegistroArchivo(proveedor);
+//	archivoComp.grabraRegistroArchivo(compra);
+//}
+//
+//Proveedor buscarProveedor(Archivo <Proveedor> arch)
+//{
+//	Proveedor proveedor;
+//
+//	int idProv;
+//	cout << "INGRESE ID DE PROVEEDOR: ";
+//	cin >> idProv;
+//
+//	//proveedor = arch.buscarProvID(idProv);
+//
+//	return proveedor;
+//}
 

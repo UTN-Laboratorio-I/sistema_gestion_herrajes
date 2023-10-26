@@ -2,6 +2,7 @@
 #pragma warning (disable : 4996)
 #include <functional>
 #include <vector>
+#include <iostream>
 using namespace std;
 template <class T>
 class Archivo
@@ -21,6 +22,9 @@ public:
             return false;
         }
 
+        int id_secuencial = contadorRegistros(objeto) +1; //Armar esto en una fn especifica de "asignarID"
+
+        objeto.setId(id_secuencial);
         bool escribio = fwrite(&objeto, sizeof(objeto), 1, p);
 
         fclose(p); 
@@ -34,7 +38,7 @@ public:
 
         FILE* p = fopen(_nombreArchivo, "rb");
         if (p == nullptr) {
-            std::cerr << "Error al abrir el archivo." << std::endl;
+            cerr << "Error al abrir el archivo." << endl;
             return registros;
         }
 
@@ -54,11 +58,11 @@ public:
     T buscarRegistroByParametro(FuncionValidacion funcionValidacion) {
         FILE* p = fopen(_nombreArchivo, "rb");
         if (p == nullptr) {
-            std::cerr << "Error al abrir el archivo." << std::endl;
+            std::cerr << "Error al abrir el archivo." << endl;
             return T();
         }
 
-        T objeto;
+        T objeto{};
         bool valor_encontrado = false;
         while (fread(&objeto, sizeof(T), 1, p) == 1) {
             if (funcionValidacion(objeto)) {

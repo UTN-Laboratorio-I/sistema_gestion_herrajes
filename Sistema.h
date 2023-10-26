@@ -10,6 +10,7 @@ protected:
 	bool _encendido;
 	int _pantalla;
 	string _modulo;
+	string _subModulo;
 	Usuario _usuario;
 	ErrorDto _error;
 public:
@@ -37,6 +38,10 @@ public:
 
 	void setModulo(std::string modulo);
 	string getModulo();
+
+	void setSubModulo(std::string subModulo);
+	string getSubModulo();
+	void limpiarSubModulo();
 
 	void setError(std::string mensaje);
 	std::string getError();

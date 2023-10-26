@@ -1,7 +1,7 @@
 #include "AdminConfig.h"
 #include "InterfazUI.h"
 
-AdminConfig::AdminConfig(Sistema* sistema) {
+AdminConfig::AdminConfig(Sistema* sistema):_sistema(sistema) {
 	_sistema = sistema;
 	_nombreModulo = "Configuracion";
 }
