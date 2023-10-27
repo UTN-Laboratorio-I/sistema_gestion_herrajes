@@ -2,21 +2,21 @@
 
 void Proveedor::cargarProveedor()
 {
-	int idProveedor;
 
 	cargar();
-	cout << "INGRESE ID PROVEEDOR: ";
-	cin >> idProveedor;
+	
+
 	cout << endl;
 
-	setIdProveedor(idProveedor);
+
 }
 
 void Proveedor::MostarProveedor()
 {
+	cout << "ID PROVEEDOR: " << getIdProveedor() << endl;
 	mostrar();
-	cout << "ID CLIENTE: " << getIdProveedor() << endl;
+
 }
 
 int Proveedor::getIdProveedor(){return _idProveedor;}
-void Proveedor::setIdProveedor(int id){_idProveedor = id;}
+void Proveedor::setId(int id){_idProveedor = id;}

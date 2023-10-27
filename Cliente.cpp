@@ -3,14 +3,11 @@
 
 void Cliente::cargarCliente()
 {
-	int cuit, idCliente;
+	int cuit;
 	char razonSocial[50];
 
 	cargar();
 
-	cout << "INGRESE ID CLIENTE: ";
-	cin >> idCliente;
-	cout << endl;
 	cout << "CUIT: ";
 	cin >> cuit;
 	cout << endl;
@@ -18,7 +15,6 @@ void Cliente::cargarCliente()
 	cin >> razonSocial;
 	cout << endl;
 
-	setIdCliente(idCliente);
 	setCuit(cuit);
 	setRazonSocial(razonSocial);
 
@@ -38,6 +34,6 @@ int Cliente::getIdCliente() {return _idCliente; }
 char* Cliente::getRazonSocial(){return _razonSocial;}
 int Cliente::getCuit(){return _cuit;}
 
-void Cliente::setIdCliente(int id){_idCliente = id;}
+void Cliente::setId(int id){_idCliente = id;}
 void Cliente::setCuit(int cuit){cuit = cuit;}
 void Cliente::setRazonSocial(const char* razonSocial){strcpy_s(_razonSocial, razonSocial);}

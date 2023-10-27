@@ -66,6 +66,7 @@ bool Usuario::getIsAdmin() const {
     return _isAdmin;
 }
 
+
 void Usuario::setDatosUsuario(char* usuario, char* nombre, char* rol, bool isAdmin, char* password) {
     std::strncpy(_usuario, usuario, sizeof(_usuario) - 1);
     std::strncpy(_password, password, sizeof(_password) - 1);

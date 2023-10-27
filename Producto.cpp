@@ -71,7 +71,6 @@ void Producto::cargarProductos() {
 	int cantidad;
 	string nombreProducto, descripcionProducto;
 	Producto producto;
-	Archivo <Producto> archivo("Productos.dat");
 
 	cout << "NOMBRE DE PRODUCTO: ";
 	getline(cin, nombreProducto);
@@ -94,8 +93,6 @@ void Producto::cargarProductos() {
 	//setPrecioVenta(pVenta);
 	setCantidad(cantidad);
 	setEstado(true);
-	//setIdProducto(archivo.contadorRegistros(producto));
-	archivo.grabarRegistroArchivo(producto);
 }
 
 void Producto::mostrarProductos()

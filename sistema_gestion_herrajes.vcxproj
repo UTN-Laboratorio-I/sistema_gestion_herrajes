@@ -134,7 +134,6 @@
     <ClCompile Include="AdminUsuario.cpp" />
     <ClCompile Include="AdminVenta.cpp" />
     <ClCompile Include="Caja.cpp" />
-    <ClCompile Include="Categoria.cpp" />
     <ClCompile Include="Cliente.cpp" />
     <ClCompile Include="Compra.cpp" />
     <ClCompile Include="Detalle.cpp" />
@@ -172,7 +171,6 @@
     <ClInclude Include="Archivo.h" />
     <ClInclude Include="Backup.h" />
     <ClInclude Include="Caja.h" />
-    <ClInclude Include="Categoria.h" />
     <ClInclude Include="Cliente.h" />
     <ClInclude Include="Compra.h" />
     <ClInclude Include="Detalle.h" />

@@ -1,4 +1,5 @@
 #include "Persona.h"
+#include "Archivo.h"
 
 Persona::Persona()
 {
@@ -60,31 +61,21 @@ Fecha Persona::getFechaAlta(){return _fechaAlta;}
 
 void Persona::cargar()
 {
-	int dni, idPersona;
+	int dni;
 	char nombre[40], apellido[40], direccion[100], email[50];
 	Fecha fechaAlta;
 	
-	//Dato ID autoincremental asignado al crear nuevo registro:
-	//cout << "INGRESE ID: ";
-	//cin >> idPersona;
-	cout << endl;
 	cout << "DNI: ";
 	cin >> dni;
-	cout << endl;
 	cout << "NOMBRE: ";
 	cin >> nombre;
-	cout << endl;
 	cout << "APELLIDO: ";
 	cin >> apellido;
-	cout << endl;
 	cout << "EMAIL: ";
 	cin >> email;
-	cout << endl;
 	cout << "DOMICILIO: ";
 	cin >> direccion;
-	cout << endl;
 	setFechaAlta();
-	cout << endl;
 
 	setDni(dni);
 	setNombre(nombre);
@@ -95,7 +86,7 @@ void Persona::cargar()
 
 void Persona::mostrar()
 {
-	cout << "ID PERSONA: " << getId() << endl;
+	//cout << "ID PERSONA: " << getId() << endl;
 	cout << "DNI: " << getDNI() << endl;
 	cout << "NOMBRE: " << getNombre() << endl;
 	cout << "APELLIDO: " << getApellido() << endl;

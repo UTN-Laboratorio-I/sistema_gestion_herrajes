@@ -114,15 +114,6 @@
     <ClCompile Include="ErrorDto.cpp">
       <Filter>Archivos de origen\Dto</Filter>
     </ClCompile>
-    <ClCompile Include="Detalle.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="DetalleDto.cpp">
-      <Filter>Archivos de origen\Dto</Filter>
-    </ClCompile>
-    <ClCompile Include="TransaccionDto.cpp">
-      <Filter>Archivos de origen\Dto</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Categoria.h">
@@ -210,15 +201,6 @@
       <Filter>Archivos de encabezado\Dto</Filter>
     </ClInclude>
     <ClInclude Include="ResponseDto.h">
-      <Filter>Archivos de encabezado\Dto</Filter>
-    </ClInclude>
-    <ClInclude Include="Detalle.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="TransaccionDto.h">
-      <Filter>Archivos de encabezado\Dto</Filter>
-    </ClInclude>
-    <ClInclude Include="DetalleDto.h">
       <Filter>Archivos de encabezado\Dto</Filter>
     </ClInclude>
   </ItemGroup>

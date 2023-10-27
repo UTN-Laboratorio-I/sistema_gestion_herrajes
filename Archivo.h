@@ -22,9 +22,8 @@ public:
             return false;
         }
 
-        int id_secuencial = contadorRegistros(objeto) +1; //Armar esto en una fn especifica de "asignarID"
+        setIdIncremental(objeto, p);
 
-        objeto.setId(id_secuencial);
         bool escribio = fwrite(&objeto, sizeof(objeto), 1, p);
 
         fclose(p); 
@@ -83,23 +82,17 @@ public:
     }
 
     // Esta es una funcion que cuenta la cantidad de registros.
-    int contadorRegistros(T objeto)
+    bool setIdIncremental(T &objeto, FILE* p)
     {
-
-        FILE* p = fopen(_nombreArchivo, "rb");
-
-        if (p == NULL)
-        {
-            return 0;
-        }
 
         fseek(p, 0, SEEK_END);
         int tam = ftell(p);
 
         int cantidadReg = tam / sizeof(T);
 	    
+        objeto.setId(cantidadReg);
 
-        return cantidadReg;
+        return true;
 
     }
 private:

@@ -18,7 +18,7 @@ public:
 
 	int getIdProveedor();
 
-	void setIdProveedor(int id);
+	void setId(int id);
 
 private:
 
