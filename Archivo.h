@@ -22,9 +22,8 @@ public:
             return false;
         }
 
-        int id_secuencial = contadorRegistros(objeto) +1; //Armar esto en una fn especifica de "asignarID"
+        setIdIncremental(objeto, p);
 
-        objeto.setId(id_secuencial);
         bool escribio = fwrite(&objeto, sizeof(objeto), 1, p);
 
         fclose(p); 
@@ -83,25 +82,79 @@ public:
     }
 
     // Esta es una funcion que cuenta la cantidad de registros.
-    int contadorRegistros(T objeto)
+    bool setIdIncremental(T &objeto, FILE* p)
     {
-
-        FILE* p = fopen(_nombreArchivo, "rb");
-
-        if (p == NULL)
-        {
-            return 0;
-        }
 
         fseek(p, 0, SEEK_END);
         int tam = ftell(p);
 
         int cantidadReg = tam / sizeof(T);
 	    
+        objeto.setId(cantidadReg);
 
-        return cantidadReg;
+        return true;
 
     }
+
+    bool modificarRegistro(T &objeto, int posicion)
+    {
+        FILE* p = fopen(_nombreArchivo, "rb+");
+
+        if (p == NULL)
+        {
+            return false;
+        }
+
+        fseek(p, sizeof(T) * posicion, 0);
+        objeto.setId(posicion);
+        fwrite(&objeto, sizeof(T), 1, p);
+
+        fclose(p);
+
+        return true;
+
+    }
+
+    int buscarPosRegistro(T objeto, int valorBuscado)
+    {
+        FILE* p = fopen(_nombreArchivo, "rb");
+
+        if (p == NULL)
+        {
+            return -1;
+        }
+
+        int contador = 0;
+        bool encontro = false;
+        int posicion;
+
+        while (fread(&objeto, sizeof(T), 1, p) == 1)
+        {
+            if (objeto.getId() == valorBuscado)
+            {
+                posicion = contador;
+                encontro = true;
+            }
+            contador++;
+        }
+
+        fclose(p);
+
+        if (encontro)
+        {
+           return posicion;
+        }
+        else
+        {
+            return -1;
+        }
+    }
+
+
+
+
+
+
 private:
 
 };

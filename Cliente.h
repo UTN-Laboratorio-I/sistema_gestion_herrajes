@@ -22,7 +22,7 @@ public:
 	char* getRazonSocial();
 	int getCuit();
 
-	void setIdCliente(int id);
+	void setId(int id);
 	void setCuit(int cuit);
 	void setRazonSocial(const char* razonSocial);
 
