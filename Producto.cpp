@@ -18,7 +18,7 @@ Producto::Producto(){
 
 #pragma region GETTERS
 
-int Producto::getIdProducto() {
+int Producto::getId() {
 	return _id;
 }
 float Producto::getPrecioCosto() {
@@ -98,7 +98,7 @@ void Producto::cargarProductos() {
 void Producto::mostrarProductos()
 {
 	cout << "ID PRODUCTO: ";
-	cout << getIdProducto() << endl;
+	cout << getId() << endl;
 	cout << "NOMBRE DE PRODUCTO: ";
 	cout << getNombreProducto() << endl;
 	cout << "DESCRIPCION PRODUCTO: ";
@@ -116,7 +116,7 @@ Producto Producto::listarYSeleccionarProductoVenta() {
 	vector<Producto> listaProductos = archivoProducto.listarRegistroArchivo();
 
 	for (Producto prod : listaProductos) {
-		cout << prod.getIdProducto() << " - " << prod.getNombreProducto() << endl;
+		cout << prod.getId() << " - " << prod.getNombreProducto() << endl;
 	}
 
 	int idProducto;
@@ -124,7 +124,7 @@ Producto Producto::listarYSeleccionarProductoVenta() {
 	cin >> idProducto;
 
 	for (Producto prod : listaProductos) {
-		if (prod.getIdProducto() == idProducto) {
+		if (prod.getId() == idProducto) {
 			return prod;
 		}
 	}

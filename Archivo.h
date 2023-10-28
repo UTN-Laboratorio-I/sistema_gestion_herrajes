@@ -95,6 +95,66 @@ public:
         return true;
 
     }
+
+    bool modificarRegistro(T &objeto, int posicion)
+    {
+        FILE* p = fopen(_nombreArchivo, "rb+");
+
+        if (p == NULL)
+        {
+            return false;
+        }
+
+        fseek(p, sizeof(T) * posicion, 0);
+        objeto.setId(posicion);
+        fwrite(&objeto, sizeof(T), 1, p);
+
+        fclose(p);
+
+        return true;
+
+    }
+
+    int buscarPosRegistro(T objeto, int valorBuscado)
+    {
+        FILE* p = fopen(_nombreArchivo, "rb");
+
+        if (p == NULL)
+        {
+            return -1;
+        }
+
+        int contador = 0;
+        bool encontro = false;
+        int posicion;
+
+        while (fread(&objeto, sizeof(T), 1, p) == 1)
+        {
+            if (objeto.getId() == valorBuscado)
+            {
+                posicion = contador;
+                encontro = true;
+            }
+            contador++;
+        }
+
+        fclose(p);
+
+        if (encontro)
+        {
+           return posicion;
+        }
+        else
+        {
+            return -1;
+        }
+    }
+
+
+
+
+
+
 private:
 
 };

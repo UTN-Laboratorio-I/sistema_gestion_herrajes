@@ -10,7 +10,7 @@ class Producto
 public:
 
     Producto();
-    int getIdProducto();
+    int getId();
     float getPrecioCosto();
     float getPrecioVenta();
     int getCantidad();
