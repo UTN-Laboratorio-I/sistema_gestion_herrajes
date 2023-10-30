@@ -3,6 +3,7 @@
 #include <functional>
 #include <vector>
 #include <iostream>
+#include "ResponseDto.h"
 using namespace std;
 template <class T>
 class Archivo
@@ -14,12 +15,14 @@ public:
     Archivo(const char* nombreArchivo){ _nombreArchivo = nombreArchivo; }
 
     //Esta función permite guardar un registro en cualquier archivo:
-    bool grabarRegistroArchivo(T objeto) {
+    Response<T> grabarRegistroArchivo(T objeto) {
+        Response<T> response;
         FILE* p;
         p = fopen(_nombreArchivo, "ab");
 
         if (p == NULL) {
-            return false;
+            response.setFailure("No se encontro archivo");
+            return response;
         }
 
         setIdIncremental(objeto, p);
@@ -28,7 +31,13 @@ public:
 
         fclose(p); 
 
-        return escribio;
+        if (escribio) {
+            response.setSuccess("Guardado con exito", objeto);
+        } 
+        else{
+            response.setFailure("No se pudo guardar el registro.");
+        }
+        return response;
     }
 
     //Esta función devuelve un listado de todos los registros de un determinado archivo.
@@ -89,8 +98,9 @@ public:
         int tam = ftell(p);
 
         int cantidadReg = tam / sizeof(T);
-	    
-        objeto.setId(cantidadReg);
+        int idSecuencial = cantidadReg + 1;
+
+        objeto.setId(idSecuencial);
 
         return true;
 

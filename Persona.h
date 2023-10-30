@@ -13,7 +13,6 @@ public:
 	Persona();
 
 	void setDni(int d);
-	void setId(int id);
 	void setNombre(const char* nombre);
 	void setApellido(const char* apellido);
 	void setDomicilio(const char* domicilio);
@@ -23,7 +22,6 @@ public:
 	void setEstado(bool estado);
 
 	int getDNI();
-	int getId();
 	char* getNombre();
 	char* getApellido();
 	char* getDomicilio();
@@ -38,7 +36,7 @@ public:
 	void mostrarContenido();
 
 protected:
-	int _dni, _id;
+	int _dni;
 	char _nombre[40], _apellido[40];
 	char _direccion[100], _email[50];
 	Fecha _fechaNacimiento, _fechaAlta;

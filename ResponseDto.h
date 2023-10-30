@@ -18,12 +18,12 @@ public:
 
 	void setSuccess(string message, T data) {
 		_success = true;
-		message = message;
-		data = data;
+		_message = message;
+		_data = data;
 	}
 	void setFailure(string message) {
 		_success = false;
-		message = message;
+		_message = message;
 	}
 	bool getSuccess() {
 		return this->_success;

@@ -1,5 +1,6 @@
 #pragma once
 #include "Persona.h"
+#include "ResponseDto.h"
 #include <iostream>
 #include <cstdio>
 
@@ -10,7 +11,7 @@ class Cliente : public Persona
 
 public:
 
-	void cargarCliente();
+	Response<Cliente> cargarCliente();
 	void MostarCliente();
 
 	/// <getters especiales>
@@ -20,14 +21,17 @@ public:
 
 	int getIdCliente();
 	char* getRazonSocial();
-	int getCuit();
+	long long getCuit();
 
 	void setId(int id);
-	void setCuit(int cuit);
+	void setCuit(long long cuit);
 	void setRazonSocial(const char* razonSocial);
+
+	Cliente listarYSeleccionarClienteExistente();
 
 private:
 
-	int _idCliente, _cuit, _PersonaId;
+	int _idCliente;
 	char _razonSocial[50];
+	long long _cuit;
 };

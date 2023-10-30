@@ -44,6 +44,8 @@ void AdminVenta::administrarModuloVenta() {
 //Registra una nueva venta:
 void AdminVenta::registrarNuevaVenta() {
 	InterfazUI ventas_UI(_sistema);
+	Cliente cliente;
+	Response<Cliente> responseCliente;
 	Venta venta;
 	Response<Venta> responseVenta;
 	//Cliente cliente;
@@ -56,20 +58,32 @@ void AdminVenta::registrarNuevaVenta() {
 		switch (opc) {
 		case 1:
 			_sistema->setSubModulo("Seleccion cliente existente");
+			cliente = cliente.listarYSeleccionarClienteExistente();
+			if (cliente.getIdCliente() == 0) {
+				_sistema->setError("No hay clientes creados");
+				ventas_UI.headerDinamico();
+				system("pause");
+				continuar = true;
+			}
+			else {
+				venta.setClienteId(cliente.getIdCliente());
+			}
 
-			//Cliente existente;
 			break;
 		case 2:
 			_sistema->setSubModulo("Creacion nuevo cliente");
+			responseCliente = cliente.cargarCliente();
+			cliente= responseCliente.getData();
 
-			//Nuevo cliente
-			//Response<Cliente> responseNuevoCliente = cliente.crearNuevoCliente();
-			//cliente = responseNuevoCliente.getData();
+			
+			venta.setClienteId(cliente.getIdCliente());
+
 			break;
 		case 0: //SALIR DEL REGISTRO DE NUEVA VENTA AL MENU VENTA:
 			continuar = true;
 			break;
 		}
+		//Guardamos el ID del cliente en la venta:
 
 		if (!continuar) {
 			_sistema->setSubModulo("Nueva Venta");
