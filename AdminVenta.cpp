@@ -31,7 +31,7 @@ void AdminVenta::administrarModuloVenta() {
 			registrarNuevaVenta();
 			break;
 		case 2:
-			//_sistema->setModuloPantalla("ventas", 2);
+			//listarVentas();
 			break;
 		case 0: //SALIR DEL MÓDULO VENTA:
 			moduloVentaSalir();
@@ -90,8 +90,11 @@ void AdminVenta::registrarNuevaVenta() {
 			venta.crearNuevaVenta(_sistema); //Le paso el parametro sistema para
 			//poder utilizar la UI (Sobre todo el limpiarConsola y headerDinamico)
 
+			
 
 			if (responseVenta.getSuccess()) {
+				//Hacemos el descuento de stock de los productos vendidos
+				//y sumamos el monto total de la venta al cliente a la caja.
 			}
 			else {
 				_sistema->setError(responseVenta.getMessage());

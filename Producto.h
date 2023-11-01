@@ -39,6 +39,7 @@ private:
     int _cantidad;
     char _nombreProducto[30], _descripcionProducto[45];
     bool _estado;
+    Stock _stock;
     //Categoria::_idCategoria;
 };
 

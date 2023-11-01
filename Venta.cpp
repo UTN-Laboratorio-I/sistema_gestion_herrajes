@@ -3,7 +3,7 @@
 #include "InterfazUI.h"
 #include "Cliente.h"
 #include "Caja.h"
-#include "ResponseDto.h"
+#include "DetalleDto.h"
 
 using namespace std;
 Venta::Venta() {
@@ -24,13 +24,6 @@ int Venta::getClienteId() {
 	return _clienteId;
 }
 
-void Venta::setProducto(Producto producto) {
-	_producto = producto;
-}
-Producto Venta::getProducto() {
-	return _producto;
-}
-
 void Venta::setTipoTransaccion(char tipoTransaccion) { _tipoTransaccion = tipoTransaccion; }
 char Venta::getTipoTransaccion() { return _tipoTransaccion; }
 
@@ -47,12 +40,15 @@ void Venta::agregarProducto(Producto producto) {
 	this->agregarADetalleVenta(producto, cant);
 }
 
-Response<Venta> Venta::crearNuevaVenta(Sistema* sistema) {
+Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 	InterfazUI ventas_UI(sistema); //Utilizo ésta instancia para utilizar limpiarConsola y
 	//headerDinamico, y así evitar que la consola se ensucie entre pantalla y pantalla.
-	Archivo<Venta> archivoVenta("ventas.dat");
-	Response<Venta> response;
+	Archivo<TransaccionDto> archivoTransaccion("transacciones.dat");
+	Archivo<DetalleDto> archivoDetalle("detalles.dat");
+	Response<TransaccionDto> response;
 	Venta venta;
+	Fecha fecha;
+
 	bool finalizarVenta = false;
 
 
@@ -74,9 +70,57 @@ Response<Venta> Venta::crearNuevaVenta(Sistema* sistema) {
 		cin >> opc;
 		if (opc == 's' || opc == 'S') {
 			finalizarVenta = !finalizarVenta;
-			response.setSuccess("Venta creada correctamente", venta);
+
 		}
 		
+	}
+	//Obtenemos el total de la venta y lo guardamos en la transacción:
+	float acumuladorTotal = 0;
+	int cantidadProductos = 0;
+	for(Detalle detalle : venta._detalle){
+		Producto prod = detalle.getProducto();
+		acumuladorTotal += detalle.getCantidad() * prod.getPrecioCosto(); //Modificar por precio venta!!!
+		cantidadProductos += detalle.getCantidad();
+	}
+	venta.setMonto(acumuladorTotal);
+
+	//Guardamos el usuario que registró la venta:
+	string user = sistema->getUsuarioLogged();
+	venta.setUsuario(user.c_str());
+
+	//Guardamos la fecha de la venta:
+	venta.setFecha(fecha.now());
+
+	//Guardamos el tamaño total de la venta en cuanto a cantidad:
+	venta.setCantidad(cantidadProductos);
+
+	//Seteamos tipo de transaccion (Venta)
+	venta.setTipoTransaccion(_tipo);
+
+	//Guardamos la venta en el archivo:
+	TransaccionDto transaccion(_monto, _fecha, _tipo, _cantidadProductos, _usuario);
+	Response<TransaccionDto> registro = archivoTransaccion.grabarRegistroArchivo(transaccion);
+
+	bool registroCorrecto = true;
+	for (Detalle detalle : venta._detalle) {
+		//Obtenemos el id del registro y cada detalle de la lista:
+		int id = registro.getData().getId();
+		DetalleDto detalleDto(detalle, id);
+
+		Response<DetalleDto> registroDetalle = archivoDetalle.grabarRegistroArchivo(detalleDto);
+
+		//Si algún registro falla, devolvemos false:
+		if (registroDetalle.getSuccess() == false) {
+			registroCorrecto = false;
+		}
+	}
+
+	//Si se registraron correctamente tanto detalles como transaccion, se avanza OK:
+	if (registro.getSuccess() && registroCorrecto) {
+		response.setSuccess("Se registro la venta correctamente", registro.getData());
+	}
+	else {
+		response.setFailure("No se pudo registrar la venta");
 	}
 	return response;
 }

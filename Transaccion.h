@@ -13,7 +13,7 @@ protected:
 	Fecha _fecha;
 	char _usuario[30];
 	char _tipoTransaccion;
-	int _cantidad; //Cantidad total de productos
+	int _cantidadProductos;
 	vector<Detalle> _detalle;
 
 public:
@@ -30,17 +30,17 @@ public:
 	void setMonto(float monto);
 	float getMonto();
 
-	void setProductoId(int productoId);
-	int getProductoId();
-
 	void setFecha(Fecha fecha);
 	Fecha getFecha();
 
-	void setUsuario(char* usuario);
+	void setUsuario(const char* usuario);
 	const char* getUsuario();
 
 	void setTipo(char tipo);
 	char getTipo();
+
+	void setCantidad(int cantidad);
+	int getCantidad();
 
 	vector<Detalle> getDetalle();
 
