@@ -22,5 +22,7 @@ public:
 
 	void pantallaBuscarProducto();
 
+	void crearNuevaCompra();
+
 };
 

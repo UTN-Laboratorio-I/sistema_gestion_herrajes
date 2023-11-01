@@ -1,24 +1,26 @@
 #pragma once
 #include "Fecha.h"
+
 class TransaccionDto
 {
 private:
 	int _id;
-	int _monto;
+	float _monto;
 	Fecha _fecha;
-	char* _usuario;
+	char _usuario[30];
 	char _tipoTransaccion;
+	int _cantidadTotal;
 public:
 	TransaccionDto();
-	TransaccionDto(int id, int monto, Fecha fecha, char* usuario, char tipoTransaccion);
-	~TransaccionDto();
+	TransaccionDto(float monto, Fecha fecha, char tipo, int cantidad,  char* usuario);
+
 	int getId();
-	int getMonto();
+	float getMonto();
 	Fecha getFecha();
 	char* getUsuario();
 	char getTipoTransaccion();
 	void setId(int id);
-	void setMonto(int monto);
+	void setMonto(float monto);
 	void setFecha(Fecha fecha);
 	void setUsuario(char* usuario);
 	void setTipoTransaccion(char tipoTransaccion);

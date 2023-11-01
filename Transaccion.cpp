@@ -13,7 +13,7 @@ Transaccion::Transaccion(
 	_tipoTransaccion = tipo;
 	std::strncpy(_usuario, usuario, sizeof(_usuario) - 1);
 	_fecha = fecha.now();
-	_cantidad = cantidad;
+	_cantidadProductos = cantidad;
 };
 
 
@@ -38,7 +38,7 @@ Fecha Transaccion::getFecha() {
 	return _fecha;
 }
 
-void Transaccion::setUsuario(char* usuario) {
+void Transaccion::setUsuario(const char* usuario) {
 	std::strncpy(_usuario, usuario, sizeof(_usuario) - 1);
 }
 const char* Transaccion::getUsuario() {
@@ -55,6 +55,14 @@ char Transaccion::getTipo() {
 
 vector<Detalle> Transaccion::getDetalle() {
 	return _detalle;
+}
+
+void Transaccion::setCantidad(int cantidad) {
+	_cantidadProductos = cantidad;
+}
+
+int Transaccion::getCantidad() {
+	return _cantidadProductos;
 }
 
 Response<Transaccion> Transaccion::crearNuevaTransaccion(

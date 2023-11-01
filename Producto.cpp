@@ -73,12 +73,12 @@ void Producto::cargarProductos() {
 	Producto producto;
 
 	cout << "NOMBRE DE PRODUCTO: ";
-	getline(cin, nombreProducto);
 	cin.ignore();
+	getline(cin, nombreProducto);
 
 	cout << "DESCRIPCION PRODUCTO: ";
-	getline(cin, descripcionProducto);
 	cin.ignore();
+	getline(cin, descripcionProducto);
 
 	cout << "PRECIO DE COSTO:$ ";
 	cin >> pCosto;

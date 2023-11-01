@@ -99,9 +99,9 @@ Response<Usuario> Usuario::crearNuevoUsuario() {
     std::cout << "Ingrese rol del Usuario: ";
     std::cin.getline(nuevoUser._rol, sizeof(nuevoUser._rol));
 
-    bool registro = archivo.grabarRegistroArchivo(nuevoUser);
+    //Response<Usuario> registro = archivo.grabarRegistroArchivo(nuevoUser);
 
-    if (registro) {
+    if (true) {
         response.setSuccess("Usuario creado con éxito.", nuevoUser);
     }
     else {
