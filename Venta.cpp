@@ -48,6 +48,7 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 	Response<TransaccionDto> response;
 	Venta venta;
 	Fecha fecha;
+	Stock stock;
 
 	bool finalizarVenta = false;
 
@@ -108,6 +109,10 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 		DetalleDto detalleDto(detalle, id);
 
 		Response<DetalleDto> registroDetalle = archivoDetalle.grabarRegistroArchivo(detalleDto);
+
+		//Modificamos el stock del producto:
+		stock.gestionarStock(detalle.getProducto().getId(), detalle.getCantidad(), _tipo);
+
 
 		//Si algún registro falla, devolvemos false:
 		if (registroDetalle.getSuccess() == false) {
