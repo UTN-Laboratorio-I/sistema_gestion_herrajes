@@ -39,6 +39,19 @@ void InterfazUI::headerDinamico()
 	}
 	cout << "---------------------------------" << endl << endl;
 }
+
+void InterfazUI::mostrarMensajeDinamico(string mensaje)
+{
+	Helper helper;
+	helper.limpiarConsola();
+	headerDinamico();
+
+	cout << endl << endl;
+
+	helper.delayMensaje(mensaje,2);
+
+	helper.limpiarConsola();
+}
 /// <summary>
 /// Controla que la opción seleccionada por el menú sea válida.
 /// </summary>
