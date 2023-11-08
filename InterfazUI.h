@@ -11,6 +11,7 @@ public:
 	InterfazUI(Sistema* sistema);
 
 	void headerDinamico();
+	void mostrarMensajeDinamico(string mensaje);
 	bool opcionesValidasMenu(int inicio, int fin, int seleccion, bool imprimir = false, bool admiteAtras = true);
 	bool mensajeCancelarEjecucion(string ejecucion);
 
