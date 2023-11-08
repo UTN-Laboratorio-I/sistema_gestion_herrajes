@@ -20,8 +20,9 @@ public:
 	~StockDto();
 	int getIdProducto();
 	int getCantidadTotal();
-	vector<DetalleStockDto> getDetalleStock();
+	//vector<DetalleStockDto> getDetalleStock();
 	void setIdProducto(int idProducto);
 	void setCantidadTotal(int cantidadTotal);
-	void setDetalleStock(vector<DetalleStockDto> detalleStock);
+	//void setDetalleStock(vector<DetalleStockDto> detalleStock);
+
 };
