@@ -1,6 +1,7 @@
 #pragma once
 #include "ResponseDto.h"
 #include "DetalleStockDto.h"
+#include "StockDto.h"
 class Stock
 {
 private:

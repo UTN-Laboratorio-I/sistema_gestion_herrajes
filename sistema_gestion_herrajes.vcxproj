@@ -155,9 +155,6 @@
     </ClCompile>
     <ClCompile Include="Stock.cpp" />
     <ClCompile Include="StockDto.cpp" />
-    <ClCompile Include="test.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Transaccion.cpp" />
     <ClCompile Include="TransaccionDto.cpp" />
     <ClCompile Include="Usuario.cpp" />

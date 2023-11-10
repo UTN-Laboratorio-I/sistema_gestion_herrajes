@@ -25,17 +25,18 @@ Response<StockDto> Stock::sumarStock(int cantidad, int idProducto) {
 	Archivo<StockDto> archivoStock("stock.dat");
 	StockDto stock(idProducto, cantidad);
 
-	int existente = archivoStock.buscarPosRegistro(stock, idProducto);
+	int existente = 0;
+		//archivoStock.buscarPosRegistro(stock, idProducto);
 
 	if (existente != -1) {
 		stock.setCantidadTotal(stock.getCantidadTotal() + cantidad);
+		//bool modifico = archivoStock.modificarRegistro(stock, existente);
+
+	}
+	else {
+		//response = archivoStock.grabarRegistroArchivo(stock);
 	}
 
-	response = archivoStock.grabarOModificarRegistro(stock, idProducto);
-
-	if (!response.getSuccess()) {
-		response.setFailure("No se ha podido registrar el cambio de stock");
-	}
 	return response;
 }
 
@@ -44,14 +45,19 @@ Response<StockDto> Stock::restarStock(int cantidad, int idProducto) {
 	Archivo<StockDto> archivoStock("stock.dat");
 	StockDto stock(idProducto, cantidad);
 
-	int existente = archivoStock.buscarPosRegistro(stock, idProducto);
+	int existente = 0;
+	//archivoStock.buscarPosRegistro(stock, idProducto);
 
 	//En caso de que el producto ya esté registrado, sobreescribimos la cantidad:
 	if (existente != -1) {
 		stock.setCantidadTotal(stock.getCantidadTotal() - cantidad);
+		//bool modifico = archivoStock.modificarRegistro(stock, existente);
+
 	}
-	
-	response = archivoStock.grabarOModificarRegistro(stock, idProducto);
+	else {
+		//response = archivoStock.grabarRegistroArchivo(stock);
+		response.setSuccess("ok", stock);
+	}
 
 	if (!response.getSuccess()) {
 		response.setFailure("No se ha podido registrar el cambio de stock");
