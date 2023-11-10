@@ -92,16 +92,13 @@ void AdminVenta::registrarNuevaVenta() {
 			responseVenta = venta.crearNuevaVenta(_sistema); //Le paso el parametro sistema para
 			//poder utilizar la UI (Sobre todo el limpiarConsola y headerDinamico)
 
-
 			if (responseVenta.getSuccess()) {
-				//Hacemos el descuento de stock de los productos vendidos
-				//y sumamos el monto total de la venta al cliente a la caja.
+
 			}
 			else {
 				_sistema->setError(responseVenta.getMessage());
 			}	
 		}
-
 	}
 	_sistema->limpiarError();
 	_sistema->limpiarSubModulo();

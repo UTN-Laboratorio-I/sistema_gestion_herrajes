@@ -2,7 +2,9 @@
 #include "Detalle.h"
 #include "Producto.h"
 
-DetalleDto::DetalleDto() {}
+DetalleDto::DetalleDto() {
+
+}
 
 DetalleDto::DetalleDto(Detalle detalle, int idTransaccion)
 {
@@ -13,10 +15,6 @@ DetalleDto::DetalleDto(Detalle detalle, int idTransaccion)
 	_idProducto = producto.getId();
 	_precioUnitario = producto.getPrecioCosto();
 	_cantidad = detalle.getCantidad();
-}
-
-DetalleDto::~DetalleDto()
-{
 }
 
 int DetalleDto::getId()

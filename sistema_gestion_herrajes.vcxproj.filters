@@ -84,9 +84,6 @@
     <ClCompile Include="Stock.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="test.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="Caja.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
