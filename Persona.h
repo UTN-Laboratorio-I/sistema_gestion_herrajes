@@ -15,8 +15,8 @@ public:
 	void setDni(int d);
 	void setNombre(const char* nombre);
 	void setApellido(const char* apellido);
-	void setDomicilio(const char* domicilio);
-	void setEmail(const char* email);
+	void setDomicilio(string domicilio);
+	void setEmail(string email);
 	void setFechaAlta();
 	void setFechaNacimiento(Fecha fechaNacimiento);
 	void setEstado(bool estado);

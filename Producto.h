@@ -3,6 +3,8 @@
 #include <string>
 #include <cstring>
 #include "Archivo.h"
+#include "Stock.h"
+#include "ResponseDto.h"
 
 
 class Producto
@@ -26,7 +28,7 @@ public:
     void setDescripcionProducto(std::string descripcion);
     void setEstado(bool estado);
 
-    void cargarProductos();
+    Response <Producto> cargarProductos();
     void mostrarProductos();
 
     Producto listarYSeleccionarProductoVenta();

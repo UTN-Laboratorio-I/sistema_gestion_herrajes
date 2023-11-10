@@ -169,11 +169,31 @@ void InterfazUI::ver_MenuCrearCompraProducto() {
 	
 	while (!verificado) {
 		headerDinamico();
-		cout << "Mostrar opciones para comprar productos" << endl;
+		cout << "1) Comprar producto" << endl;
 		cin >> opc;
+		helper.limpiarConsola();
 		verificado = opcionesValidasMenu(1, 1, opc);
 	}
 	_sistema->setModuloPantalla("Compras", opc);
+}
+
+void InterfazUI::ver_SubMenuCrearCompraProducto() {
+	Helper helper;
+	helper.limpiarConsola();
+	int opc;
+	bool verificado = false;
+
+	while (!verificado) {
+		headerDinamico();
+		cout << "1) Comprar a un proveedor existente" << endl;
+		cout << "2) Comprar a un nuevo proveedor" << endl;
+		cout << "0) <-Atras" << endl;
+		cin >> opc;
+		helper.limpiarConsola();
+		verificado = opcionesValidasMenu(0, 2, opc);
+	}
+	_sistema->setModuloPantalla("SubModulo Compras", opc);
+
 }
 
 #pragma endregion UI_Compras
@@ -213,6 +233,7 @@ int InterfazUI::ver_VentasClienteExistente() {
 	}
 	return opc;
 }
+
 
 #pragma endregion UI_Ventas
 

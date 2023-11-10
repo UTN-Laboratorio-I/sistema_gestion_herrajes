@@ -21,6 +21,19 @@ bool AdminCompra::moduloCompraActivo() {
 	}
 }
 
+bool AdminCompra::subModuloCompraActivo() {
+	if (_sistema->getModulo() == _nombreModulo) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+void AdminCompra::subModuloCompraSalir() {
+	_sistema->setModuloPantalla("Compras", 0);
+}
+
 //Sale del modulo compra hacia el principal:
 void AdminCompra::moduloCompraSalir() {
 	_sistema->setModuloPantalla("Principal", 888);
@@ -38,12 +51,11 @@ void AdminCompra::administrarModuloCompra() {
 		switch (opc) {
 		case 1:
 			compras_UI.headerDinamico();
-			//compras_UI.ver_menuCrearCompraProducto();
 			crearNuevaCompra();
 			break;
 		case 2:
 			compras_UI.headerDinamico();
-			//mostrarProductos();
+			mostrarCompras();
 			break;
 		case 0: //SALIR DEL MÓDULO COMPRA:
 			moduloCompraSalir();
@@ -53,59 +65,59 @@ void AdminCompra::administrarModuloCompra() {
 	return;
 }
 
+
+
 void AdminCompra::crearNuevaCompra() {
 	Archivo <Producto> archivoProd ("productos.dat");
-	Archivo <Proveedor> archivoProv ("proveedores.dat");
 	Archivo <Compra> archivoComp ("compras.dat");
-	Response <Proveedor> responseNuevoProveedor;
-	Response <Proveedor> proveedorExistente;
 	Producto producto;
+	Response <Producto> responseProducto;
+	Response <Proveedor> responseProveedor;
 	Proveedor proveedor;
 	Compra Compra;
+	Helper header;
+	InterfazUI subCompras_UI(_sistema);
 
-	bool continuar = false;
-	int opc;
 
-	while (!continuar)
-	{
-		cin >> opc;
+	bool continuar = true;
+
+	while (continuar)
+	{	
+		subCompras_UI.headerDinamico();
+		subCompras_UI.ver_SubMenuCrearCompraProducto();
+		int opc = _sistema->getPantalla();
 		switch(opc)
 		{
-		case 1: 
-			//proveedorExistente = buscarProveedor();
+		case 1:
+			subCompras_UI.headerDinamico();
+			responseProveedor = proveedor.buscarProveedor();
+			if (!responseProveedor.getSuccess()){break;}
+			header.limpiarConsola();
+			subCompras_UI.headerDinamico();
+			proveedor.ver_ProveedorEncontrado(responseProveedor);
 			//proveedor = proveedorExistente.getData();
-			producto.cargarProductos();
+			responseProducto = producto.cargarProductos();
 			break;
 		case 2:
-			 //responseNuevoProveedor = proveedor.crearNuevoProveedor();
+			subCompras_UI.headerDinamico();
+			responseProveedor = proveedor.cargarProveedor();
+			//proveedor = responseNuevoProveedor.getData();
+			//responseNuevoProveedor.setData(proveedor);
+			producto.cargarProductos();
 			 //proveedor = responseNuevoProveedor.getData();
 			break;
 		case 0:
-			continuar = true;
-			continue;
-		default:
+			subModuloCompraSalir();
+			continuar = false;
+			break;
+		default: 
 			break;
 		}
-			continuar = true;
-
-
 	}
 
-	archivoProd.grabarRegistroArchivo(producto);
-	//archivoProv.grabarRegistroArchivo(proveedor);
-	//archivoComp.grabraRegistroArchivo(compra);
 }
 
-Proveedor buscarProveedor(Archivo <Proveedor> arch)
-{
-	Proveedor proveedor;
 
-	int idProv;
-	cout << "INGRESE ID DE PROVEEDOR: ";
-	cin >> idProv;
+void AdminCompra :: mostrarCompras() {
 
-	//proveedor = arch.buscarProvID(idProv);
-
-	return proveedor;
 }
-

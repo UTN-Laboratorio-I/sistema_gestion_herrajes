@@ -22,6 +22,7 @@ public:
 
 	void ver_MenuCompras();
 	void ver_MenuCrearCompraProducto();
+	void ver_SubMenuCrearCompraProducto();
 
 	void ver_MenuABM();
 	void ver_SubMenuABMCliente();
@@ -40,5 +41,6 @@ public:
 
 	void ver_MenuVentas();
 	int ver_VentasClienteExistente();
+
 };
 
