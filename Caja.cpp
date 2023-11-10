@@ -2,6 +2,8 @@
 #include "Archivo.h"
 #include "ResponseDto.h"
 
+Caja::Caja() {}
+Caja::~Caja() {}
 //Response<Caja> Caja::gestionarCaja(float monto, char tipoTransaccion) {
 //	Response<Caja> response;
 //	Archivo<Caja> archivoCaja("caja.dat");

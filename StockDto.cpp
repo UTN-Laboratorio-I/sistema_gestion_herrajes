@@ -1,5 +1,6 @@
 #include "StockDto.h"
 
+StockDto::StockDto(){}
 StockDto::StockDto(int idProducto, int cantidad)
 {
 	this->idProducto = idProducto;

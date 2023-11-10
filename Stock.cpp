@@ -34,7 +34,7 @@ Response<StockDto> Stock::sumarStock(int cantidad, int idProducto) {
 
 	}
 	else {
-		response = archivoStock.grabarRegistroArchivo(stock);
+		//response = archivoStock.grabarRegistroArchivo(stock);
 	}
 
 	return response;
@@ -55,7 +55,8 @@ Response<StockDto> Stock::restarStock(int cantidad, int idProducto) {
 
 	}
 	else {
-		response = archivoStock.grabarRegistroArchivo(stock);
+		//response = archivoStock.grabarRegistroArchivo(stock);
+		response.setSuccess("ok", stock);
 	}
 
 	if (!response.getSuccess()) {
