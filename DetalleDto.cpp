@@ -1,19 +1,32 @@
 #include "DetalleDto.h"
+#include "Detalle.h"
+#include "Producto.h"
 
-DetalleDto::DetalleDto()
-{
-}
+DetalleDto::DetalleDto() {}
 
-DetalleDto::DetalleDto(int idTransaccion, int idProducto, float precioUnitario, int cantidad)
+DetalleDto::DetalleDto(Detalle detalle, int idTransaccion)
 {
+	Producto producto = detalle.getProducto();
+
+	_id = 0;
 	_idTransaccion = idTransaccion;
-	_idProducto = idProducto;
-	_precioUnitario = precioUnitario;
-	_cantidad = cantidad;
+	_idProducto = producto.getId();
+	_precioUnitario = producto.getPrecioCosto();
+	_cantidad = detalle.getCantidad();
 }
 
 DetalleDto::~DetalleDto()
 {
+}
+
+int DetalleDto::getId()
+{
+	return _id;
+}
+
+void DetalleDto::setId(int id)
+{
+	_id = id;
 }
 
 int DetalleDto::getIdTransaccion()

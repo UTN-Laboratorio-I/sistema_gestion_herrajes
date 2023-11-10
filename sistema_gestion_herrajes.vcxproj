@@ -138,6 +138,7 @@
     <ClCompile Include="Compra.cpp" />
     <ClCompile Include="Detalle.cpp" />
     <ClCompile Include="DetalleDto.cpp" />
+    <ClCompile Include="DetalleStockDto.cpp" />
     <ClCompile Include="ErrorDto.cpp" />
     <ClCompile Include="Fecha.cpp" />
     <ClCompile Include="FechaHorario.cpp" />
@@ -153,6 +154,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Stock.cpp" />
+    <ClCompile Include="StockDto.cpp" />
     <ClCompile Include="test.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -175,6 +177,7 @@
     <ClInclude Include="Compra.h" />
     <ClInclude Include="Detalle.h" />
     <ClInclude Include="DetalleDto.h" />
+    <ClInclude Include="DetalleStockDto.h" />
     <ClInclude Include="ErrorDto.h" />
     <ClInclude Include="Fecha.h" />
     <ClInclude Include="FechaHorario.h" />
@@ -189,6 +192,7 @@
     <ClInclude Include="ResponseDto.h" />
     <ClInclude Include="Sistema.h" />
     <ClInclude Include="Stock.h" />
+    <ClInclude Include="StockDto.h" />
     <ClInclude Include="Transaccion.h" />
     <ClInclude Include="TransaccionDto.h" />
     <ClInclude Include="Usuario.h" />

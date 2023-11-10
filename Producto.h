@@ -3,6 +3,7 @@
 #include <string>
 #include <cstring>
 #include "Archivo.h"
+#include "Stock.h"
 
 
 class Producto
@@ -39,6 +40,5 @@ private:
     int _cantidad;
     char _nombreProducto[30], _descripcionProducto[45];
     bool _estado;
-    //Categoria::_idCategoria;
 };
 

@@ -1,15 +1,21 @@
 #pragma once
+#include "Detalle.h"
+
 class DetalleDto
 {
 private:
+	int _id;
 	int _idTransaccion;
 	int _idProducto;
 	float _precioUnitario;
 	int _cantidad;
 public:
 	DetalleDto();
-	DetalleDto(int idTransaccion, int idProducto, float precioUnitario, int cantidad);
+	DetalleDto(Detalle detalle, int idTransaccion);
 	~DetalleDto();
+
+	int getId();
+	void setId(int id);
 	int getIdTransaccion();
 	int getIdProducto();
 	float getPrecioUnitario();

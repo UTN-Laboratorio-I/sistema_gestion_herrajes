@@ -1,23 +1,24 @@
 #include "TransaccionDto.h"
+#include "Venta.h"
 
-TransaccionDto::TransaccionDto() {};
 
 //Constructor vacío
-TransaccionDto::TransaccionDto(int id, int monto, Fecha fecha, char* usuario, char tipoTransaccion) {
-	_id = id;
-	_monto = monto;
-	_fecha = fecha;
-	_usuario = usuario;
-	_tipoTransaccion = tipoTransaccion;
-}
+TransaccionDto::TransaccionDto(){}
 
-TransaccionDto::~TransaccionDto() {};
+TransaccionDto::TransaccionDto(float monto, Fecha fecha, char tipo,int cantidad,  char* usuario) {
+	_id = 0;
+	_monto =monto;
+	_fecha = fecha;
+	_tipoTransaccion = tipo;
+	_cantidadTotal =cantidad;
+	setUsuario(usuario);
+}
 
 int TransaccionDto::getId() {
 	return _id;
 }
 
-int TransaccionDto::getMonto() {
+float TransaccionDto::getMonto() {
 	return _monto;
 }
 
@@ -38,7 +39,7 @@ void TransaccionDto::setId(int id) {
 
 }
 
-void TransaccionDto::setMonto(int monto) {
+void TransaccionDto::setMonto(float monto) {
 	_monto = monto;
 }
 
@@ -47,7 +48,7 @@ void TransaccionDto::setFecha(Fecha fecha) {
 }
 
 void TransaccionDto::setUsuario(char* usuario) {
-	_usuario = usuario;
+	std::strncpy(_usuario, usuario, sizeof(_usuario) - 1);
 }
 
 void TransaccionDto::setTipoTransaccion(char tipoTransaccion) {
