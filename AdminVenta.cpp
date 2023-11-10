@@ -2,6 +2,7 @@
 #include "InterfazUI.h"
 #include "Venta.h"
 #include "Cliente.h"
+#include "Caja.h"
 
 //Constructor:
 AdminVenta::AdminVenta(Sistema* sistema) : _sistema(sistema) {
@@ -47,7 +48,8 @@ void AdminVenta::registrarNuevaVenta() {
 	Cliente cliente;
 	Response<Cliente> responseCliente;
 	Venta venta;
-	Response<Venta> responseVenta;
+	Response<TransaccionDto> responseVenta;
+	Caja caja;
 	//Cliente cliente;
 	bool continuar = false;
 
@@ -87,10 +89,9 @@ void AdminVenta::registrarNuevaVenta() {
 
 		if (!continuar) {
 			_sistema->setSubModulo("Nueva Venta");
-			venta.crearNuevaVenta(_sistema); //Le paso el parametro sistema para
+			responseVenta = venta.crearNuevaVenta(_sistema); //Le paso el parametro sistema para
 			//poder utilizar la UI (Sobre todo el limpiarConsola y headerDinamico)
 
-			
 
 			if (responseVenta.getSuccess()) {
 				//Hacemos el descuento de stock de los productos vendidos
