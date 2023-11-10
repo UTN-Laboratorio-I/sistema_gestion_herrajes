@@ -37,6 +37,7 @@ Fecha::Fecha(int dia, int mes, int anio) {
     setAnio(anio);
     _diaSemana = -1;
 }
+
 std::string Fecha::toString() {
     std::string valorADevolver;
     valorADevolver = std::to_string(_dia) + "/" + std::to_string(_mes) + "/" + std::to_string(_anio);
@@ -65,6 +66,25 @@ std::string Fecha::hoy() {
     _dia = localTime->tm_mday;           // Día del mes
 
     // Imprime la fecha actual
-    std::string fecha =""+ std::to_string(_anio) + "/" + std::to_string(_mes) + "/"+ std::to_string(_dia)+"";
+    std::string fecha =""+ std::to_string(_dia) + "/" + std::to_string(_mes) + "/"+ std::to_string(_anio)+"";
+    return fecha;
+}
+
+Fecha Fecha::now() {
+    std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+
+    // Convierte el punto de tiempo actual a un objeto de tiempo local
+    std::time_t currentTime = std::chrono::system_clock::to_time_t(now);
+
+    // Convierte el tiempo local a una estructura tm para extraer la fecha
+    std::tm* localTime = std::localtime(&currentTime);
+
+    // Obtén los componentes de la fecha
+    _anio = localTime->tm_year + 1900;  // Añade 1900 al año
+    _mes = localTime->tm_mon + 1;      // Los meses comienzan desde 0
+    _dia = localTime->tm_mday;           // Día del mes
+
+    Fecha fecha(_dia, _mes, _anio);
+
     return fecha;
 }

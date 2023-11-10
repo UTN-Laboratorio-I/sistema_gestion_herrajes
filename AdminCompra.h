@@ -16,11 +16,13 @@ public:
 
 	void administrarModuloCompra();
 
-	void crearCompraProducto();
+	//void crearNuevaCompra();
 
 	void pantallaListarProducto();
 
 	void pantallaBuscarProducto();
+
+	void crearNuevaCompra();
 
 };
 

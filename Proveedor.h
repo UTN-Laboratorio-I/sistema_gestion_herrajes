@@ -2,6 +2,7 @@
 #include "Persona.h"
 #include <iostream>
 #include <cstdio>
+#include "Archivo.h"
 
 class Proveedor : public Persona
 {
@@ -17,7 +18,7 @@ public:
 
 	int getIdProveedor();
 
-	void setIdProveedor(int id);
+	void setId(int id);
 
 private:
 

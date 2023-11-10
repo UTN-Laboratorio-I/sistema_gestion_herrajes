@@ -1,11 +1,13 @@
 #include <iostream>
 #include <cstring>
 #include "Producto.h"
+#include "Archivo.h"
+#include <vector>
 
 using namespace std;
 
 Producto::Producto(){
-	_idProducto = 0;
+	_id = 0;
 	_precioCosto = 0;
 	_precioVenta = 0;
 	_cantidad = 0;
@@ -16,8 +18,8 @@ Producto::Producto(){
 
 #pragma region GETTERS
 
-int Producto::getIdProducto() {
-	return _idProducto;
+int Producto::getId() {
+	return _id;
 }
 float Producto::getPrecioCosto() {
 	return _precioCosto;
@@ -41,8 +43,8 @@ bool Producto::getEstado() { return _estado; }
 
 #pragma region SETTERS
 
-void Producto::setIdProducto(int id) {
-	_idProducto = id;
+void Producto::setId(int id) {
+	_id = id;
 }
 void Producto::setPrecioCosto(float pCosto) {
 	_precioCosto = pCosto;
@@ -68,13 +70,17 @@ void Producto::cargarProductos() {
 	float pCosto, pVenta;
 	int cantidad;
 	string nombreProducto, descripcionProducto;
+	Producto producto;
 
 	cout << "NOMBRE DE PRODUCTO: ";
 	cin.ignore();
 	getline(cin, nombreProducto);
+
 	cout << "DESCRIPCION PRODUCTO: ";
+	cin.ignore();
 	getline(cin, descripcionProducto);
-	cout << "PRECIO DE COSTO: ";
+
+	cout << "PRECIO DE COSTO:$ ";
 	cin >> pCosto;
 	/*cout << "PRECIO DE VENTA: ";
 	cin >> pVenta;*/
@@ -91,15 +97,35 @@ void Producto::cargarProductos() {
 
 void Producto::mostrarProductos()
 {
+	cout << "ID PRODUCTO: ";
+	cout << getId() << endl;
 	cout << "NOMBRE DE PRODUCTO: ";
 	cout << getNombreProducto() << endl;
 	cout << "DESCRIPCION PRODUCTO: ";
 	cout << getDescripcionProducto() << endl;
-	cout << "PRECIO DE COSTO: ";
+	cout << "PRECIO DE COSTO:$ ";
 	cout << getPrecioCosto() << endl;
 	/*cout << "PRECIO DE VENTA: ";
 	cout << pVenta;*/
 	cout << "CANTIDAD: ";
 	cout << getCantidad() << endl;
+}
 
+Producto Producto::listarYSeleccionarProductoVenta() {
+	Archivo<Producto> archivoProducto("productos.dat");
+	vector<Producto> listaProductos = archivoProducto.listarRegistroArchivo();
+
+	for (Producto prod : listaProductos) {
+		cout << prod.getId() << " - " << prod.getNombreProducto() << endl;
+	}
+
+	int idProducto;
+	cout << "Seleccione el producto: ";
+	cin >> idProducto;
+
+	for (Producto prod : listaProductos) {
+		if (prod.getId() == idProducto) {
+			return prod;
+		}
+	}
 }

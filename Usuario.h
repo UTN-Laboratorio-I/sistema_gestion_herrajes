@@ -6,6 +6,7 @@
 
 class Usuario {
 private:
+    int _id;
     char _usuario[30];
     char _password[30];
     char _nombre[50];
@@ -16,6 +17,8 @@ public:
     Usuario();
     Usuario(char* usuario, char* nombre, char* rol, bool isAdmin, const char* password = "");
 
+    void setId(int id);
+    int getId() const;
     void setUsuario(char* usuario);
     const char* getUsuario() const;
     void setPassword(char* password);

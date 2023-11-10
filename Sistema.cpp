@@ -16,6 +16,7 @@ Sistema::Sistema() {
 	_encendido = true;
 	_pantalla = 0;
 	_modulo = "Login";
+	_subModulo = "";
 	_usuario;
 }
 
@@ -45,6 +46,10 @@ int Sistema::getPantalla() { return _pantalla; }
 
 void Sistema::setModulo(string modulo) { _modulo = modulo; }
 string Sistema::getModulo() { return _modulo; }
+
+void Sistema::setSubModulo(string subModulo) { _subModulo = subModulo; }
+string Sistema::getSubModulo() { return _subModulo; }
+void Sistema::limpiarSubModulo(){ _subModulo = ""; }
 
 void Sistema::setError(string mensaje) { _error.setError(true, mensaje); }
 string Sistema::getError() { return _error.getErrorMensaje(); }

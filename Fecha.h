@@ -14,6 +14,7 @@ public:
     Fecha(int dia, int mes, int anio);
     std::string toString();
     std::string hoy();
+    Fecha now();
 
 private:
     int _dia, _mes, _anio;

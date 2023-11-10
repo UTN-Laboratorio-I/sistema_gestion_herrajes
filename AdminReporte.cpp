@@ -45,6 +45,9 @@ void AdminReporte::administrarModuloReporte()
 			administrarSubModuloReporteCaja();
 
 			break;
+		case 5:
+			_sistema->setModuloPantalla("Reporte Usuarios", -1);
+			//administrarSubModuloUsuarios();
 		case 0: //SALIR DEL MÓDULO REPORTES:
 			moduloReporteSalir();
 			break;
