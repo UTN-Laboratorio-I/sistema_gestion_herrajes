@@ -193,9 +193,22 @@ public:
            
     }
 
+    Response<T> grabarOModificarRegistro(T objeto, int idBuscado) {
+    Response<T> response;
+		int posicion = buscarPosRegistro(objeto, idBuscado);
 
+		if (posicion == -1)
+		{
+			response = grabarRegistroArchivo(objeto);
+		}
+		else
+		{
+			modificarRegistro(objeto, posicion);
+			response.setSuccess("Modificado con exito", objeto);
+		}
 
-
+		return response;
+    }
 
 
 private:
