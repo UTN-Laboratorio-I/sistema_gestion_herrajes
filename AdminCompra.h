@@ -12,7 +12,11 @@ public:
 
 	bool moduloCompraActivo();
 
+	bool subModuloCompraActivo();
+
 	void moduloCompraSalir();
+
+	void subModuloCompraSalir();
 
 	void administrarModuloCompra();
 
@@ -23,6 +27,10 @@ public:
 	void pantallaBuscarProducto();
 
 	void crearNuevaCompra();
+
+	void subModuloCompra();
+
+	void mostrarCompras();
 
 };
 

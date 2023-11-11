@@ -66,11 +66,15 @@ void Producto::setEstado(bool estado){ _estado = estado;}
 
 #pragma endregion
 
-void Producto::cargarProductos() {
+Response <Producto> Producto::cargarProductos() {
+	Response <Producto> registro;
+	Archivo <Producto> archivo("productos.dat");
 	float pCosto, pVenta;
 	int cantidad;
 	string nombreProducto, descripcionProducto;
 	Producto producto;
+
+	cout << "----------- COMPRA DE PRODUCTOS -----------" << endl << endl;
 
 	cout << "NOMBRE DE PRODUCTO: ";
 	cin.ignore();
@@ -93,6 +97,25 @@ void Producto::cargarProductos() {
 	//setPrecioVenta(pVenta);
 	setCantidad(cantidad);
 	setEstado(true);
+
+	registro = archivo.grabarRegistroArchivo(producto);
+
+	if (registro.getSuccess())
+	{
+		registro.setSuccess("Producto grabado correctamente", registro.getData());
+	}
+	else
+	{
+		registro.setFailure("El producto no se pudo grabar");
+	}
+	
+	cout << registro.getMessage() << endl;
+	cout << "----------------------" << endl;
+
+	_sleep(2000);
+
+	return registro;
+
 }
 
 void Producto::mostrarProductos()

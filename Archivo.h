@@ -136,7 +136,7 @@ public:
 
         int contador = 0;
         bool encontro = false;
-        int posicion;
+        int posicion = -1;
 
         while (fread(&objeto, sizeof(T), 1, p) == 1)
         {
@@ -144,11 +144,10 @@ public:
             {
                 posicion = contador;
                 encontro = true;
+                break;
             }
             contador++;
         }
-
-        fclose(p);
 
         if (encontro)
         {
@@ -156,8 +155,42 @@ public:
         }
         else
         {
-            return -1;
+            posicion = -1;
         }
+        
+        fclose(p);
+        return posicion;
+    }
+
+    Response <T> listarUnRegistro(int posicion, T objeto)
+    {
+        Response <T> response;
+
+        FILE* p = fopen(_nombreArchivo, "rb");
+
+        if (p == NULL)
+        {
+            response.setFailure("No se pudo leer el archivo...");
+            return response;
+        }
+
+        if (posicion == -1)
+        {
+            response.setFailure("No se pudo encontrar el registro solicitado");
+            return response;
+        }
+
+
+        fseek(p, sizeof(T) * posicion, 0);
+        
+        fread(&objeto, sizeof(T), 1, p);
+
+        response.setSuccess("Registro encontrado: ", objeto);
+
+        fclose(p);
+
+        return response;
+           
     }
 
     Response<T> grabarOModificarRegistro(T objeto, int idBuscado) {
