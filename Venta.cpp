@@ -112,10 +112,9 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 		Response<DetalleDto> registroDetalle = archivoDetalle.grabarRegistroArchivo(detalleDto);
 
 		//Modificamos el stock del producto:
-		//stock.gestionarStock(detalle.getProducto().getId(), detalle.getCantidad(), _tipo);
+		stock.gestionarStock(detalle.getCantidad(), detalle.getProducto().getId(), _tipo);
 
-
-		//Si algún registro falla, devolvemos false:
+				//Si algún registro falla, devolvemos false:
 		if (registroDetalle.getSuccess() == false) {
 			registroCorrecto = false;
 		}
