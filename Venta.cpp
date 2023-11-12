@@ -46,6 +46,7 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 	Archivo<TransaccionDto> archivoTransaccion("transacciones.dat");
 	Archivo<DetalleDto> archivoDetalle("detalles.dat");
 	Response<TransaccionDto> response;
+	vector<DetalleDto> detalleVenta;
 	Venta venta;
 	Fecha fecha;
 	Stock stock;
@@ -53,6 +54,7 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 
 	bool finalizarVenta = false;
 
+	ventas_UI.ver_CarritoVentas(detalleVenta);
 
 	while (!finalizarVenta) {
 		Producto producto;

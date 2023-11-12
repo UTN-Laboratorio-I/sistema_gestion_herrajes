@@ -3,6 +3,7 @@
 #include <string>
 #include "Fecha.h"
 #include "Helper.h"
+#include "TablaDto.h"
 #pragma warning (disable : 4996)
 
 using namespace std;
@@ -247,8 +248,17 @@ int InterfazUI::ver_VentasClienteExistente() {
 	return opc;
 }
 
-void verCarritoCompras() {
+void InterfazUI::ver_CarritoVentas(vector<DetalleDto> detalle) {
 	Helper helper;
+	TablaDto<DetalleDto> tabla(0, detalle);
+	tabla.mostrarNuevaTabla();
+	helper.limpiarConsola();
+
+}
+
+void verListadoProductos() {
+	Helper helper;
+	helper.limpiarConsola();
 }
 
 #pragma endregion UI_Ventas
