@@ -73,18 +73,18 @@ bool Compra::realizarCompra(Sistema* sistema)
 			header.limpiarConsola();
 			subCompras_UI.headerDinamico();
 			//proveedor = proveedorExistente.getData();
-			registrarNuevaCompra(compra, sistema, subCompras_UI, responseProveedor);
+			registrarNuevaCompra(sistema, subCompras_UI, responseProveedor);
 			break;
 		case 2:
 			subCompras_UI.headerDinamico();
 			responseProveedor = proveedor.cargarProveedor();
 			//proveedor = responseNuevoProveedor.getData();
 			//responseNuevoProveedor.setData(proveedor);
-			registrarNuevaCompra(compra, sistema, subCompras_UI, responseProveedor);
+			registrarNuevaCompra(sistema, subCompras_UI, responseProveedor);
 			//proveedor = responseNuevoProveedor.getData();
 			break;
 		case 3:
-			compra.mostrarCompras();
+			mostrarCompras();
 			break;
 		case 0:
 			sistema->setModuloPantalla("Compras", 0);
@@ -101,7 +101,7 @@ bool Compra::realizarCompra(Sistema* sistema)
 	return true;
 }
 
-Response <TransaccionDto> Compra::registrarNuevaCompra(Compra compra, Sistema *sistema, InterfazUI interfaz, Response <Proveedor> prov)
+Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, InterfazUI interfaz, Response <Proveedor> prov)
 {
 	Archivo<TransaccionDto> archivoTransaccion("transacciones.dat");
 	Archivo<DetalleDto> archivoDetalle("detalles.dat");
@@ -117,6 +117,7 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Compra compra, Sistema *s
 	Detalle detalle;
 	Stock stock;
 	Caja caja;
+	Compra compra;
 
 
 
@@ -135,7 +136,7 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Compra compra, Sistema *s
 		
 		productoAcargar.cargarProductos();
 
-		this->agregarADetalleCompra(productoAcargar, productoAcargar.getCantidad());
+		compra.agregarADetalleCompra(productoAcargar, productoAcargar.getCantidad());
 
 		cout << endl << "Desea continuar la compra ?" << endl <<"1) SI // 2): NO" << endl << endl;
 
@@ -178,6 +179,9 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Compra compra, Sistema *s
 
 	//Seteamos tipo de transaccion (Compra, 'C')
 	compra.setTipoTransaccion(_tipo);
+
+	//Setamos ID proveedor
+	compra.setIdProveedor(prov.getData().getId());
 
 	TransaccionDto transaccion(_monto, _fecha, _tipo, _cantidadProductos, _usuario);
 	Response <TransaccionDto> registro = archivoTransaccion.grabarRegistroArchivo(transaccion);

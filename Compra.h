@@ -33,7 +33,7 @@ public:
 
 	bool realizarCompra(Sistema* sistema);
 
-	Response <TransaccionDto> registrarNuevaCompra (Compra compra, Sistema *sistema, InterfazUI interfaz, Response <Proveedor> prov);
+	Response <TransaccionDto> registrarNuevaCompra (Sistema *sistema, InterfazUI interfaz, Response <Proveedor> prov);
 
 };
 
