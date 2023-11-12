@@ -247,6 +247,9 @@ int InterfazUI::ver_VentasClienteExistente() {
 	return opc;
 }
 
+void verCarritoCompras() {
+	Helper helper;
+}
 
 #pragma endregion UI_Ventas
 
