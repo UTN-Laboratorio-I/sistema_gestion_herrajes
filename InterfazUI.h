@@ -1,5 +1,6 @@
 #pragma once
 #include "Sistema.h"
+#include "DetalleDto.h"
 class InterfazUI
 {
 private:
@@ -40,8 +41,10 @@ public:
 
 	void ver_MenuUsuario();
 
+	//Ventas:
 	void ver_MenuVentas();
 	int ver_VentasClienteExistente();
+	void ver_CarritoVentas(vector<DetalleDto> detalle);
 
 };
 

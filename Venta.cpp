@@ -46,6 +46,7 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 	Archivo<TransaccionDto> archivoTransaccion("transacciones.dat");
 	Archivo<DetalleDto> archivoDetalle("detalles.dat");
 	Response<TransaccionDto> response;
+	vector<DetalleDto> detalleVenta;
 	Venta venta;
 	Fecha fecha;
 	Stock stock;
@@ -53,6 +54,7 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 
 	bool finalizarVenta = false;
 
+	ventas_UI.ver_CarritoVentas(detalleVenta);
 
 	while (!finalizarVenta) {
 		Producto producto;
@@ -100,7 +102,7 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 	venta.setTipoTransaccion(_tipo);
 
 	//Guardamos la venta en el archivo:
-	TransaccionDto transaccion(_monto, _fecha, _tipo, _cantidadProductos, _usuario);
+	TransaccionDto transaccion(venta._monto, venta._fecha, venta._tipo, venta._cantidadProductos, venta._usuario);
 	Response<TransaccionDto> registro = archivoTransaccion.grabarRegistroArchivo(transaccion);
 
 	bool registroCorrecto = true;
