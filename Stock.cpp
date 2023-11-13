@@ -2,17 +2,17 @@
 #include "Producto.h"
 #include "StockDto.h"
 
-
+Stock::Stock() {};
 Response<Stock> Stock::gestionarStock(int cantidad, int idProducto, char tipoTransaccion) {
 	Response<Stock> response;
 	Response<StockDto> responseDto;
 	
 	switch (tipoTransaccion) {
 	case 'v':
-			responseDto = restarStock(cantidad, idProducto);
+			responseDto = restarStock<StockDto>(cantidad, idProducto);
 			break;
 	case 'c':
-			responseDto = sumarStock(cantidad, idProducto);
+			responseDto = sumarStock<StockDto>(cantidad, idProducto);
 			break;
 	default:
 			break;
@@ -20,48 +20,40 @@ Response<Stock> Stock::gestionarStock(int cantidad, int idProducto, char tipoTra
 	return response;
 }
 
+//Función para pasar como parametro:
+template <class T>
+bool Stock::validarStock(int idProducto, T objetoArchivo) {
+	T stock = (T)objetoArchivo;
+	if (idProducto == stock.getIdProducto()) {
+		return true;
+	}
+	return false;
+}
+
+typedef bool(Stock:: *validarStock)(int, int);
+template <class T>
 Response<StockDto> Stock::sumarStock(int cantidad, int idProducto) {
 	Response<StockDto> response;
 	Archivo<StockDto> archivoStock("stock.dat");
 	StockDto stock(idProducto, cantidad);
 
-	int existente = 0;
-		//archivoStock.buscarPosRegistro(stock, idProducto);
+	auto funcionValidar = [this](int idProducto, T objetoArchivo) {return validarStock(idProducto, objetoArchivo); };
 
-	if (existente != -1) {
-		stock.setCantidadTotal(stock.getCantidadTotal() + cantidad);
-		//bool modifico = archivoStock.modificarRegistro(stock, existente);
-
-	}
-	else {
-		//response = archivoStock.grabarRegistroArchivo(stock);
-	}
+	response = archivoStock.grabarOModificarRegistro(stock, idProducto, funcionValidar);
 
 	return response;
 }
 
+typedef bool(Stock::* validarStock)(int, int);
+template <class T>
 Response<StockDto> Stock::restarStock(int cantidad, int idProducto) {
 	Response<StockDto> response;
 	Archivo<StockDto> archivoStock("stock.dat");
 	StockDto stock(idProducto, cantidad);
 
-	int existente = 0;
-	//archivoStock.buscarPosRegistro(stock, idProducto);
+	auto funcionValidar = [this](int idProducto, T idArchivo) {return validarStock(idProducto, idArchivo); };
 
-	//En caso de que el producto ya esté registrado, sobreescribimos la cantidad:
-	if (existente != -1) {
-		stock.setCantidadTotal(stock.getCantidadTotal() - cantidad);
-		//bool modifico = archivoStock.modificarRegistro(stock, existente);
-
-	}
-	else {
-		//response = archivoStock.grabarRegistroArchivo(stock);
-		response.setSuccess("ok", stock);
-	}
-
-	if (!response.getSuccess()) {
-		response.setFailure("No se ha podido registrar el cambio de stock");
-	}
+	response = archivoStock.grabarOModificarRegistro(stock, idProducto, funcionValidar);
 
 	return response;
 }

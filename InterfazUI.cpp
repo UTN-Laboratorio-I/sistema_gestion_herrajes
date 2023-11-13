@@ -3,6 +3,7 @@
 #include <string>
 #include "Fecha.h"
 #include "Helper.h"
+#include "TablaDto.h"
 #pragma warning (disable : 4996)
 
 using namespace std;
@@ -19,27 +20,32 @@ void InterfazUI::headerDinamico()
 	Helper helper;
 	Fecha fecha;
 	string ahora = fecha.hoy();
+	string modulo_actual = _sistema->getModulo();
 	string subModulo = _sistema->getSubModulo();
+	string nombreUsuario = _sistema->getUsuarioLogged();
+	bool error_existente = _sistema->hasError();
+	string mensaje_error = _sistema->getError();
 
 	helper.limpiarConsola();
-	string usuario = _sistema->getUsuarioLogged();
-	bool error = _sistema->hasError();
 	cout << "Sistema de Gestion" << " - " << ahora << endl;
-	if (usuario != "") {
-		cout << "User: " << usuario << endl;
+	if (nombreUsuario != "") {
+		cout << "User: " << nombreUsuario << endl;
 	}
-	cout << "MENU " << _sistema->getModulo();
+	cout << "MENU " << modulo_actual;
 	subModulo != "" && cout << " - " << subModulo;
 	cout << endl;
 
-	if (error) {
-		std::string error = _sistema->getError();
+	if (error_existente) {
 		cout << "---------------------------------" << endl;
-		cout << "Error: " << error << endl;
+		cout << "Error: " << mensaje_error << endl;
 	}
 	cout << "---------------------------------" << endl << endl;
 }
 
+/// <summary>
+/// Muestra mensaje en pantalla por un tiempo determinado.
+/// Utilizado para mostrar mensajes de response
+/// </summary>
 void InterfazUI::mostrarMensajeDinamico(string mensaje)
 {
 	Helper helper;
@@ -52,6 +58,7 @@ void InterfazUI::mostrarMensajeDinamico(string mensaje)
 
 	helper.limpiarConsola();
 }
+
 /// <summary>
 /// Controla que la opción seleccionada por el menú sea válida.
 /// </summary>
@@ -68,6 +75,9 @@ bool InterfazUI::opcionesValidasMenu(int inicio, int fin, int seleccion, bool im
 	return true;
 }
 
+/// <summary>
+/// Se muestra en caso de querer salir de un proceso.
+/// </summary>
 bool InterfazUI::mensajeCancelarEjecucion(string ejecucion) {
 	headerDinamico();
 	int opc;
@@ -99,6 +109,9 @@ void InterfazUI::vistaLogin() {
 	cout << "Ingrese User/Password " << endl<<endl;
 }
 
+/// <summary>
+/// Consulta si desea apagar o cerrar sesión al salir del programa.
+/// </summary>
 int InterfazUI::apagarOCerrarSesion() {
 	Helper helper;
 	helper.limpiarConsola();
@@ -116,6 +129,9 @@ int InterfazUI::apagarOCerrarSesion() {
 	return opc;
 }
 
+/// <summary>
+/// Muestra un mensaje final al apagar el programa.
+/// </summary>
 void InterfazUI::mensajeCierrePrograma() {
 	Helper helper;
 	helper.limpiarConsola();
@@ -248,6 +264,16 @@ int InterfazUI::ver_VentasClienteExistente() {
 	return opc;
 }
 
+void InterfazUI::ver_CarritoVentas(vector<DetalleDto> detalle) {
+	Helper helper;
+	helper.limpiarConsola();
+
+}
+
+void verListadoProductos() {
+	Helper helper;
+	helper.limpiarConsola();
+}
 
 #pragma endregion UI_Ventas
 
