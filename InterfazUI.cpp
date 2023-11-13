@@ -216,12 +216,13 @@ void InterfazUI::ver_SubMenuCrearCompraProducto() {
 		headerDinamico();
 		cout << "1) Comprar a un proveedor existente" << endl;
 		cout << "2) Comprar a un nuevo proveedor" << endl;
+		cout << "3) Mostrar Compras realizadas" << endl;
 		cout << "0) <-Atras" << endl;
 		cin >> opc;
 		helper.limpiarConsola();
-		verificado = opcionesValidasMenu(0, 2, opc);
+		verificado = opcionesValidasMenu(0, 3, opc);
 	}
-	_sistema->setModuloPantalla("SubModulo Compras", opc);
+	_sistema->setModuloPantalla("Compras", opc);
 
 }
 

@@ -28,7 +28,7 @@ public:
     void setDescripcionProducto(std::string descripcion);
     void setEstado(bool estado);
 
-    Response <Producto> cargarProductos();
+    Producto cargarProductos();
     void mostrarProductos();
 
     Producto listarYSeleccionarProductoVenta();
