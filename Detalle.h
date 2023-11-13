@@ -11,7 +11,6 @@ public:
 	Producto getProducto();
 	void setIdProducto(int idProducto);
 	int getCantidad();
-	void setIdProducto(int idProducto);
 	void setProducto(Producto producto);
 	void setCantidad(int cantidad);
 };

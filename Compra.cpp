@@ -201,7 +201,7 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 		Response<DetalleDto> registroDetalle = archivoDetalle.grabarRegistroArchivo(detalleDto);
 
 		//Modificamos el stock del producto:
-		//stock.gestionarStock(detalle.getProducto().getId(), detalle.getCantidad(), _tipo);
+		stock.gestionarStock(detalle.getProducto().getId(), detalle.getCantidad(), _tipo);
 
 
 		//Si algún registro falla, devolvemos false:
@@ -233,19 +233,12 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 void Compra::mostrarCompras()
 {
 	Archivo <TransaccionDto> archivoTransacciones("transacciones.dat");
-	Archivo <Detalle> arhivoDetalle("detalle.dat");
 
-	vector <Detalle> vecDetalle;
 	vector <TransaccionDto> vecTransaccion;
-
-	TransaccionDto Transaccion;
 
 	Response <TransaccionDto> responseTransaccion;
 
 	Response <Compra> responseCompra;
-	Compra compra;
-	Detalle detalle;
-	TransaccionDto transaccion;
 
 	vecTransaccion = archivoTransacciones.listarRegistroArchivo();
 

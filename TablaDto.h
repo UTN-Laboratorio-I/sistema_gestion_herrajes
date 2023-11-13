@@ -109,25 +109,25 @@ public:
                 cout << endl;
             }
             cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
-        case 1: //Compras
-            for (T datos : _datos) {
-				cout << setw(_columnas[0].ancho) << datos.getId();
-				cout << setw(_columnas[1].ancho) << datos.getNombre();
-				cout << setw(_columnas[2].ancho) << datos.getPrecio();
-				cout << setw(_columnas[3].ancho) << datos.getCantidad();
-				cout << setw(_columnas[4].ancho) << datos.getSubtotal();
-				cout << endl;
-			}
-        case 2: //Ventas
-            for (T datos : _datos) {
-				cout << setw(_columnas[0].ancho) << datos.getId();
-				cout << setw(_columnas[1].ancho) << datos.getNombre();
-				cout << setw(_columnas[2].ancho) << datos.getPrecio();
-				cout << setw(_columnas[3].ancho) << datos.getCantidad();
-				cout << setw(_columnas[4].ancho) << datos.getSubtotal();
-				cout << endl;
-			}
-            break;
+   //     case 1: //Compras
+   //         for (T datos : _datos) {
+			//	cout << setw(_columnas[0].ancho) << datos.getId();
+			//	cout << setw(_columnas[1].ancho) << datos.getNombre();
+			//	cout << setw(_columnas[2].ancho) << datos.getPrecio();
+			//	cout << setw(_columnas[3].ancho) << datos.getCantidad();
+			//	cout << setw(_columnas[4].ancho) << datos.getSubtotal();
+			//	cout << endl;
+			//}
+   //     case 2: //Ventas
+   //         for (T datos : _datos) {
+			//	cout << setw(_columnas[0].ancho) << datos.getId();
+			//	cout << setw(_columnas[1].ancho) << datos.getNombre();
+			//	cout << setw(_columnas[2].ancho) << datos.getPrecio();
+			//	cout << setw(_columnas[3].ancho) << datos.getCantidad();
+			//	cout << setw(_columnas[4].ancho) << datos.getSubtotal();
+			//	cout << endl;
+			//}
+   //         break;
         }
     }
     
