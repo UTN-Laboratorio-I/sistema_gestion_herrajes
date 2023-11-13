@@ -6,6 +6,9 @@ using namespace std;
 
 class Sistema
 {
+private:
+	//Inyección de dependencias:
+
 protected:
 	bool _encendido;
 	int _pantalla;

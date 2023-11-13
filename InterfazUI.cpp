@@ -27,20 +27,17 @@ void InterfazUI::headerDinamico()
 	string mensaje_error = _sistema->getError();
 
 	helper.limpiarConsola();
-	string usuario = nombreUsuario;
-	bool error = error_existente;
 	cout << "Sistema de Gestion" << " - " << ahora << endl;
-	if (usuario != "") {
-		cout << "User: " << usuario << endl;
+	if (nombreUsuario != "") {
+		cout << "User: " << nombreUsuario << endl;
 	}
 	cout << "MENU " << modulo_actual;
 	subModulo != "" && cout << " - " << subModulo;
 	cout << endl;
 
-	if (error) {
-		std::string error = mensaje_error;
+	if (error_existente) {
 		cout << "---------------------------------" << endl;
-		cout << "Error: " << error << endl;
+		cout << "Error: " << mensaje_error << endl;
 	}
 	cout << "---------------------------------" << endl << endl;
 }
@@ -268,8 +265,6 @@ int InterfazUI::ver_VentasClienteExistente() {
 
 void InterfazUI::ver_CarritoVentas(vector<DetalleDto> detalle) {
 	Helper helper;
-	TablaDto<DetalleDto> tabla(0, detalle);
-	tabla.mostrarNuevaTabla();
 	helper.limpiarConsola();
 
 }

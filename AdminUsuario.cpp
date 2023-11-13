@@ -2,6 +2,8 @@
 #include "InterfazUI.h"
 #include "Archivo.h"
 #include "Helper.h"
+#include "TablaDto.h"
+
 
 AdminUsuario::AdminUsuario(Sistema* sistema) {
 	_sistema = sistema;
@@ -54,14 +56,10 @@ void AdminUsuario::listarUsuarios() {
 
 	usuarios = usuario.listarUsuarios();
 
-	for (Usuario user : usuarios) {
-		cout << user.getUsuario() << endl;
-		cout << user.getPassword() << endl;
-		cout << user.getNombre() << endl;
-		cout << user.getRol() << endl;
-		cout << user.getIsAdmin() << endl;
-		cout << "------------------------" << endl<<endl;
-	}
+	TablaDto<Usuario> tabla("usuarios", usuarios);
+	
+	tabla.mostrarNuevaTabla();
+	
 	system("pause");
 }
 

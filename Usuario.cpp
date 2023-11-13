@@ -1,7 +1,9 @@
-#include "Usuario.h"
 #include <iostream>
 #include <cstring>
+#include "Usuario.h"
 #include "Helper.h"
+
+using namespace std;
 
 Usuario::Usuario()
     : _isAdmin(false) {
@@ -118,5 +120,6 @@ std::vector<Usuario> Usuario::listarUsuarios() {
     Archivo<Usuario> archivo(nombreArchivo);
 
     usuarios = archivo.listarRegistroArchivo();
+
     return usuarios;
 }
