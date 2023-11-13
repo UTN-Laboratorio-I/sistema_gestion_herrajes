@@ -33,12 +33,12 @@ public:
     /// </summary>
     /// <param name="tipo"></param>
     /// <param name="datos"></param>
-    TablaDto(string tipo, vector<T> datos) {
+    TablaDto(string tipo, vector<T> datos, bool limpiarPantalla=true) {
         _datos = datos;
         _columnas = getColumnas();
         _conversion_tipo = helper.conversorNombreTablaSwitch(tipo);
         _anchoTotalTabla = 0;
-        _limpiarPantalla = true;
+        _limpiarPantalla = limpiarPantalla;
     }
     /// <summary>
     /// Muestra tanto el header como el contenido de la tabla:
@@ -52,7 +52,7 @@ public:
         }
         cout << endl;
         cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
-        
+
         mostrarContenidoSegunEntidad();
     }
 
@@ -100,8 +100,8 @@ public:
 
         switch (_conversion_tipo) {
         case 0: //Usuarios
-            
-            for (T datos : _datos) {
+            vector<Usuario> listaUsuarios = _datos;
+            for (Usuario datos : listaUsuarios) {
                 cout << setw(_columnas[0].ancho) << datos.getId();
                 cout << setw(_columnas[1].ancho) << datos.getUsuario();
                 cout << setw(_columnas[2].ancho) << datos.getNombre();
@@ -109,27 +109,37 @@ public:
                 cout << endl;
             }
             cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
-        case 1: //Compras
-            for (T datos : _datos) {
-				cout << setw(_columnas[0].ancho) << datos.getId();
-				cout << setw(_columnas[1].ancho) << datos.getNombre();
-				cout << setw(_columnas[2].ancho) << datos.getPrecio();
-				cout << setw(_columnas[3].ancho) << datos.getCantidad();
-				cout << setw(_columnas[4].ancho) << datos.getSubtotal();
-				cout << endl;
-			}
-        case 2: //Ventas
-            for (T datos : _datos) {
-				cout << setw(_columnas[0].ancho) << datos.getId();
-				cout << setw(_columnas[1].ancho) << datos.getNombre();
-				cout << setw(_columnas[2].ancho) << datos.getPrecio();
-				cout << setw(_columnas[3].ancho) << datos.getCantidad();
-				cout << setw(_columnas[4].ancho) << datos.getSubtotal();
-				cout << endl;
-			}
             break;
+   //     case 1: //Compras
+   //         vector<Compra>
+   //         for (T datos : _datos) {
+   //             cout << setw(_columnas[0].ancho) << datos.getId();
+			//	cout << setw(_columnas[1].ancho) << datos.getNombreProducto();
+			//	cout << setw(_columnas[2].ancho) << datos.getPrecio();
+			//	cout << setw(_columnas[3].ancho) << datos.getCantidad();
+			//	cout << setw(_columnas[4].ancho) << datos.getSubtotal();
+			//	cout << endl;
+			//}
+   //         break;
+   //     case 2: //Ventas
+   //         for (T datos : _datos) {
+   //             cout << setw(_columnas[0].ancho) << datos.getId();
+   //         }
         }
     }
+
+
+#pragma region contenido
+
+    void mostrarUsuarios(T datos) {
+
+    }
+
+    //void mostrarCompras(T datos){
+    //    cout << setw(_columnas[0].ancho) << datos.getNombreProducto();
+    //    cout << endl;
+    //}
+#pragma endregion contenido
     
 
 };
