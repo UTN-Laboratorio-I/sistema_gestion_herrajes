@@ -20,21 +20,25 @@ void InterfazUI::headerDinamico()
 	Helper helper;
 	Fecha fecha;
 	string ahora = fecha.hoy();
+	string modulo_actual = _sistema->getModulo();
 	string subModulo = _sistema->getSubModulo();
+	string nombreUsuario = _sistema->getUsuarioLogged();
+	bool error_existente = _sistema->hasError();
+	string mensaje_error = _sistema->getError();
 
 	helper.limpiarConsola();
-	string usuario = _sistema->getUsuarioLogged();
-	bool error = _sistema->hasError();
+	string usuario = nombreUsuario;
+	bool error = error_existente;
 	cout << "Sistema de Gestion" << " - " << ahora << endl;
 	if (usuario != "") {
 		cout << "User: " << usuario << endl;
 	}
-	cout << "MENU " << _sistema->getModulo();
+	cout << "MENU " << modulo_actual;
 	subModulo != "" && cout << " - " << subModulo;
 	cout << endl;
 
 	if (error) {
-		std::string error = _sistema->getError();
+		std::string error = mensaje_error;
 		cout << "---------------------------------" << endl;
 		cout << "Error: " << error << endl;
 	}
