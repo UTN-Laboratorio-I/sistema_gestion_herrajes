@@ -193,21 +193,55 @@ public:
            
     }
 
-    Response<T> grabarOModificarRegistro(T objeto, int idBuscado) {
-    Response<T> response;
-		int posicion = buscarPosRegistro(objeto, idBuscado);
+    template <class FuncionValidacion>
+    Response<T> grabarOModificarRegistro(T objeto, int idBuscado, FuncionValidacion validacion) {
+        Response<T> response;
 
-		if (posicion == -1)
-		{
-			response = grabarRegistroArchivo(objeto);
-		}
-		else
-		{
-			modificarRegistro(objeto, posicion);
-			response.setSuccess("Modificado con exito", objeto);
-		}
+        FILE* p = fopen(_nombreArchivo, "rb+");
+        T objetoLeido;
 
-		return response;
+        if (p == NULL) {
+
+            p = fopen(_nombreArchivo, "ab");
+            bool escribio = fwrite(&objeto, sizeof(T), 1, p);
+            response.setSuccess("Se creo el registro", objeto);
+            return response;
+        }
+
+        int posicionObjeto = 0;
+
+        while (fread(&objetoLeido, sizeof(T), 1, p) == 1) {
+            if (validacion(idBuscado, objetoLeido)) {
+                fseek(p, sizeof(T) * posicionObjeto, 0);
+                bool actualizo = fwrite(&objeto, sizeof(T), 1, p);
+
+                if (actualizo) {
+                    fclose(p);
+                    response.setSuccess("Se actualizó el registro", objeto);
+                    return response;
+                }
+                else {
+                    fclose(p);
+                    response.setFailure("No se pudo actualizar el registro.");
+                    return response;
+                }
+            }
+            posicionObjeto++;
+        }
+
+        fseek(p, 0, SEEK_END);
+        bool escribio = fwrite(&objeto, sizeof(T), 1, p);
+
+        fclose(p);
+
+        if (escribio) {
+            response.setSuccess("Guardado con éxito", objeto);
+        }
+        else {
+            response.setFailure("No se pudo guardar el registro.");
+        }
+
+        return response;
     }
 
 

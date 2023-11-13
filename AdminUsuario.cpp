@@ -1,6 +1,9 @@
 #include "AdminUsuario.h"
 #include "InterfazUI.h"
 #include "Archivo.h"
+#include "Helper.h"
+#include "TablaDto.h"
+
 
 AdminUsuario::AdminUsuario(Sistema* sistema) {
 	_sistema = sistema;
@@ -53,19 +56,17 @@ void AdminUsuario::listarUsuarios() {
 
 	usuarios = usuario.listarUsuarios();
 
-	for (Usuario user : usuarios) {
-		cout << user.getUsuario() << endl;
-		cout << user.getPassword() << endl;
-		cout << user.getNombre() << endl;
-		cout << user.getRol() << endl;
-		cout << user.getIsAdmin() << endl;
-		cout << "------------------------" << endl<<endl;
-	}
+	TablaDto<Usuario> tabla("usuarios", usuarios);
+	
+	tabla.mostrarNuevaTabla();
+	
 	system("pause");
 }
 
 void AdminUsuario::creacionNuevoUsuario() {
 	InterfazUI user_UI(_sistema);
+	Helper helper;
+
 	bool continuar = false;
 	while (!continuar) {
 		Usuario nuevoUser;
@@ -86,10 +87,9 @@ void AdminUsuario::creacionNuevoUsuario() {
 		else {
 		//Caso contrario, no permito la salida del bucle while hasta que se cree el usuario correctamente
 			_sistema->setError(res.getMessage());
-
 			continuar = user_UI.mensajeCancelarEjecucion("creacion de usuario");
-
 		}
+		user_UI.mostrarMensajeDinamico(res.getMessage());
 
 	}
 	//Si salgo del bucle while, es porque se creó el usuario correctamente o cancelé la carga por lo que limpio los errores:

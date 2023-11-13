@@ -190,6 +190,7 @@
     <ClInclude Include="Sistema.h" />
     <ClInclude Include="Stock.h" />
     <ClInclude Include="StockDto.h" />
+    <ClInclude Include="TablaDto.h" />
     <ClInclude Include="Transaccion.h" />
     <ClInclude Include="TransaccionDto.h" />
     <ClInclude Include="Usuario.h" />
