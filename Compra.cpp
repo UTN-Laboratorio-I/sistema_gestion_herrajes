@@ -12,8 +12,8 @@
 
 Compra::Compra()
 {
-	int _idProveedor = 0;
-	char _tipo = 'c';
+	_idProveedor = 0;
+	_tipo = 'c';
 };
 
 
@@ -109,6 +109,7 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 	vector <Producto> producto;
 
 	Response<TransaccionDto> response;
+	Response <Producto> responseProducto;
 
 	Producto productoAcargar;
 	Helper helper;
@@ -183,13 +184,18 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 	//Setamos ID proveedor
 	compra.setIdProveedor(prov.getData().getId());
 
-	TransaccionDto transaccion(_monto, _fecha, _tipo, _cantidadProductos, _usuario);
+	TransaccionDto transaccion(compra._monto, compra._fecha, compra._tipo, compra._cantidadProductos, compra._usuario);
 	Response <TransaccionDto> registro = archivoTransaccion.grabarRegistroArchivo(transaccion);
 
 	bool registroCorrecto = true;
 	for (Detalle detalle : compra._detalle) {
 		//Obtenemos el id del registro y cada detalle de la lista:
 		int id = registro.getData().getId();
+
+		Archivo <Producto> archivoProducto("producto.dat");
+		responseProducto = archivoProducto.grabarRegistroArchivo(detalle.getProducto());
+
+		detalle.setIdProducto(responseProducto.getData().getId());
 		DetalleDto detalleDto(detalle, id);
 
 		Response<DetalleDto> registroDetalle = archivoDetalle.grabarRegistroArchivo(detalleDto);
@@ -232,7 +238,9 @@ void Compra::mostrarCompras()
 	vector <Detalle> vecDetalle;
 	vector <TransaccionDto> vecTransaccion;
 
-	Response <Transaccion> responseTransaccion;
+	TransaccionDto Transaccion;
+
+	Response <TransaccionDto> responseTransaccion;
 
 	Response <Compra> responseCompra;
 	Compra compra;
@@ -241,14 +249,13 @@ void Compra::mostrarCompras()
 
 	vecTransaccion = archivoTransacciones.listarRegistroArchivo();
 
-
-	for (TransaccionDto t : vecTransaccion)
+	for (TransaccionDto a : vecTransaccion)
 	{	
-		if (transaccion.getTipoTransaccion() == 'c')
+		if (a.getTipoTransaccion() == 'c')
 		{
-			cout << transaccion.getId() << endl;
-			cout << transaccion.getMonto() << endl;
-			cout << transaccion.getUsuario() << endl;
+			cout << a.getId() << endl;
+			cout << a.getMonto() << endl;
+			cout << a.getUsuario() << endl;
 		}
 	}
 

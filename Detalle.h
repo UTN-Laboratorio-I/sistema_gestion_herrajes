@@ -10,6 +10,7 @@ public:
 	Detalle(Producto producto, int cantidad);
 	Producto getProducto();
 	int getCantidad();
+	void setIdProducto(int idProducto);
 	void setProducto(Producto producto);
 	void setCantidad(int cantidad);
 };
