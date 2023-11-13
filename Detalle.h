@@ -9,6 +9,7 @@ public:
 	Detalle();
 	Detalle(Producto producto, int cantidad);
 	Producto getProducto();
+	void setIdProducto(int idProducto);
 	int getCantidad();
 	void setProducto(Producto producto);
 	void setCantidad(int cantidad);

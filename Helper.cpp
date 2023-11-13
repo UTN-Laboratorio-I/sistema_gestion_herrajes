@@ -18,6 +18,7 @@ void Helper::limpiarConsola()
 
 void Helper::delayMensaje(string mensaje, int segundos = 3)
 {
+
 	cout << mensaje << endl << endl;
 	cout << "---------------------------------" << endl;
 	this_thread::sleep_for(chrono::seconds(segundos));

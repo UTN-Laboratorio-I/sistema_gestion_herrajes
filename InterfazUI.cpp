@@ -41,6 +41,10 @@ void InterfazUI::headerDinamico()
 	cout << "---------------------------------" << endl << endl;
 }
 
+/// <summary>
+/// Muestra mensaje en pantalla por un tiempo determinado.
+/// Utilizado para mostrar mensajes de response
+/// </summary>
 void InterfazUI::mostrarMensajeDinamico(string mensaje)
 {
 	Helper helper;
@@ -53,6 +57,7 @@ void InterfazUI::mostrarMensajeDinamico(string mensaje)
 
 	helper.limpiarConsola();
 }
+
 /// <summary>
 /// Controla que la opción seleccionada por el menú sea válida.
 /// </summary>
@@ -69,6 +74,9 @@ bool InterfazUI::opcionesValidasMenu(int inicio, int fin, int seleccion, bool im
 	return true;
 }
 
+/// <summary>
+/// Se muestra en caso de querer salir de un proceso.
+/// </summary>
 bool InterfazUI::mensajeCancelarEjecucion(string ejecucion) {
 	headerDinamico();
 	int opc;
@@ -100,6 +108,9 @@ void InterfazUI::vistaLogin() {
 	cout << "Ingrese User/Password " << endl<<endl;
 }
 
+/// <summary>
+/// Consulta si desea apagar o cerrar sesión al salir del programa.
+/// </summary>
 int InterfazUI::apagarOCerrarSesion() {
 	Helper helper;
 	helper.limpiarConsola();
@@ -117,6 +128,9 @@ int InterfazUI::apagarOCerrarSesion() {
 	return opc;
 }
 
+/// <summary>
+/// Muestra un mensaje final al apagar el programa.
+/// </summary>
 void InterfazUI::mensajeCierrePrograma() {
 	Helper helper;
 	helper.limpiarConsola();

@@ -1,6 +1,7 @@
 #include "AdminUsuario.h"
 #include "InterfazUI.h"
 #include "Archivo.h"
+#include "Helper.h"
 
 AdminUsuario::AdminUsuario(Sistema* sistema) {
 	_sistema = sistema;
@@ -66,6 +67,8 @@ void AdminUsuario::listarUsuarios() {
 
 void AdminUsuario::creacionNuevoUsuario() {
 	InterfazUI user_UI(_sistema);
+	Helper helper;
+
 	bool continuar = false;
 	while (!continuar) {
 		Usuario nuevoUser;
@@ -86,10 +89,9 @@ void AdminUsuario::creacionNuevoUsuario() {
 		else {
 		//Caso contrario, no permito la salida del bucle while hasta que se cree el usuario correctamente
 			_sistema->setError(res.getMessage());
-
 			continuar = user_UI.mensajeCancelarEjecucion("creacion de usuario");
-
 		}
+		user_UI.mostrarMensajeDinamico(res.getMessage());
 
 	}
 	//Si salgo del bucle while, es porque se creó el usuario correctamente o cancelé la carga por lo que limpio los errores:

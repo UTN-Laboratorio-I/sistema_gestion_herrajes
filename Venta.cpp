@@ -102,7 +102,7 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 	venta.setTipoTransaccion(_tipo);
 
 	//Guardamos la venta en el archivo:
-	TransaccionDto transaccion(_monto, _fecha, _tipo, _cantidadProductos, _usuario);
+	TransaccionDto transaccion(venta._monto, venta._fecha, venta._tipo, venta._cantidadProductos, venta._usuario);
 	Response<TransaccionDto> registro = archivoTransaccion.grabarRegistroArchivo(transaccion);
 
 	bool registroCorrecto = true;
