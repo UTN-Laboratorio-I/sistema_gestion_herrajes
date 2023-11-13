@@ -20,17 +20,25 @@ private:
     vector<columnas> _columnas;
     string _tipo;
     vector<T> _datos;
-    bool _limpiarPantalla = true;
-    int _anchoTotalTabla = 0;
+    bool _limpiarPantalla;
+    int _anchoTotalTabla;
     int _conversion_tipo;
 
 
 public:
     TablaDto() {}
+
+    /// <summary>
+    /// Constructor que recibe el tipo de tabla y los datos a mostrar
+    /// </summary>
+    /// <param name="tipo"></param>
+    /// <param name="datos"></param>
     TablaDto(string tipo, vector<T> datos) {
         _datos = datos;
         _columnas = getColumnas();
         _conversion_tipo = helper.conversorNombreTablaSwitch(tipo);
+        _anchoTotalTabla = 0;
+        _limpiarPantalla = true;
     }
     /// <summary>
     /// Muestra tanto el header como el contenido de la tabla:
@@ -70,6 +78,13 @@ public:
             columnasResult.push_back({ "Cantidad", 15 });
             columnasResult.push_back({ "Subtotal", 20 });
             break;
+        case 2: //Ventas
+			columnasResult.push_back({ "Id", 5 });
+			columnasResult.push_back({ "Nombre", 30 });
+			columnasResult.push_back({ "Precio", 15 });
+			columnasResult.push_back({ "Cantidad", 15 });
+			columnasResult.push_back({ "Subtotal", 20 });
+			break;
         default:
             break;
         }
@@ -103,7 +118,15 @@ public:
 				cout << setw(_columnas[4].ancho) << datos.getSubtotal();
 				cout << endl;
 			}
-
+        case 2: //Ventas
+            for (T datos : _datos) {
+				cout << setw(_columnas[0].ancho) << datos.getId();
+				cout << setw(_columnas[1].ancho) << datos.getNombre();
+				cout << setw(_columnas[2].ancho) << datos.getPrecio();
+				cout << setw(_columnas[3].ancho) << datos.getCantidad();
+				cout << setw(_columnas[4].ancho) << datos.getSubtotal();
+				cout << endl;
+			}
             break;
         }
     }
