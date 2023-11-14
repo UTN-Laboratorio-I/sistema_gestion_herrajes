@@ -42,7 +42,7 @@ void Venta::agregarProducto(Producto producto) {
 	this->agregarADetalleVenta(producto, cant);
 }
 
-void Venta::carritoDeVenta() {
+void Venta::carritoDeVenta(bool ventaRealizada=false) {
 	vector<DetalleDto> carrito;
 	for (Detalle detalle : _detalle) {
 		//Obtenemos el id del registro y cada detalle de la lista:
@@ -52,12 +52,20 @@ void Venta::carritoDeVenta() {
 	}
 
 	if (!_detalle.empty()) {
-	cout << "Carrito de venta: " << endl;
+		if (ventaRealizada) {
+			cout << "Venta realizada con exito!" << endl;
+		}
+		else {
+			cout << "Carrito de venta: " << endl;
+		}
 	TablaDto<DetalleDto> tabla("carrito", carrito, false);
 
 	tabla.generarCarritoProductos(carrito);
 
 	}
+
+	if (ventaRealizada)
+		system("pause");
 	cout << endl << endl;
 }
 
@@ -97,7 +105,8 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 		cin >> opc;
 		if (opc == 's' || opc == 'S') {
 			finalizarVenta = !finalizarVenta;
-
+			sistema->setSubModulo("VENTA FINALIZADA");
+			ventas_UI.headerDinamico();
 		}
 		
 	}
@@ -149,9 +158,11 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 	if (registro.getSuccess() && registroCorrecto) {
 		//caja.gestionarCaja(_monto, _tipo);
 		response.setSuccess("Se registro la venta correctamente", registro.getData());
+		venta.carritoDeVenta(true);
 	}
 	else {
 		response.setFailure("No se pudo registrar la venta");
 	}
+	sistema->limpiarSubModulo();
 	return response;
 }

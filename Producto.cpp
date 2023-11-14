@@ -8,6 +8,7 @@
 using namespace std;
 
 Producto::Producto(){
+	
 	_id = 0;
 	_precioCosto = 0;
 	_precioVenta = 0;
@@ -136,18 +137,31 @@ void Producto::mostrarProductos()
 Producto Producto::listarYSeleccionarProductoVenta() {
 	Archivo<Producto> archivoProducto("productos.dat");
 	vector<Producto> listaProductos = archivoProducto.listarRegistroArchivo();
-	TablaDto<Producto> tabla("productos", listaProductos, false);
-
-	cout << "LISTA DE PRODUCTOS: " << endl;
-	tabla.generarTablaProductos(listaProductos);
-
-	int idProducto;
-	cout << "Seleccione el producto: ";
-	cin >> idProducto;
+	//modificar stock según inventario:
+	Archivo<StockDto> archivoStock("stock.dat");
+	vector<StockDto> stock;
+	stock = archivoStock.listarRegistroArchivo();
 
 	for (Producto prod : listaProductos) {
-		if (prod.getId() == idProducto) {
-			return prod;
+		for (StockDto s : stock) {
+			if (s.getIdProducto() == prod.getId()) {
+				prod.setCantidad(s.getCantidadTotal());
+			}
+		}
+
+		TablaDto<Producto> tabla("productos", listaProductos, false);
+
+		cout << "LISTA DE PRODUCTOS: " << endl;
+		tabla.generarTablaProductos(listaProductos);
+
+		int idProducto;
+		cout << "Seleccione el producto: ";
+		cin >> idProducto;
+
+		for (Producto prod : listaProductos) {
+			if (prod.getId() == idProducto) {
+				return prod;
+			}
 		}
 	}
 }
