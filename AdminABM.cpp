@@ -47,10 +47,11 @@ void AdminABM::administrarSubModuloABMCliente() {
 	while (subModuloABMActivo(_nombreSubModuloCliente)) {
 		ABM_UI.ver_SubMenuABMCliente();
 		int opc = _sistema->getPantalla();
+		Cliente nuevoCliente;
 
 		switch (opc) {
 		case 1:
-			//AGREGAR CLIENTE
+			nuevoCliente.cargarCliente();
 			break;
 		case 2:
 			//ELIMINAR CLIENTE

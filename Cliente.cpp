@@ -1,5 +1,6 @@
 #include "Cliente.h"
 #include "Archivo.h"
+#include "TablaDto.h"
 
 using namespace std;
 
@@ -63,24 +64,22 @@ void Cliente::setRazonSocial(const char* razonSocial){strcpy_s(_razonSocial, raz
 Cliente Cliente::listarYSeleccionarClienteExistente() {
 	Archivo<Cliente> archivoCliente("clientes.dat");
 	vector<Cliente> clientes = archivoCliente.listarRegistroArchivo();
+	TablaDto<Cliente> tabla("clientes", clientes, false);
 
 	if(clientes.size() == 0) {
 		cout << "No hay clientes cargados" << endl;
 		return Cliente();
 	};
 
-	for(Cliente cliente : clientes) {
-		cout << "ID: " << cliente.getIdCliente() << " - " << cliente.getRazonSocial() << endl;
-	};
+	tabla.generarTablaClientes(clientes);
 
 	int idCliente;
 	cout << "Seleccione el cliente: ";
 	cin >> idCliente;
-
+	
 	for (Cliente cliente : clientes) {
 		if (cliente.getIdCliente() == idCliente) {
 			return cliente;
 		}
 	};
-
 }

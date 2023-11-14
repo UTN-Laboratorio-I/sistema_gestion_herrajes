@@ -26,27 +26,27 @@ void AdminReporte::administrarModuloReporte()
 
 		switch (opc) {
 		case 1:
-			_sistema->setModuloPantalla("Reporte Clientes", -1);
+			_sistema->setModulo("Reporte Clientes");
 			administrarSubModuloReporteCliente();
 
 			break;
 		case 2:
-			_sistema->setModuloPantalla("Reporte Proveedores", -1);
+			_sistema->setModulo("Reporte Proveedores");
 			administrarSubModuloReporteProveedor();
 
 			break;
 		case 3:
-			_sistema->setModuloPantalla("Reporte Productos", -1);
+			_sistema->setModulo("Reporte Productos");
 			administrarSubModuloReporteProducto();
 
 			break;
 		case 4:
-			_sistema->setModuloPantalla("Reporte Ventas", -1);
+			_sistema->setModulo("Reporte Ventas");
 			administrarSubModuloReporteCaja();
 
 			break;
 		case 5:
-			_sistema->setModuloPantalla("Reporte Usuarios", -1);
+			_sistema->setModulo("Reporte Usuarios");
 			//administrarSubModuloUsuarios();
 		case 0: //SALIR DEL MÓDULO REPORTES:
 			moduloReporteSalir();
@@ -60,12 +60,15 @@ void AdminReporte::administrarSubModuloReporteCliente() {
 	InterfazUI Reporte_UI(_sistema);
 
 	while (subModuloReporteActivo(_nombreSubModuloCliente)) {
+		const char* nombreArchivo = "clientes.dat";
 		Reporte_UI.ver_SubMenuReportesCliente();
 		int opc = _sistema->getPantalla();
+		Reporte reporte(nombreArchivo, "reporte clientes");
 
 		switch (opc) {
 		case 1:
-			//AGREGAR CLIENTE
+			_sistema->setSubModulo("Reporte Clientes");
+			reporte.generarReporteClientes();
 			break;
 		case 2:
 			//ELIMINAR CLIENTE

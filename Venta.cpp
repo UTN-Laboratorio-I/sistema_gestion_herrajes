@@ -1,9 +1,11 @@
 #include <iostream>
+#include <vector>
 #include "Venta.h"
 #include "InterfazUI.h"
 #include "Cliente.h"
 #include "Caja.h"
 #include "DetalleDto.h"
+#include "TablaDto.h"
 
 using namespace std;
 Venta::Venta() {
@@ -40,6 +42,33 @@ void Venta::agregarProducto(Producto producto) {
 	this->agregarADetalleVenta(producto, cant);
 }
 
+void Venta::carritoDeVenta(bool ventaRealizada=false) {
+	vector<DetalleDto> carrito;
+	for (Detalle detalle : _detalle) {
+		//Obtenemos el id del registro y cada detalle de la lista:
+		int id = _id;
+		DetalleDto detalleDto(detalle, id);
+		carrito.push_back(detalleDto);
+	}
+
+	if (!_detalle.empty()) {
+		if (ventaRealizada) {
+			cout << "Venta realizada con exito!" << endl;
+		}
+		else {
+			cout << "Carrito de venta: " << endl;
+		}
+	TablaDto<DetalleDto> tabla("carrito", carrito, false);
+
+	tabla.generarCarritoProductos(carrito);
+
+	}
+
+	if (ventaRealizada)
+		system("pause");
+	cout << endl << endl;
+}
+
 Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 	InterfazUI ventas_UI(sistema); //Utilizo ésta instancia para utilizar limpiarConsola y
 	//headerDinamico, y así evitar que la consola se ensucie entre pantalla y pantalla.
@@ -60,7 +89,9 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 		Producto producto;
 		char opc;
 
+
 		ventas_UI.headerDinamico();
+		venta.carritoDeVenta();
 		//Obtener listado de productos disponibles para venta:
 		producto = producto.listarYSeleccionarProductoVenta();
 
@@ -74,7 +105,8 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 		cin >> opc;
 		if (opc == 's' || opc == 'S') {
 			finalizarVenta = !finalizarVenta;
-
+			sistema->setSubModulo("VENTA FINALIZADA");
+			ventas_UI.headerDinamico();
 		}
 		
 	}
@@ -126,9 +158,11 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 	if (registro.getSuccess() && registroCorrecto) {
 		//caja.gestionarCaja(_monto, _tipo);
 		response.setSuccess("Se registro la venta correctamente", registro.getData());
+		venta.carritoDeVenta(true);
 	}
 	else {
 		response.setFailure("No se pudo registrar la venta");
 	}
+	sistema->limpiarSubModulo();
 	return response;
 }

@@ -149,6 +149,7 @@
     <ClCompile Include="Producto.cpp" />
     <ClCompile Include="AdminReporte.cpp" />
     <ClCompile Include="Proveedor.cpp" />
+    <ClCompile Include="Reporte.cpp" />
     <ClCompile Include="Sistema.cpp" />
     <ClCompile Include="sistema_gestion_herrajes.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>

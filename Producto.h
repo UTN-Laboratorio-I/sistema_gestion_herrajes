@@ -33,6 +33,7 @@ public:
 
     Producto listarYSeleccionarProductoVenta();
 
+    void tablaProductosContenido(vector<Producto> lista, vector<int> columnas, int anchoTabla);
 
 private:
 

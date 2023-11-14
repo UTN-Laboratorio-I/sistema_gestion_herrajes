@@ -1,8 +1,21 @@
 #pragma once
+#include <iostream>
+#include <string>
+
+using namespace std;
+
 class Reporte
 {
 private:
-	char _nombreReporte[50];
+	const char* _nombreArchivo;
+	string _nombreModulo;
 
+public:
+	Reporte();
+	Reporte(const char* nombreArchivo, string nombreModulo);
+
+	char opcionesMenuReporte();
+
+	void generarReporteClientes();
 };
 

@@ -1,9 +1,12 @@
+#include <iostream>
+#include <string>
 #include "AdminVenta.h"
 #include "InterfazUI.h"
 #include "Venta.h"
 #include "Cliente.h"
 #include "Caja.h"
 
+using namespace std;
 //Constructor:
 AdminVenta::AdminVenta(Sistema* sistema) : _sistema(sistema) {
 	_nombreModulo = "Ventas";
@@ -60,6 +63,7 @@ void AdminVenta::registrarNuevaVenta() {
 		switch (opc) {
 		case 1:
 			_sistema->setSubModulo("Seleccion cliente existente");
+			ventas_UI.headerDinamico();
 			cliente = cliente.listarYSeleccionarClienteExistente();
 			if (cliente.getIdCliente() == 0) {
 				_sistema->setError("No hay clientes creados");
@@ -69,6 +73,8 @@ void AdminVenta::registrarNuevaVenta() {
 			}
 			else {
 				venta.setClienteId(cliente.getIdCliente());
+				
+				ventas_UI.mostrarMensajeDinamico("Cliente seleccionado correctamente");
 			}
 
 			break;

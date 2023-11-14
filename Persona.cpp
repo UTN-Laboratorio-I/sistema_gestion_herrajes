@@ -53,8 +53,8 @@ char* Persona::getNombre(){return _nombre;}
 char* Persona::getApellido(){return _apellido;}
 char* Persona::getDomicilio(){return _direccion;}
 char* Persona::getEmail(){return _email;}
-Fecha Persona::getFechaNacimiento() { return _fechaNacimiento; }
 Fecha Persona::getFechaAlta(){return _fechaAlta;}
+bool Persona::getEstado(){return _estado;}
 
 void Persona::cargar(){
 	int dni;
