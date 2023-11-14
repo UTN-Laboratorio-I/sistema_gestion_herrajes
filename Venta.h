@@ -24,6 +24,7 @@ public:
 	void agregarADetalleVenta(Producto producto, int cantidad);
 
 	void agregarProducto(Producto producto);
+	void carritoDeVenta();
 	
 	Response<TransaccionDto> crearNuevaVenta(Sistema* sistema);//Le paso el parametro sistema para poder utilizar la UI (Sobre todo el limpiarConsola y headerDinamico)
 

@@ -137,8 +137,9 @@ Producto Producto::listarYSeleccionarProductoVenta() {
 	Archivo<Producto> archivoProducto("productos.dat");
 	vector<Producto> listaProductos = archivoProducto.listarRegistroArchivo();
 	TablaDto<Producto> tabla("productos", listaProductos, false);
-	tabla.generarTablaProductos(listaProductos);
 
+	cout << "LISTA DE PRODUCTOS: " << endl;
+	tabla.generarTablaProductos(listaProductos);
 
 	int idProducto;
 	cout << "Seleccione el producto: ";

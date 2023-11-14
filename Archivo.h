@@ -193,6 +193,16 @@ public:
            
     }
 
+    Response<T> buscarUnRegistro(int id) {
+        T obj;
+        Response<T> res;
+        int pos = buscarPosRegistro(T(), id);
+
+        res = listarUnRegistro(pos, T());
+
+        return res;
+    }
+
     template <class FuncionValidacion>
     Response<T> grabarOModificarRegistro(T objeto, int idBuscado, FuncionValidacion validacion) {
         Response<T> response;

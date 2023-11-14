@@ -1,9 +1,11 @@
 #include <iostream>
+#include <vector>
 #include "Venta.h"
 #include "InterfazUI.h"
 #include "Cliente.h"
 #include "Caja.h"
 #include "DetalleDto.h"
+#include "TablaDto.h"
 
 using namespace std;
 Venta::Venta() {
@@ -40,6 +42,25 @@ void Venta::agregarProducto(Producto producto) {
 	this->agregarADetalleVenta(producto, cant);
 }
 
+void Venta::carritoDeVenta() {
+	vector<DetalleDto> carrito;
+	for (Detalle detalle : _detalle) {
+		//Obtenemos el id del registro y cada detalle de la lista:
+		int id = _id;
+		DetalleDto detalleDto(detalle, id);
+		carrito.push_back(detalleDto);
+	}
+
+	if (!_detalle.empty()) {
+	cout << "Carrito de venta: " << endl;
+	TablaDto<DetalleDto> tabla("carrito", carrito, false);
+
+	tabla.generarCarritoProductos(carrito);
+
+	}
+	cout << endl << endl;
+}
+
 Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 	InterfazUI ventas_UI(sistema); //Utilizo ésta instancia para utilizar limpiarConsola y
 	//headerDinamico, y así evitar que la consola se ensucie entre pantalla y pantalla.
@@ -60,7 +81,9 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 		Producto producto;
 		char opc;
 
+
 		ventas_UI.headerDinamico();
+		venta.carritoDeVenta();
 		//Obtener listado de productos disponibles para venta:
 		producto = producto.listarYSeleccionarProductoVenta();
 

@@ -5,6 +5,9 @@
 #include "Usuario.h"
 #include "Producto.h"
 #include "Cliente.h"
+#include "DetalleDto.h"
+#include "Transaccion.h"
+
 using namespace std;
 
 #pragma once
@@ -98,9 +101,17 @@ public:
             columnasResult.push_back({ "Razon Social", 30 });
             columnasResult.push_back({ "Cuit", 30 });
 			break;
+        case 3: //Carrito
+            columnasResult.push_back({ "Item nro", 10 });
+			columnasResult.push_back({ "Nombre Producto", 20 });
+			columnasResult.push_back({ "Precio Unitario", 20 });
+			columnasResult.push_back({ "Cantidad", 10 });
+            columnasResult.push_back({ "Subtotal", 15 });
+			break;
         default:
             break;
         }
+
         for (columnas col : columnasResult) {
 			_anchoColumnas.push_back(col.ancho);
 		}
@@ -145,6 +156,26 @@ public:
             cout << setw(_columnas[3].ancho) << datos.getRazonSocial();
             cout << setw(_columnas[4].ancho) << datos.getCuit();
             cout << endl;
+        }
+        cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
+    }
+
+    void generarCarritoProductos(vector<DetalleDto> carrito) {
+        Producto producto;
+        Response<Producto> res;
+        Archivo<Producto> archivoProducto("productos.dat");
+        int contador = 1;
+        mostrarHeaderTabla();
+        for (DetalleDto datos : carrito) {
+            res = archivoProducto.buscarUnRegistro(datos.getIdProducto());
+            int subtotal = datos.getCantidad() * datos.getPrecioUnitario();
+            cout << setw(_columnas[0].ancho) << contador;
+            cout << setw(_columnas[1].ancho) << res.getData().getNombreProducto();
+            cout << setw(_columnas[2].ancho) << datos.getCantidad();
+            cout << setw(_columnas[3].ancho) << datos.getPrecioUnitario();
+            cout << setw(_columnas[4].ancho) << subtotal;
+            cout << endl;
+            contador++;
         }
         cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
     }

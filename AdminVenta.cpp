@@ -1,9 +1,12 @@
+#include <iostream>
+#include <string>
 #include "AdminVenta.h"
 #include "InterfazUI.h"
 #include "Venta.h"
 #include "Cliente.h"
 #include "Caja.h"
 
+using namespace std;
 //Constructor:
 AdminVenta::AdminVenta(Sistema* sistema) : _sistema(sistema) {
 	_nombreModulo = "Ventas";
@@ -70,6 +73,8 @@ void AdminVenta::registrarNuevaVenta() {
 			}
 			else {
 				venta.setClienteId(cliente.getIdCliente());
+				
+				ventas_UI.mostrarMensajeDinamico("Cliente seleccionado correctamente");
 			}
 
 			break;
