@@ -335,7 +335,7 @@ void InterfazUI::ver_SubMenuABMCliente() {
 			cin >> opc;
 			verificado = opcionesValidasMenu(1, 5, opc);
 		}
-		_sistema->setModuloPantalla("ABM Proveedor", opc);
+		_sistema->setModuloPantalla("ABM Proveedores", opc);
 	}
 
 	void InterfazUI::ver_SubMenuABMProducto() {
@@ -355,7 +355,7 @@ void InterfazUI::ver_SubMenuABMCliente() {
 			cin >> opc;
 			verificado = opcionesValidasMenu(1, 5, opc);
 		}
-		_sistema->setModuloPantalla("ABM Producto", opc);
+		_sistema->setModuloPantalla("ABM Productos", opc);
 	}
 
 
@@ -367,17 +367,19 @@ void InterfazUI::ver_MenuReportes() {
 	helper.limpiarConsola();
 	int opc;
 	bool verificado = false;
-
+	bool isAdmin = _sistema->getIsAdminUsuarioLogged();
 	while (!verificado) {
 		headerDinamico();
 		cout << "1) Reporte Clientes" << endl;
 		cout << "2) Reporte Proveedores" << endl;
 		cout << "3) Reporte Productos" << endl;
 		cout << "4) Reporte Caja" << endl;
+		if (isAdmin) {
 		cout << "5) Reporte Usuarios" << endl << endl;
+		}
 		cout << "0) <- Atras" << endl;
 		cin >> opc;
-		verificado = opcionesValidasMenu(1, 5, opc);
+		verificado = opcionesValidasMenu(1, isAdmin?5:4, opc);
 	}
 	_sistema->setModuloPantalla("Reporte", opc);
 }
@@ -472,6 +474,24 @@ void InterfazUI::ver_MenuUsuario() {
 	}
 	_sistema->setModuloPantalla("Usuarios", opc);
 }
+
+void InterfazUI::ver_SubMenuReportesUsuario() {
+Helper helper;
+	helper.limpiarConsola();
+	int opc;
+	bool verificado = false;
+
+	while (!verificado) {
+		headerDinamico();
+		cout << "1) Listar Usuarios" << endl;
+		cout << "2) Buscar Usuario" << endl << endl;
+		cout << "0) <- Atras" << endl;
+		cin >> opc;
+		verificado = opcionesValidasMenu(1, 2, opc);
+	}
+	_sistema->setModuloPantalla("Reporte Usuarios", opc);
+}
+
 #pragma endregion UI_Usuario
 
 #pragma region UI_Configuracion
