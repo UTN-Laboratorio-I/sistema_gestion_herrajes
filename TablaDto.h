@@ -35,6 +35,7 @@ private:
     bool _limpiarPantalla;
     int _anchoTotalTabla;
     int _conversion_tipo;
+    bool _isReporte;
 
 
 public:
@@ -45,12 +46,14 @@ public:
     /// </summary>
     /// <param name="tipo"></param>
     /// <param name="datos"></param>
-    TablaDto(string tipo, vector<T> datos, bool limpiarPantalla=true) {
+    TablaDto(string tipo, vector<T> datos, bool limpiarPantalla=true, bool isReporte=false) {
         _datos = datos;
         _conversion_tipo = helper.conversorNombreTablaSwitch(tipo);
         _columnas = getColumnas();
         _anchoTotalTabla = 0;
         _limpiarPantalla = limpiarPantalla;
+        _isReporte = isReporte;
+        _tipo = tipo;
     }
 
     int getAnchoTotalTabla() { return _anchoTotalTabla; }
@@ -61,10 +64,18 @@ public:
     /// </summary>
     void mostrarHeaderTabla() {
         if (_limpiarPantalla) helper.limpiarConsola();
+
+        for (columnas col : _columnas) {
+			_anchoTotalTabla += col.ancho;
+        }
+
+        if (_isReporte) {
+        cout <<_tipo << endl;
+        cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl << endl;
+        }
+
         for (columnas col : _columnas) {
             cout << setw(col.ancho) << col.header;
-            _anchoTotalTabla += col.ancho;
-
         }
         cout << endl;
         cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
@@ -109,7 +120,7 @@ public:
             columnasResult.push_back({ "Subtotal", 15 });
 			break;
         case 4: //Reporte cliente
-            columnasResult.push_back({ "Id", 5 });
+            columnasResult.push_back({ "Id", 2 });
 			columnasResult.push_back({ "Nombre", 30 });
             columnasResult.push_back({ "Apellido", 30 });
             columnasResult.push_back({ "Razon Social", 30 });
@@ -239,6 +250,7 @@ public:
     }
 
     void generarReporteClientes(vector<Cliente> lista) {
+
 		mostrarHeaderTabla();
 		for (Cliente datos : lista) {
 			cout << setw(_columnas[0].ancho) << datos.getIdCliente();
@@ -248,11 +260,10 @@ public:
 			cout << setw(_columnas[4].ancho) << datos.getCuit();
 			cout << setw(_columnas[5].ancho) << datos.getFechaAlta().toString();
 			cout << setw(_columnas[6].ancho) << datos.getEmail();
-			cout << setw(_columnas[7].ancho) << datos.getEstado();
+            cout << std::noboolalpha << std::setw(_columnas[7].ancho) << datos.getEstado();
 			cout << endl;
 		}
 		cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
-        system("pause");
 	}
 #pragma endregion contenido
     
