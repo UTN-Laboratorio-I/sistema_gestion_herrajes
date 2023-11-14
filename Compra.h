@@ -6,6 +6,8 @@
 #include "Proveedor.h"
 #include <vector>;
 #include "Producto.h"
+#include "Stock.h"
+#include "StockDto.h"
 
 class Compra : public Transaccion 
 {
@@ -30,6 +32,8 @@ public:
 	void agregarADetalleCompra(Producto producto, int cantidad);
 
 	void mostrarCompras();
+
+	void mostrarProductosComprados();
 
 	bool realizarCompra(Sistema* sistema);
 

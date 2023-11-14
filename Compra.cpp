@@ -84,7 +84,7 @@ bool Compra::realizarCompra(Sistema* sistema)
 			//proveedor = responseNuevoProveedor.getData();
 			break;
 		case 3:
-			mostrarCompras();
+			compra.mostrarCompras();
 			break;
 		case 0:
 			sistema->setModuloPantalla("Compras", 0);
@@ -201,7 +201,7 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 		Response<DetalleDto> registroDetalle = archivoDetalle.grabarRegistroArchivo(detalleDto);
 
 		//Modificamos el stock del producto:
-		//stock.gestionarStock(detalle.getProducto().getId(), detalle.getCantidad(), _tipo);
+		stock.gestionarStock(detalle.getProducto().getId(), detalle.getCantidad(), _tipo);
 
 
 		//Si algún registro falla, devolvemos false:
@@ -233,19 +233,12 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 void Compra::mostrarCompras()
 {
 	Archivo <TransaccionDto> archivoTransacciones("transacciones.dat");
-	Archivo <Detalle> arhivoDetalle("detalle.dat");
 
-	vector <Detalle> vecDetalle;
 	vector <TransaccionDto> vecTransaccion;
-
-	TransaccionDto Transaccion;
 
 	Response <TransaccionDto> responseTransaccion;
 
 	Response <Compra> responseCompra;
-	Compra compra;
-	Detalle detalle;
-	TransaccionDto transaccion;
 
 	vecTransaccion = archivoTransacciones.listarRegistroArchivo();
 
@@ -257,6 +250,22 @@ void Compra::mostrarCompras()
 			cout << a.getMonto() << endl;
 			cout << a.getUsuario() << endl;
 		}
+	}
+
+	system("pause");
+}
+
+void Compra::mostrarProductosComprados()
+{
+	Stock stock;
+	vector <Stock> vectorStock;
+	Archivo <Stock> archivoStock("stock.dat");
+
+	vectorStock = archivoStock.listarRegistroArchivo();
+	
+	for (Stock s : vectorStock)
+	{
+		s.mostrarStock();
 	}
 
 	system("pause");

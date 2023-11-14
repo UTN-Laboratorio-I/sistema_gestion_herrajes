@@ -3,6 +3,22 @@
 #include "StockDto.h"
 
 Stock::Stock() {};
+
+
+
+//GETTERS
+
+int Stock::getIdProducto() {
+	return idProducto;
+}
+
+int Stock::getCantidad()
+{
+	return cantidadTotal;
+}
+
+//
+
 Response<Stock> Stock::gestionarStock(int cantidad, int idProducto, char tipoTransaccion) {
 	Response<Stock> response;
 	Response<StockDto> responseDto;
@@ -56,4 +72,18 @@ Response<StockDto> Stock::restarStock(int cantidad, int idProducto) {
 	response = archivoStock.grabarOModificarRegistro(stock, idProducto, funcionValidar);
 
 	return response;
+}
+
+void Stock::mostrarStock()
+{
+	Archivo <Producto> archivoProducto("productos.dat");
+	Response <Producto> responseProducto;
+	Producto producto;
+
+	responseProducto = archivoProducto.listarUnRegistro(this->getIdProducto(), producto);
+
+	cout << responseProducto.getData().getId() << endl;
+	cout << responseProducto.getData().getDescripcionProducto() << endl;
+	cout << this->getCantidad() << endl;
+
 }
