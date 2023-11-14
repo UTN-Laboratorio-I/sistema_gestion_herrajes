@@ -57,6 +57,7 @@ void AdminCompra::administrarModuloCompra() {
 			break;
 		case 2:
 			compras_UI.headerDinamico();
+			compra.mostrarProductosComprados();
 			break;
 		case 0: //SALIR DEL MÓDULO COMPRA:
 			moduloCompraSalir();

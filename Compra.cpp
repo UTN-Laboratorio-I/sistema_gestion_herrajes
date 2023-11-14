@@ -84,7 +84,7 @@ bool Compra::realizarCompra(Sistema* sistema)
 			//proveedor = responseNuevoProveedor.getData();
 			break;
 		case 3:
-			mostrarCompras();
+			compra.mostrarCompras();
 			break;
 		case 0:
 			sistema->setModuloPantalla("Compras", 0);
@@ -250,6 +250,22 @@ void Compra::mostrarCompras()
 			cout << a.getMonto() << endl;
 			cout << a.getUsuario() << endl;
 		}
+	}
+
+	system("pause");
+}
+
+void Compra::mostrarProductosComprados()
+{
+	Stock stock;
+	vector <Stock> vectorStock;
+	Archivo <Stock> archivoStock("stock.dat");
+
+	vectorStock = archivoStock.listarRegistroArchivo();
+	
+	for (Stock s : vectorStock)
+	{
+		s.mostrarStock();
 	}
 
 	system("pause");
