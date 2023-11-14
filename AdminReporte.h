@@ -1,9 +1,11 @@
 #include <iostream>
 #include "Sistema.h"
+#include "Reporte.h"
 #pragma once
 
 class AdminReporte
 {
+
 private:
 	string _nombreModulo;
 	string _nombreSubModuloCliente;
@@ -39,5 +41,6 @@ public:
 	void pantallaReporteProveedores();
 	void pantallaReporteProductos();
 	void pantallaReporteVentas();
+
 };
 

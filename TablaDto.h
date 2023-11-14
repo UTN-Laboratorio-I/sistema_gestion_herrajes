@@ -108,6 +108,64 @@ public:
 			columnasResult.push_back({ "Cantidad", 10 });
             columnasResult.push_back({ "Subtotal", 15 });
 			break;
+        case 4: //Reporte cliente
+            columnasResult.push_back({ "Id", 5 });
+			columnasResult.push_back({ "Nombre", 30 });
+            columnasResult.push_back({ "Apellido", 30 });
+            columnasResult.push_back({ "Razon Social", 30 });
+            columnasResult.push_back({ "Cuit", 30 });
+            columnasResult.push_back({ "Fecha Alta", 30 });
+            columnasResult.push_back({ "E-mail", 30 });
+            columnasResult.push_back({ "Estado", 10 });
+            break;
+        case 5: //Reporte proveedores
+            columnasResult.push_back({ "Id", 5 });
+			columnasResult.push_back({ "Nombre", 30 });
+			columnasResult.push_back({ "Apellido", 30 });
+			columnasResult.push_back({ "Razon Social", 30 });
+			columnasResult.push_back({ "Cuit", 30 });
+			columnasResult.push_back({ "Fecha Alta", 30 });
+			columnasResult.push_back({ "E-mail", 30 });
+			columnasResult.push_back({ "Estado", 10 });
+			break;
+        case 6: //Reporte productos
+            columnasResult.push_back({ "Id", 5 });
+			columnasResult.push_back({ "Nombre", 30 });
+            columnasResult.push_back({ "Descripción", 30 });
+            columnasResult.push_back({ "Precio Costo", 15 });
+            columnasResult.push_back({ "Precio Venta", 15 });
+            columnasResult.push_back({ "Stock disponible", 15 });
+			break;
+        case 7: //Reporte Usuarios
+            columnasResult.push_back({ "Id", 5 });
+			columnasResult.push_back({ "Usuario", 30 });
+            columnasResult.push_back({ "Nombre", 30 });
+            columnasResult.push_back({ "Rol", 20 });
+			break;
+        case 8: //Reporte ventas
+			columnasResult.push_back({ "Id", 5 });
+            columnasResult.push_back({ "Fecha", 30 });
+            columnasResult.push_back({ "Total", 30 });
+            columnasResult.push_back({ "Id Cliente", 30 });
+            columnasResult.push_back({ "Id Usuario", 30 });
+			break;
+        case 9: //Reporte compras
+            columnasResult.push_back({ "Id", 5 });
+			columnasResult.push_back({ "Fecha", 30 });
+			columnasResult.push_back({ "Total", 30 });
+			columnasResult.push_back({ "Id Proveedor", 30 });
+			columnasResult.push_back({ "Id Usuario", 30 });
+        case 10: //Reporte caja
+            columnasResult.push_back({ "Saldo Total", 10 });
+            break;
+        case 11: //Reporte stock
+			columnasResult.push_back({ "Id", 5 });
+			columnasResult.push_back({ "Nombre", 30 });
+			columnasResult.push_back({ "Descripción", 30 });
+			columnasResult.push_back({ "Precio Costo", 15 });
+			columnasResult.push_back({ "Precio Venta", 15 });
+			columnasResult.push_back({ "Stock disponible", 15 });
+			break;
         default:
             break;
         }
@@ -179,6 +237,23 @@ public:
         }
         cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
     }
+
+    void generarReporteClientes(vector<Cliente> lista) {
+		mostrarHeaderTabla();
+		for (Cliente datos : lista) {
+			cout << setw(_columnas[0].ancho) << datos.getIdCliente();
+			cout << setw(_columnas[1].ancho) << datos.getNombre();
+			cout << setw(_columnas[2].ancho) << datos.getApellido();
+			cout << setw(_columnas[3].ancho) << datos.getRazonSocial();
+			cout << setw(_columnas[4].ancho) << datos.getCuit();
+			cout << setw(_columnas[5].ancho) << datos.getFechaAlta().toString();
+			cout << setw(_columnas[6].ancho) << datos.getEmail();
+			cout << setw(_columnas[7].ancho) << datos.getEstado();
+			cout << endl;
+		}
+		cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
+        system("pause");
+	}
 #pragma endregion contenido
     
 
