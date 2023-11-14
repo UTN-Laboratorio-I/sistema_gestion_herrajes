@@ -7,6 +7,7 @@
 #include "Cliente.h"
 #include "DetalleDto.h"
 #include "Transaccion.h"
+#include "Proveedor.h"
 
 using namespace std;
 
@@ -95,6 +96,7 @@ public:
 			columnasResult.push_back({ "Usuario", 30 });
 			columnasResult.push_back({ "Nombre", 30 });
 			columnasResult.push_back({ "Rol", 20 });
+            columnasResult.push_back({ "Admin", 10 });
 			break;
         case 1: //Productos
             columnasResult.push_back({ "Id", 5 });
@@ -125,9 +127,9 @@ public:
             columnasResult.push_back({ "Apellido", 30 });
             columnasResult.push_back({ "Razon Social", 30 });
             columnasResult.push_back({ "Cuit", 30 });
-            columnasResult.push_back({ "Fecha Alta", 30 });
+            columnasResult.push_back({ "Fecha Alta", 20 });
             columnasResult.push_back({ "E-mail", 30 });
-            columnasResult.push_back({ "Estado", 10 });
+            columnasResult.push_back({ "Activo", 10 });
             break;
         case 5: //Reporte proveedores
             columnasResult.push_back({ "Id", 5 });
@@ -135,9 +137,9 @@ public:
 			columnasResult.push_back({ "Apellido", 30 });
 			columnasResult.push_back({ "Razon Social", 30 });
 			columnasResult.push_back({ "Cuit", 30 });
-			columnasResult.push_back({ "Fecha Alta", 30 });
+			columnasResult.push_back({ "Fecha Alta", 20 });
 			columnasResult.push_back({ "E-mail", 30 });
-			columnasResult.push_back({ "Estado", 10 });
+			columnasResult.push_back({ "Activo", 10 });
 			break;
         case 6: //Reporte productos
             columnasResult.push_back({ "Id", 5 });
@@ -152,6 +154,7 @@ public:
 			columnasResult.push_back({ "Usuario", 30 });
             columnasResult.push_back({ "Nombre", 30 });
             columnasResult.push_back({ "Rol", 20 });
+            columnasResult.push_back({ "Admin", 10 });
 			break;
         case 8: //Reporte ventas
 			columnasResult.push_back({ "Id", 5 });
@@ -198,10 +201,12 @@ public:
      		cout << setw(_columnas[1].ancho) << datos.getUsuario();
      		cout << setw(_columnas[2].ancho) << datos.getNombre();
      		cout << setw(_columnas[3].ancho) << datos.getRol();
+            cout << setw(_columnas[4].ancho) << datos.getIsAdmin();
      		cout << endl;
      	}
         cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
     }
+
     void generarTablaProductos(vector<Producto> lista) {
         mostrarHeaderTabla();
         for (Producto datos : lista) {
@@ -260,11 +265,61 @@ public:
 			cout << setw(_columnas[4].ancho) << datos.getCuit();
 			cout << setw(_columnas[5].ancho) << datos.getFechaAlta().toString();
 			cout << setw(_columnas[6].ancho) << datos.getEmail();
-            cout << std::noboolalpha << std::setw(_columnas[7].ancho) << datos.getEstado();
+            cout << std::boolalpha << std::setw(_columnas[7].ancho) << datos.getEstado();
 			cout << endl;
 		}
 		cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
 	}
+
+    void generarReporteProveedores(vector<Proveedor> lista) {
+
+        mostrarHeaderTabla();
+        for (Proveedor datos : lista) {
+            cout << setw(_columnas[0].ancho) << datos.getId();
+            cout << setw(_columnas[1].ancho) << datos.getNombre();
+            cout << setw(_columnas[2].ancho) << datos.getApellido();
+            cout << setw(_columnas[3].ancho) << datos.getRazonsocial();
+            cout << setw(_columnas[4].ancho) << datos.getCuit();
+            cout << setw(_columnas[5].ancho) << datos.getFechaAlta().toString();
+            cout << setw(_columnas[6].ancho) << datos.getEmail();
+            cout << std::boolalpha << std::setw(_columnas[7].ancho) << datos.getEstado();
+            cout << endl;
+        }
+        cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
+    }
+
+    void generarReporteProductos(vector<Producto> lista) {
+
+		mostrarHeaderTabla();
+		for (Producto datos : lista) {
+			cout << setw(_columnas[0].ancho) << datos.getId();
+			cout << setw(_columnas[1].ancho) << datos.getNombreProducto();
+			cout << setw(_columnas[2].ancho) << datos.getDescripcionProducto();
+			cout << setw(_columnas[3].ancho) << datos.getPrecioCosto();
+			cout << setw(_columnas[4].ancho) << datos.getPrecioVenta();
+			cout << setw(_columnas[5].ancho) << datos.getCantidad();
+			cout << endl;
+		}
+		cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
+	}
+
+    void generarReporteUsuarios(vector<Usuario> lista) {
+        mostrarHeaderTabla();
+        for (Usuario datos : lista) {
+            cout << setw(_columnas[0].ancho) << datos.getId();
+            cout << setw(_columnas[1].ancho) << datos.getUsuario();
+            cout << setw(_columnas[2].ancho) << datos.getNombre();
+            cout << setw(_columnas[3].ancho) << datos.getRol();
+            cout << std::boolalpha << setw(_columnas[4].ancho) << datos.getIsAdmin();
+            cout << endl;
+        }
+        cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
+    }
+ 
+
+	
+	
+
 #pragma endregion contenido
     
 

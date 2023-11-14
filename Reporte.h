@@ -17,5 +17,8 @@ public:
 	char opcionesMenuReporte();
 
 	void generarReporteClientes();
+	void generarReporteProveedores();
+	void generarReporteProductos();
+	void generarReporteUsuarios();
 };
 

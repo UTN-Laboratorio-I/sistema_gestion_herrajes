@@ -1,6 +1,7 @@
 #include "AdminABM.h"
 #include "InterfazUI.h"
 #include "Cliente.h"
+#include "Proveedor.h"
 
 #pragma region Getters/Setters
 string AdminABM::getNombreModulo(){return _nombreModulo;}
@@ -31,6 +32,8 @@ void AdminABM::administrarModuloABM()
 
 			break;
 		case 2:
+			_sistema->setModulo("ABM Proveedores");
+			administrarSubModuloABMProveedor();
 
 			break;
 		case 0: //SALIR DEL MÓDULO ABM:
@@ -63,6 +66,31 @@ void AdminABM::administrarSubModuloABMCliente() {
 			subModuloABMSalir();
 		}
 	}
+}
+
+void AdminABM::administrarSubModuloABMProveedor() {
+	InterfazUI ABM_UI(_sistema);
+
+	while (subModuloABMActivo(_nombreSubModuloProveedor)) {
+		ABM_UI.ver_SubMenuABMProveedor();
+		int opc = _sistema->getPantalla();
+		Proveedor nuevoProveedor;
+
+		switch (opc) {
+		case 1:
+			nuevoProveedor.cargarProveedor();
+			break;
+		case 2:
+			//ELIMINAR PROVEEDOR
+			break;
+		case 3:
+			//MODIFICAR PROVEEDOR
+			break;
+		case 0:
+			subModuloABMSalir();
+		}
+	}
+
 }
 
 bool AdminABM::moduloABMActivo()

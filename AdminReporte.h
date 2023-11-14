@@ -12,6 +12,7 @@ private:
 	string _nombreSubModuloProveedor;
 	string _nombreSubModuloProducto;
 	string _nombreSubModuloVenta;
+	string _nombreSubModuloUsuario;
 	Sistema* _sistema;
 
 public:
@@ -27,6 +28,7 @@ public:
 	void administrarSubModuloReporteProveedor();
 	void administrarSubModuloReporteProducto();
 	void administrarSubModuloReporteCaja();
+	void administrarSubModuloReporteUsuarios();
 
 	//Verificadores de estado del módulo:
 	bool moduloReporteActivo();
