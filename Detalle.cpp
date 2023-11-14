@@ -16,6 +16,11 @@ int Detalle::getCantidad() {
 	return _cantidad;
 }
 
+void Detalle::setIdProducto(int idProducto)
+{
+	_producto.setId(idProducto);
+}
+
 void Detalle::setProducto(Producto producto) {
 	_producto = producto;
 }

@@ -65,7 +65,7 @@ void Proveedor::MostarProveedor()
 void Proveedor::ver_ProveedorEncontrado(Response <Proveedor> proveedor)
 {
 	cout << "PROVEEDOR SELECCIONADO: " << endl;
-	cout << proveedor.getData().getRazonsocial() << " - " << proveedor.getData().getCuit() << endl << endl;
+	cout << proveedor.getData().getRazonsocial() << " - CUIT: " << proveedor.getData().getCuit() << endl << endl;
 }
 
 int Proveedor::getId(){return _idProveedor;}
@@ -80,7 +80,7 @@ Response <Proveedor> Proveedor::buscarProveedor()
 
 	int idProv;
 	bool continuar = true;
-	int opc;
+	int opc = {};
 	int posicion;
 
 
@@ -99,7 +99,7 @@ Response <Proveedor> Proveedor::buscarProveedor()
 			responseProveedor.getData().MostarProveedor();
 			cout << endl;
 
-			cout << "¿EL PROVEEDOR SELECCIONADO ES EL CORRECTO? (1) SI - 2) NO - 0) ATRAS)" << endl;
+			cout << endl << " EL PROVEEDOR SELECCIONADO ES EL CORRECTO? " << endl <<" 1) SI - 2) NO - 0) ATRAS)" << endl;
 			cin >> opc;
 		}
 		else {
@@ -111,13 +111,10 @@ Response <Proveedor> Proveedor::buscarProveedor()
 		{
 			continuar = false;
 		}
-		else
+		else if(opc == 0)
 		{
-			if (opc == 0)
-			{
-				responseProveedor.setFailure("Volviendo al menu anterior...");
-				continuar = false;
-			}
+			responseProveedor.setFailure("Volviendo al menu anterior...");
+			continuar = false;
 		}
 
 	}

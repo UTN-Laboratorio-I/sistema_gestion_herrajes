@@ -31,8 +31,8 @@ void Helper::delayMensaje(string mensaje, int segundos = 3)
 int Helper::conversorNombreTablaSwitch(string tabla) {
 
 	if (tabla == "usuarios") return 0;
-	if (tabla == "compras") return 1;
-	if (tabla == "productos") return 2;
+	if (tabla == "productos") return 1;
+	if (tabla == "clientes") return 2;
 
 }
 

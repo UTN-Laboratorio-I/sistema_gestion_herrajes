@@ -43,6 +43,7 @@ void AdminCompra::moduloCompraSalir() {
 void AdminCompra::administrarModuloCompra() {
 	Producto prod;
 	InterfazUI compras_UI(_sistema);
+	Compra compra;
 
 	while (moduloCompraActivo()) {
 		compras_UI.ver_MenuCompras();
@@ -51,11 +52,12 @@ void AdminCompra::administrarModuloCompra() {
 		switch (opc) {
 		case 1:
 			compras_UI.headerDinamico();
-			crearNuevaCompra();
+			_sistema->setSubModulo("Sub-modulo Compra");
+			compra.realizarCompra(_sistema);
 			break;
 		case 2:
 			compras_UI.headerDinamico();
-			mostrarCompras();
+			compra.mostrarProductosComprados();
 			break;
 		case 0: //SALIR DEL MÓDULO COMPRA:
 			moduloCompraSalir();
@@ -67,57 +69,3 @@ void AdminCompra::administrarModuloCompra() {
 
 
 
-void AdminCompra::crearNuevaCompra() {
-	Archivo <Producto> archivoProd ("productos.dat");
-	Archivo <Compra> archivoComp ("compras.dat");
-	Producto producto;
-	Response <Producto> responseProducto;
-	Response <Proveedor> responseProveedor;
-	Proveedor proveedor;
-	Compra Compra;
-	Helper header;
-	InterfazUI subCompras_UI(_sistema);
-
-
-	bool continuar = true;
-
-	while (continuar)
-	{	
-		subCompras_UI.headerDinamico();
-		subCompras_UI.ver_SubMenuCrearCompraProducto();
-		int opc = _sistema->getPantalla();
-		switch(opc)
-		{
-		case 1:
-			subCompras_UI.headerDinamico();
-			responseProveedor = proveedor.buscarProveedor();
-			if (!responseProveedor.getSuccess()){break;}
-			header.limpiarConsola();
-			subCompras_UI.headerDinamico();
-			proveedor.ver_ProveedorEncontrado(responseProveedor);
-			//proveedor = proveedorExistente.getData();
-			responseProducto = producto.cargarProductos();
-			break;
-		case 2:
-			subCompras_UI.headerDinamico();
-			responseProveedor = proveedor.cargarProveedor();
-			//proveedor = responseNuevoProveedor.getData();
-			//responseNuevoProveedor.setData(proveedor);
-			producto.cargarProductos();
-			 //proveedor = responseNuevoProveedor.getData();
-			break;
-		case 0:
-			subModuloCompraSalir();
-			continuar = false;
-			break;
-		default: 
-			break;
-		}
-	}
-
-}
-
-
-void AdminCompra :: mostrarCompras() {
-
-}

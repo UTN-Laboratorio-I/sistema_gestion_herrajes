@@ -60,6 +60,7 @@ void AdminVenta::registrarNuevaVenta() {
 		switch (opc) {
 		case 1:
 			_sistema->setSubModulo("Seleccion cliente existente");
+			ventas_UI.headerDinamico();
 			cliente = cliente.listarYSeleccionarClienteExistente();
 			if (cliente.getIdCliente() == 0) {
 				_sistema->setError("No hay clientes creados");

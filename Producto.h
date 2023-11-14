@@ -28,11 +28,12 @@ public:
     void setDescripcionProducto(std::string descripcion);
     void setEstado(bool estado);
 
-    Response <Producto> cargarProductos();
+    Producto cargarProductos();
     void mostrarProductos();
 
     Producto listarYSeleccionarProductoVenta();
 
+    void tablaProductosContenido(vector<Producto> lista, vector<int> columnas, int anchoTabla);
 
 private:
 

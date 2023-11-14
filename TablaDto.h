@@ -1,6 +1,10 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
+#include "Helper.h"
+#include "Usuario.h"
+#include "Producto.h"
+#include "Cliente.h"
 using namespace std;
 
 #pragma once
@@ -16,10 +20,15 @@ private:
         string header;
         int ancho;
     };
+    struct responseTabla {
+		vector<int> anchoColumnas;
+		int anchoTotalTabla;
+	};
 
-    vector<columnas> _columnas;
-    string _tipo;
     vector<T> _datos;
+    vector<columnas> _columnas;
+    vector<int> _anchoColumnas; //para el contenido de la tabla.
+    string _tipo;
     bool _limpiarPantalla;
     int _anchoTotalTabla;
     int _conversion_tipo;
@@ -35,15 +44,19 @@ public:
     /// <param name="datos"></param>
     TablaDto(string tipo, vector<T> datos, bool limpiarPantalla=true) {
         _datos = datos;
-        _columnas = getColumnas();
         _conversion_tipo = helper.conversorNombreTablaSwitch(tipo);
+        _columnas = getColumnas();
         _anchoTotalTabla = 0;
         _limpiarPantalla = limpiarPantalla;
     }
+
+    int getAnchoTotalTabla() { return _anchoTotalTabla; }
+    vector<int> getAnchoColumnas() { return _anchoColumnas; }
+
     /// <summary>
     /// Muestra tanto el header como el contenido de la tabla:
     /// </summary>
-    void mostrarNuevaTabla() {
+    void mostrarHeaderTabla() {
         if (_limpiarPantalla) helper.limpiarConsola();
         for (columnas col : _columnas) {
             cout << setw(col.ancho) << col.header;
@@ -52,8 +65,6 @@ public:
         }
         cout << endl;
         cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
-
-        mostrarContenidoSegunEntidad();
     }
 
     /// <summary>
@@ -71,74 +82,72 @@ public:
 			columnasResult.push_back({ "Nombre", 30 });
 			columnasResult.push_back({ "Rol", 20 });
 			break;
-        case 1: //Compras
+        case 1: //Productos
             columnasResult.push_back({ "Id", 5 });
             columnasResult.push_back({ "Nombre", 30 });
-            columnasResult.push_back({ "Precio", 15 });
-            columnasResult.push_back({ "Cantidad", 15 });
-            columnasResult.push_back({ "Subtotal", 20 });
+            columnasResult.push_back({ "Descripción", 30 });
+            //columnasResult.push_back({ "Precio Costo", 15 });
+            columnasResult.push_back({ "Precio Venta", 15 });
+            //columnasResult.push_back({ "Cantidad", 15 });
+
             break;
-        case 2: //Ventas
-			columnasResult.push_back({ "Id", 5 });
-			columnasResult.push_back({ "Nombre", 30 });
-			columnasResult.push_back({ "Precio", 15 });
-			columnasResult.push_back({ "Cantidad", 15 });
-			columnasResult.push_back({ "Subtotal", 20 });
+        case 2: //Cliente
+            columnasResult.push_back({ "Id", 5 });
+            columnasResult.push_back({ "Nombre", 30 });
+            columnasResult.push_back({ "Apellido", 30 });
+            columnasResult.push_back({ "Razon Social", 30 });
+            columnasResult.push_back({ "Cuit", 30 });
 			break;
         default:
             break;
         }
-
+        for (columnas col : columnasResult) {
+			_anchoColumnas.push_back(col.ancho);
+		}
         return columnasResult;
     }
 
-    /// <summary>
-    /// Acá se setea manualmente los datos que se mostrarán por cada registro
-    /// </summary>
-    void mostrarContenidoSegunEntidad() {
-        int conversion_tipo = helper.conversorNombreTablaSwitch(_tipo);
-
-        switch (_conversion_tipo) {
-        case 0: //Usuarios
-            vector<Usuario> listaUsuarios = _datos;
-            for (Usuario datos : listaUsuarios) {
-                cout << setw(_columnas[0].ancho) << datos.getId();
-                cout << setw(_columnas[1].ancho) << datos.getUsuario();
-                cout << setw(_columnas[2].ancho) << datos.getNombre();
-                cout << setw(_columnas[3].ancho) << datos.getRol();
-                cout << endl;
-            }
-            cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
-            break;
-   //     case 1: //Compras
-   //         vector<Compra>
-   //         for (T datos : _datos) {
-   //             cout << setw(_columnas[0].ancho) << datos.getId();
-			//	cout << setw(_columnas[1].ancho) << datos.getNombreProducto();
-			//	cout << setw(_columnas[2].ancho) << datos.getPrecio();
-			//	cout << setw(_columnas[3].ancho) << datos.getCantidad();
-			//	cout << setw(_columnas[4].ancho) << datos.getSubtotal();
-			//	cout << endl;
-			//}
-   //         break;
-   //     case 2: //Ventas
-   //         for (T datos : _datos) {
-   //             cout << setw(_columnas[0].ancho) << datos.getId();
-   //         }
-        }
-    }
-
-
 #pragma region contenido
-
-    void mostrarUsuarios(T datos) {
-
+    /// <summary>
+	/// Acá se setea manualmente el contenido de cada tabla:
+    /// </summary>
+    void generarTablaUsuarios(vector<Usuario> lista) {
+        mostrarHeaderTabla();
+     	for (Usuario datos : lista) {
+     		cout << setw(_columnas[0].ancho) << datos.getId();
+     		cout << setw(_columnas[1].ancho) << datos.getUsuario();
+     		cout << setw(_columnas[2].ancho) << datos.getNombre();
+     		cout << setw(_columnas[3].ancho) << datos.getRol();
+     		cout << endl;
+     	}
+        cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
     }
+    void generarTablaProductos(vector<Producto> lista) {
+        mostrarHeaderTabla();
+        for (Producto datos : lista) {
+			cout << setw(_columnas[0].ancho) << datos.getId();
+			cout << setw(_columnas[1].ancho) << datos.getNombreProducto();
+			cout << setw(_columnas[2].ancho) << datos.getDescripcionProducto();
+			//cout << setw(_columnas[3].ancho) << datos.getPrecioCosto();
+			cout << setw(_columnas[3].ancho) << datos.getPrecioVenta();
+			//cout << setw(_columnas[5].ancho) << datos.getCantidad();
+			cout << endl;
+		}
+        cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
+	}
+    void generarTablaClientes(vector<Cliente> lista) {
 
-    //void mostrarCompras(T datos){
-    //    cout << setw(_columnas[0].ancho) << datos.getNombreProducto();
-    //    cout << endl;
-    //}
+		mostrarHeaderTabla();
+        for (Cliente datos : lista) {
+            cout << setw(_columnas[0].ancho) << datos.getIdCliente();
+            cout << setw(_columnas[1].ancho) << datos.getNombre();
+            cout << setw(_columnas[2].ancho) << datos.getApellido();
+            cout << setw(_columnas[3].ancho) << datos.getRazonSocial();
+            cout << setw(_columnas[4].ancho) << datos.getCuit();
+            cout << endl;
+        }
+        cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
+    }
 #pragma endregion contenido
     
 

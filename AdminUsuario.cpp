@@ -55,10 +55,10 @@ void AdminUsuario::listarUsuarios() {
 	vector<Usuario> usuarios;
 
 	usuarios = usuario.listarUsuarios();
-
 	TablaDto<Usuario> tabla("usuarios", usuarios);
-	
-	tabla.mostrarNuevaTabla();
+	tabla.generarTablaUsuarios(usuarios);
+
+
 	
 	system("pause");
 }

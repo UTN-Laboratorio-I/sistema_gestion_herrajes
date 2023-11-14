@@ -3,6 +3,7 @@
 #include "Producto.h"
 #include "Archivo.h"
 #include <vector>
+#include "TablaDto.h"
 
 using namespace std;
 
@@ -66,15 +67,13 @@ void Producto::setEstado(bool estado){ _estado = estado;}
 
 #pragma endregion
 
-Response <Producto> Producto::cargarProductos() {
+Producto Producto::cargarProductos() {
 	Response <Producto> registro;
 	Archivo <Producto> archivo("productos.dat");
 	float pCosto, pVenta;
 	int cantidad;
 	string nombreProducto, descripcionProducto;
 	Producto producto;
-
-	cout << "----------- COMPRA DE PRODUCTOS -----------" << endl << endl;
 
 	cout << "NOMBRE DE PRODUCTO: ";
 	cin.ignore();
@@ -98,7 +97,7 @@ Response <Producto> Producto::cargarProductos() {
 	setCantidad(cantidad);
 	setEstado(true);
 
-	registro = archivo.grabarRegistroArchivo(producto);
+	/*registro = archivo.grabarRegistroArchivo(producto);
 
 	if (registro.getSuccess())
 	{
@@ -112,9 +111,9 @@ Response <Producto> Producto::cargarProductos() {
 	cout << registro.getMessage() << endl;
 	cout << "----------------------" << endl;
 
-	_sleep(2000);
+	_sleep(2000);*/
 
-	return registro;
+	return producto;
 
 }
 
@@ -137,10 +136,9 @@ void Producto::mostrarProductos()
 Producto Producto::listarYSeleccionarProductoVenta() {
 	Archivo<Producto> archivoProducto("productos.dat");
 	vector<Producto> listaProductos = archivoProducto.listarRegistroArchivo();
+	TablaDto<Producto> tabla("productos", listaProductos, false);
+	tabla.generarTablaProductos(listaProductos);
 
-	for (Producto prod : listaProductos) {
-		cout << prod.getId() << " - " << prod.getNombreProducto() << endl;
-	}
 
 	int idProducto;
 	cout << "Seleccione el producto: ";

@@ -21,5 +21,12 @@ public:
 
 	template <class T>
 	bool validarStock(int idProducto, T objeto);
+
+	int getIdProducto();
+
+	int getCantidad();
+
+	void mostrarStock();
+
 };
 
