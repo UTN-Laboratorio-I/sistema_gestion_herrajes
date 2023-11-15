@@ -40,7 +40,7 @@ Response<Stock> Stock::gestionarStock(int cantidad, int idProducto, char tipoTra
 template <class T>
 bool Stock::validarStock(int idProducto, T objetoArchivo) {
 	T stock = (T)objetoArchivo;
-	if (idProducto == stock.getIdProducto()) {
+	if (idProducto == stock.getId()) {
 		return true;
 	}
 	return false;
@@ -51,6 +51,12 @@ template <class T>
 Response<StockDto> Stock::sumarStock(int cantidad, int idProducto) {
 	Response<StockDto> response;
 	Archivo<StockDto> archivoStock("stock.dat");
+	int cantidadActualizada = cantidad;
+	response = archivoStock.buscarUnRegistro(idProducto);
+	if (response.getSuccess()) {
+	cantidadActualizada = response.getData().getCantidadTotal() + cantidad;
+	}
+
 	StockDto stock(idProducto, cantidad);
 
 	auto funcionValidar = [this](int idProducto, T objetoArchivo) {return validarStock(idProducto, objetoArchivo); };
@@ -65,10 +71,14 @@ template <class T>
 Response<StockDto> Stock::restarStock(int cantidad, int idProducto) {
 	Response<StockDto> response;
 	Archivo<StockDto> archivoStock("stock.dat");
-	StockDto stock(idProducto, cantidad);
+	int cantidadActualizada = cantidad;
+	response = archivoStock.buscarUnRegistro(idProducto);
+	if (response.getSuccess()) {
+		cantidadActualizada = response.getData().getCantidadTotal() - cantidad;
+	}
+	StockDto stock(idProducto, cantidadActualizada);
 
 	auto funcionValidar = [this](int idProducto, T idArchivo) {return validarStock(idProducto, idArchivo); };
-
 	response = archivoStock.grabarOModificarRegistro(stock, idProducto, funcionValidar);
 
 	return response;

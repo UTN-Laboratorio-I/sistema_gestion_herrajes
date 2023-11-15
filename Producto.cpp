@@ -144,7 +144,7 @@ Producto Producto::listarYSeleccionarProductoVenta() {
 
 	for (Producto prod : listaProductos) {
 		for (StockDto s : stock) {
-			if (s.getIdProducto() == prod.getId()) {
+			if (s.getId() == prod.getId()) {
 				prod.setCantidad(s.getCantidadTotal());
 			}
 		}

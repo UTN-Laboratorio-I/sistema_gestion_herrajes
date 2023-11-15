@@ -1,4 +1,5 @@
 #include "StockDto.h"
+#include "Archivo.h"
 
 StockDto::StockDto(){}
 StockDto::StockDto(int idProducto, int cantidad)
@@ -11,7 +12,7 @@ StockDto::~StockDto()
 {
 }
 
-int StockDto::getIdProducto()
+int StockDto::getId() //idproducto
 {
 	return this->idProducto;
 }
