@@ -19,7 +19,7 @@ public:
 	StockDto();
 	StockDto(int idProducto, int cantidad);
 	~StockDto();
-	int getIdProducto();
+	int getId();
 	int getCantidadTotal();
 	//vector<DetalleStockDto> getDetalleStock();
 	void setIdProducto(int idProducto);

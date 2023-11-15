@@ -25,9 +25,9 @@ void Reporte::generarReporteClientes() {
 	vector<Cliente> listaCliente;
 	Archivo<Cliente> archivo(_nombreArchivo);
 	listaCliente = archivo.listarRegistroArchivo();
-	
 	TablaDto<Cliente> tabla(_nombreModulo, listaCliente, true, true);
 	tabla.generarReporteClientes(listaCliente);
+
 	char opc = opcionesMenuReporte();
 
 	switch (opc) {

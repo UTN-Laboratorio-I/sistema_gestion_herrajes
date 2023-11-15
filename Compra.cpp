@@ -16,8 +16,6 @@ Compra::Compra()
 	_tipo = 'c';
 };
 
-
-
 //SETTERS---------
 
 void Compra::setId(int id) { _id = id; }
@@ -192,7 +190,7 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 		//Obtenemos el id del registro y cada detalle de la lista:
 		int id = registro.getData().getId();
 
-		Archivo <Producto> archivoProducto("producto.dat");
+		Archivo <Producto> archivoProducto("productos.dat");
 		responseProducto = archivoProducto.grabarRegistroArchivo(detalle.getProducto());
 
 		detalle.setIdProducto(responseProducto.getData().getId());
@@ -201,7 +199,7 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 		Response<DetalleDto> registroDetalle = archivoDetalle.grabarRegistroArchivo(detalleDto);
 
 		//Modificamos el stock del producto:
-		stock.gestionarStock(detalle.getProducto().getId(), detalle.getCantidad(), _tipo);
+		stock.gestionarStock(detalle.getCantidad(), detalle.getProducto().getId(), _tipo);
 
 
 		//Si algún registro falla, devolvemos false:
@@ -241,7 +239,7 @@ void Compra::mostrarCompras()
 	Response <Compra> responseCompra;
 
 	vecTransaccion = archivoTransacciones.listarRegistroArchivo();
-
+	
 	for (TransaccionDto a : vecTransaccion)
 	{	
 		if (a.getTipoTransaccion() == 'c')

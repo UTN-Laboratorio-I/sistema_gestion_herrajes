@@ -4,7 +4,7 @@
 #include "TransaccionDto.h"
 #include "ResponseDto.h"
 #include "Proveedor.h"
-#include <vector>;
+#include <vector>
 #include "Producto.h"
 #include "Stock.h"
 #include "StockDto.h"

@@ -8,6 +8,7 @@
 #include "DetalleDto.h"
 #include "Transaccion.h"
 #include "Proveedor.h"
+#include "TransaccionDto.h"
 
 using namespace std;
 
@@ -316,6 +317,20 @@ public:
         cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
     }
  
+   /* void generarTablaCompras(vector<TransaccionDto> listaTransaccion, vector<Compras> listaCompras) {
+        mostrarHeaderTabla();
+
+        for (TransaccionDto transaccion : listaTransaccion) {
+            vector<Compras> comprasFiltradas;
+            cout << setw(_columnas[0].ancho) << transaccion.getId();
+
+            for(Compras compra : listaCompras) {
+				if (compra.getIdTransaccion() == transaccion.getId()) {
+                    cout << setw(_columnas[0].ancho) << datos.getRol();
+				}
+			})
+        }
+    }*/
 
 	
 	
