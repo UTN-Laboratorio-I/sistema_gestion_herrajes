@@ -113,3 +113,55 @@ void Reporte::generarReporteUsuarios(){
 		break;
 	}
 }
+
+void Reporte::generarReporteTransacciones() {
+	Archivo<TransaccionDto> archivoTransaccion("transacciones.dat");
+	Archivo<DetalleDto> archivoDetalle("detalles.dat");
+	Archivo<Producto> archivoProducto("productos.dat");
+	vector<TransaccionDto> listaTransaccionDto = archivoTransaccion.listarRegistroArchivo();
+	vector<DetalleDto> listaDetalleDto = archivoDetalle.listarRegistroArchivo();
+
+	vector<Transaccion> listaTransaccion;
+
+	for (TransaccionDto tran : listaTransaccionDto) {
+		Transaccion transaccion;
+		Detalle detalle;
+		transaccion.setId(tran.getId());
+		transaccion.setMonto(tran.getMonto());
+		transaccion.setFecha(tran.getFecha());
+		transaccion.setUsuario(tran.getUsuario());
+		transaccion.setTipo(tran.getTipoTransaccion());
+		transaccion.setCantidad(tran.getCantidadTotal());
+
+		int idTransaccion = tran.getId();
+		for (DetalleDto det : listaDetalleDto) {
+			if (det.getIdTransaccion() == idTransaccion) {
+				Response<Producto> res = archivoProducto.buscarUnRegistro(det.getIdProducto());
+				detalle.setCantidad(det.getCantidad());
+				detalle.setProducto(res.getData());
+				transaccion.setDetalle(detalle);
+			}
+		}
+		listaTransaccion.push_back(transaccion);
+	}
+
+	TablaDto<Transaccion> tabla(_nombreModulo, listaTransaccion, true);
+	tabla.generarReporteTransacciones(listaTransaccion);
+
+	char opc = opcionesMenuReporte();
+
+	switch (opc) {
+	case 1:
+		cout << "Aplicar filtro";
+		break;
+	case 8:
+		cout << "Enviar por mail";
+		break;
+	case 9:
+		cout << "Imprimir";
+		break;
+	case 0:
+		break;
+	}
+
+}

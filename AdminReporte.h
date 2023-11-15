@@ -13,6 +13,7 @@ private:
 	string _nombreSubModuloProducto;
 	string _nombreSubModuloVenta;
 	string _nombreSubModuloUsuario;
+	string _nombreSubModuloTransaccion;
 	Sistema* _sistema;
 
 public:

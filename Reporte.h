@@ -20,5 +20,6 @@ public:
 	void generarReporteProveedores();
 	void generarReporteProductos();
 	void generarReporteUsuarios();
+	void generarReporteTransacciones();
 };
 
