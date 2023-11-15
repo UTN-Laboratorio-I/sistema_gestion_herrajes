@@ -116,7 +116,7 @@ public:
         }
 
         fseek(p, sizeof(T) * posicion, 0);
-        objeto.setId(posicion);
+        objeto.setId(posicion+1);
         fwrite(&objeto, sizeof(T), 1, p);
 
         fclose(p);
