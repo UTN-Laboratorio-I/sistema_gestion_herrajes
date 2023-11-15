@@ -65,14 +65,14 @@ void AdminVenta::registrarNuevaVenta() {
 			_sistema->setSubModulo("Seleccion cliente existente");
 			ventas_UI.headerDinamico();
 			cliente = cliente.listarYSeleccionarClienteExistente();
-			if (cliente.getIdCliente() == 0) {
+			if (cliente.getId() == 0) {
 				_sistema->setError("No hay clientes creados");
 				ventas_UI.headerDinamico();
 				system("pause");
 				continuar = true;
 			}
 			else {
-				venta.setClienteId(cliente.getIdCliente());
+				venta.setClienteId(cliente.getId());
 				
 				ventas_UI.mostrarMensajeDinamico("Cliente seleccionado correctamente");
 			}
@@ -84,7 +84,7 @@ void AdminVenta::registrarNuevaVenta() {
 			cliente= responseCliente.getData();
 
 			
-			venta.setClienteId(cliente.getIdCliente());
+			venta.setClienteId(cliente.getId());
 
 			break;
 		case 0: //SALIR DEL REGISTRO DE NUEVA VENTA AL MENU VENTA:

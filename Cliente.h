@@ -12,6 +12,8 @@ class Cliente : public Persona
 public:
 
 	Response<Cliente> cargarCliente();
+	Cliente cargarClienteAmodificar();
+	Response<Cliente> modificarCliente();
 	void MostarCliente();
 
 	/// <getters especiales>
@@ -19,7 +21,7 @@ public:
 	/// </summary>
 	/// <returns></returns>
 
-	int getIdCliente();
+	int getId();
 	char* getRazonSocial();
 	long long getCuit();
 
@@ -28,6 +30,8 @@ public:
 	void setRazonSocial(const char* razonSocial);
 
 	Cliente listarYSeleccionarClienteExistente();
+
+	void verClienteAmodificar(Response <Cliente> responseCliente);
 
 private:
 
