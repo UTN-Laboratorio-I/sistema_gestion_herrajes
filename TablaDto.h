@@ -224,7 +224,7 @@ public:
 
 		mostrarHeaderTabla();
         for (Cliente datos : lista) {
-            cout << setw(_columnas[0].ancho) << datos.getIdCliente();
+            cout << setw(_columnas[0].ancho) << datos.getId();
             cout << setw(_columnas[1].ancho) << datos.getNombre();
             cout << setw(_columnas[2].ancho) << datos.getApellido();
             cout << setw(_columnas[3].ancho) << datos.getRazonSocial();
@@ -258,7 +258,7 @@ public:
 
 		mostrarHeaderTabla();
 		for (Cliente datos : lista) {
-			cout << setw(_columnas[0].ancho) << datos.getIdCliente();
+			cout << setw(_columnas[0].ancho) << datos.getId();
 			cout << setw(_columnas[1].ancho) << datos.getNombre();
 			cout << setw(_columnas[2].ancho) << datos.getApellido();
 			cout << setw(_columnas[3].ancho) << datos.getRazonSocial();

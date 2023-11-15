@@ -46,6 +46,7 @@ void AdminABM::administrarModuloABM()
 
 void AdminABM::administrarSubModuloABMCliente() {
 	InterfazUI ABM_UI(_sistema);
+	Helper helper;
 
 	while (subModuloABMActivo(_nombreSubModuloCliente)) {
 		ABM_UI.ver_SubMenuABMCliente();
@@ -54,13 +55,15 @@ void AdminABM::administrarSubModuloABMCliente() {
 
 		switch (opc) {
 		case 1:
+			helper.limpiarConsola();
+			ABM_UI.headerDinamico();
 			nuevoCliente.cargarCliente();
 			break;
 		case 2:
-			//ELIMINAR CLIENTE
+			nuevoCliente.modificarCliente();
 			break;
 		case 3:
-			//MODIFICAR CLIENTE
+			
 			break;
 		case 0:
 			subModuloABMSalir();
