@@ -44,8 +44,7 @@ void Persona::setFechaNacimiento(Fecha fechaNacimiento)
 
 void Persona::setEstado(bool estado)
 {
-	if (_dni != 0) {_estado = 1;}
-	else{_estado = 0;}
+	_estado = estado;
 }
 
 int Persona::getDNI(){return _dni;}

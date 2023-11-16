@@ -13,7 +13,6 @@ Reporte::Reporte(const char* nombreArchivo, string nombreModulo) {
 int Reporte::opcionesMenuReporte() {
 	int opc;
 	cout << "Seleccione una opcion: " << endl;
-	cout << setw(20) << "1) Aplicar filtros";
 	cout << setw(20) << "0) Cerrar reporte";
 	cout << setw(30) << "8) Enviar por mail";
 	cout << setw(15) << "9) Imprimir";

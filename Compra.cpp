@@ -133,7 +133,7 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 
 		cout << "ITEM N: " << contador << endl;
 		
-		productoAcargar.cargarProductos();
+		productoAcargar = productoAcargar.cargarProductos();
 
 		compra.agregarADetalleCompra(productoAcargar, productoAcargar.getCantidad());
 

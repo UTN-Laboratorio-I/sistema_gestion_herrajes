@@ -52,12 +52,8 @@ void AdminCompra::administrarModuloCompra() {
 		switch (opc) {
 		case 1:
 			compras_UI.headerDinamico();
-			_sistema->setSubModulo("Sub-modulo Compra");
+			_sistema->setSubModulo("Nueva compra");
 			compra.realizarCompra(_sistema);
-			break;
-		case 2:
-			compras_UI.headerDinamico();
-			compra.mostrarProductosComprados();
 			break;
 		case 0: //SALIR DEL MÓDULO COMPRA:
 			moduloCompraSalir();

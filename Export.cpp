@@ -114,7 +114,7 @@ void Export::exportTransaccionCsv(vector<Transaccion> lista, vector<string> head
     for (Transaccion& t : lista) {
 		for (Detalle d : t.getDetalle()) {
 		archivo << t.getId() << ",";
-		archivo << t.getTipo() << ",";
+		archivo << (t.getTipo()=='c'?"Compra":"Venta") << ",";
 		archivo << t.getFecha().toString() << ",";
 		archivo << t.getId() << ",";
 		archivo << t.getUsuario() << ",";
@@ -122,9 +122,6 @@ void Export::exportTransaccionCsv(vector<Transaccion> lista, vector<string> head
 		archivo << d.getCantidad() << ",";
 		archivo << d.getSubTotal() << ",";
 		archivo << t.getMonto() << endl;
-
-
-		//archivo << t.getUsuarioId() << std::endl;
 		}
 	}
 
