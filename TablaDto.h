@@ -342,18 +342,6 @@ public:
 
     }
 
-    //case 11: //Reporte transacciones (Venta/Compra)
-    //    columnasResult.push_back({ "Id", 5 });
-    //    columnasResult.push_back({ "Tipo Transaccion", 20 });
-    //    columnasResult.push_back({ "Fecha", 20 });
-    //    columnasResult.push_back({ "Id Cliente/Proveedor", 30 });
-    //    columnasResult.push_back({ "Usuario", 30 });
-    //    columnasResult.push_back({ "Producto", 30 });
-    //    columnasResult.push_back({ "Cantidad", 10 });
-    //    columnasResult.push_back({ "Monto", 30 });
-    //    break;
-
-
     vector<string> generarReporteTransacciones(vector<Transaccion> lista) {
         Archivo<Cliente> archivoCliente("clientes.dat");
         Archivo<Proveedor> archivoProveedor("proveedores.dat");
@@ -374,7 +362,7 @@ public:
                     cout << setw(_columnas[0].ancho) << "";
                     cout << setw(_columnas[1].ancho) << "";
                     cout << setw(_columnas[2].ancho) << "";
-                    cout << setw(_columnas[3].ancho) << "";
+                    cout << setw(_columnas[3].ancho) << ""; 
                     cout << setw(_columnas[4].ancho) << "";
                     cout << setw(_columnas[5].ancho) << detalle.getProducto().getNombreProducto();
                     cout << setw(_columnas[6].ancho) << detalle.getCantidad();

@@ -181,11 +181,9 @@ void InterfazUI::ver_MenuCompras() {
 	while (!verificado) {
 	headerDinamico();
 	cout << "1) Compra Productos" << endl;
-	cout << "2) Listar Productos" << endl;
-	cout << "3) Buscar Producto" << endl << endl;
 	cout << "0) <- Atras" << endl;
 	cin >> opc;
-	verificado = opcionesValidasMenu(1, 3, opc);
+	verificado = opcionesValidasMenu(1, 1, opc);
 	}
 	_sistema->setModuloPantalla("Compras", opc);
 }
@@ -216,11 +214,10 @@ void InterfazUI::ver_SubMenuCrearCompraProducto() {
 		headerDinamico();
 		cout << "1) Comprar a un proveedor existente" << endl;
 		cout << "2) Comprar a un nuevo proveedor" << endl;
-		cout << "3) Mostrar Compras realizadas" << endl;
 		cout << "0) <-Atras" << endl;
 		cin >> opc;
 		helper.limpiarConsola();
-		verificado = opcionesValidasMenu(0, 3, opc);
+		verificado = opcionesValidasMenu(1, 2, opc);
 	}
 	_sistema->setModuloPantalla("Compras", opc);
 
