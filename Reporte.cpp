@@ -2,6 +2,7 @@
 #include "Reporte.h"
 #include "TablaDto.h"
 #include "Proveedor.h"
+#include "Export.h"
 
 Reporte::Reporte(){}
 Reporte::Reporte(const char* nombreArchivo, string nombreModulo) {
@@ -9,8 +10,8 @@ Reporte::Reporte(const char* nombreArchivo, string nombreModulo) {
 	_nombreModulo = nombreModulo;
 }
 
-char Reporte::opcionesMenuReporte() {
-	char opc;
+int Reporte::opcionesMenuReporte() {
+	int opc;
 	cout << "Seleccione una opcion: " << endl;
 	cout << setw(20) << "1) Aplicar filtros";
 	cout << setw(20) << "0) Cerrar reporte";
@@ -22,20 +23,21 @@ char Reporte::opcionesMenuReporte() {
 }
 
 void Reporte::generarReporteClientes() {
+	Export exportArchivo("clientes.csv");
 	vector<Cliente> listaCliente;
 	Archivo<Cliente> archivo(_nombreArchivo);
 	listaCliente = archivo.listarRegistroArchivo();
 	TablaDto<Cliente> tabla(_nombreModulo, listaCliente, true, true);
-	tabla.generarReporteClientes(listaCliente);
+	vector<string> headersTabla = tabla.generarReporteClientes(listaCliente);
 
-	char opc = opcionesMenuReporte();
+	int opc = opcionesMenuReporte();
 
 	switch (opc) {
 	case 1:
 		cout << "Aplicar filtro";
 		break;
-	case 2:
-	cout << "Imprimir";
+	case 9:
+		exportArchivo.exportClienteCsv(listaCliente, headersTabla);
 		break;
 	case 0:
 		break;
@@ -43,13 +45,14 @@ void Reporte::generarReporteClientes() {
 }
 
 void Reporte::generarReporteProveedores() {
+	Export exportArchivo("proveedores.csv");
 	vector<Proveedor> listaProveedor;
 	Archivo<Proveedor> archivo(_nombreArchivo);
 	listaProveedor = archivo.listarRegistroArchivo();
 
 	TablaDto<Proveedor> tabla(_nombreModulo, listaProveedor, true, true);
-	tabla.generarReporteProveedores(listaProveedor);
-	char opc = opcionesMenuReporte();
+	vector<string> headersTabla = tabla.generarReporteProveedores(listaProveedor);
+	int opc = opcionesMenuReporte();
 
 	switch (opc) {
 	case 1:
@@ -59,7 +62,7 @@ void Reporte::generarReporteProveedores() {
 		cout << "Enviar por mail";
 		break;
 	case 9:
-		cout << "Imprimir";
+		exportArchivo.exportProveedorCsv(listaProveedor, headersTabla);
 		break;
 	case 0:
 		break;
@@ -67,12 +70,13 @@ void Reporte::generarReporteProveedores() {
 }
 
 void Reporte::generarReporteProductos() {
+	Export exportProductos("productos.csv");
 	vector<Producto> listaProducto;
 	Archivo<Producto> archivo(_nombreArchivo);
 	listaProducto = archivo.listarRegistroArchivo();
 
 	TablaDto<Producto> tabla(_nombreModulo, listaProducto, true, true);
-	tabla.generarReporteProductos(listaProducto);
+	vector<string> headersTabla = tabla.generarReporteProductos(listaProducto);
 	char opc = opcionesMenuReporte();
 
 	switch (opc) {
@@ -83,7 +87,7 @@ void Reporte::generarReporteProductos() {
 		cout << "Enviar por mail";
 		break;
 	case 9:
-		cout << "Imprimir";
+		exportProductos.exportProductoCsv(listaProducto, headersTabla);
 		break;
 	case 0:
 		break;
@@ -94,10 +98,12 @@ void Reporte::generarReporteUsuarios(){
 	vector<Usuario> listaUsuario;
 	Archivo<Usuario> archivo(_nombreArchivo);
 	listaUsuario = archivo.listarRegistroArchivo();
+	const char* nombreArchivo = "usuarios.csv";
+	Export exportArchivo(nombreArchivo);
 
 	TablaDto<Usuario> tabla(_nombreModulo, listaUsuario, true, true);
-	tabla.generarReporteUsuarios(listaUsuario);
-	char opc = opcionesMenuReporte();
+	vector<string> headers = tabla.generarReporteUsuarios(listaUsuario);
+	int opc = opcionesMenuReporte();
 
 	switch (opc) {
 	case 1:
@@ -107,7 +113,7 @@ void Reporte::generarReporteUsuarios(){
 		cout << "Enviar por mail";
 		break;
 	case 9:
-		cout << "Imprimir";
+		exportArchivo.exportUsuarioCsv(listaUsuario, headers);
 		break;
 	case 0:
 		break;
@@ -115,6 +121,7 @@ void Reporte::generarReporteUsuarios(){
 }
 
 void Reporte::generarReporteTransacciones() {
+	Export exportArchivo("transacciones.csv");
 	Archivo<TransaccionDto> archivoTransaccion("transacciones.dat");
 	Archivo<DetalleDto> archivoDetalle("detalles.dat");
 	Archivo<Producto> archivoProducto("productos.dat");
@@ -146,9 +153,9 @@ void Reporte::generarReporteTransacciones() {
 	}
 
 	TablaDto<Transaccion> tabla(_nombreModulo, listaTransaccion, true);
-	tabla.generarReporteTransacciones(listaTransaccion);
+	vector<string> headersTabla = tabla.generarReporteTransacciones(listaTransaccion);
 
-	char opc = opcionesMenuReporte();
+	int opc = opcionesMenuReporte();
 
 	switch (opc) {
 	case 1:
@@ -158,7 +165,7 @@ void Reporte::generarReporteTransacciones() {
 		cout << "Enviar por mail";
 		break;
 	case 9:
-		cout << "Imprimir";
+		exportArchivo.exportTransaccionCsv(listaTransaccion, headersTabla);
 		break;
 	case 0:
 		break;

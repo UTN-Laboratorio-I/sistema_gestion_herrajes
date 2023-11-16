@@ -3,6 +3,8 @@
 #include <functional>
 #include <vector>
 #include <iostream>
+#include <fstream>
+#include <string>
 #include "ResponseDto.h"
 using namespace std;
 template <class T>
@@ -253,8 +255,7 @@ public:
 
         return response;
     }
-
-
+    
 private:
 
 };
