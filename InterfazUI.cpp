@@ -502,7 +502,8 @@ void InterfazUI::ver_MenuConfig() {
 		headerDinamico();
 		cout << "1) Configurar fecha/hora" << endl;
 		cout << "2) Configurar margen de utilidad " << endl;
-		cout << "3) Configurar ruta archivo" << endl << endl;
+		cout << "3) Configurar ruta archivo" << endl;
+		cout << "4) Realizar BackUp" << endl << endl;
 		cout << "0) <- Atras" << endl;
 		cin >> opc;
 		verificado = opcionesValidasMenu(1, 4, opc);
