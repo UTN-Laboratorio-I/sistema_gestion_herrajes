@@ -18,6 +18,7 @@ protected:
 
 public:
 	Transaccion();
+	Transaccion(bool reporte);
 	Transaccion(float monto,
 		const char* usuario,
 		char tipo,
@@ -43,6 +44,7 @@ public:
 	int getCantidad();
 
 	vector<Detalle> getDetalle();
+	void setDetalle(Detalle detalle);
 
 	Response<Transaccion> crearNuevaTransaccion(
 		float monto, 

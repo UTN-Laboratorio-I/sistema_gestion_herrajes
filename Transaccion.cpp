@@ -2,6 +2,16 @@
 #include "Caja.h"
 
 Transaccion::Transaccion() {};
+
+Transaccion::Transaccion(bool reporte) {
+	if (reporte) {
+		_id = 0;
+		_monto = 0;
+		_fecha = Fecha();
+		_tipoTransaccion = ' ';
+		_cantidadProductos = 0;
+	}
+}
 Transaccion::Transaccion(
 	float monto,
 	const char* usuario,
@@ -55,6 +65,10 @@ char Transaccion::getTipo() {
 
 vector<Detalle> Transaccion::getDetalle() {
 	return _detalle;
+}
+
+void Transaccion::setDetalle(Detalle detalle) {
+	_detalle.push_back(detalle);
 }
 
 void Transaccion::setCantidad(int cantidad) {

@@ -13,5 +13,6 @@ public:
 	int getCantidad();
 	void setProducto(Producto producto);
 	void setCantidad(int cantidad);
+	int getSubTotal();
 };
 

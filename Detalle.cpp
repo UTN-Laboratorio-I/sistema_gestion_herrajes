@@ -29,4 +29,6 @@ void Detalle::setCantidad(int cantidad) {
 	_cantidad = cantidad;
 }
 
-
+int Detalle::getSubTotal() {
+	return _producto.getPrecioCosto() * _cantidad;
+}
