@@ -1,9 +1,6 @@
 Id,Tipo Transaccion,Fecha,Id Cliente/Proveedor,Usuario,Producto,Cantidad,Monto,Total
-1,c,15/11/2023,1,pescudero,Teclado,40,120000,348000
-1,c,15/11/2023,1,pescudero,Teclado,100,300000,348000
-2,c,15/11/2023,2,pescudero,Monitor,50,50000,50000
-3,v,15/11/2023,3,pescudero,Monitor,30,30000,30000
-4,c,15/11/2023,4,pescudero,Yerba,100,30000,30000
-5,v,15/11/2023,5,admin,Teclado,2,6000,7300
-5,v,15/11/2023,5,admin,Monitor,1,1000,7300
-5,v,15/11/2023,5,admin,Yerba,1,300,7300
+1,Compra,16/11/2023,1,pescudero,Yerba mate,300,30000,54000
+1,Compra,16/11/2023,1,pescudero,Galletitas,120,24000,54000
+2,Compra,16/11/2023,2,admin,arina,400,52000,52000
+3,Venta,16/11/2023,3,pescudero,Galletitas,12,2400,2900
+3,Venta,16/11/2023,3,pescudero,Yerba mate,5,500,2900

@@ -201,7 +201,7 @@ Cliente Cliente::cargarClienteAmodificar()
 	long primerosDosDigitosCuit;
 	long ultimoDigitoCuit;
 	Helper helper;
-
+	bool modificar = false;
 
 	cout << endl << endl <<"------- CARGA DE NUEVOS DATOS DE CLIENTE -------" << endl << endl;
 

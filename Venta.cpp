@@ -84,7 +84,7 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 	bool finalizarVenta = false;
 
 	ventas_UI.ver_CarritoVentas(detalleVenta);
-
+	sistema->setSubModulo("Nueva venta");
 	while (!finalizarVenta) {
 		Producto producto;
 		char opc;
