@@ -97,7 +97,8 @@ void Export::exportProveedorCsv(vector<Proveedor> lista, vector<string> headers)
 		archivo << p.getRazonsocial() << ",";
 		archivo << p.getCuit() << ",";
 		archivo << p.getFechaAlta().toString() << ",";
-		archivo << p.getEmail() << std::endl;
+		archivo << p.getEmail() << ",";
+		archivo << (p.getEstado()?"SI":"NO")<< std::endl;
 	}
 
 	archivo.close();
