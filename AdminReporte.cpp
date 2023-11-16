@@ -45,7 +45,7 @@ void AdminReporte::administrarModuloReporte()
 			break;
 		case 4:
 			_sistema->setModulo("Reporte Transacciones");
-			administrarSubModuloReporteCaja();
+			administrarSubModuloReporteTransacciones();
 
 			break;
 		case 5:
@@ -73,12 +73,6 @@ void AdminReporte::administrarSubModuloReporteCliente() {
 			_sistema->setSubModulo("Reporte Clientes");
 			reporte.generarReporteClientes();
 			break;
-		case 2:
-			//ELIMINAR CLIENTE
-			break;
-		case 3:
-			//MODIFICAR CLIENTE
-			break;
 		case 0:
 			subModuloReporteSalir();
 			break;
@@ -101,12 +95,6 @@ void AdminReporte::administrarSubModuloReporteProveedor() {
 			_sistema->setSubModulo("Reporte Proveedores");
 
 			reporte.generarReporteProveedores();
-			break;
-		case 2:
-			//ELIMINAR PROVEEDOR
-			break;
-		case 3:
-			//MODIFICAR PROVEEDOR
 			break;
 		case 0:
 			subModuloReporteSalir();
@@ -131,9 +119,6 @@ void AdminReporte::administrarSubModuloReporteProducto() {
 
 			reporte.generarReporteProductos();
 			break;
-		case 2:
-			//ELIMINAR PRODUCTO
-			break;
 		case 0:
 			subModuloReporteSalir();
 			break;
@@ -142,7 +127,7 @@ void AdminReporte::administrarSubModuloReporteProducto() {
 	return;
 }
 
-void AdminReporte::administrarSubModuloReporteCaja() {
+void AdminReporte::administrarSubModuloReporteTransacciones() {
 	InterfazUI Reporte_UI(_sistema);
 
 	while (subModuloReporteActivo(_nombreSubModuloTransaccion)) {
@@ -157,11 +142,8 @@ void AdminReporte::administrarSubModuloReporteCaja() {
 			reporte.generarReporteTransacciones();
 			break;
 		case 2:
-			//ELIMINAR VENTA
-			break;
-		case 3:
-			//MODIFICAR VENTA
-			break;
+			_sistema->setSubModulo("Reporte Transacciones");
+
 		case 0:
 			subModuloReporteSalir();
 			break;
@@ -180,13 +162,8 @@ void AdminReporte::administrarSubModuloReporteUsuarios() {
 
 		switch (opc) {
 		case 1:
+			_sistema->setSubModulo("Reporte Usuarios");
 			reporte.generarReporteUsuarios();
-			break;
-		case 2:
-			//ELIMINAR USUARIO
-			break;
-		case 3:
-			//MODIFICAR USUARIO
 			break;
 		case 0:
 			subModuloReporteSalir();

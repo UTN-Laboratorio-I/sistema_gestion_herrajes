@@ -11,7 +11,6 @@ private:
 	int _id;
 	int _clienteId;
 	char _tipo;
-
 public:
 	Venta();
 

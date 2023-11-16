@@ -140,6 +140,7 @@
     <ClCompile Include="DetalleDto.cpp" />
     <ClCompile Include="DetalleStockDto.cpp" />
     <ClCompile Include="ErrorDto.cpp" />
+    <ClCompile Include="Export.cpp" />
     <ClCompile Include="Fecha.cpp" />
     <ClCompile Include="FechaHorario.cpp" />
     <ClCompile Include="Helper.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="DetalleDto.h" />
     <ClInclude Include="DetalleStockDto.h" />
     <ClInclude Include="ErrorDto.h" />
+    <ClInclude Include="Export.h" />
     <ClInclude Include="Fecha.h" />
     <ClInclude Include="FechaHorario.h" />
     <ClInclude Include="Helper.h" />

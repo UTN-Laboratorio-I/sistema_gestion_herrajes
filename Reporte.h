@@ -14,7 +14,7 @@ public:
 	Reporte();
 	Reporte(const char* nombreArchivo, string nombreModulo);
 
-	char opcionesMenuReporte();
+	int opcionesMenuReporte();
 
 	void generarReporteClientes();
 	void generarReporteProveedores();
