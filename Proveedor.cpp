@@ -330,7 +330,7 @@ Proveedor Proveedor::darBajaProveedor(int id)
 			break;
 		}
 
-		cout << "Esta seguro que desea eliminar el cliente: " << responseProveedor.getData().getNombre() << " " << responseProveedor.getData().getApellido() << " - CUIT: " << responseProveedor.getData().getCuit() << endl;
+		cout << "Esta seguro que desea eliminar el proveedor?: " << responseProveedor.getData().getNombre() << " " << responseProveedor.getData().getApellido() << " - CUIT: " << responseProveedor.getData().getCuit() << endl;
 		cout << "1) Si - 2) No - 0) Atras" << endl;
 
 		cin >> opc;

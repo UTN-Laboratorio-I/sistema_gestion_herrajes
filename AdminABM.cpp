@@ -114,16 +114,16 @@ void AdminABM::administrarSubModuloABMProducto() {
 
 		switch (opc) {
 		case 1:
-			nuevoProducto.cargarProductos();
+			nuevoProducto.responseCargarProducto();
 			break;
 		case 2:
-			//MODIFICAR PRODUCTO
+			nuevoProducto.modificarOdarBajaProducto();
 			break;
 		case 3:
-			//ELIMINAR PRODUCTO
+			nuevoProducto.modificarOdarBajaProducto(false);
 			break;
 		case 4:
-			//LISTAR PRODUCTOS
+			nuevoProducto.mostrarProductos();
 			break;
 		case 0:
 			subModuloABMSalir();

@@ -6,6 +6,16 @@
 
 using namespace std;
 
+
+int Cliente::getId() { return _idCliente; }
+char* Cliente::getRazonSocial() { return _razonSocial; }
+long long Cliente::getCuit() { return _cuit; }
+
+void Cliente::setId(int id) { _idCliente = id; }
+void Cliente::setCuit(long long cuit) { _cuit = cuit; }
+void Cliente::setRazonSocial(const char* razonSocial) { strcpy_s(_razonSocial, razonSocial); }
+
+
 Response<Cliente> Cliente::cargarCliente()
 {
 	Archivo<Cliente> archivoCliente("clientes.dat");
@@ -67,13 +77,7 @@ void Cliente::mostarCliente()
 
 }
 
-int Cliente::getId() {return _idCliente; }
-char* Cliente::getRazonSocial(){return _razonSocial;}
-long long Cliente::getCuit(){return _cuit;}
 
-void Cliente::setId(int id){_idCliente = id;}
-void Cliente::setCuit(long long cuit){_cuit = cuit;}
-void Cliente::setRazonSocial(const char* razonSocial){strcpy_s(_razonSocial, razonSocial);}
 
 Cliente Cliente::listarYSeleccionarClienteExistente() {
 	Archivo<Cliente> archivoCliente("clientes.dat");
