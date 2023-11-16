@@ -308,12 +308,11 @@ void InterfazUI::ver_SubMenuABMCliente() {
 			cout << "1) Crear Cliente" << endl;
 			cout << "2) Modificar Cliente" << endl;
 			cout << "3) Eliminar Cliente" << endl;
-			cout << "4) Listar Clientes" << endl;
-			cout << "5) Buscar Cliente" << endl << endl;
+			cout << "4) Listar Clientes" << endl << endl;
 			cout << "0) <- Atras" << endl;
 
 		cin >> opc;
-		verificado = opcionesValidasMenu(1, 5, opc);
+		verificado = opcionesValidasMenu(1, 4, opc);
 	}
 	_sistema->setModuloPantalla("ABM Clientes", opc);
 
@@ -329,11 +328,10 @@ void InterfazUI::ver_SubMenuABMCliente() {
 			cout << "1) Crear Proveedor" << endl;
 			cout << "2) Modificar Proveedor" << endl;
 			cout << "3) Eliminar Proveedor" << endl;
-			cout << "4) Listar Proveedores" << endl;
-			cout << "5) Buscar Proveedor" << endl << endl;
+			cout << "4) Listar Proveedores" << endl << endl;
 			cout << "0) <- Atras" << endl;
 			cin >> opc;
-			verificado = opcionesValidasMenu(1, 5, opc);
+			verificado = opcionesValidasMenu(1, 4, opc);
 		}
 		_sistema->setModuloPantalla("ABM Proveedores", opc);
 	}
@@ -349,11 +347,10 @@ void InterfazUI::ver_SubMenuABMCliente() {
 			cout << "1) Crear Producto" << endl;
 			cout << "2) Modificar Producto" << endl;
 			cout << "3) Eliminar Producto" << endl;
-			cout << "4) Listar Productos" << endl;
-			cout << "5) Buscar Producto" << endl << endl;
+			cout << "4) Listar Productos" << endl << endl;
 			cout << "0) <- Atras" << endl;
 			cin >> opc;
-			verificado = opcionesValidasMenu(1, 5, opc);
+			verificado = opcionesValidasMenu(1, 4, opc);
 		}
 		_sistema->setModuloPantalla("ABM Productos", opc);
 	}
@@ -504,7 +501,8 @@ void InterfazUI::ver_MenuConfig() {
 		headerDinamico();
 		cout << "1) Configurar fecha/hora" << endl;
 		cout << "2) Configurar margen de utilidad " << endl;
-		cout << "3) Configurar ruta archivo" << endl << endl;
+		cout << "3) Configurar ruta archivo" << endl;
+		cout << "4) Realizar BackUp" << endl << endl;
 		cout << "0) <- Atras" << endl;
 		cin >> opc;
 		verificado = opcionesValidasMenu(1, 4, opc);

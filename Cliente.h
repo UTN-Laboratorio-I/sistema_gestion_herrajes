@@ -13,8 +13,9 @@ public:
 
 	Response<Cliente> cargarCliente();
 	Cliente cargarClienteAmodificar();
-	Response<Cliente> modificarCliente();
-	void MostarCliente();
+	Response<Cliente> modificarOdarBajaCliente(bool modificar = true);
+	Cliente darBajaCliente(int id);
+	void mostarCliente();
 
 	/// <getters especiales>
 	/// agregar los getters del diagrama de clases 
@@ -38,4 +39,5 @@ private:
 	int _idCliente;
 	char _razonSocial[50];
 	long long _cuit;
+	bool modificar = true;
 };

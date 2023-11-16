@@ -11,11 +11,19 @@ class Proveedor : public Persona
 public:
 
 	Response <Proveedor> cargarProveedor();
-	void MostarProveedor();
 	Response <Proveedor> buscarProveedor();
+	
 	void ver_ProveedorEncontrado(Response <Proveedor> proveedor);
+	
+	Proveedor darBajaProveedor(int id);
+	Response<Proveedor> modificarOdarBajaProveedor(bool modificar = true);
+	void verProveedorAmodificar(Response <Proveedor> responseProveedor);
+	Proveedor cargarProveedorAmodificar();
+
+	void mostarProveedor();
 
 
+	void MostarProveedor();
 	void setRazonSocial(string razonSocial) { strcpy_s(_razonSocial, razonSocial.c_str()); }
 	void setCuit(string cuit) { strcpy_s(_cuit, cuit.c_str()); }
 
@@ -31,5 +39,6 @@ private:
 	int _idProveedor;
 	char _razonSocial[30];
 	char _cuit[30];
+	bool modificar = false;
 };
 

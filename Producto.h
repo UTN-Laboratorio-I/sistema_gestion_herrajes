@@ -19,7 +19,6 @@ public:
     std::string getNombreProducto();
     std::string getDescripcionProducto();
     bool getEstado();
-
     void setId(int id);
     void setPrecioCosto(float pCosto);
     void setPrecioVenta(float pVenta);
@@ -28,7 +27,19 @@ public:
     void setDescripcionProducto(std::string descripcion);
     void setEstado(bool estado);
 
-    Producto cargarProductos();
+
+    Response <Producto> responseCargarProducto();
+
+    Response<Producto> modificarOdarBajaProducto(bool modificar = true);
+    Producto darBajaProducto(int id);
+
+    void verProductoAmodificar(Response <Producto> responseProducto);
+
+    Producto cargarProductoAmodificar(bool inventario = false);
+
+    void mostrarProducto();
+
+    Producto cargarProductos(bool inventario = false);
     void mostrarProductos();
 
     Producto listarYSeleccionarProductoVenta();
@@ -42,5 +53,7 @@ private:
     int _cantidad;
     char _nombreProducto[30], _descripcionProducto[45];
     bool _estado;
+    bool modificar = false;
+    bool inventario = false;
 };
 

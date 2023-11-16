@@ -13,8 +13,8 @@ public:
 	Persona();
 
 	void setDni(int d);
-	void setNombre(const char* nombre);
-	void setApellido(const char* apellido);
+	void setNombre(string nombre);
+	void setApellido(string apellido);
 	void setDomicilio(string domicilio);
 	void setEmail(string email);
 	void setFechaAlta();

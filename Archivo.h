@@ -108,7 +108,7 @@ public:
 
     }
 
-    bool modificarRegistro(T &objeto, int posicion)
+    bool modificarRegistroObajaRegistro(T &objeto, int posicion, bool modificar = true)
     {
         FILE* p = fopen(_nombreArchivo, "rb+");
 
@@ -117,9 +117,19 @@ public:
             return false;
         }
 
-        fseek(p, sizeof(T) * posicion, 0);
-        objeto.setId(posicion+1);
-        fwrite(&objeto, sizeof(T), 1, p);
+        if (!modificar)
+        {
+            fseek(p, sizeof(T) * posicion, 0);
+            objeto.setId(posicion + 1);
+            objeto.setEstado(false);
+        }
+        else
+        {
+            fseek(p, sizeof(T) * posicion, 0);
+            objeto.setId(posicion+1);
+            fwrite(&objeto, sizeof(T), 1, p);
+        }
+
 
         fclose(p);
 
