@@ -152,7 +152,7 @@ void InterfazUI::ver_MenuPrincipal() {
 
 	while (!verificado) {
 	headerDinamico();
-	cout << "1) Compras - Stock" << endl;
+	cout << "1) Compras" << endl;
 	cout << "2) Ventas" << endl;
 	cout << "3) ABM" << endl;
 	cout << "4) Reportes" << endl;
@@ -367,7 +367,7 @@ void InterfazUI::ver_MenuReportes() {
 		cout << "1) Reporte Clientes" << endl;
 		cout << "2) Reporte Proveedores" << endl;
 		cout << "3) Reporte Productos" << endl;
-		cout << "4) Reporte Caja" << endl;
+		cout << "4) Reporte Transacciones" << endl;
 		if (isAdmin) {
 		cout << "5) Reporte Usuarios" << endl << endl;
 		}
