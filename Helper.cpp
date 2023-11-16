@@ -38,5 +38,6 @@ int Helper::conversorNombreTablaSwitch(string tabla) {
 	if (tabla == "reporte proveedores") return 5;
 	if (tabla == "reporte productos") return 6;
 	if (tabla == "reporte usuarios") return 7;
+	if (tabla == "reporte transacciones")return 11;
 }
 

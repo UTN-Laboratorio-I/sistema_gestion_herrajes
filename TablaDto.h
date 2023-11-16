@@ -33,6 +33,7 @@ private:
     vector<T> _datos;
     vector<columnas> _columnas;
     vector<int> _anchoColumnas; //para el contenido de la tabla.
+    vector<string> _headers; //para los exports
     string _tipo;
     bool _limpiarPantalla;
     int _anchoTotalTabla;
@@ -114,6 +115,8 @@ public:
             columnasResult.push_back({ "Apellido", 30 });
             columnasResult.push_back({ "Razon Social", 30 });
             columnasResult.push_back({ "Cuit", 30 });
+            columnasResult.push_back({ "Activo", 10 });
+
 			break;
         case 3: //Carrito
             columnasResult.push_back({ "Item nro", 10 });
@@ -173,13 +176,16 @@ public:
         case 10: //Reporte caja
             columnasResult.push_back({ "Saldo Total", 10 });
             break;
-        case 11: //Reporte stock
-			columnasResult.push_back({ "Id", 5 });
-			columnasResult.push_back({ "Nombre", 30 });
-			columnasResult.push_back({ "Descripción", 30 });
-			columnasResult.push_back({ "Precio Costo", 15 });
-			columnasResult.push_back({ "Precio Venta", 15 });
-			columnasResult.push_back({ "Stock disponible", 15 });
+        case 11: //Reporte transacciones (Venta/Compra)
+            columnasResult.push_back({ "Id", 5 });
+			columnasResult.push_back({ "Tipo Transaccion", 20 });
+			columnasResult.push_back({ "Fecha", 20 });
+			columnasResult.push_back({ "Id Cliente/Proveedor", 20 });
+			columnasResult.push_back({ "Usuario", 20 });
+            columnasResult.push_back({ "Producto", 20 });
+            columnasResult.push_back({ "Cantidad", 10 });
+            columnasResult.push_back({ "Monto", 15 });
+            columnasResult.push_back({ "Total", 10 });
 			break;
         default:
             break;
@@ -187,7 +193,9 @@ public:
 
         for (columnas col : columnasResult) {
 			_anchoColumnas.push_back(col.ancho);
+            _headers.push_back(col.header);
 		}
+
         return columnasResult;
     }
 
@@ -195,7 +203,7 @@ public:
     /// <summary>
 	/// Acá se setea manualmente el contenido de cada tabla:
     /// </summary>
-    void generarTablaUsuarios(vector<Usuario> lista) {
+    vector<string> generarTablaUsuarios(vector<Usuario> lista) {
         mostrarHeaderTabla();
      	for (Usuario datos : lista) {
      		cout << setw(_columnas[0].ancho) << datos.getId();
@@ -206,9 +214,10 @@ public:
      		cout << endl;
      	}
         cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
+        return _headers;
     }
 
-    void generarTablaProductos(vector<Producto> lista) {
+    vector<string> generarTablaProductos(vector<Producto> lista) {
         mostrarHeaderTabla();
         for (Producto datos : lista) {
 			cout << setw(_columnas[0].ancho) << datos.getId();
@@ -220,22 +229,28 @@ public:
 			cout << endl;
 		}
         cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
+        return _headers;
 	}
-    void generarTablaClientes(vector<Cliente> lista) {
+    vector<string> generarTablaClientes(vector<Cliente> lista) {
 
 		mostrarHeaderTabla();
         for (Cliente datos : lista) {
+            if(!_isReporte && !datos.getEstado()) continue;
             cout << setw(_columnas[0].ancho) << datos.getId();
             cout << setw(_columnas[1].ancho) << datos.getNombre();
             cout << setw(_columnas[2].ancho) << datos.getApellido();
             cout << setw(_columnas[3].ancho) << datos.getRazonSocial();
             cout << setw(_columnas[4].ancho) << datos.getCuit();
+            cout << setw(_columnas[5].ancho) << datos.getEstado();
+
             cout << endl;
         }
         cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
+        return _headers;
+
     }
 
-    void generarCarritoProductos(vector<DetalleDto> carrito) {
+    vector<string> generarCarritoProductos(vector<DetalleDto> carrito) {
         Producto producto;
         Response<Producto> res;
         Archivo<Producto> archivoProducto("productos.dat");
@@ -253,9 +268,11 @@ public:
             contador++;
         }
         cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
+        return _headers;
+
     }
 
-    void generarReporteClientes(vector<Cliente> lista) {
+    vector<string> generarReporteClientes(vector<Cliente> lista) {
 
 		mostrarHeaderTabla();
 		for (Cliente datos : lista) {
@@ -270,9 +287,11 @@ public:
 			cout << endl;
 		}
 		cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
+        return _headers;
+
 	}
 
-    void generarReporteProveedores(vector<Proveedor> lista) {
+    vector<string> generarReporteProveedores(vector<Proveedor> lista) {
 
         mostrarHeaderTabla();
         for (Proveedor datos : lista) {
@@ -287,9 +306,11 @@ public:
             cout << endl;
         }
         cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
+        return _headers;
+
     }
 
-    void generarReporteProductos(vector<Producto> lista) {
+    vector<string> generarReporteProductos(vector<Producto> lista) {
 
 		mostrarHeaderTabla();
 		for (Producto datos : lista) {
@@ -302,9 +323,11 @@ public:
 			cout << endl;
 		}
 		cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
+        return _headers;
+
 	}
 
-    void generarReporteUsuarios(vector<Usuario> lista) {
+    vector<string> generarReporteUsuarios(vector<Usuario> lista) {
         mostrarHeaderTabla();
         for (Usuario datos : lista) {
             cout << setw(_columnas[0].ancho) << datos.getId();
@@ -315,6 +338,55 @@ public:
             cout << endl;
         }
         cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
+        return _headers;
+
+    }
+
+    //case 11: //Reporte transacciones (Venta/Compra)
+    //    columnasResult.push_back({ "Id", 5 });
+    //    columnasResult.push_back({ "Tipo Transaccion", 20 });
+    //    columnasResult.push_back({ "Fecha", 20 });
+    //    columnasResult.push_back({ "Id Cliente/Proveedor", 30 });
+    //    columnasResult.push_back({ "Usuario", 30 });
+    //    columnasResult.push_back({ "Producto", 30 });
+    //    columnasResult.push_back({ "Cantidad", 10 });
+    //    columnasResult.push_back({ "Monto", 30 });
+    //    break;
+
+
+    vector<string> generarReporteTransacciones(vector<Transaccion> lista) {
+        Archivo<Cliente> archivoCliente("clientes.dat");
+        Archivo<Proveedor> archivoProveedor("proveedores.dat");
+        		mostrarHeaderTabla();
+            for (Transaccion datos : lista) {
+                char tipo = datos.getTipo();
+                cout << setw(_columnas[0].ancho) << datos.getId();
+                cout << setw(_columnas[1].ancho) << (tipo=='v'?"Venta" : "Compra");
+                cout << setw(_columnas[2].ancho) << datos.getFecha().toString();
+                cout << setw(_columnas[3].ancho) << datos.getId();
+                cout << setw(_columnas[4].ancho) << datos.getUsuario();
+                cout << setw(_columnas[5].ancho) << "";
+                cout << setw(_columnas[6].ancho) << "";
+                cout << setw(_columnas[7].ancho) << "";
+                cout << setw(_columnas[8].ancho) << datos.getMonto();
+                cout << endl;
+                for (Detalle detalle : datos.getDetalle()) {
+                    cout << setw(_columnas[0].ancho) << "";
+                    cout << setw(_columnas[1].ancho) << "";
+                    cout << setw(_columnas[2].ancho) << "";
+                    cout << setw(_columnas[3].ancho) << "";
+                    cout << setw(_columnas[4].ancho) << "";
+                    cout << setw(_columnas[5].ancho) << detalle.getProducto().getNombreProducto();
+                    cout << setw(_columnas[6].ancho) << detalle.getCantidad();
+                    cout << setw(_columnas[7].ancho) << detalle.getSubTotal();
+                    cout << endl;
+                }
+                cout << setfill('.') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
+		    }
+
+		cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
+        return _headers;
+
     }
  
    /* void generarTablaCompras(vector<TransaccionDto> listaTransaccion, vector<Compras> listaCompras) {

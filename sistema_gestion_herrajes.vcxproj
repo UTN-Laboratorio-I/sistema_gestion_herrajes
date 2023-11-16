@@ -140,6 +140,7 @@
     <ClCompile Include="DetalleDto.cpp" />
     <ClCompile Include="DetalleStockDto.cpp" />
     <ClCompile Include="ErrorDto.cpp" />
+    <ClCompile Include="Export.cpp" />
     <ClCompile Include="Fecha.cpp" />
     <ClCompile Include="FechaHorario.cpp" />
     <ClCompile Include="Helper.cpp" />
@@ -162,6 +163,7 @@
     <ClCompile Include="Venta.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Downloads\httplib.h" />
     <ClInclude Include="AdminABM.h" />
     <ClInclude Include="AdminCompra.h" />
     <ClInclude Include="AdminConfig.h" />
@@ -177,6 +179,7 @@
     <ClInclude Include="DetalleDto.h" />
     <ClInclude Include="DetalleStockDto.h" />
     <ClInclude Include="ErrorDto.h" />
+    <ClInclude Include="Export.h" />
     <ClInclude Include="Fecha.h" />
     <ClInclude Include="FechaHorario.h" />
     <ClInclude Include="Helper.h" />

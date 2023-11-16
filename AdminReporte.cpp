@@ -15,6 +15,8 @@ AdminReporte::AdminReporte(Sistema* sistema) : _sistema(sistema)
 	_nombreSubModuloProducto = "Reporte Productos";
 	_nombreSubModuloVenta = "Reporte Ventas";
 	_nombreSubModuloUsuario = "Reporte Usuarios";
+	_nombreSubModuloTransaccion = "Reporte Transacciones";
+
 }
 
 void AdminReporte::administrarModuloReporte()
@@ -42,8 +44,8 @@ void AdminReporte::administrarModuloReporte()
 
 			break;
 		case 4:
-			_sistema->setModulo("Reporte Ventas");
-			administrarSubModuloReporteCaja();
+			_sistema->setModulo("Reporte Transacciones");
+			administrarSubModuloReporteTransacciones();
 
 			break;
 		case 5:
@@ -71,12 +73,6 @@ void AdminReporte::administrarSubModuloReporteCliente() {
 			_sistema->setSubModulo("Reporte Clientes");
 			reporte.generarReporteClientes();
 			break;
-		case 2:
-			//ELIMINAR CLIENTE
-			break;
-		case 3:
-			//MODIFICAR CLIENTE
-			break;
 		case 0:
 			subModuloReporteSalir();
 			break;
@@ -96,13 +92,9 @@ void AdminReporte::administrarSubModuloReporteProveedor() {
 
 		switch (opc) {
 		case 1:
+			_sistema->setSubModulo("Reporte Proveedores");
+
 			reporte.generarReporteProveedores();
-			break;
-		case 2:
-			//ELIMINAR PROVEEDOR
-			break;
-		case 3:
-			//MODIFICAR PROVEEDOR
 			break;
 		case 0:
 			subModuloReporteSalir();
@@ -123,10 +115,9 @@ void AdminReporte::administrarSubModuloReporteProducto() {
 
 		switch (opc) {
 		case 1:
+			_sistema->setSubModulo("Reporte Productos");
+
 			reporte.generarReporteProductos();
-			break;
-		case 2:
-			//ELIMINAR PRODUCTO
 			break;
 		case 0:
 			subModuloReporteSalir();
@@ -136,23 +127,23 @@ void AdminReporte::administrarSubModuloReporteProducto() {
 	return;
 }
 
-void AdminReporte::administrarSubModuloReporteCaja() {
+void AdminReporte::administrarSubModuloReporteTransacciones() {
 	InterfazUI Reporte_UI(_sistema);
 
-	while (subModuloReporteActivo(_nombreSubModuloVenta)) {
+	while (subModuloReporteActivo(_nombreSubModuloTransaccion)) {
+		Reporte reporte("transacciones.dat", "reporte transacciones");
 		Reporte_UI.ver_SubMenuReportesCaja();
 		int opc = _sistema->getPantalla();
 
 		switch (opc) {
 		case 1:
-			//AGREGAR VENTA
+			_sistema->setSubModulo("Reporte Transacciones");
+
+			reporte.generarReporteTransacciones();
 			break;
 		case 2:
-			//ELIMINAR VENTA
-			break;
-		case 3:
-			//MODIFICAR VENTA
-			break;
+			_sistema->setSubModulo("Reporte Transacciones");
+
 		case 0:
 			subModuloReporteSalir();
 			break;
@@ -171,13 +162,8 @@ void AdminReporte::administrarSubModuloReporteUsuarios() {
 
 		switch (opc) {
 		case 1:
+			_sistema->setSubModulo("Reporte Usuarios");
 			reporte.generarReporteUsuarios();
-			break;
-		case 2:
-			//ELIMINAR USUARIO
-			break;
-		case 3:
-			//MODIFICAR USUARIO
 			break;
 		case 0:
 			subModuloReporteSalir();

@@ -19,6 +19,7 @@ public:
 	Fecha getFecha();
 	char* getUsuario();
 	char getTipoTransaccion();
+	int getCantidadTotal();
 	void setId(int id);
 	void setMonto(float monto);
 	void setFecha(Fecha fecha);
