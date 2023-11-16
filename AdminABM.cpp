@@ -60,10 +60,13 @@ void AdminABM::administrarSubModuloABMCliente() {
 			nuevoCliente.cargarCliente();
 			break;
 		case 2:
-			nuevoCliente.modificarCliente();
+			nuevoCliente.modificarOdarBajaCliente();
 			break;
 		case 3:
-			
+			nuevoCliente.modificarOdarBajaCliente(false);
+			break;
+		case 4:
+			nuevoCliente.mostarCliente();
 			break;
 		case 0:
 			subModuloABMSalir();

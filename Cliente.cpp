@@ -2,6 +2,7 @@
 #include "Archivo.h"
 #include "TablaDto.h"
 #include "vector"
+#include "conio.h"
 
 using namespace std;
 
@@ -50,13 +51,19 @@ Response<Cliente> Cliente::cargarCliente()
 	return response;
 }
 
-void Cliente::MostarCliente()
+void Cliente::mostarCliente()
 {
-	mostrar();
+	vector <Cliente> vectorClientes;
+	Archivo <Cliente> archivoCliente("clientes.dat");
+	vectorClientes = archivoCliente.listarRegistroArchivo();
 
-	cout << "ID CLIENTE: " << getId() << endl;
-	cout << "CUIT: " << getCuit() << endl;
-	cout << "RAZON SOCIAL: " << getRazonSocial() << endl;
+	TablaDto <Cliente> tablaClientes("clientes", vectorClientes, true, false);
+	tablaClientes.generarTablaClientes(vectorClientes);
+
+	cout << endl;
+
+	cout << "Seleccione una tecla para volver al menu anterior...";
+	getch();
 
 }
 
@@ -91,7 +98,7 @@ Cliente Cliente::listarYSeleccionarClienteExistente() {
 	};
 }
 
-Response<Cliente> Cliente::modificarCliente()
+Response<Cliente> Cliente::modificarOdarBajaCliente(bool modificar)
 {
 	vector <Cliente> vectorClientes;
 	Archivo <Cliente> archivoCliente("clientes.dat");
@@ -99,7 +106,8 @@ Response<Cliente> Cliente::modificarCliente()
 	
 	TablaDto <Cliente> tablaClientes("clientes", vectorClientes, true, false);
 	tablaClientes.generarTablaClientes(vectorClientes);
-
+	
+	int id = vectorClientes.back().getId();
 
 	Response <Cliente> responseCliente;
 
@@ -113,13 +121,29 @@ Response<Cliente> Cliente::modificarCliente()
 	while (!continuar)
 
 	{
+		//En caso de que modificar sea false
+		if (!modificar)
+		{
+			cliente.darBajaCliente(id);
+			continuar = false;
+			break;
+		}
+
 		cout << endl <<"Ingrese ID de cliente que desea modificar: ";
 		cin >> idCliente;
+
+		if (idCliente < 1 || idCliente > id)
+		{
+			cout << endl << "El numero de ID seleccionado no existe, seleccione un ID valido..." << endl;
+			_sleep(2000);
+			continue;
+		}
 		
 		int posicion = archivoCliente.buscarPosRegistro(cliente, idCliente);
 
 		responseCliente = archivoCliente.listarUnRegistro(posicion, cliente);
 
+		cout << endl;
 
 		verClienteAmodificar(responseCliente);
 
@@ -141,7 +165,7 @@ Response<Cliente> Cliente::modificarCliente()
 			cliente = cliente.cargarClienteAmodificar();
 			cout << endl;
 			responseCliente.setSuccess("Cliente modificado correctamente!", cliente);
-			archivoCliente.modificarRegistro(cliente, posicion);
+			archivoCliente.modificarRegistroObajaRegistro(cliente, posicion);
 
 			cout << responseCliente.getMessage();
 			_sleep(2000);
@@ -157,15 +181,12 @@ Response<Cliente> Cliente::modificarCliente()
 		}
 
 	}
-	
-
-
 
 }
 
 void Cliente::verClienteAmodificar(Response <Cliente> responseCliente)
 {
-	cout << "El cliente " << responseCliente.getData().getNombre() << " " << responseCliente.getData().getApellido() << " " << responseCliente.getData().getCuit() << endl << endl;
+	cout << "El cliente seleccionado es: " << responseCliente.getData().getNombre() << " " << responseCliente.getData().getApellido() << " - CUIT: " << responseCliente.getData().getCuit() << endl;
 }
 
 Cliente Cliente::cargarClienteAmodificar()
@@ -178,7 +199,7 @@ Cliente Cliente::cargarClienteAmodificar()
 	Helper helper;
 
 
-	cout << "------- CARGA DE NUEVOS DATOS DE CLIENTE -------" << endl << endl;
+	cout << endl << endl <<"------- CARGA DE NUEVOS DATOS DE CLIENTE -------" << endl << endl;
 
 	cliente.cargar();
 
@@ -201,4 +222,85 @@ Cliente Cliente::cargarClienteAmodificar()
 	cliente.setCuit(resultado);
 
 	return cliente;
+}
+
+Cliente Cliente::darBajaCliente(int id)
+{
+	
+	vector <Cliente> vectorClientes;
+	Archivo <Cliente> archivoCliente("clientes.dat");
+	vectorClientes = archivoCliente.listarRegistroArchivo();
+
+	Response <Cliente> responseCliente;
+
+	Helper helper;
+
+	bool continuar = false;
+	int idCliente;
+	int opc;
+	Cliente cliente;
+	
+	while (!continuar)
+	{
+
+		cout << endl << "Ingrese ID de cliente que desea eliminar: ";
+		cin >> idCliente;
+
+		if (idCliente < 1 || idCliente > id)
+		{
+			cout << endl << "El numero de ID seleccionado no existe, seleccione un ID valido..." << endl;
+			_sleep(2000);
+			continue;
+		}
+
+		int posicion = archivoCliente.buscarPosRegistro(cliente, idCliente);
+
+		responseCliente = archivoCliente.listarUnRegistro(posicion, cliente);
+
+		cout << endl;
+
+		verClienteAmodificar(responseCliente);
+
+		cout << endl << "Es el que desea eliminar?" << endl;
+
+		cout << "1) Si - 2) No - 0) Atras" << endl;
+		cin >> opc;
+
+		if (opc != 1)
+		{
+			responseCliente.setFailure("No se a eliminado ningun cliente, volviendo al menu anterior...");
+			continuar = true;
+			break;
+		}
+
+		cout << "Esta seguro que desea eliminar el cliente: " << responseCliente.getData().getNombre() << " " << responseCliente.getData().getApellido() << " - CUIT: " << responseCliente.getData().getCuit() << endl;;
+		cout << "1) Si - 2) No - 0) Atras" << endl;
+		
+		cin >> opc;
+
+		if (opc == 1)
+		{
+			cliente = responseCliente.getData();
+			cliente.setEstado(false);
+
+			archivoCliente.modificarRegistroObajaRegistro(cliente, posicion, true);
+
+			responseCliente.setSuccess("Cliente eliminado correctamente", cliente);
+			continuar = true;
+			break;
+		}
+		else if (opc != 1)
+		{
+			responseCliente.setFailure("No se a eliminado ningun cliente, volviendo al menu anterior...");
+			continuar = true;
+			break;
+		}
+
+	}
+		cout << endl << responseCliente.getMessage();
+
+		_sleep(4000);
+
+		return cliente;
+	
 }
