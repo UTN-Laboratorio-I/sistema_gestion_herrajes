@@ -1,6 +1,9 @@
-#include "Usuario.h"
 #include <iostream>
 #include <cstring>
+#include "Usuario.h"
+#include "Helper.h"
+
+using namespace std;
 
 Usuario::Usuario()
     : _isAdmin(false) {
@@ -99,10 +102,10 @@ Response<Usuario> Usuario::crearNuevoUsuario() {
     std::cout << "Ingrese rol del Usuario: ";
     std::cin.getline(nuevoUser._rol, sizeof(nuevoUser._rol));
 
-    //Response<Usuario> registro = archivo.grabarRegistroArchivo(nuevoUser);
+    Response<Usuario> registro = archivo.grabarRegistroArchivo(nuevoUser);
 
     if (true) {
-        response.setSuccess("Usuario creado con éxito.", nuevoUser);
+        response.setSuccess("Usuario creado con exito.", nuevoUser);
     }
     else {
         response.setFailure("Error al crear usuario.");
@@ -117,5 +120,6 @@ std::vector<Usuario> Usuario::listarUsuarios() {
     Archivo<Usuario> archivo(nombreArchivo);
 
     usuarios = archivo.listarRegistroArchivo();
+
     return usuarios;
 }

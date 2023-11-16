@@ -1,0 +1,6 @@
+Id,Tipo Transaccion,Fecha,Id Cliente/Proveedor,Usuario,Producto,Cantidad,Monto,Total
+1,Compra,16/11/2023,1,pescudero,Yerba mate,300,30000,54000
+1,Compra,16/11/2023,1,pescudero,Galletitas,120,24000,54000
+2,Compra,16/11/2023,2,admin,arina,400,52000,52000
+3,Venta,16/11/2023,3,pescudero,Galletitas,12,2400,2900
+3,Venta,16/11/2023,3,pescudero,Yerba mate,5,500,2900

@@ -1,5 +1,6 @@
 #pragma once
 #include "Sistema.h"
+#include "DetalleDto.h"
 class InterfazUI
 {
 private:
@@ -11,6 +12,7 @@ public:
 	InterfazUI(Sistema* sistema);
 
 	void headerDinamico();
+	void mostrarMensajeDinamico(string mensaje);
 	bool opcionesValidasMenu(int inicio, int fin, int seleccion, bool imprimir = false, bool admiteAtras = true);
 	bool mensajeCancelarEjecucion(string ejecucion);
 
@@ -34,13 +36,16 @@ public:
 	void ver_SubMenuReportesProveedor();
 	void ver_SubMenuReportesProducto();
 	void ver_SubMenuReportesCaja();
+	void ver_SubMenuReportesUsuario();
 
 	void ver_MenuConfig();
 
 	void ver_MenuUsuario();
 
+	//Ventas:
 	void ver_MenuVentas();
 	int ver_VentasClienteExistente();
+	void ver_CarritoVentas(vector<DetalleDto> detalle);
 
 };
 

@@ -1,9 +1,12 @@
+#include <iostream>
+#include <string>
 #include "AdminVenta.h"
 #include "InterfazUI.h"
 #include "Venta.h"
 #include "Cliente.h"
 #include "Caja.h"
 
+using namespace std;
 //Constructor:
 AdminVenta::AdminVenta(Sistema* sistema) : _sistema(sistema) {
 	_nombreModulo = "Ventas";
@@ -60,15 +63,18 @@ void AdminVenta::registrarNuevaVenta() {
 		switch (opc) {
 		case 1:
 			_sistema->setSubModulo("Seleccion cliente existente");
+			ventas_UI.headerDinamico();
 			cliente = cliente.listarYSeleccionarClienteExistente();
-			if (cliente.getIdCliente() == 0) {
+			if (cliente.getId() == 0) {
 				_sistema->setError("No hay clientes creados");
 				ventas_UI.headerDinamico();
 				system("pause");
 				continuar = true;
 			}
 			else {
-				venta.setClienteId(cliente.getIdCliente());
+				venta.setClienteId(cliente.getId());
+				
+				ventas_UI.mostrarMensajeDinamico("Cliente seleccionado correctamente");
 			}
 
 			break;
@@ -78,7 +84,7 @@ void AdminVenta::registrarNuevaVenta() {
 			cliente= responseCliente.getData();
 
 			
-			venta.setClienteId(cliente.getIdCliente());
+			venta.setClienteId(cliente.getId());
 
 			break;
 		case 0: //SALIR DEL REGISTRO DE NUEVA VENTA AL MENU VENTA:
@@ -92,16 +98,13 @@ void AdminVenta::registrarNuevaVenta() {
 			responseVenta = venta.crearNuevaVenta(_sistema); //Le paso el parametro sistema para
 			//poder utilizar la UI (Sobre todo el limpiarConsola y headerDinamico)
 
-
 			if (responseVenta.getSuccess()) {
-				//Hacemos el descuento de stock de los productos vendidos
-				//y sumamos el monto total de la venta al cliente a la caja.
+
 			}
 			else {
 				_sistema->setError(responseVenta.getMessage());
 			}	
 		}
-
 	}
 	_sistema->limpiarError();
 	_sistema->limpiarSubModulo();

@@ -1,15 +1,19 @@
 #include <iostream>
 #include "Sistema.h"
+#include "Reporte.h"
 #pragma once
 
 class AdminReporte
 {
+
 private:
 	string _nombreModulo;
 	string _nombreSubModuloCliente;
 	string _nombreSubModuloProveedor;
 	string _nombreSubModuloProducto;
 	string _nombreSubModuloVenta;
+	string _nombreSubModuloUsuario;
+	string _nombreSubModuloTransaccion;
 	Sistema* _sistema;
 
 public:
@@ -24,7 +28,8 @@ public:
 	void administrarSubModuloReporteCliente();
 	void administrarSubModuloReporteProveedor();
 	void administrarSubModuloReporteProducto();
-	void administrarSubModuloReporteCaja();
+	void administrarSubModuloReporteTransacciones();
+	void administrarSubModuloReporteUsuarios();
 
 	//Verificadores de estado del módulo:
 	bool moduloReporteActivo();
@@ -33,11 +38,5 @@ public:
 	//Salir de módulo y submódulos:
 	void moduloReporteSalir();
 	void subModuloReporteSalir();
-
-	//Lógica del submódulos:
-	void pantallaReporteClientes();
-	void pantallaReporteProveedores();
-	void pantallaReporteProductos();
-	void pantallaReporteVentas();
 };
 

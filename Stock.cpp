@@ -2,6 +2,22 @@
 #include "Producto.h"
 #include "StockDto.h"
 
+Stock::Stock() {};
+
+
+
+//GETTERS
+
+int Stock::getIdProducto() {
+	return idProducto;
+}
+
+int Stock::getCantidad()
+{
+	return cantidadTotal;
+}
+
+//
 
 Response<Stock> Stock::gestionarStock(int cantidad, int idProducto, char tipoTransaccion) {
 	Response<Stock> response;
@@ -9,10 +25,10 @@ Response<Stock> Stock::gestionarStock(int cantidad, int idProducto, char tipoTra
 	
 	switch (tipoTransaccion) {
 	case 'v':
-			responseDto = restarStock(cantidad, idProducto);
+			responseDto = restarStock<StockDto>(cantidad, idProducto);
 			break;
 	case 'c':
-			responseDto = sumarStock(cantidad, idProducto);
+			responseDto = sumarStock<StockDto>(cantidad, idProducto);
 			break;
 	default:
 			break;
@@ -20,42 +36,64 @@ Response<Stock> Stock::gestionarStock(int cantidad, int idProducto, char tipoTra
 	return response;
 }
 
+//Función para pasar como parametro:
+template <class T>
+bool Stock::validarStock(int idProducto, T objetoArchivo) {
+	T stock = (T)objetoArchivo;
+	if (idProducto == stock.getId()) {
+		return true;
+	}
+	return false;
+}
+
+typedef bool(Stock:: *validarStock)(int, int);
+template <class T>
 Response<StockDto> Stock::sumarStock(int cantidad, int idProducto) {
 	Response<StockDto> response;
 	Archivo<StockDto> archivoStock("stock.dat");
+	int cantidadActualizada = cantidad;
+	response = archivoStock.buscarUnRegistro(idProducto);
+	if (response.getSuccess()) {
+	cantidadActualizada = response.getData().getCantidadTotal() + cantidad;
+	}
+
 	StockDto stock(idProducto, cantidad);
 
-	int existente = archivoStock.buscarPosRegistro(stock, idProducto);
+	auto funcionValidar = [this](int idProducto, T objetoArchivo) {return validarStock(idProducto, objetoArchivo); };
 
-	if (existente != -1) {
-		stock.setCantidadTotal(stock.getCantidadTotal() + cantidad);
-	}
+	response = archivoStock.grabarOModificarRegistro(stock, idProducto, funcionValidar);
 
-	response = archivoStock.grabarOModificarRegistro(stock, idProducto);
-
-	if (!response.getSuccess()) {
-		response.setFailure("No se ha podido registrar el cambio de stock");
-	}
 	return response;
 }
 
+typedef bool(Stock::* validarStock)(int, int);
+template <class T>
 Response<StockDto> Stock::restarStock(int cantidad, int idProducto) {
 	Response<StockDto> response;
 	Archivo<StockDto> archivoStock("stock.dat");
-	StockDto stock(idProducto, cantidad);
-
-	int existente = archivoStock.buscarPosRegistro(stock, idProducto);
-
-	//En caso de que el producto ya esté registrado, sobreescribimos la cantidad:
-	if (existente != -1) {
-		stock.setCantidadTotal(stock.getCantidadTotal() - cantidad);
+	int cantidadActualizada = cantidad;
+	response = archivoStock.buscarUnRegistro(idProducto);
+	if (response.getSuccess()) {
+		cantidadActualizada = response.getData().getCantidadTotal() - cantidad;
 	}
-	
-	response = archivoStock.grabarOModificarRegistro(stock, idProducto);
+	StockDto stock(idProducto, cantidadActualizada);
 
-	if (!response.getSuccess()) {
-		response.setFailure("No se ha podido registrar el cambio de stock");
-	}
+	auto funcionValidar = [this](int idProducto, T idArchivo) {return validarStock(idProducto, idArchivo); };
+	response = archivoStock.grabarOModificarRegistro(stock, idProducto, funcionValidar);
 
 	return response;
+}
+
+void Stock::mostrarStock()
+{
+	Archivo <Producto> archivoProducto("productos.dat");
+	Response <Producto> responseProducto;
+	Producto producto;
+
+	responseProducto = archivoProducto.listarUnRegistro(this->getIdProducto(), producto);
+
+	cout << responseProducto.getData().getId() << endl;
+	cout << responseProducto.getData().getDescripcionProducto() << endl;
+	cout << this->getCantidad() << endl;
+
 }

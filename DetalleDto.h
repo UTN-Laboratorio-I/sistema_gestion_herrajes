@@ -12,7 +12,6 @@ private:
 public:
 	DetalleDto();
 	DetalleDto(Detalle detalle, int idTransaccion);
-	~DetalleDto();
 
 	int getId();
 	void setId(int id);

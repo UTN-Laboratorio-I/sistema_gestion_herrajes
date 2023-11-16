@@ -13,8 +13,8 @@ Persona::Persona()
 
 
 void Persona::setDni(int d){ _dni = d;}
-void Persona::setNombre(const char* nombre){strcpy_s(_nombre, nombre);}
-void Persona::setApellido(const char* apellido){strcpy_s(_apellido, apellido);}
+void Persona::setNombre(string nombre){strcpy_s(_nombre, nombre.c_str());}
+void Persona::setApellido(string apellido){strcpy_s(_apellido, apellido.c_str());}
 void Persona::setDomicilio(string domicilio){strcpy_s(_direccion, domicilio.c_str());}
 void Persona::setEmail(string email){strcpy_s(_email, email.c_str());}
 
@@ -44,8 +44,7 @@ void Persona::setFechaNacimiento(Fecha fechaNacimiento)
 
 void Persona::setEstado(bool estado)
 {
-	if (_dni != 0) {_estado = 1;}
-	else{_estado = 0;}
+	_estado = estado;
 }
 
 int Persona::getDNI(){return _dni;}
@@ -53,8 +52,8 @@ char* Persona::getNombre(){return _nombre;}
 char* Persona::getApellido(){return _apellido;}
 char* Persona::getDomicilio(){return _direccion;}
 char* Persona::getEmail(){return _email;}
-Fecha Persona::getFechaNacimiento() { return _fechaNacimiento; }
 Fecha Persona::getFechaAlta(){return _fechaAlta;}
+bool Persona::getEstado(){return _estado;}
 
 void Persona::cargar(){
 	int dni;

@@ -54,3 +54,7 @@ void TransaccionDto::setUsuario(char* usuario) {
 void TransaccionDto::setTipoTransaccion(char tipoTransaccion) {
 	_tipoTransaccion = tipoTransaccion;
 }
+
+int TransaccionDto::getCantidadTotal() {
+	return _cantidadTotal;
+}

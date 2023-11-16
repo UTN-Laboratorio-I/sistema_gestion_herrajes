@@ -140,6 +140,7 @@
     <ClCompile Include="DetalleDto.cpp" />
     <ClCompile Include="DetalleStockDto.cpp" />
     <ClCompile Include="ErrorDto.cpp" />
+    <ClCompile Include="Export.cpp" />
     <ClCompile Include="Fecha.cpp" />
     <ClCompile Include="FechaHorario.cpp" />
     <ClCompile Include="Helper.cpp" />
@@ -149,21 +150,20 @@
     <ClCompile Include="Producto.cpp" />
     <ClCompile Include="AdminReporte.cpp" />
     <ClCompile Include="Proveedor.cpp" />
+    <ClCompile Include="Reporte.cpp" />
     <ClCompile Include="Sistema.cpp" />
     <ClCompile Include="sistema_gestion_herrajes.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Stock.cpp" />
     <ClCompile Include="StockDto.cpp" />
-    <ClCompile Include="test.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Transaccion.cpp" />
     <ClCompile Include="TransaccionDto.cpp" />
     <ClCompile Include="Usuario.cpp" />
     <ClCompile Include="Venta.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Downloads\httplib.h" />
     <ClInclude Include="AdminABM.h" />
     <ClInclude Include="AdminCompra.h" />
     <ClInclude Include="AdminConfig.h" />
@@ -179,6 +179,7 @@
     <ClInclude Include="DetalleDto.h" />
     <ClInclude Include="DetalleStockDto.h" />
     <ClInclude Include="ErrorDto.h" />
+    <ClInclude Include="Export.h" />
     <ClInclude Include="Fecha.h" />
     <ClInclude Include="FechaHorario.h" />
     <ClInclude Include="Helper.h" />
@@ -193,6 +194,7 @@
     <ClInclude Include="Sistema.h" />
     <ClInclude Include="Stock.h" />
     <ClInclude Include="StockDto.h" />
+    <ClInclude Include="TablaDto.h" />
     <ClInclude Include="Transaccion.h" />
     <ClInclude Include="TransaccionDto.h" />
     <ClInclude Include="Usuario.h" />

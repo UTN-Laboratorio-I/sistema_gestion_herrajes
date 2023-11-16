@@ -16,6 +16,10 @@ public:
 
 	void administrarModuloConfig();
 
+	void realizarCopiaDeSeguridad();
+
+	void generarBackUp();
+
 
 };
 

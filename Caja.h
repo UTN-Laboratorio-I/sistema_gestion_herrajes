@@ -5,8 +5,15 @@ private:
 	float _dineroTotal;
 
 public:
-	void restarDinero(float monto);
-	void sumarDinero(float monto);
+	Caja();
+	~Caja();
+
+	//Response<Caja> gestionarCaja(float monto, char tipoTransaccion);
+
+	float getDineroTotal();
+	void setDineroTotal(float dineroTotal);
+
+	Caja getEstadoCaja();
 
 };
 

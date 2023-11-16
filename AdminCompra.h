@@ -26,8 +26,6 @@ public:
 
 	void pantallaBuscarProducto();
 
-	void crearNuevaCompra();
-
 	void subModuloCompra();
 
 	void mostrarCompras();

@@ -1,9 +1,11 @@
 #include <iostream>
+#include <vector>
 #include "Venta.h"
 #include "InterfazUI.h"
 #include "Cliente.h"
 #include "Caja.h"
 #include "DetalleDto.h"
+#include "TablaDto.h"
 
 using namespace std;
 Venta::Venta() {
@@ -40,24 +42,56 @@ void Venta::agregarProducto(Producto producto) {
 	this->agregarADetalleVenta(producto, cant);
 }
 
+void Venta::carritoDeVenta(bool ventaRealizada=false) {
+	vector<DetalleDto> carrito;
+	for (Detalle detalle : _detalle) {
+		//Obtenemos el id del registro y cada detalle de la lista:
+		int id = _id;
+		DetalleDto detalleDto(detalle, id);
+		carrito.push_back(detalleDto);
+	}
+
+	if (!_detalle.empty()) {
+		if (ventaRealizada) {
+			cout << "Venta realizada con exito!" << endl;
+		}
+		else {
+			cout << "Carrito de venta: " << endl;
+		}
+	TablaDto<DetalleDto> tabla("carrito", carrito, false);
+
+	tabla.generarCarritoProductos(carrito);
+
+	}
+
+	if (ventaRealizada)
+		system("pause");
+	cout << endl << endl;
+}
+
 Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 	InterfazUI ventas_UI(sistema); //Utilizo ésta instancia para utilizar limpiarConsola y
 	//headerDinamico, y así evitar que la consola se ensucie entre pantalla y pantalla.
 	Archivo<TransaccionDto> archivoTransaccion("transacciones.dat");
 	Archivo<DetalleDto> archivoDetalle("detalles.dat");
 	Response<TransaccionDto> response;
+	vector<DetalleDto> detalleVenta;
 	Venta venta;
 	Fecha fecha;
 	Stock stock;
+	Caja caja;
 
 	bool finalizarVenta = false;
 
-
+	ventas_UI.ver_CarritoVentas(detalleVenta);
+	sistema->setSubModulo("Nueva venta");
 	while (!finalizarVenta) {
 		Producto producto;
 		char opc;
 
+
 		ventas_UI.headerDinamico();
+		venta.carritoDeVenta();
 		//Obtener listado de productos disponibles para venta:
 		producto = producto.listarYSeleccionarProductoVenta();
 
@@ -71,7 +105,8 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 		cin >> opc;
 		if (opc == 's' || opc == 'S') {
 			finalizarVenta = !finalizarVenta;
-
+			sistema->setSubModulo("VENTA FINALIZADA");
+			ventas_UI.headerDinamico();
 		}
 		
 	}
@@ -99,7 +134,7 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 	venta.setTipoTransaccion(_tipo);
 
 	//Guardamos la venta en el archivo:
-	TransaccionDto transaccion(_monto, _fecha, _tipo, _cantidadProductos, _usuario);
+	TransaccionDto transaccion(venta._monto, venta._fecha, venta._tipo, venta._cantidadProductos, venta._usuario);
 	Response<TransaccionDto> registro = archivoTransaccion.grabarRegistroArchivo(transaccion);
 
 	bool registroCorrecto = true;
@@ -111,10 +146,9 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 		Response<DetalleDto> registroDetalle = archivoDetalle.grabarRegistroArchivo(detalleDto);
 
 		//Modificamos el stock del producto:
-		stock.gestionarStock(detalle.getProducto().getId(), detalle.getCantidad(), _tipo);
+		stock.gestionarStock(detalle.getCantidad(), detalle.getProducto().getId(), _tipo);
 
-
-		//Si algún registro falla, devolvemos false:
+				//Si algún registro falla, devolvemos false:
 		if (registroDetalle.getSuccess() == false) {
 			registroCorrecto = false;
 		}
@@ -122,10 +156,13 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 
 	//Si se registraron correctamente tanto detalles como transaccion, se avanza OK:
 	if (registro.getSuccess() && registroCorrecto) {
+		//caja.gestionarCaja(_monto, _tipo);
 		response.setSuccess("Se registro la venta correctamente", registro.getData());
+		venta.carritoDeVenta(true);
 	}
 	else {
 		response.setFailure("No se pudo registrar la venta");
 	}
+	sistema->limpiarSubModulo();
 	return response;
 }

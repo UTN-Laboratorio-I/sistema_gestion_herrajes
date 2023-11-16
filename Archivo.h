@@ -3,6 +3,8 @@
 #include <functional>
 #include <vector>
 #include <iostream>
+#include <fstream>
+#include <string>
 #include "ResponseDto.h"
 using namespace std;
 template <class T>
@@ -106,7 +108,7 @@ public:
 
     }
 
-    bool modificarRegistro(T &objeto, int posicion)
+    bool modificarRegistroObajaRegistro(T &objeto, int posicion, bool modificar = true)
     {
         FILE* p = fopen(_nombreArchivo, "rb+");
 
@@ -115,9 +117,19 @@ public:
             return false;
         }
 
-        fseek(p, sizeof(T) * posicion, 0);
-        objeto.setId(posicion);
-        fwrite(&objeto, sizeof(T), 1, p);
+        if (!modificar)
+        {
+            fseek(p, sizeof(T) * posicion, 0);
+            objeto.setId(posicion + 1);
+            objeto.setEstado(false);
+        }
+        else
+        {
+            fseek(p, sizeof(T) * posicion, 0);
+            objeto.setId(posicion+1);
+            fwrite(&objeto, sizeof(T), 1, p);
+        }
+
 
         fclose(p);
 
@@ -193,24 +205,67 @@ public:
            
     }
 
-    Response<T> grabarOModificarRegistro(T objeto, int idBuscado) {
-    Response<T> response;
-		int posicion = buscarPosRegistro(objeto, idBuscado);
+    Response<T> buscarUnRegistro(int id) {
+        T obj;
+        Response<T> res;
+        int pos = buscarPosRegistro(T(), id);
 
-		if (posicion == -1)
-		{
-			response = grabarRegistroArchivo(objeto);
-		}
-		else
-		{
-			modificarRegistro(objeto, posicion);
-			response.setSuccess("Modificado con exito", objeto);
-		}
+        res = listarUnRegistro(pos, T());
 
-		return response;
+        return res;
     }
 
+    template <class FuncionValidacion>
+    Response<T> grabarOModificarRegistro(T objeto, int idBuscado, FuncionValidacion validacion) {
+        Response<T> response;
 
+        FILE* p = fopen(_nombreArchivo, "rb+");
+        T objetoLeido;
+
+        if (p == NULL) {
+
+            p = fopen(_nombreArchivo, "ab");
+            bool escribio = fwrite(&objeto, sizeof(T), 1, p);
+            response.setSuccess("Se creo el registro", objeto);
+            return response;
+        }
+
+        int posicionObjeto = 0;
+
+        while (fread(&objetoLeido, sizeof(T), 1, p) == 1) {
+            if (validacion(idBuscado, objetoLeido)) {
+                fseek(p, sizeof(T) * posicionObjeto, 0);
+                bool actualizo = fwrite(&objeto, sizeof(T), 1, p);
+
+                if (actualizo) {
+                    fclose(p);
+                    response.setSuccess("Se actualizó el registro", objeto);
+                    return response;
+                }
+                else {
+                    fclose(p);
+                    response.setFailure("No se pudo actualizar el registro.");
+                    return response;
+                }
+            }
+            posicionObjeto++;
+        }
+
+        fseek(p, 0, SEEK_END);
+        bool escribio = fwrite(&objeto, sizeof(T), 1, p);
+
+        fclose(p);
+
+        if (escribio) {
+            response.setSuccess("Guardado con éxito", objeto);
+        }
+        else {
+            response.setFailure("No se pudo guardar el registro.");
+        }
+
+        return response;
+    }
+    
 private:
 
 };

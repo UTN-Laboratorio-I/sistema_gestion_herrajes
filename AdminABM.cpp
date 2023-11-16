@@ -1,6 +1,7 @@
 #include "AdminABM.h"
 #include "InterfazUI.h"
 #include "Cliente.h"
+#include "Proveedor.h"
 
 #pragma region Getters/Setters
 string AdminABM::getNombreModulo(){return _nombreModulo;}
@@ -28,10 +29,13 @@ void AdminABM::administrarModuloABM()
 		case 1:
 			_sistema->setModulo("ABM Clientes");
 			administrarSubModuloABMCliente();
-
 			break;
 		case 2:
-
+			_sistema->setModulo("ABM Proveedores");
+			administrarSubModuloABMProveedor();
+		case 3:
+			_sistema->setModulo("ABM Productos");
+			administrarSubModuloABMProducto();
 			break;
 		case 0: //SALIR DEL MÓDULO ABM:
 			moduloABMSalir();
@@ -43,26 +47,91 @@ void AdminABM::administrarModuloABM()
 
 void AdminABM::administrarSubModuloABMCliente() {
 	InterfazUI ABM_UI(_sistema);
+	Helper helper;
 
 	while (subModuloABMActivo(_nombreSubModuloCliente)) {
 		ABM_UI.ver_SubMenuABMCliente();
 		int opc = _sistema->getPantalla();
+		Cliente nuevoCliente;
 
 		switch (opc) {
 		case 1:
-			//AGREGAR CLIENTE
+			helper.limpiarConsola();
+			ABM_UI.headerDinamico();
+			nuevoCliente.cargarCliente();
 			break;
 		case 2:
-			//ELIMINAR CLIENTE
+			nuevoCliente.modificarOdarBajaCliente();
 			break;
 		case 3:
-			//MODIFICAR CLIENTE
+			nuevoCliente.modificarOdarBajaCliente(false);
+			break;
+		case 4:
+			nuevoCliente.mostarCliente();
 			break;
 		case 0:
 			subModuloABMSalir();
 		}
 	}
 }
+
+void AdminABM::administrarSubModuloABMProveedor() {
+	InterfazUI ABM_UI(_sistema);
+
+	while (subModuloABMActivo(_nombreSubModuloProveedor)) {
+		ABM_UI.ver_SubMenuABMProveedor();
+		int opc = _sistema->getPantalla();
+		Proveedor nuevoProveedor;
+
+		switch (opc) {
+		case 1:
+			nuevoProveedor.cargarProveedor();
+			break;
+		case 2:
+			nuevoProveedor.modificarOdarBajaProveedor();
+			break;
+		case 3:
+			nuevoProveedor.modificarOdarBajaProveedor(false);
+			break;
+		case 4:
+			nuevoProveedor.mostarProveedor();
+			break;
+		case 0:
+			subModuloABMSalir();
+		}
+	}
+
+}
+
+void AdminABM::administrarSubModuloABMProducto() {
+	InterfazUI ABM_UI(_sistema);
+	Helper helper;
+
+	while (subModuloABMActivo(_nombreSubModuloProducto)) {
+		ABM_UI.ver_SubMenuABMProducto();
+		int opc = _sistema->getPantalla();
+		Producto nuevoProducto;
+
+		switch (opc) {
+		case 1:
+			nuevoProducto.responseCargarProducto();
+			break;
+		case 2:
+			nuevoProducto.modificarOdarBajaProducto();
+			break;
+		case 3:
+			nuevoProducto.modificarOdarBajaProducto(false);
+			break;
+		case 4:
+			nuevoProducto.mostrarProductos();
+			break;
+		case 0:
+			subModuloABMSalir();
+		}
+	}
+}
+
+
 
 bool AdminABM::moduloABMActivo()
 {

@@ -84,9 +84,6 @@
     <ClCompile Include="Stock.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="test.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="Caja.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
@@ -118,6 +115,15 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="TransaccionDto.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="DetalleStockDto.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="StockDto.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Reporte.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -191,9 +197,6 @@
     <ClInclude Include="Proveedor.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Reporte.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="Transaccion.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -213,6 +216,18 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="TransaccionDto.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="DetalleStockDto.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="StockDto.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="TablaDto.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Reporte.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

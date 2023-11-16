@@ -12,14 +12,17 @@ class Cliente : public Persona
 public:
 
 	Response<Cliente> cargarCliente();
-	void MostarCliente();
+	Cliente cargarClienteAmodificar();
+	Response<Cliente> modificarOdarBajaCliente(bool modificar = true);
+	Cliente darBajaCliente(int id);
+	void mostarCliente();
 
 	/// <getters especiales>
 	/// agregar los getters del diagrama de clases 
 	/// </summary>
 	/// <returns></returns>
 
-	int getIdCliente();
+	int getId();
 	char* getRazonSocial();
 	long long getCuit();
 
@@ -29,9 +32,12 @@ public:
 
 	Cliente listarYSeleccionarClienteExistente();
 
+	void verClienteAmodificar(Response <Cliente> responseCliente);
+
 private:
 
 	int _idCliente;
 	char _razonSocial[50];
 	long long _cuit;
+	bool modificar = true;
 };
