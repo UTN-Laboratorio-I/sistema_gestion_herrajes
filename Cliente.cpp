@@ -62,7 +62,7 @@ void Cliente::mostarCliente()
 
 	cout << endl;
 
-	cout << "Seleccione una tecla para volver al menu anterior...";
+	cout << "Seleccione una tecla para volver al menu anterior..." << endl;
 	getch();
 
 }

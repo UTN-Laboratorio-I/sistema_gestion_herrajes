@@ -29,12 +29,13 @@ void AdminABM::administrarModuloABM()
 		case 1:
 			_sistema->setModulo("ABM Clientes");
 			administrarSubModuloABMCliente();
-
 			break;
 		case 2:
 			_sistema->setModulo("ABM Proveedores");
 			administrarSubModuloABMProveedor();
-
+		case 3:
+			_sistema->setModulo("ABM Productos");
+			administrarSubModuloABMProducto();
 			break;
 		case 0: //SALIR DEL MÓDULO ABM:
 			moduloABMSalir();
@@ -87,10 +88,13 @@ void AdminABM::administrarSubModuloABMProveedor() {
 			nuevoProveedor.cargarProveedor();
 			break;
 		case 2:
-			//ELIMINAR PROVEEDOR
+			nuevoProveedor.modificarOdarBajaProveedor();
 			break;
 		case 3:
-			//MODIFICAR PROVEEDOR
+			nuevoProveedor.modificarOdarBajaProveedor(false);
+			break;
+		case 4:
+			nuevoProveedor.mostarProveedor();
 			break;
 		case 0:
 			subModuloABMSalir();
@@ -98,6 +102,36 @@ void AdminABM::administrarSubModuloABMProveedor() {
 	}
 
 }
+
+void AdminABM::administrarSubModuloABMProducto() {
+	InterfazUI ABM_UI(_sistema);
+	Helper helper;
+
+	while (subModuloABMActivo(_nombreSubModuloProducto)) {
+		ABM_UI.ver_SubMenuABMProducto();
+		int opc = _sistema->getPantalla();
+		Producto nuevoProducto;
+
+		switch (opc) {
+		case 1:
+			nuevoProducto.cargarProductos();
+			break;
+		case 2:
+			//MODIFICAR PRODUCTO
+			break;
+		case 3:
+			//ELIMINAR PRODUCTO
+			break;
+		case 4:
+			//LISTAR PRODUCTOS
+			break;
+		case 0:
+			subModuloABMSalir();
+		}
+	}
+}
+
+
 
 bool AdminABM::moduloABMActivo()
 {

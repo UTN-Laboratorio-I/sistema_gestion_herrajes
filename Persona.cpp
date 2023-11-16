@@ -13,8 +13,8 @@ Persona::Persona()
 
 
 void Persona::setDni(int d){ _dni = d;}
-void Persona::setNombre(const char* nombre){strcpy_s(_nombre, nombre);}
-void Persona::setApellido(const char* apellido){strcpy_s(_apellido, apellido);}
+void Persona::setNombre(string nombre){strcpy_s(_nombre, nombre.c_str());}
+void Persona::setApellido(string apellido){strcpy_s(_apellido, apellido.c_str());}
 void Persona::setDomicilio(string domicilio){strcpy_s(_direccion, domicilio.c_str());}
 void Persona::setEmail(string email){strcpy_s(_email, email.c_str());}
 

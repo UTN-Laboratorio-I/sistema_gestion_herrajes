@@ -1,4 +1,6 @@
 #include "Proveedor.h"
+#include "TablaDto.h"
+#include "conio.h"
 
 
 Response <Proveedor> Proveedor::cargarProveedor()
@@ -6,22 +8,29 @@ Response <Proveedor> Proveedor::cargarProveedor()
 	Response <Proveedor> response;
 	Archivo <Proveedor> archivo("proveedores.dat");
 	Proveedor proveedor;
-	string razonSocial, cuit, direccion, email;
+	string razonSocial, cuit, direccion, email, nombre, apellido;
 
-	cout << "Ingrese numero de CUIT: " << endl;
+	system("cls");
+
+	cout << "------- CARGA DE PROVEEDOR -------" << endl << endl;
+	
+	cout << "Ingrese Nombre: " << endl;
 	cin.ignore();
+	getline(cin, nombre);
+
+	cout << "Ingrese Apellido: " << endl;
+	getline(cin, apellido);
+	
+	cout << "Ingrese numero de CUIT: " << endl;
 	getline(cin, cuit);
 
 	cout << "Ingrese razon social: " << endl;
-	//cin.ignore();
 	getline(cin, razonSocial);
 
 	cout << "Ingrese direccion: " << endl;
-	//cin.ignore();
 	getline(cin, direccion);
 
 	cout << "Ingrese email: " << endl;
-	//cin.ignore();
 	getline(cin, email);
 
 	proveedor.setCuit(cuit);
@@ -29,6 +38,8 @@ Response <Proveedor> Proveedor::cargarProveedor()
 	proveedor.setDomicilio(direccion);
 	proveedor.setEmail(email);
 	proveedor.setFechaAlta();
+	proveedor.setNombre(nombre);
+	proveedor.setApellido(apellido);
 	cout << endl;
 
 	Response <Proveedor> registro = archivo.grabarRegistroArchivo(proveedor);
@@ -131,4 +142,237 @@ Response <Proveedor> Proveedor::buscarProveedor()
 	}
 
 	
+}
+
+Proveedor Proveedor::cargarProveedorAmodificar()
+{
+	Archivo <Proveedor> archivo("proveedores.dat");
+	Proveedor proveedor;
+	string razonSocial, cuit, direccion, email, nombre, apellido;
+
+	system("cls");
+
+	cout << "------- CARGA DE NUEVOS DATOS DE PROVEEDOR -------" << endl << endl;
+
+
+	cout << "Ingrese numero de CUIT: " << endl;
+	cin.ignore();
+	getline(cin, cuit);
+
+	cout << "Ingrese razon social: " << endl;
+	//cin.ignore();
+	getline(cin, razonSocial);
+
+	cout << "Ingrese direccion: " << endl;
+	//cin.ignore();
+	getline(cin, direccion);
+
+	cout << "Ingrese email: " << endl;
+	//cin.ignore();
+	getline(cin, email);
+
+	proveedor.setCuit(cuit);
+	proveedor.setRazonSocial(razonSocial);
+	proveedor.setDomicilio(direccion);
+	proveedor.setEmail(email);
+	proveedor.setFechaAlta();
+	proveedor.setNombre(nombre);
+	proveedor.setApellido(apellido);
+	cout << endl;
+
+	return proveedor;
+}
+
+
+
+Response<Proveedor> Proveedor::modificarOdarBajaProveedor(bool modificar)
+{
+	vector <Proveedor> vectorProveedor;
+	Archivo <Proveedor> archivoProveedor("proveedores.dat");
+	vectorProveedor = archivoProveedor.listarRegistroArchivo();
+
+	TablaDto <Proveedor> tablaProveedores("reporte proveedores", vectorProveedor, true, false);
+	tablaProveedores.generarReporteProveedores(vectorProveedor);
+
+	int id = vectorProveedor.back().getId();
+
+	Response <Proveedor> responseProveedor;
+
+	Helper helper;
+
+	bool continuar = false;
+	int idProveedor;
+	int opc;
+	Proveedor proveedor;
+
+	while (!continuar)
+
+	{
+		//En caso de que modificar sea false
+		if (!modificar)
+		{
+			proveedor.darBajaProveedor(id);
+			continuar = false;
+			break;
+		}
+
+		cout << endl << "Ingrese ID de proveedor que desea modificar: ";
+		cin >> idProveedor;
+
+		if (idProveedor < 1 || idProveedor > id)
+		{
+			cout << endl << "El numero de ID seleccionado no existe, seleccione un ID valido..." << endl;
+			_sleep(2000);
+			continue;
+		}
+
+		int posicion = archivoProveedor.buscarPosRegistro(proveedor, idProveedor);
+
+		responseProveedor = archivoProveedor.listarUnRegistro(posicion, proveedor);
+
+		cout << endl;
+
+		verProveedorAmodificar(responseProveedor);
+
+		cout << endl << "Es el que desea modificar?" << endl;
+
+		cout << "1) Si - 2) No - 0) Atras" << endl;
+		cin >> opc;
+
+		if (opc == 1)
+		{
+			helper.limpiarConsola();
+
+			cout << endl;
+
+			verProveedorAmodificar(responseProveedor);
+
+			proveedor = proveedor.cargarProveedorAmodificar();
+			cout << endl;
+			responseProveedor.setSuccess("Proveedor modificado correctamente!", proveedor);
+			archivoProveedor.modificarRegistroObajaRegistro(proveedor, posicion);
+
+			cout << responseProveedor.getMessage();
+			_sleep(2000);
+			continuar = true;
+		}
+		else if (opc == 0)
+		{
+			responseProveedor.setFailure("No se ha modificado ningun proveedor, volviendo al menu anterior...");
+			cout << responseProveedor.getMessage();
+			_sleep(2000);
+			return responseProveedor;
+			break;
+		}
+
+	}
+
+}
+
+void Proveedor::verProveedorAmodificar(Response <Proveedor> responseProveedor)
+{
+	cout << "El proveedor seleccionado es: " << responseProveedor.getData().getNombre() << " " << responseProveedor.getData().getApellido() << " - CUIT: " << responseProveedor.getData().getCuit() << endl;
+}
+
+
+
+
+Proveedor Proveedor::darBajaProveedor(int id)
+{
+	vector <Proveedor> vectorProveedor;
+	Archivo <Proveedor> archivoProveedor("proveedores.dat");
+	vectorProveedor = archivoProveedor.listarRegistroArchivo();
+
+	TablaDto <Proveedor> tablaProveedores("reporte proveedores", vectorProveedor, true, false);
+	tablaProveedores.generarReporteProveedores(vectorProveedor);
+
+	id = vectorProveedor.back().getId();
+
+	Response <Proveedor> responseProveedor;
+
+	Helper helper;
+
+	bool continuar = false;
+	int idProveedor;
+	int opc;
+	Proveedor proveedor;
+
+	while (!continuar)
+	{
+
+		cout << endl << "Ingrese ID de proveedor que desea eliminar: ";
+		cin >> idProveedor;
+
+		if (idProveedor < 1 || idProveedor > id)
+		{
+			cout << endl << "El numero de ID seleccionado no existe, seleccione un ID valido..." << endl;
+			_sleep(2000);
+			continue;
+		}
+
+		int posicion = archivoProveedor.buscarPosRegistro(proveedor, idProveedor);
+
+		responseProveedor = archivoProveedor.listarUnRegistro(posicion, proveedor);
+
+		cout << endl;
+
+		verProveedorAmodificar(responseProveedor);
+
+		cout << endl << "Es el que desea eliminar?" << endl;
+
+		cout << "1) Si - 2) No - 0) Atras" << endl;
+		cin >> opc;
+
+		if (opc != 1)
+		{
+			responseProveedor.setFailure("No se a eliminado ningun proveedor, volviendo al menu anterior...");
+			continuar = true;
+			break;
+		}
+
+		cout << "Esta seguro que desea eliminar el cliente: " << responseProveedor.getData().getNombre() << " " << responseProveedor.getData().getApellido() << " - CUIT: " << responseProveedor.getData().getCuit() << endl;
+		cout << "1) Si - 2) No - 0) Atras" << endl;
+
+		cin >> opc;
+
+		if (opc == 1)
+		{
+			proveedor = responseProveedor.getData();
+			proveedor.setEstado(false);
+
+			archivoProveedor.modificarRegistroObajaRegistro(proveedor, posicion, true);
+
+			responseProveedor.setSuccess("Proveedor eliminado correctamente", proveedor);
+			continuar = true;
+			break;
+		}
+		else if (opc != 1)
+		{
+			responseProveedor.setFailure("No se a eliminado ningun proveedor, volviendo al menu anterior...");
+			continuar = true;
+			break;
+		}
+
+	}
+	cout << endl << responseProveedor.getMessage();
+
+	_sleep(4000);
+
+	return proveedor;
+}
+
+void Proveedor::mostarProveedor()
+{
+	vector <Proveedor> vectorProveedor;
+	Archivo <Proveedor> archivoProveedor("proveedores.dat");
+	vectorProveedor = archivoProveedor.listarRegistroArchivo();
+
+	TablaDto <Proveedor> tablaProveedores("reporte proveedores", vectorProveedor, true, false);
+	tablaProveedores.generarReporteProveedores(vectorProveedor);
+
+	cout << endl;
+
+	cout << "Seleccione una tecla para volver al menu anterior..." << endl;
+	getch();
+
 }
