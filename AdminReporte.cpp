@@ -141,9 +141,6 @@ void AdminReporte::administrarSubModuloReporteTransacciones() {
 
 			reporte.generarReporteTransacciones();
 			break;
-		case 2:
-			_sistema->setSubModulo("Reporte Transacciones");
-
 		case 0:
 			subModuloReporteSalir();
 			break;

@@ -443,7 +443,7 @@ void InterfazUI::ver_SubMenuReportesCaja() {
 		cin >> opc;
 		verificado = opcionesValidasMenu(1, 2, opc);
 	}
-	_sistema->setModuloPantalla("Reporte Ventas", opc);
+	_sistema->setModuloPantalla("Reporte Transacciones", opc);
 }
 
 
