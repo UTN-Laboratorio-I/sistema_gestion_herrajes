@@ -10,6 +10,10 @@ private:
 public:
 	Configuracion();
 	~Configuracion();
+
+	void setConfiguracion();
+	void setId(int);
+	int getId();
 	void setMargenUtilidad(float);
 	void setFormatoFecha(int);
 

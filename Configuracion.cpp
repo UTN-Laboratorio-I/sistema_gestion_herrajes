@@ -6,9 +6,15 @@ using namespace std;
 
 Configuracion::Configuracion()
 {
-	Response<Configuracion> configuracion;
+}
+
+Configuracion::~Configuracion()
+{
+}
+
+void Configuracion::setConfiguracion() {
 	Archivo<Configuracion> archivoConfig("configuracion.dat");
-	configuracion = archivoConfig.buscarUnRegistro(0);
+	Response<Configuracion> configuracion = archivoConfig.buscarUnRegistro(1);
 
 	if (configuracion.getSuccess())
 	{
@@ -22,8 +28,17 @@ Configuracion::Configuracion()
 	}
 }
 
-Configuracion::~Configuracion()
+void Configuracion::setId(int id)
 {
+	Archivo<Configuracion> archivoConfig("configuracion.dat");
+	_id = id;
+
+	archivoConfig.grabarOModificarObjeto(*this);
+}
+
+int Configuracion::getId()
+{
+	return _id;
 }
 
 void Configuracion::setMargenUtilidad(float m)
@@ -31,7 +46,7 @@ void Configuracion::setMargenUtilidad(float m)
 	Archivo<Configuracion> archivoConfig("configuracion.dat");
 	_margenUtilidad = m;
 
-	archivoConfig.grabarOModificarRegistro(*this, 1, [](Configuracion c) {return c.getMargenUtilidad() != -1; });
+	archivoConfig.grabarOModificarObjeto(*this);
 }
 
 void Configuracion::setFormatoFecha(int f)
@@ -39,7 +54,7 @@ void Configuracion::setFormatoFecha(int f)
 	Archivo<Configuracion> archivoConfig("configuracion.dat");
 	_formatoFecha = f;
 
-	archivoConfig.grabarOModificarRegistro(*this, 1, [](Configuracion c) {return c.getMargenUtilidad() != -1; });
+	archivoConfig.grabarOModificarObjeto(*this);
 }
 
 float Configuracion::getMargenUtilidad()

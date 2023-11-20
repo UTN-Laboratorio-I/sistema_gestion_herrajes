@@ -18,6 +18,7 @@ Sistema::Sistema() {
 	_modulo = "Login";
 	_subModulo = "";
 	_usuario;
+	_config.setConfiguracion();
 }
 
 void Sistema::setEncendido(bool set) { _encendido = set; }

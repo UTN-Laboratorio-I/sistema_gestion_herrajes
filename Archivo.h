@@ -265,6 +265,33 @@ public:
 
         return response;
     }
+
+    //Utilizado en registro y modificación de configuraciones:
+    T grabarOModificarObjeto(T objeto) {
+    FILE* p = fopen(_nombreArchivo, "rb+");
+		if (p == NULL) {
+			p = fopen(_nombreArchivo, "ab");
+			bool escribio = fwrite(&objeto, sizeof(T), 1, p);
+			fclose(p);
+			return objeto;
+		}
+
+		T objetoLeido;
+		while (fread(&objetoLeido, sizeof(T), 1, p) == 1) {
+			if (objetoLeido.getId() == objeto.getId()) {
+
+				fseek(p, sizeof(T) * 0, 0);
+				bool actualizo = fwrite(&objeto, sizeof(T), 1, p);
+				fclose(p);
+				return objeto;
+			}
+		}
+
+		fseek(p, 0, SEEK_END);
+		bool escribio = fwrite(&objeto, sizeof(T), 1, p);
+		fclose(p);
+		return objeto;
+	}
     
 private:
 
