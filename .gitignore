@@ -374,3 +374,6 @@ test.exe
 
 #Archivos de configuracion
 enc_temp_folder/*
+
+#Achivos exportados
+*.csv

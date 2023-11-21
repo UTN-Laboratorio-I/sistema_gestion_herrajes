@@ -11,7 +11,6 @@
 #include "TransaccionDto.h"
 
 using namespace std;
-
 #pragma once
 
 template <class T>
@@ -369,7 +368,7 @@ public:
                     cout << setw(_columnas[7].ancho) << detalle.getSubTotal();
                     cout << endl;
                 }
-                cout << setfill('.') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
+                cout << setfill('.') << setw(_anchoTotalTabla) << "." << setfill(' ') << endl;
 		    }
 
 		cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
