@@ -14,7 +14,7 @@ Configuracion::~Configuracion()
 
 void Configuracion::setConfiguracion() {
 	Archivo<Configuracion> archivoConfig("configuracion.dat");
-	Response<Configuracion> configuracion = archivoConfig.buscarUnRegistro(1);
+	Response<Configuracion> configuracion = archivoConfig.obtenerConfiguracion();
 
 	if (configuracion.getSuccess())
 	{
@@ -28,33 +28,38 @@ void Configuracion::setConfiguracion() {
 	}
 }
 
-void Configuracion::setId(int id)
+void Configuracion::setMargenUtilidad(int m)
 {
+	Response<Configuracion> response;
 	Archivo<Configuracion> archivoConfig("configuracion.dat");
-	_id = id;
+	float conversion = m / 100.0;
+	_margenUtilidad = conversion;
 
-	archivoConfig.grabarOModificarObjeto(*this);
-}
+	response = archivoConfig.grabarOModificarConfiguracion(*this);
 
-int Configuracion::getId()
-{
-	return _id;
-}
-
-void Configuracion::setMargenUtilidad(float m)
-{
-	Archivo<Configuracion> archivoConfig("configuracion.dat");
-	_margenUtilidad = m;
-
-	archivoConfig.grabarOModificarObjeto(*this);
+	if (response.getSuccess()) {
+		cout << "Margen de utilidad actualizado con exito." << endl;
+	}
+	else {
+		cout << "No se pudo actualizar el margen de utilidad." << endl;
+	}
+	
 }
 
 void Configuracion::setFormatoFecha(int f)
 {
+	Response<Configuracion> response;
 	Archivo<Configuracion> archivoConfig("configuracion.dat");
 	_formatoFecha = f;
 
-	archivoConfig.grabarOModificarObjeto(*this);
+	response = archivoConfig.grabarOModificarConfiguracion(*this);
+
+	if (response.getSuccess()) {
+		cout << "Margen de utilidad actualizado con exito." << endl;
+	}
+	else {
+		cout << "No se pudo actualizar el margen de utilidad." << endl;
+	}
 }
 
 float Configuracion::getMargenUtilidad()
@@ -66,15 +71,4 @@ int Configuracion::getFormatoFecha()
 {
 	return _formatoFecha;
 }
-
-//void Configuracion::setFormatoMoneda(int opc) {
-//	Archivo<Configuracion> archivoConfig("configuracion.dat");
-//	_formatoMoneda = opc;
-//
-//	archivoConfig.grabarOModificarRegistro(*this, 1, [](Configuracion c) {return c.getMargenUtilidad() != -1; });
-//}
-//
-//int Configuracion::getFormatoMoneda() {
-//	return _formatoMoneda;
-//}
 

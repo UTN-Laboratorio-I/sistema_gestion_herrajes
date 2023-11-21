@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include "ResponseDto.h"
+#include "Configuracion.h"
 using namespace std;
 template <class T>
 class Archivo
@@ -267,32 +268,45 @@ public:
     }
 
     //Utilizado en registro y modificación de configuraciones:
-    T grabarOModificarObjeto(T objeto) {
+    Response<Configuracion> grabarOModificarConfiguracion(Configuracion objeto) {
+        Response<Configuracion> res;
     FILE* p = fopen(_nombreArchivo, "rb+");
 		if (p == NULL) {
 			p = fopen(_nombreArchivo, "ab");
 			bool escribio = fwrite(&objeto, sizeof(T), 1, p);
 			fclose(p);
-			return objeto;
+			res.setSuccess("Se creo el registro", objeto);
+            return res;
 		}
 
-		T objetoLeido;
-		while (fread(&objetoLeido, sizeof(T), 1, p) == 1) {
-			if (objetoLeido.getId() == objeto.getId()) {
-
-				fseek(p, sizeof(T) * 0, 0);
-				bool actualizo = fwrite(&objeto, sizeof(T), 1, p);
+		Configuracion objetoLeido;
+		while (fread(&objetoLeido, sizeof(Configuracion), 1, p) == 1) {
+				fseek(p, sizeof(Configuracion) * 0, 0);
+				bool actualizo = fwrite(&objeto, sizeof(Configuracion), 1, p);
 				fclose(p);
-				return objeto;
-			}
+                res.setSuccess("Se actualizó el registro", objeto);
+                return res;
 		}
-
-		fseek(p, 0, SEEK_END);
-		bool escribio = fwrite(&objeto, sizeof(T), 1, p);
-		fclose(p);
-		return objeto;
 	}
     
+    Response<Configuracion> obtenerConfiguracion() {
+        Response<Configuracion> res;
+		FILE* p = fopen(_nombreArchivo, "rb");
+		Configuracion objetoLeido;
+        if (p == NULL) {
+            res.setFailure("El archivo no existe");
+            return res;
+		}
+        while (fread(&objetoLeido, sizeof(Configuracion), 1, p) == 1) {
+			fclose(p);
+            res.setSuccess("Se obtuvo la configuracion", objetoLeido);
+            return res;
+		}
+        res.setFailure("No se pudo obtener la configuracion");
+        return res;
+    }
+
+
 private:
 
 };
