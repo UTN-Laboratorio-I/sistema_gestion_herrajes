@@ -89,6 +89,13 @@ Response <Proveedor> Proveedor::buscarProveedor()
 	Response <Proveedor> responseProveedor;
 	Helper helper;
 
+	vector <Proveedor> vectorProveedores;
+
+	vectorProveedores = archivoProv.listarRegistroArchivo();
+	TablaDto <Proveedor> tablaProveedores("reporte proveedores", vectorProveedores, true, false);
+	tablaProveedores.generarReporteProveedores(vectorProveedores);
+
+
 	int idProv;
 	bool continuar = true;
 	int opc = {};

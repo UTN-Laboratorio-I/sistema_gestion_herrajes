@@ -77,9 +77,7 @@ Producto Producto::cargarProductos(bool inventario) {
 	string nombreProducto, descripcionProducto;
 	Producto producto;
 
-	system("cls");
 
-	cout << "------- CARGA DE PRODUCTO -------" << endl << endl;
 
 	cout << "NOMBRE DE PRODUCTO: ";
 	cin.ignore();
@@ -159,6 +157,40 @@ Producto Producto::listarYSeleccionarProductoVenta() {
 		}
 	}
 }
+
+Producto Producto::listarYSeleccionarProductoCompra() {
+	Archivo<Producto> archivoProducto("productos.dat");
+	vector<Producto> listaProductos = archivoProducto.listarRegistroArchivo();
+	//modificar stock según inventario:
+	Archivo<StockDto> archivoStock("stock.dat");
+	vector<StockDto> stock;
+	stock = archivoStock.listarRegistroArchivo();
+
+	for (Producto prod : listaProductos) {
+		for (StockDto s : stock) {
+			if (s.getId() == prod.getId()) {
+				prod.setCantidad(s.getCantidadTotal());
+			}
+		}
+
+		TablaDto<Producto> tabla("carrito compras", listaProductos, false);
+
+		cout << "LISTA DE PRODUCTOS: " << endl;
+		tabla.generarTablaProductosCompra(listaProductos);
+
+		int idProducto;
+		cout << "Seleccione el producto: ";
+		cin >> idProducto;
+
+		for (Producto prod : listaProductos) {
+			if (prod.getId() == idProducto) {
+				return prod;
+			}
+		}
+	}
+}
+
+
 
 Response <Producto> Producto::responseCargarProducto()
 {

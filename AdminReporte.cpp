@@ -143,7 +143,7 @@ void AdminReporte::administrarSubModuloReporteTransacciones() {
 			break;
 		case 2:
 			_sistema->setSubModulo("Reporte Transacciones");
-
+			break;
 		case 0:
 			subModuloReporteSalir();
 			break;

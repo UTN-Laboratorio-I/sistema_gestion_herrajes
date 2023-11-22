@@ -44,6 +44,8 @@ public:
 
     Producto listarYSeleccionarProductoVenta();
 
+    Producto listarYSeleccionarProductoCompra();
+
     void tablaProductosContenido(vector<Producto> lista, vector<int> columnas, int anchoTabla);
 
 private:

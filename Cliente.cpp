@@ -58,6 +58,9 @@ Response<Cliente> Cliente::cargarCliente()
 		response.setFailure("No se pudo crear el cliente");
 	}
 
+	response.getMessage();
+	
+	_sleep(3000);
 	return response;
 }
 

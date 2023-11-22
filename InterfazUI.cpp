@@ -267,6 +267,12 @@ void InterfazUI::ver_CarritoVentas(vector<DetalleDto> detalle) {
 
 }
 
+void InterfazUI::ver_CarritoCompras(vector<DetalleDto> detalle) {
+	Helper helper;
+	//helper.limpiarConsola();
+
+}
+
 void verListadoProductos() {
 	Helper helper;
 	helper.limpiarConsola();
@@ -443,7 +449,7 @@ void InterfazUI::ver_SubMenuReportesCaja() {
 		cin >> opc;
 		verificado = opcionesValidasMenu(1, 2, opc);
 	}
-	_sistema->setModuloPantalla("Reporte Ventas", opc);
+	_sistema->setModuloPantalla("Reporte Transacciones", opc);
 }
 
 
