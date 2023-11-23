@@ -20,6 +20,8 @@ public:
 
 	void administrarConfiguracionMargenUtilidad();
 
+	void administrarCarpetaDeBackups();
+
 	void realizarCopiaDeSeguridad();
 };
 

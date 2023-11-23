@@ -506,4 +506,50 @@ void InterfazUI::ver_MenuConfig() {
 	}
 	_sistema->setModuloPantalla("Configuracion", opc);
 }
+
+void InterfazUI::ver_setearMargenUtilidad() {
+	Helper helper;
+	helper.limpiarConsola();
+	float margen;
+	bool verificado = false;
+
+	while (!verificado) {
+		headerDinamico();
+		cout << "Ingrese el nuevo margen de utilidad: " << endl;
+		cin >> margen;
+		verificado = opcionesValidasMenu(0, 100, margen);
+	}
+	_sistema->setMargenUtilidad(margen);
+}
+
+void InterfazUI::ver_seleccionFormatoFecha() {
+	Helper helper;
+	helper.limpiarConsola();
+	int opc;
+	bool verificado = false;
+
+	while (!verificado) {
+		headerDinamico();
+		cout << "Seleccione el formato de fecha: " << endl;
+		cout << "1) DD/MM/AAAA" << endl;
+		cout << "2) MM/DD/AAAA" << endl;
+		cout << "3) AAAA/MM/DD" << endl << endl;
+		cout << "0) <- Atras" << endl;
+		cin >> opc;
+		verificado = opcionesValidasMenu(1, 3, opc);
+	}
+	_sistema->setFormatoFecha(opc);
+}
+
+void InterfazUI::ver_setearCarpetaBackUp() {
+	Helper helper;
+	helper.limpiarConsola();
+	char carpeta[50];
+	bool verificado = false;
+
+	headerDinamico();
+	cout << "Ingrese la nueva ruta de la carpeta de BackUp: " << endl;
+	cin >> carpeta;
+	_sistema->setCarpetaBackUp(carpeta);
+}
 #pragma endregion UI_Configuracion

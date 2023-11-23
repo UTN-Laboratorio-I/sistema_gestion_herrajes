@@ -1,8 +1,9 @@
 #pragma warning(disable : 4996) //_CRT_SECURE_NO_WARNINGS
+#include "Fecha.h"
+#include "Helper.h"
 #include <ctime>
 #include <iostream>
 #include <chrono>
-#include "fecha.h"
 
 int Fecha::getDia() {
     return _dia;
@@ -47,6 +48,12 @@ std::string Fecha::getNombreDia() {
 }
 
 std::string Fecha::hoy() {
+    Helper helper;
+    Archivo<Configuracion> archivoConfiguracion("configuracion.dat");
+    Response<Configuracion> configuracion;
+    configuracion = archivoConfiguracion.obtenerConfiguracion();
+    int configuracionFecha = configuracion.getData().getFormatoFecha();
+
     std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
 
     // Convierte el punto de tiempo actual a un objeto de tiempo local
@@ -61,11 +68,16 @@ std::string Fecha::hoy() {
     _dia = localTime->tm_mday;           // Día del mes
 
     // Imprime la fecha actual
-    std::string fecha =""+ std::to_string(_dia) + "/" + std::to_string(_mes) + "/"+ std::to_string(_anio)+"";
+    string fecha = helper.conversorFormatoFecha(configuracionFecha, *this);
     return fecha;
 }
 
 Fecha Fecha::now() {
+    Archivo<Configuracion> archivoConfiguracion("configuracion.dat");
+    Response<Configuracion> configuracion;
+    configuracion = archivoConfiguracion.obtenerConfiguracion();
+    int configuracionFecha = configuracion.getData().getFormatoFecha();
+
     std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
 
     // Convierte el punto de tiempo actual a un objeto de tiempo local

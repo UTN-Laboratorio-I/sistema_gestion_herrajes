@@ -65,6 +65,9 @@ float Sistema::getMargenUtilidad() { return _config.getMargenUtilidad(); }
 void Sistema::setFormatoFecha(int formato) { _config.setFormatoFecha(formato); }
 int Sistema::getFormatoFecha() { return _config.getFormatoFecha(); }
 
+void Sistema::setCarpetaBackUp(const char* carpeta) { _config.setCarpetaBackUp(carpeta); }
+const char* Sistema::getCarpetaBackUp() { return _config.getCarpetaBackUp(); }
+
 #pragma endregion
 
 void Sistema::administrarPrograma() {

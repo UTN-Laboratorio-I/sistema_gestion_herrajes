@@ -39,6 +39,9 @@ public:
 	void ver_SubMenuReportesUsuario();
 
 	void ver_MenuConfig();
+	void ver_setearMargenUtilidad();
+	void ver_seleccionFormatoFecha();
+	void ver_setearCarpetaBackUp();
 
 	void ver_MenuUsuario();
 

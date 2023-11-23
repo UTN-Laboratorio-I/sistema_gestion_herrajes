@@ -14,16 +14,17 @@ class Backup
 private:
 	const char* _nombreArchivo;
 	const char* _nombreBackUp;
-
+	string _carpetaBackUp;
 public:
 #pragma region CONSTRUCTOR
 	Backup(){
 	}
 	
-	Backup(const char* nombreArchivo, const char* nombreBackUp)
+	Backup(const char* nombreArchivo, const char* nombreBackUp, const char* carpetaBackUp)
 	{
 		_nombreArchivo = nombreArchivo;
 		_nombreBackUp = nombreBackUp;
+		_carpetaBackUp = carpetaBackUp != nullptr ? carpetaBackUp : "";
 	}
 #pragma endregion
 
@@ -32,11 +33,19 @@ public:
 	bool grabarCopiaDeSeguridad(T objeto)
 	{
 		bool cargo = false;
-		
+		std::string rutaBackup;
+
+		if (!_carpetaBackUp.empty()) {
+			rutaBackup = _carpetaBackUp + "\\" + _nombreBackUp;
+		}
+		else {
+			rutaBackup = _nombreBackUp;
+		}
+
 		FILE* p;
 		p = fopen(_nombreArchivo, "rb");
 		FILE* pBack;
-		pBack = fopen(_nombreBackUp, "wb");
+		pBack = fopen(rutaBackup.c_str(), "wb");
 
 		if (pBack == NULL) { return cargo; }
 		if (p == NULL) { return cargo; }
@@ -45,15 +54,18 @@ public:
 		{
 			fwrite(&objeto, sizeof(T), 1, pBack);
 		}
+
 		fclose(p);
 		fclose(pBack);
 
 		cargo = true;
 
 		cout << "BackUp realizado correctamente..." << endl;
-		
+
 		return cargo;
 	}
+
+
 
 	/*bool cargarCopiaDeSeguridad(T objeto) {
 		

@@ -20,11 +20,13 @@ void Configuracion::setConfiguracion() {
 	{
 		_margenUtilidad = configuracion.getData()._margenUtilidad;
 		_formatoFecha = configuracion.getData()._formatoFecha;
+		_carpetaBackUp = configuracion.getData()._carpetaBackUp;
 	}
 	else
 	{
 		_margenUtilidad = 0.0;
 		_formatoFecha = 0;
+		_carpetaBackUp = "";
 	}
 }
 
@@ -72,3 +74,24 @@ int Configuracion::getFormatoFecha()
 	return _formatoFecha;
 }
 
+void Configuracion::setCarpetaBackUp(const char* carpeta)
+{
+	Response<Configuracion> response;
+	Archivo<Configuracion> archivoConfig("configuracion.dat");
+	_carpetaBackUp = carpeta;
+
+
+	response = archivoConfig.grabarOModificarConfiguracion(*this);
+
+	if (response.getSuccess()) {
+		cout << "La carpeta de backups fue grabada." << endl;
+	}
+	else {
+		cout << "No se pudo actualizar la carpeta de backups." << endl;
+	}
+}
+
+const char* Configuracion::getCarpetaBackUp()
+{
+	return _carpetaBackUp;
+}

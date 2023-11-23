@@ -1,9 +1,11 @@
 #include "Helper.h"
+#include "Fecha.h"
 #include <iostream>
 #include <functional>
 #include <string>
 #include <chrono>
 #include <thread>
+
 
 using namespace std;
 
@@ -41,3 +43,24 @@ int Helper::conversorNombreTablaSwitch(string tabla) {
 	if (tabla == "reporte transacciones")return 11;
 }
 
+string Helper::conversorFormatoFecha(int formatoFecha, Fecha& fecha) {
+	string date;
+	string anio = std::to_string(fecha.getAnio());
+	string mes = std::to_string(fecha.getMes());
+	string dia = std::to_string(fecha.getDia());
+	switch (formatoFecha) {
+	case 1: // DD/MM/AAAA
+		date = "" + dia + "/" + mes + "/" + anio + "";
+		break;
+	case 2: //MM/DD/AAAA
+		date = "" + mes + "/" + dia + "/" + anio + "";
+		break;
+	case 3: //AAAA/MM/DD
+		date = "" + anio + "/" + mes + "/" + dia + "";
+		break;
+	default:// DD/MM/AAAA
+		date = "" + dia + "/" + mes + "/" + anio + "";
+		break;
+	}
+	return date;
+}
