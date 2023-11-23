@@ -187,13 +187,18 @@ public:
             columnasResult.push_back({ "Monto", 15 });
             columnasResult.push_back({ "Total", 10 });
 			break;
-        case 12:
+        case 12://Carrito compra
             columnasResult.push_back({ "Item nro", 10 });
             columnasResult.push_back({ "Nombre Producto", 20 });
             columnasResult.push_back({ "Precio Unitario", 20 });
             columnasResult.push_back({ "Cantidad", 10 });
             columnasResult.push_back({ "Subtotal", 15 });
             break;
+        case 13://Productos compras
+            columnasResult.push_back({ "Id", 5 });
+            columnasResult.push_back({ "Nombre", 30 });
+            columnasResult.push_back({ "Descripción", 30 });
+            columnasResult.push_back({ "Precio Costo", 15 });
         default:
             break;
         }
@@ -245,9 +250,7 @@ public:
             cout << setw(_columnas[0].ancho) << datos.getId();
             cout << setw(_columnas[1].ancho) << datos.getNombreProducto();
             cout << setw(_columnas[2].ancho) << datos.getDescripcionProducto();
-            //cout << setw(_columnas[3].ancho) << datos.getPrecioCosto();
             cout << setw(_columnas[3].ancho) << datos.getPrecioCosto();
-            //cout << setw(_columnas[5].ancho) << datos.getCantidad();
             cout << endl;
         }
         cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;

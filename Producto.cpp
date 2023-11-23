@@ -173,7 +173,7 @@ Producto Producto::listarYSeleccionarProductoCompra() {
 			}
 		}
 
-		TablaDto<Producto> tabla("carrito compras", listaProductos, false);
+		TablaDto<Producto> tabla("productos compras", listaProductos, false);
 
 		cout << "LISTA DE PRODUCTOS: " << endl;
 		tabla.generarTablaProductosCompra(listaProductos);
@@ -207,7 +207,7 @@ Response <Producto> Producto::responseCargarProducto()
 
 	producto = producto.cargarProductos(true);
 
-	 registro = archivo.grabarRegistroArchivo(producto);
+	registro = archivo.grabarRegistroArchivo(producto);
 
 	if (registro.getSuccess())
 	{

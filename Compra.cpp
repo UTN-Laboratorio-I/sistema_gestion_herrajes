@@ -56,7 +56,6 @@ void Compra::carritoDeCompra(bool compraRealizada, Producto &producto){
 	}
 
 	if (compraRealizada)
-		system("pause");
 	cout << endl << endl;
 }
 
@@ -163,6 +162,7 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 	bool continuarCompra = true;
 	int opc;
 	int contador = 1;
+	int cantidadDetalleProducto=0;
 
 
 	while (continuarCompra)
@@ -171,7 +171,7 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 
 		interfaz.ver_CarritoCompras(detalle);
 
-		if (contador >= 1)
+		if (contador > 1)
 		{
 			compra.carritoDeCompra(false,productoAcargar);
 		}
@@ -180,20 +180,19 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 
 		cout << endl << "----------- COMPRA DE PRODUCTOS -----------" << endl << endl;
 
-		cout << "ITEM N: " << contador << endl;
+		cout << "ITEM N: " << contador << endl << endl;
 		
 		if (productoExistente == false)
 		{
 			productoAcargar = productoAcargar.cargarProductos();
+			compra.agregarADetalleCompra(productoAcargar, productoAcargar.getCantidad());
 		}
 		else
-		{
+		{	//Compra de producto existente
 			productoAcargar = productoAcargar.listarYSeleccionarProductoCompra();
-			productoAcargar.setCantidad(seleccionarCantidad());
+			cantidadDetalleProducto = seleccionarCantidad();
+			compra.agregarADetalleCompra(productoAcargar, cantidadDetalleProducto);
 		}
-
-
-		compra.agregarADetalleCompra(productoAcargar, productoAcargar.getCantidad());
 
 		cout << endl << "Desea continuar la compra ?" << endl <<"1) SI // 2): NO" << endl << endl;
 
@@ -208,7 +207,6 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 
 		if (opc != 1)
 		{
-			
 			compra.carritoDeCompra(true, productoAcargar);
 			cout << endl << "Compra finalizada!" << endl;
 			_sleep(4000);
@@ -250,11 +248,12 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 	for (Detalle detalle : compra._detalle) {
 		//Obtenemos el id del registro y cada detalle de la lista:
 		int id = registro.getData().getId();
-
+		
+		detalle.setCantidad(response.getData().getCantidadTotal());
 		Archivo <Producto> archivoProducto("productos.dat");
-		responseProducto = archivoProducto.grabarRegistroArchivo(detalle.getProducto());
+		Producto produ = detalle.getProducto();
+		archivoProducto.modificarRegistroObajaRegistro(produ, detalle.getProducto().getId());
 
-		detalle.setIdProducto(responseProducto.getData().getId());
 		DetalleDto detalleDto(detalle, id);
 
 		Response<DetalleDto> registroDetalle = archivoDetalle.grabarRegistroArchivo(detalleDto);
