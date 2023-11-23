@@ -248,11 +248,18 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 	for (Detalle detalle : compra._detalle) {
 		//Obtenemos el id del registro y cada detalle de la lista:
 		int id = registro.getData().getId();
+
+		if (!productoExistente)
+		{
+			Archivo <Producto> archivoProducto("productos.dat");
+			responseProducto = archivoProducto.grabarRegistroArchivo(detalle.getProducto());
+		}
 		
-		detalle.setCantidad(response.getData().getCantidadTotal());
-		Archivo <Producto> archivoProducto("productos.dat");
-		Producto produ = detalle.getProducto();
-		archivoProducto.modificarRegistroObajaRegistro(produ, detalle.getProducto().getId());
+		/*Producto produ = detalle.getProducto();
+		if (productoExistente)
+		{
+			archivoProducto.modificarRegistroObajaRegistro(produ, detalle.getProducto().getId());
+		}*/
 
 		DetalleDto detalleDto(detalle, id);
 

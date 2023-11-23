@@ -22,14 +22,9 @@ void Fecha::setMes(int mes) {
 void Fecha::setAnio(int anio) {
     _anio = anio;
 }
-///Queda por revisar la funcion localtime
+
 Fecha::Fecha() {
-    /*time_t t = time(NULL);
-    struct tm* f = localtime(&t);
-    _dia = (*f).tm_mday; // Indirecciona f y accede a tm_mday
-    _mes = f->tm_mon + 1; // Indirecciona f y accede a tm_mon
-    _anio = f->tm_year + 1900;
-    _diaSemana = f->tm_wday;*/
+
 }
 Fecha::Fecha(int dia, int mes, int anio) {
     setDia(dia);
@@ -87,4 +82,12 @@ Fecha Fecha::now() {
     Fecha fecha(_dia, _mes, _anio);
 
     return fecha;
+}
+
+void Fecha::setFormatoFecha(int formato) {
+	_formatoFecha = formato;
+}
+
+int Fecha::getFormatoFecha() {
+	return _formatoFecha;
 }

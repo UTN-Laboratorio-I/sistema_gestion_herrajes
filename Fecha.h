@@ -15,8 +15,11 @@ public:
     std::string toString();
     std::string hoy();
     Fecha now();
+    void setFormatoFecha(int formatoFecha);
+    int getFormatoFecha();
 
 private:
     int _dia, _mes, _anio;
     int _diaSemana;
+    int _formatoFecha;
 };

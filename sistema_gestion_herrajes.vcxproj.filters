@@ -31,6 +31,12 @@
     <Filter Include="Archivos de origen\Dto">
       <UniqueIdentifier>{25303a0b-6005-41b2-b498-00b3498fb68f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de origen\Administradores">
+      <UniqueIdentifier>{2b604e8c-6b37-470e-8c8a-5f43446d1f7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Administradores">
+      <UniqueIdentifier>{660d934e-40e5-468f-bb47-81053dc68dc7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sistema_gestion_herrajes.cpp">
@@ -51,31 +57,10 @@
     <ClCompile Include="Sistema.cpp">
       <Filter>Archivos de origen\Sistema</Filter>
     </ClCompile>
-    <ClCompile Include="AdminABM.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="AdminCompra.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="AdminLogin.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="AdminVenta.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="InterfazUI.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="AdminReporte.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="Usuario.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="AdminUsuario.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="AdminConfig.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Helper.cpp">
@@ -126,6 +111,33 @@
     <ClCompile Include="Reporte.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="Export.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Configuracion.cpp">
+      <Filter>Archivos de origen\Sistema</Filter>
+    </ClCompile>
+    <ClCompile Include="AdminABM.cpp">
+      <Filter>Archivos de origen\Administradores</Filter>
+    </ClCompile>
+    <ClCompile Include="AdminCompra.cpp">
+      <Filter>Archivos de origen\Administradores</Filter>
+    </ClCompile>
+    <ClCompile Include="AdminConfig.cpp">
+      <Filter>Archivos de origen\Administradores</Filter>
+    </ClCompile>
+    <ClCompile Include="AdminLogin.cpp">
+      <Filter>Archivos de origen\Administradores</Filter>
+    </ClCompile>
+    <ClCompile Include="AdminReporte.cpp">
+      <Filter>Archivos de origen\Administradores</Filter>
+    </ClCompile>
+    <ClCompile Include="AdminUsuario.cpp">
+      <Filter>Archivos de origen\Administradores</Filter>
+    </ClCompile>
+    <ClCompile Include="AdminVenta.cpp">
+      <Filter>Archivos de origen\Administradores</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Producto.h">
@@ -146,31 +158,10 @@
     <ClInclude Include="Archivo.h">
       <Filter>Archivos de encabezado\Sistema</Filter>
     </ClInclude>
-    <ClInclude Include="AdminABM.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="AdminCompra.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="AdminLogin.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="AdminVenta.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="InterfazUI.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="AdminReporte.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="Usuario.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="AdminUsuario.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="AdminConfig.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Helper.h">
@@ -229,6 +220,36 @@
     </ClInclude>
     <ClInclude Include="Reporte.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Downloads\httplib.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Export.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Configuracion.h">
+      <Filter>Archivos de encabezado\Sistema</Filter>
+    </ClInclude>
+    <ClInclude Include="AdminABM.h">
+      <Filter>Archivos de encabezado\Administradores</Filter>
+    </ClInclude>
+    <ClInclude Include="AdminCompra.h">
+      <Filter>Archivos de encabezado\Administradores</Filter>
+    </ClInclude>
+    <ClInclude Include="AdminConfig.h">
+      <Filter>Archivos de encabezado\Administradores</Filter>
+    </ClInclude>
+    <ClInclude Include="AdminLogin.h">
+      <Filter>Archivos de encabezado\Administradores</Filter>
+    </ClInclude>
+    <ClInclude Include="AdminReporte.h">
+      <Filter>Archivos de encabezado\Administradores</Filter>
+    </ClInclude>
+    <ClInclude Include="AdminUsuario.h">
+      <Filter>Archivos de encabezado\Administradores</Filter>
+    </ClInclude>
+    <ClInclude Include="AdminVenta.h">
+      <Filter>Archivos de encabezado\Administradores</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

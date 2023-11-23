@@ -22,11 +22,18 @@ void AdminConfig::moduloConfigSalir() {
 
 void AdminConfig::administrarModuloConfig() {
 	InterfazUI config_UI(_sistema);
-	int opc = 0;
+	int opc =0;
 	while (moduloConfigActivo()) {
 		config_UI.ver_MenuConfig();
 		opc = _sistema->getPantalla();
 		switch (opc) {
+		case 1:
+			administrarConfiguracionFecha();
+			break;
+		case 2:
+			administrarConfiguracionMargenUtilidad();
+			break;
+		case 3:
 		case 4:
 			realizarCopiaDeSeguridad();
 			break;
@@ -38,6 +45,28 @@ void AdminConfig::administrarModuloConfig() {
 			break;
 		}
 	}
+}
+
+void AdminConfig::administrarConfiguracionFecha() {
+	InterfazUI config_UI(_sistema);
+
+}
+
+void AdminConfig::administrarConfiguracionMargenUtilidad() {
+	InterfazUI config_UI(_sistema);
+	bool modificar;
+	float margenUtilidad = 0.0;
+
+		cout << "Margen de utilidad actual: " << _sistema->getMargenUtilidad() << "%" << endl;
+
+		cout << "Desea modificar el margen de utilidad? (1: Si - 0: No): ";
+		cin >> modificar;
+
+		if (modificar) {
+		cout << "Ingrese margen de utilidad (Numero entero %): ";
+		cin >> margenUtilidad;
+		_sistema->setMargenUtilidad(margenUtilidad);
+		}
 }
 
 void AdminConfig::realizarCopiaDeSeguridad()
@@ -67,7 +96,7 @@ void AdminConfig::realizarCopiaDeSeguridad()
 
 		if (opc == 1)
 		{
-			cout << endl << "Inciando copia de seguridad..."<< endl << endl;
+			cout << endl << "Iniciando copia de seguridad..."<< endl << endl;
 			_sleep(2000);
 
 			backUpProducto.grabarCopiaDeSeguridad(producto);

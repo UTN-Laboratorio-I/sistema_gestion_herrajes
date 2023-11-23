@@ -502,7 +502,7 @@ void InterfazUI::ver_MenuConfig() {
 
 	while (!verificado) {
 		headerDinamico();
-		cout << "1) Configurar fecha/hora" << endl;
+		cout << "1) Configurar formato fecha" << endl;
 		cout << "2) Configurar margen de utilidad " << endl;
 		cout << "3) Configurar ruta archivo" << endl;
 		cout << "4) Realizar BackUp" << endl << endl;
