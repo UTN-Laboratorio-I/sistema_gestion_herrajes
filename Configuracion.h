@@ -4,7 +4,7 @@ class Configuracion
 private:
 	float _margenUtilidad;
 	int _formatoFecha;
-	string _carpetaBackUp;
+	const char* _carpetaBackUp;
 	int _formatoMoneda;
 
 public:
@@ -19,7 +19,7 @@ public:
 	int getFormatoFecha();
 
 	void setCarpetaBackUp(const char*);
-	string getCarpetaBackUp();
+	const char* getCarpetaBackUp();
 
 	//void setFormatoMoneda(int opc);
 	//int getFormatoMoneda();
