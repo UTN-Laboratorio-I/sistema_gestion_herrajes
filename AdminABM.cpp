@@ -130,6 +130,7 @@ void AdminABM::administrarSubModuloABMProducto() {
 			break;
 		}
 	}
+	subModuloABMSalir();
 }
 
 
