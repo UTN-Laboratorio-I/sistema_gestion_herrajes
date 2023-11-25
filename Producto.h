@@ -52,7 +52,7 @@ public:
 
     Response <Producto> opcionModificar(Response <Producto> &response);
     Response <Producto> modificarCampos(Response <Producto>& response);
-
+    void headerProductoAmodificar(Response <Producto> response);
 
 
 private:

@@ -5,6 +5,7 @@
 #include <vector>
 #include "TablaDto.h"
 #include "conio.h"
+#include<windows.h>
 
 using namespace std;
 
@@ -339,11 +340,11 @@ Response<Producto> Producto::modificarOdarBajaProducto(bool modificar)
 			producto = responseProducto.getData();
 			
 			cout << endl;
-			responseProducto.setSuccess("Producto modificado correctamente!", producto);
+			//responseProducto.setSuccess("Producto modificado correctamente!", producto);
 			archivoProducto.modificarRegistroObajaRegistro(producto, posicion);
 
 			cout << responseProducto.getMessage();
-			_sleep(2000);
+			_sleep(4000);
 			continuar = true;
 		}
 		else if (opc == 0)
@@ -475,21 +476,27 @@ Response <Producto> Producto::opcionModificar(Response <Producto> &response)
 	{
 		cout << endl <<"Desea modificar el registro completo o algun campo determinado?" << endl << endl;
 
-		cout << "1) Campo determinado - 2) Todo el registro - 0) Atras" << endl;
+		cout << "1) Campo determinado - 2) Todo el registro - 0) Atras" << endl << endl;
+
 		
 		cin >> opc;
 
+		
 		switch (opc)
 		{
-		case 1: response = modificarCampos(response);
+		case 1:
+			system("cls");
+			response = modificarCampos(response);
 			continuar = true;
 			break;
 		case 2:
+			system("cls");
 			producto = cargarProductoAmodificar(true);
 			response.setData(producto);
 			continuar = true;
 			break;
 		case 0:
+			response.setFailure("No se ha modificado ningun campo, volviendo al menu anterior...");
 			continuar = true;
 			break;
 		default:
@@ -506,9 +513,11 @@ Response <Producto> Producto::modificarCampos(Response <Producto>& response)
 {
 	Producto producto;
 	producto = response.getData();
+	
 	bool continuar = false;
 	int campo;
-	int opc;
+	int opc=99;
+	int contador = 0;
 
 	string nombre, descripcion;
 	float precioCosto;
@@ -516,39 +525,46 @@ Response <Producto> Producto::modificarCampos(Response <Producto>& response)
 	
 	while (!continuar)
 	{
-		cout << "---------------------------" << endl << endl;
-		cout << "ID Producto: " << response.getData().getId() << endl;
-		cout << "Nombre del Producto: " << "1)" << response.getData().getNombreProducto() << endl;
-		cout << "Descripcion del Producto: " << "2)" << response.getData().getDescripcionProducto() << endl;
-		cout << "Precio de costo del Producto: " << "3)" << response.getData().getPrecioCosto() << endl << endl;
+		headerProductoAmodificar(response);
 
 		cout << "Selecciones campo que desea modificar: " << endl;
 
-		cout << "1) Nombre Producto - 2) Descripcion del Producto 3) Precio de costo - 0) Atras" << endl;
+		cout << "1) Nombre Producto - 2) Descripcion del Producto - 3) Precio de costo - 0) Atras" << endl;
 
 		cin.ignore();
 		cin >> campo;
+		system("cls");
 
 			switch (campo)
 			{
 			case 1:
-				cout << "Ingrese el nuevo nombre del Producto: ";
+				headerProductoAmodificar(response);
+				cout << endl <<"Ingrese el nuevo nombre del Producto: ";
 				cin.ignore();
 				getline(cin, nombre);
 				producto.setNombreProducto(nombre);
 				response.setData(producto);
+				contador++;
+				response.setSuccess("Producto modificado correctamente", producto);
 				break;
 			case 2:
-				cout << "Ingrese nueva descripcion del Producto: ";
+				headerProductoAmodificar(response);
+				cout << endl <<"Ingrese nueva descripcion del Producto: ";
 				cin.ignore();
 				getline(cin, descripcion);
 				producto.setDescripcionProducto(descripcion);
 				response.setData(producto);
+				contador++;
+				response.setSuccess("Producto modificado correctamente", producto);
 				break;
 			case 3:
-				cout << "Ingrese el nuevo precio de costo del Producto: ";
+				headerProductoAmodificar(response);
+				cout << endl <<"Ingrese el nuevo precio de costo del Producto: ";
 				cin >> precioCosto;
+				producto.setPrecioCosto(precioCosto);
 				response.setData(producto);
+				contador++;
+				response.setSuccess("Producto modificado correctamente", producto);
 				break;
 			case 0:
 				continuar = true;
@@ -556,19 +572,45 @@ Response <Producto> Producto::modificarCampos(Response <Producto>& response)
 			default:
 				break;
 			}
+			
+			system("cls");
 
-		cout << "Desea modificar algun campo mas?" << endl;
+			if (contador > 0)
+			{
 
-		cout << "1) Si - 2) No - 0) Atras" << endl;
+			headerProductoAmodificar(response);
+			cout << "Desea modificar algun campo mas?" << endl;
 
-		cin >> opc;
+			cout << "1) Si - 2) No - 0) Atras" << endl;
 
-		if (opc != 1)
+			cin >> opc;
+			
+			}
+
+
+		if (opc == 99 || campo == 0)
 		{
-			continuar = true;
+			if (contador == 0)
+			{	
+				headerProductoAmodificar(response);
+				response.setFailure("No se ha modificado ningun campo, volviendo al menu anterior...");
+			}
+		continuar = true;
 		}
 	}
 
 	return response;
 	
+}
+
+void Producto::headerProductoAmodificar(Response <Producto> response)
+{
+	system("cls");
+	cout << "---------------------------------------------" << endl << endl;
+	cout << "------------ PRODUCTO A MODFICAR ------------" << endl << endl;
+	cout << "ID Producto:\t\t\t   N# " << response.getData().getId() << endl;
+	cout << "Nombre del Producto: \t \t" << "1) " << response.getData().getNombreProducto() << endl;
+	cout << "Descripcion del Producto: \t" << "2) " << response.getData().getDescripcionProducto() << endl;
+	cout << "Precio de costo del Producto: \t" << "3) " << response.getData().getPrecioCosto() << endl << endl;
+	cout << "---------------------------------------------" << endl << endl;
 }
