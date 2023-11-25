@@ -33,13 +33,13 @@ void AdminABM::administrarModuloABM()
 		case 2:
 			_sistema->setModulo("ABM Proveedores");
 			administrarSubModuloABMProveedor();
+			break;
 		case 3:
 			_sistema->setModulo("ABM Productos");
 			administrarSubModuloABMProducto();
 			break;
 		case 0: //SALIR DEL MÓDULO ABM:
 			moduloABMSalir();
-			break;
 		}
 	}
 	return;
@@ -127,6 +127,7 @@ void AdminABM::administrarSubModuloABMProducto() {
 			break;
 		case 0:
 			subModuloABMSalir();
+			break;
 		}
 	}
 }

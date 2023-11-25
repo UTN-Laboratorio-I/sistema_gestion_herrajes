@@ -5,6 +5,7 @@
 #include <vector>
 #include "TablaDto.h"
 #include "conio.h"
+#include<windows.h>
 
 using namespace std;
 
@@ -77,9 +78,7 @@ Producto Producto::cargarProductos(bool inventario) {
 	string nombreProducto, descripcionProducto;
 	Producto producto;
 
-	system("cls");
 
-	cout << "------- CARGA DE PRODUCTO -------" << endl << endl;
 
 	cout << "NOMBRE DE PRODUCTO: ";
 	cin.ignore();
@@ -160,6 +159,40 @@ Producto Producto::listarYSeleccionarProductoVenta() {
 	}
 }
 
+Producto Producto::listarYSeleccionarProductoCompra() {
+	Archivo<Producto> archivoProducto("productos.dat");
+	vector<Producto> listaProductos = archivoProducto.listarRegistroArchivo();
+	//modificar stock según inventario:
+	Archivo<StockDto> archivoStock("stock.dat");
+	vector<StockDto> stock;
+	stock = archivoStock.listarRegistroArchivo();
+
+	for (Producto prod : listaProductos) {
+		for (StockDto s : stock) {
+			if (s.getId() == prod.getId()) {
+				prod.setCantidad(s.getCantidadTotal());
+			}
+		}
+
+		TablaDto<Producto> tabla("productos compras", listaProductos, false);
+
+		cout << "LISTA DE PRODUCTOS: " << endl;
+		tabla.generarTablaProductosCompra(listaProductos);
+
+		int idProducto;
+		cout << "Seleccione el producto: ";
+		cin >> idProducto;
+
+		for (Producto prod : listaProductos) {
+			if (prod.getId() == idProducto) {
+				return prod;
+			}
+		}
+	}
+}
+
+
+
 Response <Producto> Producto::responseCargarProducto()
 {
 	Response <Producto> response;
@@ -175,7 +208,7 @@ Response <Producto> Producto::responseCargarProducto()
 
 	producto = producto.cargarProductos(true);
 
-	 registro = archivo.grabarRegistroArchivo(producto);
+	registro = archivo.grabarRegistroArchivo(producto);
 
 	if (registro.getSuccess())
 	{
@@ -205,9 +238,8 @@ Producto Producto::cargarProductoAmodificar(bool inventario)
 	string nombreProducto, descripcionProducto;
 	Producto producto;
 
-	system("cls");
 
-	cout << "------- CARGA DE NUEVOS DATOS DE PRODUCTO -------" << endl << endl;
+	cout << endl << "------- CARGA DE NUEVOS DATOS DE PRODUCTO -------" << endl << endl;
 
 	cout << "NOMBRE DE PRODUCTO: ";
 	cin.ignore();
@@ -296,17 +328,23 @@ Response<Producto> Producto::modificarOdarBajaProducto(bool modificar)
 		{
 			helper.limpiarConsola();
 
-			cout << endl;
+			cout << endl << endl;
 
+			helper.limpiarConsola();
 			verProductoAmodificar(responseProducto);
+			
+			// modificaciones 23-11
+			
+			responseProducto = opcionModificar(responseProducto);
 
-			producto = cargarProductoAmodificar(true);
+			producto = responseProducto.getData();
+			
 			cout << endl;
-			responseProducto.setSuccess("Producto modificado correctamente!", producto);
+			//responseProducto.setSuccess("Producto modificado correctamente!", producto);
 			archivoProducto.modificarRegistroObajaRegistro(producto, posicion);
 
 			cout << responseProducto.getMessage();
-			_sleep(2000);
+			_sleep(4000);
 			continuar = true;
 		}
 		else if (opc == 0)
@@ -424,4 +462,160 @@ void Producto::mostrarProductos()
 	cout << "Seleccione una tecla para volver al menu anterior..." << endl;
 	getch();
 
+}
+
+Response <Producto> Producto::opcionModificar(Response <Producto> &response)
+{
+	Producto producto;
+
+	int opc;
+	bool continuar = false;
+
+
+	while (!continuar)
+	{
+		cout << endl <<"Desea modificar el registro completo o algun campo determinado?" << endl << endl;
+
+		cout << "1) Campo determinado - 2) Todo el registro - 0) Atras" << endl << endl;
+
+		
+		cin >> opc;
+
+		
+		switch (opc)
+		{
+		case 1:
+			system("cls");
+			response = modificarCampos(response);
+			continuar = true;
+			break;
+		case 2:
+			system("cls");
+			producto = cargarProductoAmodificar(true);
+			response.setData(producto);
+			continuar = true;
+			break;
+		case 0:
+			response.setFailure("No se ha modificado ningun campo, volviendo al menu anterior...");
+			continuar = true;
+			break;
+		default:
+			break;
+		}
+
+	}
+	
+	return response;
+
+}
+
+Response <Producto> Producto::modificarCampos(Response <Producto>& response)
+{
+	Producto producto;
+	producto = response.getData();
+	
+	bool continuar = false;
+	int campo;
+	int opc=99;
+	int contador = 0;
+
+	string nombre, descripcion;
+	float precioCosto;
+
+	
+	while (!continuar)
+	{
+		headerProductoAmodificar(response);
+
+		cout << "Selecciones campo que desea modificar: " << endl;
+
+		cout << "1) Nombre Producto - 2) Descripcion del Producto - 3) Precio de costo - 0) Atras" << endl;
+
+		cin.ignore();
+		cin >> campo;
+		system("cls");
+
+			switch (campo)
+			{
+			case 1:
+				headerProductoAmodificar(response);
+				cout << endl <<"Ingrese el nuevo nombre del Producto: ";
+				cin.ignore();
+				getline(cin, nombre);
+				producto.setNombreProducto(nombre);
+				response.setData(producto);
+				contador++;
+				response.setSuccess("Producto modificado correctamente", producto);
+				break;
+			case 2:
+				headerProductoAmodificar(response);
+				cout << endl <<"Ingrese nueva descripcion del Producto: ";
+				cin.ignore();
+				getline(cin, descripcion);
+				producto.setDescripcionProducto(descripcion);
+				response.setData(producto);
+				contador++;
+				response.setSuccess("Producto modificado correctamente", producto);
+				break;
+			case 3:
+				headerProductoAmodificar(response);
+				cout << endl <<"Ingrese el nuevo precio de costo del Producto: ";
+				cin >> precioCosto;
+				producto.setPrecioCosto(precioCosto);
+				response.setData(producto);
+				contador++;
+				response.setSuccess("Producto modificado correctamente", producto);
+				break;
+			case 0:
+				continuar = true;
+				break;
+			default:
+				break;
+			}
+			
+			system("cls");
+
+			if (contador > 0)
+			{
+
+				headerProductoAmodificar(response);
+				cout << "Desea modificar algun campo mas?" << endl;
+
+				cout << "1) Si - 2) No, Guardar y salir" << endl;
+
+				cin >> opc;
+
+				if (opc == 2)
+				{
+					continuar = true;
+				}
+
+			}
+
+
+		if (opc == 99 || campo == 0)
+		{
+			if (contador == 0)
+			{	
+				headerProductoAmodificar(response);
+				response.setFailure("No se ha modificado ningun campo, volviendo al menu anterior...");
+			}
+		continuar = true;
+		}
+	}
+
+	return response;
+	
+}
+
+void Producto::headerProductoAmodificar(Response <Producto> response)
+{
+	system("cls");
+	cout << "---------------------------------------------" << endl << endl;
+	cout << "------------ PRODUCTO A MODFICAR ------------" << endl << endl;
+	cout << "ID Producto:\t\t\t   N# " << response.getData().getId() << endl;
+	cout << "Nombre del Producto: \t \t" << "1) " << response.getData().getNombreProducto() << endl;
+	cout << "Descripcion del Producto: \t" << "2) " << response.getData().getDescripcionProducto() << endl;
+	cout << "Precio de costo del Producto: \t" << "3) " << response.getData().getPrecioCosto() << endl << endl;
+	cout << "---------------------------------------------" << endl << endl;
 }

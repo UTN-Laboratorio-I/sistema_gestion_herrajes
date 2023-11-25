@@ -49,6 +49,7 @@ public:
 	void ver_MenuVentas();
 	int ver_VentasClienteExistente();
 	void ver_CarritoVentas(vector<DetalleDto> detalle);
+	void ver_CarritoCompras(vector<DetalleDto> detalle);
 
 };
 

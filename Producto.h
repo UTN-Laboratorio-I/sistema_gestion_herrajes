@@ -44,7 +44,16 @@ public:
 
     Producto listarYSeleccionarProductoVenta();
 
+    Producto listarYSeleccionarProductoCompra();
+
     void tablaProductosContenido(vector<Producto> lista, vector<int> columnas, int anchoTabla);
+
+    /// 23 - 11
+
+    Response <Producto> opcionModificar(Response <Producto> &response);
+    Response <Producto> modificarCampos(Response <Producto>& response);
+    void headerProductoAmodificar(Response <Producto> response);
+
 
 private:
 
