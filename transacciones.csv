@@ -1,0 +1,7 @@
+Id,Tipo Transaccion,Fecha,Id Cliente/Proveedor,Usuario,Producto,Cantidad,Monto,Total
+1,Compra,16/11/2023,1,admin,Manija ,10,86000,165300
+1,Compra,16/11/2023,1,admin,Manija,8,76800,165300
+1,Compra,16/11/2023,1,admin,Tornillos,500,2500,165300
+2,Compra,16/11/2023,2,admin,Tornillos,500,5000,5000
+3,Compra,21/11/2023,3,admin,Manijas doble balancin,10,56000,71000
+3,Compra,21/11/2023,3,admin,Clavos,1000,15000,71000

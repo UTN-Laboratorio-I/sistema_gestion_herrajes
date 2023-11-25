@@ -9,6 +9,12 @@
 class Proveedor : public Persona
 {
 public:
+	const char* getRazonsocial() { return _razonSocial; }
+	const char* getCuit() { return _cuit; }
+	int getId();
+	void setId(int id);
+	void setRazonSocial(string razonSocial) { strcpy_s(_razonSocial, razonSocial.c_str()); }
+	void setCuit(string cuit) { strcpy_s(_cuit, cuit.c_str()); }
 
 	Response <Proveedor> cargarProveedor();
 	Response <Proveedor> buscarProveedor();
@@ -21,18 +27,12 @@ public:
 	Proveedor cargarProveedorAmodificar();
 
 	void mostarProveedor();
-
-
 	void MostarProveedor();
-	void setRazonSocial(string razonSocial) { strcpy_s(_razonSocial, razonSocial.c_str()); }
-	void setCuit(string cuit) { strcpy_s(_cuit, cuit.c_str()); }
 
-	const char* getRazonsocial() { return _razonSocial; }
-	const char* getCuit() { return _cuit; }
+	Response <Proveedor> opcionModificar(Response <Proveedor> &response);
+	Response <Proveedor> modificarCampos(Response <Proveedor> &response);
+	void headerProductoAmodificar(Response <Proveedor> response);
 
-	int getId();
-
-	void setId(int id);
 
 private:
 

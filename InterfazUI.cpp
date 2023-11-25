@@ -267,6 +267,12 @@ void InterfazUI::ver_CarritoVentas(vector<DetalleDto> detalle) {
 
 }
 
+void InterfazUI::ver_CarritoCompras(vector<DetalleDto> detalle) {
+	Helper helper;
+	//helper.limpiarConsola();
+
+}
+
 void verListadoProductos() {
 	Helper helper;
 	helper.limpiarConsola();
