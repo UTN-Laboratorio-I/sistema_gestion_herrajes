@@ -26,6 +26,13 @@ void Reporte::generarReporteClientes() {
 	vector<Cliente> listaCliente;
 	Archivo<Cliente> archivo(_nombreArchivo);
 	listaCliente = archivo.listarRegistroArchivo();
+	
+	if (listaCliente.empty()) {
+		cout << "No hay clientes registrados"<<endl;
+		system("pause");
+		return;
+	};
+
 	TablaDto<Cliente> tabla(_nombreModulo, listaCliente, true, true);
 	vector<string> headersTabla = tabla.generarReporteClientes(listaCliente);
 
@@ -48,6 +55,12 @@ void Reporte::generarReporteProveedores() {
 	vector<Proveedor> listaProveedor;
 	Archivo<Proveedor> archivo(_nombreArchivo);
 	listaProveedor = archivo.listarRegistroArchivo();
+
+	if (listaProveedor.empty()) {
+			cout << "No hay proveedores registrados" << endl;
+			system("pause");
+			return;
+	};
 
 	TablaDto<Proveedor> tabla(_nombreModulo, listaProveedor, true, true);
 	vector<string> headersTabla = tabla.generarReporteProveedores(listaProveedor);
@@ -74,6 +87,12 @@ void Reporte::generarReporteProductos() {
 	Archivo<Producto> archivo(_nombreArchivo);
 	listaProducto = archivo.listarRegistroArchivo();
 
+	if(listaProducto.empty()){
+		cout << "No hay productos registrados" << endl;
+		system("pause");
+		return;
+	};
+
 	TablaDto<Producto> tabla(_nombreModulo, listaProducto, true, true);
 	vector<string> headersTabla = tabla.generarReporteProductos(listaProducto);
 	char opc = opcionesMenuReporte();
@@ -91,6 +110,7 @@ void Reporte::generarReporteProductos() {
 	case 0:
 		break;
 	}
+
 }
 
 void Reporte::generarReporteUsuarios(){
@@ -99,6 +119,12 @@ void Reporte::generarReporteUsuarios(){
 	listaUsuario = archivo.listarRegistroArchivo();
 	const char* nombreArchivo = "usuarios.csv";
 	Export exportArchivo(nombreArchivo);
+
+	if (listaUsuario.empty()) {
+		cout << "No hay usuarios registrados" << endl;
+		system("pause");
+		return;
+	};
 
 	TablaDto<Usuario> tabla(_nombreModulo, listaUsuario, true, true);
 	vector<string> headers = tabla.generarReporteUsuarios(listaUsuario);
@@ -126,6 +152,12 @@ void Reporte::generarReporteTransacciones() {
 	Archivo<Producto> archivoProducto("productos.dat");
 	vector<TransaccionDto> listaTransaccionDto = archivoTransaccion.listarRegistroArchivo();
 	vector<DetalleDto> listaDetalleDto = archivoDetalle.listarRegistroArchivo();
+
+	if(listaTransaccionDto.empty()){
+		cout << "No hay transacciones registradas" << endl;
+		system("pause");
+		return;
+	};
 
 	vector<Transaccion> listaTransaccion;
 
