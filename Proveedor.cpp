@@ -250,17 +250,20 @@ Response<Proveedor> Proveedor::modificarOdarBajaProveedor(bool modificar)
 		{
 			helper.limpiarConsola();
 
-			cout << endl;
+			cout << endl << endl;
 
+			helper.limpiarConsola();
 			verProveedorAmodificar(responseProveedor);
+			
+			responseProveedor = opcionModificar(responseProveedor);
 
-			proveedor = proveedor.cargarProveedorAmodificar();
-			cout << endl;
-			responseProveedor.setSuccess("Proveedor modificado correctamente!", proveedor);
+			proveedor = responseProveedor.getData();
+
+			//responseProveedor.setSuccess("Proveedor modificado correctamente!", proveedor);
 			archivoProveedor.modificarRegistroObajaRegistro(proveedor, posicion);
 
 			cout << responseProveedor.getMessage();
-			_sleep(2000);
+			_sleep(4000);
 			continuar = true;
 		}
 		else if (opc == 0)
@@ -382,4 +385,182 @@ void Proveedor::mostarProveedor()
 	cout << "Seleccione una tecla para volver al menu anterior..." << endl;
 	getch();
 
+}
+
+Response <Proveedor> Proveedor::opcionModificar(Response <Proveedor> &response)
+{
+	Proveedor proveedor;
+
+	int opc;
+	bool continuar = false;
+
+
+	while (!continuar)
+	{
+		cout << endl << "Desea modificar el registro completo o algun campo determinado?" << endl << endl;
+
+		cout << "1) Campo determinado - 2) Todo el registro - 0) Atras" << endl << endl;
+
+
+		cin >> opc;
+
+
+		switch (opc)
+		{
+		case 1:
+			system("cls");
+			response = modificarCampos(response);
+			continuar = true;
+			break;
+		case 2:
+			system("cls");
+			proveedor = cargarProveedorAmodificar();
+			response.setData(proveedor);
+			continuar = true;
+			break;
+		case 0:
+			response.setFailure("No se ha modificado ningun campo, volviendo al menu anterior...");
+			continuar = true;
+			break;
+		default:
+			break;
+		}
+
+	}
+
+	return response;
+
+}
+
+Response <Proveedor> Proveedor::modificarCampos(Response <Proveedor> &response)
+{
+	Proveedor proveedor;
+	proveedor = response.getData();
+
+	bool continuar = false;
+	int campo;
+	int opc = 99;
+	int contador = 0;
+
+	string nombre, apellido, cuit, razonSocial, direccion;
+
+
+	while (!continuar)
+	{
+		headerProductoAmodificar(response);
+
+		cout << "Selecciones campo que desea modificar: " << endl;
+
+		cout << "1) Nombre Proveedor - 2) Apellido del Proveedor - 3) CUIT - 4) Razon Social - 5) Domicilio - 0) Atras" << endl;
+
+		cin.ignore();
+		cin >> campo;
+		system("cls");
+
+		switch (campo)
+		{
+		case 1:
+			headerProductoAmodificar(response);
+			cout << endl << "Ingrese el nuevo nombre del Proveedor: ";
+			cin.ignore();
+			getline(cin, nombre);
+			proveedor.setNombre(nombre);
+			response.setData(proveedor);
+			contador++;
+			response.setSuccess("Proveedor modificado correctamente", proveedor);
+			break;
+		case 2:
+			headerProductoAmodificar(response);
+			cout << endl << "Ingrese nuevo apellido del Proveedor: ";
+			cin.ignore();
+			getline(cin, apellido);
+			proveedor.setApellido(apellido);
+			response.setData(proveedor);
+			contador++;
+			response.setSuccess("Proveedor modificado correctamente", proveedor);
+			break;
+		case 3:
+			headerProductoAmodificar(response);
+			cout << endl << "Ingrese nuevo CUIT del Proveedor: ";
+			cin.ignore();
+			getline(cin, cuit);
+			proveedor.setCuit(cuit);
+			response.setData(proveedor);
+			contador++;
+			response.setSuccess("Proveedor modificado correctamente", proveedor);
+			break;
+		case 4:
+			headerProductoAmodificar(response);
+			cout << endl << "Ingrese nueva razon social del Proveedor: ";
+			cin.ignore();
+			getline(cin, razonSocial);
+			proveedor.setRazonSocial(razonSocial);
+			response.setData(proveedor);
+			contador++;
+			response.setSuccess("Proveedor modificado correctamente", proveedor);
+			break;
+		case 5:
+			headerProductoAmodificar(response);
+			cout << endl << "Ingrese nuevo domicilio del Proveedor: ";
+			cin.ignore();
+			getline(cin, direccion);
+			proveedor.setDomicilio(direccion);
+			response.setData(proveedor);
+			contador++;
+			response.setSuccess("Proveedor modificado correctamente", proveedor);
+			break;
+		case 0:
+			continuar = true;
+			break;
+		default:
+			break;
+		}
+
+		system("cls");
+
+		if (contador > 0)
+		{
+
+			headerProductoAmodificar(response);
+			cout << "Desea modificar algun campo mas?" << endl;
+
+			cout << "1) Si - 2) No, Guardar y salir" << endl;
+
+			cin >> opc;
+
+			if (opc == 2)
+			{
+				continuar = true;
+			}
+
+		}
+
+
+		if (opc == 99 || campo == 0)
+		{
+			if (contador == 0)
+			{
+				headerProductoAmodificar(response);
+				response.setFailure("No se ha modificado ningun campo, volviendo al menu anterior...");
+			}
+			continuar = true;
+		}
+	}
+
+	return response;
+
+}
+
+void Proveedor::headerProductoAmodificar(Response <Proveedor> response)
+{
+	system("cls");
+	cout << "----------------------------------------------" << endl << endl;
+	cout << "------------ PROVEEDOR A MODFICAR ------------" << endl << endl;
+	cout << "ID Proveedor:\t\t\t   N# " << response.getData().getId() << endl;
+	cout << "Nombre del Proveedor: \t \t" << "1) " << response.getData().getNombre()<< endl;
+	cout << "Apellido del Proveedor: \t" << "2) " << response.getData().getApellido()<< endl;
+	cout << "CUIT del Proveedor: \t\t" << "3) " << response.getData().getCuit()<< endl;
+	cout << "Razon Social del Proveedor: \t" << "4) " << response.getData().getRazonsocial() << endl;
+	cout << "Domicilio del Proveedor: \t" << "5) " << response.getData().getDomicilio() << endl << endl;
+	cout << "----------------------------------------------" << endl << endl;
 }

@@ -333,7 +333,7 @@ Response<Producto> Producto::modificarOdarBajaProducto(bool modificar)
 			helper.limpiarConsola();
 			verProductoAmodificar(responseProducto);
 			
-			// modificaciones actuales 23-11
+			// modificaciones 23-11
 			
 			responseProducto = opcionModificar(responseProducto);
 
@@ -578,13 +578,18 @@ Response <Producto> Producto::modificarCampos(Response <Producto>& response)
 			if (contador > 0)
 			{
 
-			headerProductoAmodificar(response);
-			cout << "Desea modificar algun campo mas?" << endl;
+				headerProductoAmodificar(response);
+				cout << "Desea modificar algun campo mas?" << endl;
 
-			cout << "1) Si - 2) No - 0) Atras" << endl;
+				cout << "1) Si - 2) No, Guardar y salir" << endl;
 
-			cin >> opc;
-			
+				cin >> opc;
+
+				if (opc == 2)
+				{
+					continuar = true;
+				}
+
 			}
 
 
