@@ -254,6 +254,8 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 		{
 			Archivo <Producto> archivoProducto("productos.dat");
 			responseProducto = archivoProducto.grabarRegistroArchivo(detalle.getProducto());
+
+			detalle.setIdProducto(responseProducto.getData().getId());
 		}
 		
 		/*Producto produ = detalle.getProducto();

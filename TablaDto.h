@@ -231,6 +231,7 @@ public:
     vector<string> generarTablaProductos(vector<Producto> lista) {
         mostrarHeaderTabla();
         for (Producto datos : lista) {
+            if(!_isReporte && !datos.getEstado()) continue;  //En caso de que el producto no este activo y no sea reporte, no lo mostramos.
 			cout << setw(_columnas[0].ancho) << datos.getId();
 			cout << setw(_columnas[1].ancho) << datos.getNombreProducto();
 			cout << setw(_columnas[2].ancho) << datos.getDescripcionProducto();

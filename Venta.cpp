@@ -81,6 +81,7 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 	Stock stock;
 	Caja caja;
 
+	float margenUtilidad = sistema->getMargenUtilidad() * 1.0;
 	bool finalizarVenta = false;
 
 	ventas_UI.ver_CarritoVentas(detalleVenta);
@@ -88,34 +89,38 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 	while (!finalizarVenta) {
 		Producto producto;
 		char opc;
-
-
+		
 		ventas_UI.headerDinamico();
 		venta.carritoDeVenta();
 		//Obtener listado de productos disponibles para venta:
-		producto = producto.listarYSeleccionarProductoVenta();
-
-		ventas_UI.headerDinamico();
-		//Seleccionar cantidad y añadir al carrito:
-		venta.agregarProducto(producto);
-
-		ventas_UI.headerDinamico();
-		//Consultar si desea finalizar la venta:
-		cout << "Desea finalizar la venta? (s/n): ";
-		cin >> opc;
-		if (opc == 's' || opc == 'S') {
-			finalizarVenta = !finalizarVenta;
-			sistema->setSubModulo("VENTA FINALIZADA");
-			ventas_UI.headerDinamico();
-		}
+		producto = producto.listarYSeleccionarProductoVenta(margenUtilidad);
 		
+		if (producto.getNombreProducto() != "") { //En caso de que no retorne un producto vacío, se procede a agregarlo al carrito:
+
+			//Seleccionar cantidad y añadir al carrito:
+			venta.agregarProducto(producto);
+
+			//Consultar si desea finalizar la venta:
+			cout << "Desea finalizar la venta? (s/n): ";
+			cin >> opc;
+			if (opc == 's' || opc == 'S') {
+				finalizarVenta = !finalizarVenta;
+				sistema->setSubModulo("VENTA FINALIZADA");
+				ventas_UI.headerDinamico();
+			}
+		sistema->limpiarError();
+		}
+		else { //caso contrario, se muestra el error correspondiente:
+			sistema->setError("Seleccione un producto valido");
+		}
 	}
 	//Obtenemos el total de la venta y lo guardamos en la transacción:
 	float acumuladorTotal = 0;
 	int cantidadProductos = 0;
 	for(Detalle detalle : venta._detalle){
 		Producto prod = detalle.getProducto();
-		acumuladorTotal += detalle.getCantidad() * prod.getPrecioCosto(); //Modificar por precio venta!!!
+		float precioVenta = prod.getPrecioCosto() * margenUtilidad;
+		acumuladorTotal += detalle.getCantidad() * precioVenta; //Modificar por precio venta!!!
 		cantidadProductos += detalle.getCantidad();
 	}
 	venta.setMonto(acumuladorTotal);

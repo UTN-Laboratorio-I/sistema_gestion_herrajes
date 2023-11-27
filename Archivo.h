@@ -224,10 +224,10 @@ public:
         T objetoLeido;
 
         if (p == NULL) {
-
-            p = fopen(_nombreArchivo, "ab");
-            bool escribio = fwrite(&objeto, sizeof(T), 1, p);
+            FILE* a = fopen(_nombreArchivo, "ab");
+            bool escribio = fwrite(&objeto, sizeof(T), 1, a);
             response.setSuccess("Se creo el registro", objeto);
+            fclose(a);
             return response;
         }
 

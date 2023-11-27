@@ -127,63 +127,74 @@ void Producto::mostrarProducto()
 	cout << getCantidad() << endl;
 }
 
-Producto Producto::listarYSeleccionarProductoVenta() {
+Producto Producto::listarYSeleccionarProductoVenta(float margenUtilidad) {
 	Archivo<Producto> archivoProducto("productos.dat");
 	vector<Producto> listaProductos = archivoProducto.listarRegistroArchivo();
 	//modificar stock según inventario:
 	Archivo<StockDto> archivoStock("stock.dat");
 	vector<StockDto> stock;
 	stock = archivoStock.listarRegistroArchivo();
+	bool continuar = false;
 
+	vector<Producto> listaProductosVendibles; //Acá metemos productos con stock y activos.
+	if (!continuar) {
 	for (Producto prod : listaProductos) {
 		for (StockDto s : stock) {
-			if (s.getId() == prod.getId()) {
+			if (s.getId() == prod.getId() && prod.getEstado() && s.getCantidadTotal() > 0) {
+				//Añadimos el producto al listado en caso de tener stock y este activo p/ la venta:
 				prod.setCantidad(s.getCantidadTotal());
+				prod.setPrecioVenta(prod.getPrecioCosto() * margenUtilidad);
+				listaProductosVendibles.push_back(prod);
 			}
+			//en caso de no tener stock, o que sea un producto dado de baja, no se añade al listado.
 		}
+	}
 
-		TablaDto<Producto> tabla("productos", listaProductos, false);
+		TablaDto<Producto> tabla("productos", listaProductosVendibles, false);
 
 		cout << "LISTA DE PRODUCTOS: " << endl;
-		tabla.generarTablaProductos(listaProductos);
+		tabla.generarTablaProductos(listaProductosVendibles);
 
 		int idProducto;
-		cout << "Seleccione el producto: ";
+		cout << "Seleccione el Id de producto: ";
 		cin >> idProducto;
 
+		Producto productoSeleccionado = Producto();
 		for (Producto prod : listaProductos) {
-			if (prod.getId() == idProducto) {
-				return prod;
+			if (prod.getId() == idProducto && prod.getEstado()) {
+				productoSeleccionado = prod;
 			}
 		}
+		return productoSeleccionado;
 	}
 }
 
 Producto Producto::listarYSeleccionarProductoCompra() {
 	Archivo<Producto> archivoProducto("productos.dat");
-	vector<Producto> listaProductos = archivoProducto.listarRegistroArchivo();
+	vector<Producto> listaCompletaProductos = archivoProducto.listarRegistroArchivo();
 	//modificar stock según inventario:
 	Archivo<StockDto> archivoStock("stock.dat");
 	vector<StockDto> stock;
 	stock = archivoStock.listarRegistroArchivo();
 
-	for (Producto prod : listaProductos) {
+	for (Producto prod : listaCompletaProductos) {
 		for (StockDto s : stock) {
 			if (s.getId() == prod.getId()) {
 				prod.setCantidad(s.getCantidadTotal());
+			
 			}
 		}
 
-		TablaDto<Producto> tabla("productos compras", listaProductos, false);
+		TablaDto<Producto> tabla("productos compras", listaCompletaProductos, false);
 
 		cout << "LISTA DE PRODUCTOS: " << endl;
-		tabla.generarTablaProductosCompra(listaProductos);
+		tabla.generarTablaProductosCompra(listaCompletaProductos);
 
 		int idProducto;
 		cout << "Seleccione el producto: ";
 		cin >> idProducto;
 
-		for (Producto prod : listaProductos) {
+		for (Producto prod : listaCompletaProductos) {
 			if (prod.getId() == idProducto) {
 				return prod;
 			}
