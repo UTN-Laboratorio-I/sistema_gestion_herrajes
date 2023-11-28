@@ -150,7 +150,7 @@ public:
             columnasResult.push_back({ "Descripción", 30 });
             columnasResult.push_back({ "Precio Costo", 15 });
             columnasResult.push_back({ "Precio Venta", 15 });
-            columnasResult.push_back({ "Stock disponible", 15 });
+            columnasResult.push_back({ "Stock", 20 });
 			break;
         case 7: //Reporte Usuarios
             columnasResult.push_back({ "Id", 5 });
@@ -299,16 +299,17 @@ public:
 
     }
 
-    vector<string> generarCarritoProductosCompras(vector<DetalleDto> carrito, Producto producto) {
+    vector<string> generarCarritoProductosCompras(vector<DetalleDto> carrito, Producto producto, vector<string> listaTemporal) {
         Response<Producto> res;
         Archivo<Producto> archivoProducto("productos.dat");
+
         int contador = 1;
         mostrarHeaderTabla();
         for (DetalleDto datos : carrito) {
             res = archivoProducto.buscarUnRegistro(datos.getIdProducto());
             int subtotal = datos.getCantidad() * datos.getPrecioUnitario();
             cout << setw(_columnas[0].ancho) << contador;
-            cout << setw(_columnas[1].ancho) << producto.getNombreProducto();
+            cout << setw(_columnas[1].ancho) << listaTemporal[contador-1];
             cout << setw(_columnas[2].ancho) << datos.getPrecioUnitario();
             cout << setw(_columnas[3].ancho) << datos.getCantidad();
             cout << setw(_columnas[4].ancho) << subtotal;
@@ -424,24 +425,6 @@ public:
         return _headers;
 
     }
- 
-   /* void generarTablaCompras(vector<TransaccionDto> listaTransaccion, vector<Compras> listaCompras) {
-        mostrarHeaderTabla();
-
-        for (TransaccionDto transaccion : listaTransaccion) {
-            vector<Compras> comprasFiltradas;
-            cout << setw(_columnas[0].ancho) << transaccion.getId();
-
-            for(Compras compra : listaCompras) {
-				if (compra.getIdTransaccion() == transaccion.getId()) {
-                    cout << setw(_columnas[0].ancho) << datos.getRol();
-				}
-			})
-        }
-    }*/
-
-	
-	
 
 #pragma endregion contenido
     

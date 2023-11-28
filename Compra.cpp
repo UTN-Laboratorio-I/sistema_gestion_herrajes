@@ -50,8 +50,8 @@ void Compra::carritoDeCompra(bool compraRealizada, Producto &producto){
 			cout << "Carrito de compra: " << endl;
 		}
 		TablaDto<DetalleDto> tabla("carrito compras", carrito, false);
-
-		tabla.generarCarritoProductosCompras(carrito, producto);
+		_listaTemporalCarrito.push_back(producto.getNombreProducto());
+		tabla.generarCarritoProductosCompras(carrito, producto, _listaTemporalCarrito);
 
 	}
 
