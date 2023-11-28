@@ -15,11 +15,12 @@ private:
 	int _id;
 	int _idProveedor;
 	char _tipo;
-
+	
+	vector<string> _listaTemporalCarrito; //Array temporal para poder mostrar los productos del carrito.
 
 public:
 	Compra();
-	
+
 	void setId(int id);
 	void setIdProveedor(int idProv);
 	void setTipoTransaccion(char tipoTransaccion);
