@@ -78,7 +78,7 @@ Producto Producto::cargarProductos(bool inventario) {
 	string nombreProducto, descripcionProducto;
 	Producto producto;
 
-
+	cout << endl << endl << "------- CARGA DATOS DE PRODUCTO -------" << endl << endl;
 
 	cout << "NOMBRE DE PRODUCTO: ";
 	cin.ignore();
@@ -250,7 +250,7 @@ Producto Producto::cargarProductoAmodificar(bool inventario)
 	Producto producto;
 
 
-	cout << endl << "------- CARGA DE NUEVOS DATOS DE PRODUCTO -------" << endl << endl;
+	cout << endl << endl << "------- CARGA DE NUEVOS DATOS DE PRODUCTO -------" << endl << endl;
 
 	cout << "NOMBRE DE PRODUCTO: ";
 	cin.ignore();
@@ -504,6 +504,7 @@ Response <Producto> Producto::opcionModificar(Response <Producto> &response)
 			system("cls");
 			producto = cargarProductoAmodificar(true);
 			response.setData(producto);
+			response.setSuccess("El producto se ha modificado correctamente, volviendo al menu anterior...", producto);
 			continuar = true;
 			break;
 		case 0:

@@ -171,7 +171,7 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 
 		interfaz.ver_CarritoCompras(detalle);
 
-		if (contador >= 1)
+		if (contador > 1)
 		{
 			compra.carritoDeCompra(false,productoAcargar);
 		}
@@ -191,7 +191,7 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 		{	//Compra de producto existente
 			productoAcargar = productoAcargar.listarYSeleccionarProductoCompra();
 			cantidadDetalleProducto = seleccionarCantidad();
-			//
+			productoAcargar = ingresarPrecioCosto(productoAcargar);
 			compra.agregarADetalleCompra(productoAcargar, cantidadDetalleProducto);
 		}
 
@@ -366,4 +366,20 @@ int Compra::seleccionarCantidad()
 	cin >> cant;
 
 	return cant;
+}
+
+Producto Compra::ingresarPrecioCosto(Producto &producto)
+{
+	float precioCosto;
+	
+	if (producto.getPrecioCosto() == 0)
+	{
+		cout << "Ingresar precio de costo: ";
+
+		cin >> precioCosto;
+	}
+	
+	producto.setPrecioCosto(precioCosto);
+	
+	return producto;
 }
