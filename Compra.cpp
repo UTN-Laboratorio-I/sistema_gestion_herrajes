@@ -370,9 +370,9 @@ int Compra::seleccionarCantidad()
 
 Producto Compra::ingresarPrecioCosto(Producto &producto)
 {
-	float precioCosto;
+	float precioCosto = producto.getPrecioCosto();
 	
-	if (producto.getPrecioCosto() == 0)
+	if (precioCosto == 0)
 	{
 		cout << "Ingresar precio de costo: ";
 

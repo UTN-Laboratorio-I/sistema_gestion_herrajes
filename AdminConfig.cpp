@@ -100,9 +100,9 @@ void AdminConfig::administrarCarpetaDeBackups()
 void AdminConfig::realizarCopiaDeSeguridad()
 {
 	const char* carpetaBackUp = _sistema->getCarpetaBackUp();
-	Backup <Producto> backUpProducto("productos.dat","productos.bak", carpetaBackUp);
-	Backup <Cliente> backUpcliente("clientes.dat","clientes.bak", carpetaBackUp);
-	Backup <Proveedor> backUpProveedor("proveedores.dat","proveedores.bak", carpetaBackUp);
+	Backup <Producto> backUpProducto("productos.dat","productos.bak");
+	Backup <Cliente> backUpcliente("clientes.dat","clientes.bak");
+	Backup <Proveedor> backUpProveedor("proveedores.dat","proveedores.bak");
 
 	Helper helper;
 	Producto producto;
