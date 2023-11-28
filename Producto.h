@@ -42,7 +42,7 @@ public:
     Producto cargarProductos(bool inventario = false);
     void mostrarProductos();
 
-    Producto listarYSeleccionarProductoVenta();
+    Producto listarYSeleccionarProductoVenta(float margenUtilidad);
 
     Producto listarYSeleccionarProductoCompra();
 

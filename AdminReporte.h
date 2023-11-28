@@ -38,5 +38,6 @@ public:
 	//Salir de módulo y submódulos:
 	void moduloReporteSalir();
 	void subModuloReporteSalir();
+
 };
 

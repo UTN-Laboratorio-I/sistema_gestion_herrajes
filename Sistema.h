@@ -56,6 +56,9 @@ public:
 	void setFormatoFecha(int f);
 	int getFormatoFecha();
 
+	const char* getCarpetaBackUp();
+	void setCarpetaBackUp(const char* carpeta);
+
 	/*void setFormatoMoneda(int f);
 	int getFormatoMoneda();*/
 

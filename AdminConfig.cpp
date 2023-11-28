@@ -34,6 +34,8 @@ void AdminConfig::administrarModuloConfig() {
 			administrarConfiguracionMargenUtilidad();
 			break;
 		case 3:
+			administrarCarpetaDeBackups();
+			break;
 		case 4:
 			realizarCopiaDeSeguridad();
 			break;
@@ -49,7 +51,17 @@ void AdminConfig::administrarModuloConfig() {
 
 void AdminConfig::administrarConfiguracionFecha() {
 	InterfazUI config_UI(_sistema);
+	bool modificar;
+	int formatoFecha = 0;
 
+		cout << "Formato de fecha actual: " << _sistema->getFormatoFecha() << endl;
+
+		cout << "Desea modificar el formato de fecha? (1: Si - 0: No): ";
+		cin >> modificar;
+
+		if (modificar) {
+			config_UI.ver_seleccionFormatoFecha();
+		}
 }
 
 void AdminConfig::administrarConfiguracionMargenUtilidad() {
@@ -69,12 +81,28 @@ void AdminConfig::administrarConfiguracionMargenUtilidad() {
 		}
 }
 
+void AdminConfig::administrarCarpetaDeBackups()
+{
+	InterfazUI config_UI(_sistema);
+	bool modificar;
+	string carpetaBackUp;
+
+	cout << "Carpeta de backups actual: " << _sistema->getCarpetaBackUp() << endl;
+
+	cout << "Desea modificar la carpeta de backups? (1: Si - 0: No): ";
+	cin >> modificar;
+
+	if (modificar) {
+		config_UI.ver_setearCarpetaBackUp();
+	}
+}
+
 void AdminConfig::realizarCopiaDeSeguridad()
 {
-
-	Backup <Producto> backUpProducto("productos.dat","productos.bak");
-	Backup <Cliente> backUpcliente("clientes.dat","clientes.bak");
-	Backup <Proveedor> backUpProveedor("proveedores.dat","proveedores.bak");
+	const char* carpetaBackUp = _sistema->getCarpetaBackUp();
+	Backup <Producto> backUpProducto("productos.dat","productos.bak", carpetaBackUp);
+	Backup <Cliente> backUpcliente("clientes.dat","clientes.bak", carpetaBackUp);
+	Backup <Proveedor> backUpProveedor("proveedores.dat","proveedores.bak", carpetaBackUp);
 
 	Helper helper;
 	Producto producto;
