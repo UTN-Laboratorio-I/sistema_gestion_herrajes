@@ -159,11 +159,17 @@ Proveedor Proveedor::cargarProveedorAmodificar()
 
 	system("cls");
 
-	cout << "------- CARGA DE NUEVOS DATOS DE PROVEEDOR -------" << endl << endl;
+	cout << endl << endl <<"------- CARGA DE NUEVOS DATOS DE PROVEEDOR -------" << endl << endl;
 
-
-	cout << "Ingrese numero de CUIT: " << endl;
+	cout << "Ingrese Nombre: " << endl;
 	cin.ignore();
+	getline(cin, nombre);
+
+	cout << "Ingrese Apellido: " << endl;
+	getline(cin, apellido);
+	
+	cout << "Ingrese numero de CUIT: " << endl;
+	//cin.ignore();
 	getline(cin, cuit);
 
 	cout << "Ingrese razon social: " << endl;
@@ -416,6 +422,7 @@ Response <Proveedor> Proveedor::opcionModificar(Response <Proveedor> &response)
 			system("cls");
 			proveedor = cargarProveedorAmodificar();
 			response.setData(proveedor);
+			response.setSuccess("Proveedor modificado correctamente, volviendo al menu anterior...", proveedor);
 			continuar = true;
 			break;
 		case 0:

@@ -308,8 +308,8 @@ public:
             int subtotal = datos.getCantidad() * datos.getPrecioUnitario();
             cout << setw(_columnas[0].ancho) << contador;
             cout << setw(_columnas[1].ancho) << producto.getNombreProducto();
-            cout << setw(_columnas[2].ancho) << datos.getCantidad();
-            cout << setw(_columnas[3].ancho) << datos.getPrecioUnitario();
+            cout << setw(_columnas[2].ancho) << datos.getPrecioUnitario();
+            cout << setw(_columnas[3].ancho) << datos.getCantidad();
             cout << setw(_columnas[4].ancho) << subtotal;
             cout << endl;
             contador++;

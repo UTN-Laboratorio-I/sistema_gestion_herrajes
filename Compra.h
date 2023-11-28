@@ -45,6 +45,8 @@ public:
 
 	int seleccionarCantidad();
 
+	Producto ingresarPrecioCosto(Producto& producto);
+
 
 };
 
