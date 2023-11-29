@@ -4,6 +4,7 @@
 #include "Proveedor.h"
 #include "Cliente.h"
 #include "Backup.h"
+#include <Windows.h>
 
 AdminConfig::AdminConfig(Sistema* sistema):_sistema(sistema) {
 	_sistema = sistema;
@@ -66,19 +67,34 @@ void AdminConfig::administrarConfiguracionFecha() {
 
 void AdminConfig::administrarConfiguracionMargenUtilidad() {
 	InterfazUI config_UI(_sistema);
-	bool modificar;
+	int opc;
+	bool continuar = false;
 	float margenUtilidad = 0.0;
 
-		cout << "Margen de utilidad actual: " << _sistema->getMargenUtilidad() << "%" << endl;
+		while (!continuar)
+		{
+			cout << "Margen de utilidad actual: " << _sistema->getMargenUtilidad() * 100 - 100 << "%" << endl;
 
-		cout << "Desea modificar el margen de utilidad? (1: Si - 0: No): ";
-		cin >> modificar;
+			cout << "Desea modificar el margen de utilidad? (1: Si - 2: No): " << endl;
+			cin >> opc;
 
-		if (modificar) {
-		cout << "Ingrese margen de utilidad (Numero entero %): ";
-		cin >> margenUtilidad;
-		_sistema->setMargenUtilidad(margenUtilidad);
+			if (opc == 1) {
+				cout << "Ingrese margen de utilidad (Numero entero %): ";
+				cin >> margenUtilidad;
+				_sistema->setMargenUtilidad(margenUtilidad);
+				cout << endl << "El margen de utilidad se ha actualizado a: " << _sistema->getMargenUtilidad() * 100 - 100 << "%, volviendo al menu anterior..." << endl;
+				Sleep(5000);
+				continuar = true;
+			}
+			else
+			{	
+				cout << endl << "No se ha modificado el margen de utilidad, volviendo al menu anterior..." << endl;
+				Sleep(3000);
+				continuar = true;
+			}
+
 		}
+		
 }
 
 void AdminConfig::administrarCarpetaDeBackups()
@@ -100,9 +116,9 @@ void AdminConfig::administrarCarpetaDeBackups()
 void AdminConfig::realizarCopiaDeSeguridad()
 {
 	const char* carpetaBackUp = _sistema->getCarpetaBackUp();
-	Backup <Producto> backUpProducto("productos.dat","productos.bak", carpetaBackUp);
-	Backup <Cliente> backUpcliente("clientes.dat","clientes.bak", carpetaBackUp);
-	Backup <Proveedor> backUpProveedor("proveedores.dat","proveedores.bak", carpetaBackUp);
+	Backup <Producto> backUpProducto("productos.dat","productos.bak");
+	Backup <Cliente> backUpcliente("clientes.dat","clientes.bak");
+	Backup <Proveedor> backUpProveedor("proveedores.dat","proveedores.bak");
 
 	Helper helper;
 	Producto producto;

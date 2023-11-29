@@ -81,11 +81,13 @@ void Reporte::generarReporteProveedores() {
 	}
 }
 
-void Reporte::generarReporteProductos() {
+void Reporte::generarReporteProductos(Sistema *sistema) {
 	Export exportProductos("productos.csv");
 	vector<Producto> listaProducto;
 	Archivo<Producto> archivo(_nombreArchivo);
 	listaProducto = archivo.listarRegistroArchivo();
+	float margenUtilidad = sistema->getMargenUtilidad();
+
 
 	if(listaProducto.empty()){
 		cout << "No hay productos registrados" << endl;
@@ -94,7 +96,7 @@ void Reporte::generarReporteProductos() {
 	};
 
 	TablaDto<Producto> tabla(_nombreModulo, listaProducto, true, true);
-	vector<string> headersTabla = tabla.generarReporteProductos(listaProducto);
+	vector<string> headersTabla = tabla.generarReporteProductos(listaProducto, margenUtilidad);
 	char opc = opcionesMenuReporte();
 
 	switch (opc) {

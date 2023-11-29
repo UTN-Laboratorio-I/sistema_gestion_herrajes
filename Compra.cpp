@@ -38,7 +38,7 @@ void Compra::carritoDeCompra(bool compraRealizada, Producto &producto){
 	for (Detalle detalle : _detalle) {
 		//Obtenemos el id del registro y cada detalle de la lista:
 		int id = _id;
-		DetalleDto detalleDto(detalle, id);
+		DetalleDto detalleDto(detalle, id, _tipo);
 		carrito.push_back(detalleDto);
 	}
 
@@ -157,6 +157,8 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 	Caja caja;
 	Compra compra;
 
+	float margenUtilidad = sistema->getMargenUtilidad() * 1.0;
+
 
 
 	bool continuarCompra = true;
@@ -258,13 +260,13 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 			detalle.setIdProducto(responseProducto.getData().getId());
 		}
 		
-		/*Producto produ = detalle.getProducto();
+		Producto produ = detalle.getProducto();
 		if (productoExistente)
 		{
 			archivoProducto.modificarRegistroObajaRegistro(produ, detalle.getProducto().getId());
-		}*/
+		}
 
-		DetalleDto detalleDto(detalle, id);
+		DetalleDto detalleDto(detalle, id, _tipo);
 
 		Response<DetalleDto> registroDetalle = archivoDetalle.grabarRegistroArchivo(detalleDto);
 
@@ -370,9 +372,9 @@ int Compra::seleccionarCantidad()
 
 Producto Compra::ingresarPrecioCosto(Producto &producto)
 {
-	float precioCosto;
+	float precioCosto = producto.getPrecioCosto();
 	
-	if (producto.getPrecioCosto() == 0)
+	if (precioCosto == 0)
 	{
 		cout << "Ingresar precio de costo: ";
 

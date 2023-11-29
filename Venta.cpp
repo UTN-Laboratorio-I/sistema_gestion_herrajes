@@ -47,7 +47,7 @@ void Venta::carritoDeVenta(bool ventaRealizada=false) {
 	for (Detalle detalle : _detalle) {
 		//Obtenemos el id del registro y cada detalle de la lista:
 		int id = _id;
-		DetalleDto detalleDto(detalle, id);
+		DetalleDto detalleDto(detalle, id, _tipo);
 		carrito.push_back(detalleDto);
 	}
 
@@ -74,6 +74,7 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 	//headerDinamico, y así evitar que la consola se ensucie entre pantalla y pantalla.
 	Archivo<TransaccionDto> archivoTransaccion("transacciones.dat");
 	Archivo<DetalleDto> archivoDetalle("detalles.dat");
+	//Archivo <Producto> archivoProducto("productos.dat");
 	Response<TransaccionDto> response;
 	vector<DetalleDto> detalleVenta;
 	Venta venta;
@@ -146,12 +147,15 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 	for (Detalle detalle : venta._detalle) {
 		//Obtenemos el id del registro y cada detalle de la lista:
 		int id = registro.getData().getId();
-		DetalleDto detalleDto(detalle, id);
+		DetalleDto detalleDto(detalle, id, _tipo);
 
 		Response<DetalleDto> registroDetalle = archivoDetalle.grabarRegistroArchivo(detalleDto);
 
 		//Modificamos el stock del producto:
 		stock.gestionarStock(detalle.getCantidad(), detalle.getProducto().getId(), _tipo);
+		/*Producto productoAmodificar = detalle.getProducto();
+		archivoProducto.modificarRegistroObajaRegistro(productoAmodificar, productoAmodificar.getId());*/
+		
 
 				//Si algún registro falla, devolvemos false:
 		if (registroDetalle.getSuccess() == false) {

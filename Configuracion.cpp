@@ -35,7 +35,7 @@ void Configuracion::setMargenUtilidad(int m)
 	Response<Configuracion> response;
 	Archivo<Configuracion> archivoConfig("configuracion.dat");
 	float conversion = m / 100.0;
-	_margenUtilidad = conversion;
+	_margenUtilidad = 1 + conversion;
 
 	response = archivoConfig.grabarOModificarConfiguracion(*this);
 
