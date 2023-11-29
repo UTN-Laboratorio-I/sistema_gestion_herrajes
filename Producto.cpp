@@ -162,6 +162,7 @@ Producto Producto::listarYSeleccionarProductoVenta(float margenUtilidad) {
 		Producto productoSeleccionado = Producto();
 		for (Producto prod : listaProductos) {
 			if (prod.getId() == idProducto && prod.getEstado()) {
+				prod.setPrecioVenta(prod.getPrecioCosto() * margenUtilidad);
 				productoSeleccionado = prod;
 			}
 		}
