@@ -176,34 +176,47 @@ Producto Producto::listarYSeleccionarProductoCompra() {
 	//modificar stock según inventario:
 	Archivo<StockDto> archivoStock("stock.dat");
 	vector<StockDto> stock;
+	Producto p;
 	stock = archivoStock.listarRegistroArchivo();
 
-	for (Producto prod : listaCompletaProductos) {
-		for (StockDto s : stock) {
-			if (s.getId() == prod.getId()) {
-				prod.setCantidad(s.getCantidadTotal());
-			
+	if (!listaCompletaProductos.empty()) {
+		for (Producto prod : listaCompletaProductos) {
+			for (StockDto s : stock) {
+				if (s.getId() == prod.getId()) {
+					prod.setCantidad(s.getCantidadTotal());
+
+				}
 			}
 		}
+	}
+	TablaDto<Producto> tabla("productos compras", listaCompletaProductos, false);
 
-		TablaDto<Producto> tabla("productos compras", listaCompletaProductos, false);
+	cout << "LISTA DE PRODUCTOS: " << endl;
+	tabla.generarTablaProductosCompra(listaCompletaProductos);
 
-		cout << "LISTA DE PRODUCTOS: " << endl;
-		tabla.generarTablaProductosCompra(listaCompletaProductos);
 
-		int idProducto;
-		cout << "Seleccione el producto: ";
-		cin >> idProducto;
+	int idProducto;
+	cout << "Seleccione el producto: ";
+	cin >> idProducto;
 
+	switch (idProducto) {
+	case 999:
+		return Producto();
+		break;
+	case 0:
+		 p.setId(-1);
+		 return	p;
+		break;
+	default:
 		for (Producto prod : listaCompletaProductos) {
 			if (prod.getId() == idProducto) {
 				return prod;
 			}
 		}
+		break;
 	}
 }
-
-
+		
 
 Response <Producto> Producto::responseCargarProducto()
 {
