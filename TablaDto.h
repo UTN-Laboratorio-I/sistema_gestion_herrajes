@@ -370,11 +370,11 @@ public:
 			int stock = res.getData().getCantidadTotal();
             //-----------------------------------------------
 
-			cout << setw(_columnas[0].ancho) << datos.getId();
-			cout << setw(_columnas[1].ancho) << datos.getNombreProducto();
-			cout << setw(_columnas[2].ancho) << datos.getDescripcionProducto();
-			cout << setw(_columnas[3].ancho) << datos.getPrecioCosto();
-			cout << setw(_columnas[4].ancho) << datos.getPrecioVenta();
+            cout << setw(_columnas[0].ancho) << datos.getId();
+            cout << setw(_columnas[1].ancho) << datos.getNombreProducto();
+            cout << setw(_columnas[2].ancho) << datos.getDescripcionProducto();
+            cout << setw(_columnas[3].ancho) << datos.getPrecioCosto();
+            cout << setw(_columnas[4].ancho) << datos.getPrecioCosto() * margenUtilidad;
 			cout << setw(_columnas[5].ancho) << stock;
 			cout << endl;
 		}

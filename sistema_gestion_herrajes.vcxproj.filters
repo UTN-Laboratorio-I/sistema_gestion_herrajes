@@ -221,9 +221,6 @@
     <ClInclude Include="Reporte.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Downloads\httplib.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="Export.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>

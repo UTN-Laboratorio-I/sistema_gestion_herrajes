@@ -164,7 +164,6 @@
     <ClCompile Include="Venta.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Downloads\httplib.h" />
     <ClInclude Include="AdminABM.h" />
     <ClInclude Include="AdminCompra.h" />
     <ClInclude Include="AdminConfig.h" />

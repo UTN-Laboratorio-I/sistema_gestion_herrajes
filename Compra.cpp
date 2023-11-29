@@ -260,11 +260,12 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 			detalle.setIdProducto(responseProducto.getData().getId());
 		}
 		
-		Producto produ = detalle.getProducto();
+		//Que mierda hace esto:
+		/*Producto produ = detalle.getProducto();
 		if (productoExistente)
 		{
 			archivoProducto.modificarRegistroObajaRegistro(produ, detalle.getProducto().getId());
-		}
+		}*/
 
 		DetalleDto detalleDto(detalle, id, _tipo);
 
