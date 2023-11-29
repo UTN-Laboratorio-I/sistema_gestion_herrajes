@@ -105,7 +105,7 @@ public:
             columnasResult.push_back({ "Descripción", 30 });
             //columnasResult.push_back({ "Precio Costo", 15 });
             columnasResult.push_back({ "Precio Venta", 15 });
-            //columnasResult.push_back({ "Cantidad", 15 });
+            columnasResult.push_back({ "Stock", 15 });
 
             break;
         case 2: //Cliente
@@ -237,7 +237,7 @@ public:
 			cout << setw(_columnas[2].ancho) << datos.getDescripcionProducto();
 			//cout << setw(_columnas[3].ancho) << datos.getPrecioCosto();
 			cout << setw(_columnas[3].ancho) << datos.getPrecioVenta();
-			//cout << setw(_columnas[5].ancho) << datos.getCantidad();
+			cout << setw(_columnas[4].ancho) << datos.getCantidad();
 			cout << endl;
 		}
         cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
@@ -360,15 +360,21 @@ public:
     }
 
     vector<string> generarReporteProductos(vector<Producto> lista) {
-
+        Archivo<StockDto> archivoStock("stock.dat");
 		mostrarHeaderTabla();
 		for (Producto datos : lista) {
+            //Buscamos el stock disponible del producto en cuestión:
+            if(!_isReporte && !datos.getEstado()) continue;
+			Response<StockDto> res = archivoStock.buscarUnRegistro(datos.getId());
+			int stock = res.getData().getCantidadTotal();
+            //-----------------------------------------------
+
 			cout << setw(_columnas[0].ancho) << datos.getId();
 			cout << setw(_columnas[1].ancho) << datos.getNombreProducto();
 			cout << setw(_columnas[2].ancho) << datos.getDescripcionProducto();
 			cout << setw(_columnas[3].ancho) << datos.getPrecioCosto();
 			cout << setw(_columnas[4].ancho) << datos.getPrecioVenta();
-			cout << setw(_columnas[5].ancho) << datos.getCantidad();
+			cout << setw(_columnas[5].ancho) << stock;
 			cout << endl;
 		}
 		cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;

@@ -158,7 +158,8 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 			registroCorrecto = false;
 		}
 	}
-
+	Archivo<StockDto> archivoStock("stock.dat");
+	vector<StockDto> stockActualizado = archivoStock.listarRegistroArchivo();
 	//Si se registraron correctamente tanto detalles como transaccion, se avanza OK:
 	if (registro.getSuccess() && registroCorrecto) {
 		//caja.gestionarCaja(_monto, _tipo);

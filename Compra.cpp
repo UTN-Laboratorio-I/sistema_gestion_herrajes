@@ -370,7 +370,7 @@ int Compra::seleccionarCantidad()
 
 Producto Compra::ingresarPrecioCosto(Producto &producto)
 {
-	float precioCosto;
+	float precioCosto =0.0;
 	
 	if (producto.getPrecioCosto() == 0)
 	{
