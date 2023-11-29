@@ -6,14 +6,14 @@ DetalleDto::DetalleDto() {
 
 }
 
-DetalleDto::DetalleDto(Detalle detalle, int idTransaccion)
+DetalleDto::DetalleDto(Detalle detalle, int idTransaccion, char tipo)
 {
 	Producto producto = detalle.getProducto();
 
 	_id = 0;
 	_idTransaccion = idTransaccion;
 	_idProducto = producto.getId();
-	_precioUnitario = producto.getPrecioCosto();
+	_precioUnitario = tipo == 'c' ? producto.getPrecioCosto() : producto.getPrecioVenta();
 	_cantidad = detalle.getCantidad();
 }
 

@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "Sistema.h"
 
 using namespace std;
 
@@ -18,7 +19,7 @@ public:
 
 	void generarReporteClientes();
 	void generarReporteProveedores();
-	void generarReporteProductos();
+	void generarReporteProductos(Sistema *sistema);
 	void generarReporteUsuarios();
 	void generarReporteTransacciones();
 };

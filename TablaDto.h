@@ -236,7 +236,7 @@ public:
 			cout << setw(_columnas[1].ancho) << datos.getNombreProducto();
 			cout << setw(_columnas[2].ancho) << datos.getDescripcionProducto();
 			//cout << setw(_columnas[3].ancho) << datos.getPrecioCosto();
-			cout << setw(_columnas[3].ancho) << datos.getPrecioVenta();
+			//cout << setw(_columnas[3].ancho) << datos.getPrecioVenta();
 			//cout << setw(_columnas[5].ancho) << datos.getCantidad();
 			cout << endl;
 		}
@@ -359,7 +359,7 @@ public:
 
     }
 
-    vector<string> generarReporteProductos(vector<Producto> lista) {
+    vector<string> generarReporteProductos(vector<Producto> lista, float margenUtilidad) {
 
 		mostrarHeaderTabla();
 		for (Producto datos : lista) {
@@ -367,7 +367,7 @@ public:
 			cout << setw(_columnas[1].ancho) << datos.getNombreProducto();
 			cout << setw(_columnas[2].ancho) << datos.getDescripcionProducto();
 			cout << setw(_columnas[3].ancho) << datos.getPrecioCosto();
-			cout << setw(_columnas[4].ancho) << datos.getPrecioVenta();
+			cout << setw(_columnas[4].ancho) << datos.getPrecioCosto() * margenUtilidad;
 			cout << setw(_columnas[5].ancho) << datos.getCantidad();
 			cout << endl;
 		}
