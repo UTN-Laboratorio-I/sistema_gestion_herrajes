@@ -11,7 +11,7 @@ private:
 	int _cantidad;
 public:
 	DetalleDto();
-	DetalleDto(Detalle detalle, int idTransaccion);
+	DetalleDto(Detalle detalle, int idTransaccion, char tipo);
 
 	int getId();
 	void setId(int id);

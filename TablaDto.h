@@ -359,8 +359,9 @@ public:
 
     }
 
-    vector<string> generarReporteProductos(vector<Producto> lista) {
+    vector<string> generarReporteProductos(vector<Producto> lista,float margenUtilidad) {
         Archivo<StockDto> archivoStock("stock.dat");
+
 		mostrarHeaderTabla();
 		for (Producto datos : lista) {
             //Buscamos el stock disponible del producto en cuestión:

@@ -162,6 +162,7 @@ Producto Producto::listarYSeleccionarProductoVenta(float margenUtilidad) {
 		Producto productoSeleccionado = Producto();
 		for (Producto prod : listaProductos) {
 			if (prod.getId() == idProducto && prod.getEstado()) {
+				prod.setPrecioVenta(prod.getPrecioCosto() * margenUtilidad);
 				productoSeleccionado = prod;
 			}
 		}
@@ -287,7 +288,7 @@ Response<Producto> Producto::modificarOdarBajaProducto(bool modificar)
 	vectorProducto = archivoProducto.listarRegistroArchivo();
 
 	TablaDto <Producto> tablaProductos("reporte productos", vectorProducto, true, false);
-	tablaProductos.generarReporteProductos(vectorProducto);
+	tablaProductos.generarTablaProductos(vectorProducto);
 
 	int id = vectorProducto.back().getId();
 
@@ -382,7 +383,7 @@ Producto Producto::darBajaProducto(int id)
 	vectorProducto = archivoProducto.listarRegistroArchivo();
 
 	TablaDto <Producto> tablaProductos("reporte productos", vectorProducto, true, false);
-	tablaProductos.generarReporteProductos(vectorProducto);
+	tablaProductos.generarTablaProductos(vectorProducto);
 
 	id = vectorProducto.back().getId();
 
@@ -466,7 +467,7 @@ void Producto::mostrarProductos()
 	vectorProductos = archivoProducto.listarRegistroArchivo();
 
 	TablaDto <Producto> tablaProductos("reporte productos", vectorProductos, true, false);
-	tablaProductos.generarReporteProductos(vectorProductos);
+	tablaProductos.generarTablaProductos(vectorProductos);
 
 	cout << endl;
 

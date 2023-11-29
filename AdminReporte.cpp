@@ -117,7 +117,7 @@ void AdminReporte::administrarSubModuloReporteProducto() {
 		case 1:
 			_sistema->setSubModulo("Reporte Productos");
 
-			reporte.generarReporteProductos();
+			reporte.generarReporteProductos(_sistema);
 			break;
 		case 0:
 			subModuloReporteSalir();
