@@ -39,6 +39,7 @@ public:
 	Response <Cliente> opcionModificar(Response <Cliente> &response);
 	Response <Cliente> modificarCampos(Response <Cliente> &response);
 	void headerProductoAmodificar(Response <Cliente> response);
+	Response <Cliente> verificarClienteActivo(int id);
 
 
 
