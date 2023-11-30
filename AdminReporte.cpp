@@ -72,6 +72,7 @@ void AdminReporte::administrarSubModuloReporteCliente() {
 		case 1:
 			_sistema->setSubModulo("Reporte Clientes");
 			reporte.generarReporteClientes();
+			_sistema->limpiarSubModulo();
 			break;
 		case 0:
 			subModuloReporteSalir();
@@ -95,6 +96,8 @@ void AdminReporte::administrarSubModuloReporteProveedor() {
 			_sistema->setSubModulo("Reporte Proveedores");
 
 			reporte.generarReporteProveedores();
+			_sistema->limpiarSubModulo();
+
 			break;
 		case 0:
 			subModuloReporteSalir();
@@ -118,6 +121,8 @@ void AdminReporte::administrarSubModuloReporteProducto() {
 			_sistema->setSubModulo("Reporte Productos");
 
 			reporte.generarReporteProductos(_sistema);
+			_sistema->limpiarSubModulo();
+
 			break;
 		case 0:
 			subModuloReporteSalir();
@@ -140,6 +145,8 @@ void AdminReporte::administrarSubModuloReporteTransacciones() {
 			_sistema->setSubModulo("Reporte Transacciones");
 
 			reporte.generarReporteTransacciones();
+			_sistema->limpiarSubModulo();
+
 			break;
 		case 0:
 			subModuloReporteSalir();
@@ -161,6 +168,8 @@ void AdminReporte::administrarSubModuloReporteUsuarios() {
 		case 1:
 			_sistema->setSubModulo("Reporte Usuarios");
 			reporte.generarReporteUsuarios();
+			_sistema->limpiarSubModulo();
+
 			break;
 		case 0:
 			subModuloReporteSalir();
@@ -199,6 +208,7 @@ void AdminReporte::moduloReporteSalir()
 void AdminReporte::subModuloReporteSalir()
 {
 	_sistema->setModuloPantalla("Reportes", -1);
+	_sistema->limpiarSubModulo();
 	return;
 }
 

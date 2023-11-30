@@ -14,7 +14,6 @@ int Reporte::opcionesMenuReporte() {
 	int opc;
 	cout << "Seleccione una opcion: " << endl;
 	cout << setw(20) << "0) Cerrar reporte";
-	cout << setw(30) << "8) Enviar por mail";
 	cout << setw(15) << "9) Imprimir";
 	cout << endl;
 	cin >> opc;
@@ -39,9 +38,6 @@ void Reporte::generarReporteClientes() {
 	int opc = opcionesMenuReporte();
 
 	switch (opc) {
-	case 1:
-		cout << "Aplicar filtro";
-		break;
 	case 9:
 		exportArchivo.exportClienteCsv(listaCliente, headersTabla);
 		break;
@@ -67,12 +63,6 @@ void Reporte::generarReporteProveedores() {
 	int opc = opcionesMenuReporte();
 
 	switch (opc) {
-	case 1:
-		cout << "Aplicar filtro";
-		break;
-	case 8:
-		cout << "Enviar por mail";
-		break;
 	case 9:
 		exportArchivo.exportProveedorCsv(listaProveedor, headersTabla);
 		break;
@@ -100,12 +90,6 @@ void Reporte::generarReporteProductos(Sistema *sistema) {
 	char opc = opcionesMenuReporte();
 
 	switch (opc) {
-	case 1:
-		cout << "Aplicar filtro";
-		break;
-	case 8:
-		cout << "Enviar por mail";
-		break;
 	case 9:
 		exportProductos.exportProductoCsv(listaProducto, headersTabla);
 		break;
@@ -133,12 +117,6 @@ void Reporte::generarReporteUsuarios(){
 	int opc = opcionesMenuReporte();
 
 	switch (opc) {
-	case 1:
-		cout << "Aplicar filtro";
-		break;
-	case 8:
-		cout << "Enviar por mail";
-		break;
 	case 9:
 		exportArchivo.exportUsuarioCsv(listaUsuario, headers);
 		break;
@@ -191,12 +169,6 @@ void Reporte::generarReporteTransacciones() {
 	int opc = opcionesMenuReporte();
 
 	switch (opc) {
-	case 1:
-		cout << "Aplicar filtro";
-		break;
-	case 8:
-		cout << "Enviar por mail";
-		break;
 	case 9:
 		exportArchivo.exportTransaccionCsv(listaTransaccion, headersTabla);
 		break;

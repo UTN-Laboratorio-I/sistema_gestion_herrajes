@@ -441,10 +441,9 @@ void InterfazUI::ver_SubMenuReportesCaja() {
 	while (!verificado) {
 		headerDinamico();
 		cout << "1) Listar Transacciones" << endl;
-		cout << "2) Top 5 productos vendidos" << endl << endl;
 		cout << "0) <- Atras" << endl;
 		cin >> opc;
-		verificado = opcionesValidasMenu(1, 2, opc);
+		verificado = opcionesValidasMenu(1, 1, opc);
 	}
 	_sistema->setModuloPantalla("Reporte Transacciones", opc);
 }
@@ -463,11 +462,9 @@ void InterfazUI::ver_MenuUsuario() {
 		headerDinamico();
 		cout << "1) Listar usuarios" << endl;
 		cout << "2) Crear nuevo usuario" << endl;
-		cout << "3) Modificar usuario" << endl;
-		cout << "4) Eliminar usuario" << endl;
 		cout << "0) <- Atras" << endl;
 		cin >> opc;
-		verificado = opcionesValidasMenu(1, 3, opc);
+		verificado = opcionesValidasMenu(1, 2, opc);
 	}
 	_sistema->setModuloPantalla("Usuarios", opc);
 }
