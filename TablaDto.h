@@ -253,7 +253,6 @@ public:
             cout << setw(_columnas[3].ancho) << datos.getPrecioCosto();
             cout << endl;
         }
-        cout << "999) Comprar producto nuevo" << endl;
         cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
         return _headers;
     }

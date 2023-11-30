@@ -139,8 +139,6 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 	vectorProducto = archivoProducto.listarRegistroArchivo();
 
 	TablaDto <Producto> tablaProductos("productos", vectorProducto, true, false);
-	
-
 
 	Response<TransaccionDto> response;
 	Response <Producto> responseProducto;
@@ -181,7 +179,7 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 		cout << endl << "----------- COMPRA DE PRODUCTOS -----------" << endl << endl;
 
 		cout << "ITEM N: " << contador << endl << endl;
-		/*
+		
 		if (productoExistente == false)
 		{
 			productoAcargar = productoAcargar.cargarProductos();
@@ -194,8 +192,8 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 			productoAcargar = ingresarPrecioCosto(productoAcargar);
 			compra.agregarADetalleCompra(productoAcargar, cantidadDetalleProducto);
 		}
-		*/
-		productoAcargar = productoAcargar.listarYSeleccionarProductoCompra();
+		
+		/*productoAcargar = productoAcargar.listarYSeleccionarProductoCompra();
 
 		switch (productoAcargar.getId()) {
 		case 0:
@@ -210,7 +208,7 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 			cantidadDetalleProducto = seleccionarCantidad();
 			productoAcargar = ingresarPrecioCosto(productoAcargar);
 			compra.agregarADetalleCompra(productoAcargar, cantidadDetalleProducto);
-		}
+		}*/
 
 		cout << endl << "Desea continuar la compra ?" << endl <<"1) SI // 2): NO" << endl << endl;
 
