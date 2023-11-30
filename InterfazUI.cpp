@@ -393,7 +393,6 @@ void InterfazUI::ver_SubMenuReportesCliente() {
 	while (!verificado) {
 		headerDinamico();
 		cout << "1) Listar Clientes" << endl;
-		cout << "2) Buscar Cliente" << endl << endl;
 		cout << "0) <- Atras" << endl;
 		cin >> opc;
 		verificado = opcionesValidasMenu(1, 2, opc);
@@ -410,7 +409,6 @@ void InterfazUI::ver_SubMenuReportesProveedor() {
 	while (!verificado) {
 		headerDinamico();
 		cout << "1) Listar Proveedores" << endl;
-		cout << "2) Buscar Proveedor" << endl << endl;
 		cout << "0) <- Atras" << endl;
 		cin >> opc;
 		verificado = opcionesValidasMenu(1, 2, opc);
@@ -427,7 +425,6 @@ void InterfazUI::ver_SubMenuReportesProducto() {
 	while (!verificado) {
 		headerDinamico();
 		cout << "1) Listar Productos" << endl;
-		cout << "2) Buscar Producto" << endl << endl;
 		cout << "0) <- Atras" << endl;
 		cin >> opc;
 		verificado = opcionesValidasMenu(1, 2, opc);

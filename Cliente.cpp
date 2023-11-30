@@ -49,6 +49,7 @@ Response<Cliente> Cliente::cargarCliente()
 
 	cliente.setRazonSocial(razonSocial);
 	cliente.setCuit(resultado);
+	cliente.setEstado(true);
 
 	Response<Cliente> registro = archivoCliente.grabarRegistroArchivo(cliente);
 	if (registro.getSuccess()) {
@@ -112,7 +113,7 @@ Response<Cliente> Cliente::modificarOdarBajaCliente(bool modificar)
 	vectorClientes = archivoCliente.listarRegistroArchivo();
 	
 	TablaDto <Cliente> tablaClientes("clientes", vectorClientes, true, false);
-	tablaClientes.generarTablaClientes(vectorClientes);
+	tablaClientes.generarTablaClientes(vectorClientes, true);
 	
 	int id = vectorClientes.back().getId();
 
@@ -136,11 +137,35 @@ Response<Cliente> Cliente::modificarOdarBajaCliente(bool modificar)
 			break;
 		}
 
-		cout << endl <<"Ingrese ID de cliente que desea modificar: ";
+		cout << endl <<"Ingrese ID de cliente que desea modificar:  " << endl;
+		cout << endl <<"0) Atras" << endl << endl;
+
 		cin >> idCliente;
+
+
+		if (idCliente == 0)
+		{	
+			// Si seleccionamos 0 vuelve al menu anterior
+			cout << endl << "Volviendo al menu anterior...";
+			_sleep(3000);
+			continuar = true;
+			continue;
+		}
+
+		//Verificamos si el Cliente esta activo
+		responseCliente = verificarClienteActivo(idCliente);
+
+		/*if (!responseCliente.getSuccess())
+		{
+			// Si esta activo continuamos
+			cout << endl << responseCliente.getMessage() << endl;
+			_sleep(2000);
+			continue;
+		}*/
 
 		if (idCliente < 1 || idCliente > id)
 		{
+			
 			cout << endl << "El numero de ID seleccionado no existe, seleccione un ID valido..." << endl;
 			_sleep(2000);
 			continue;
@@ -230,6 +255,7 @@ Cliente Cliente::cargarClienteAmodificar()
 
 	cliente.setRazonSocial(razonSocial);
 	cliente.setCuit(resultado);
+	cliente.setEstado(true);
 
 	return cliente;
 }
@@ -256,8 +282,17 @@ Cliente Cliente::darBajaCliente(int id)
 		cout << endl << "Ingrese ID de cliente que desea eliminar: ";
 		cin >> idCliente;
 
-		if (idCliente < 1 || idCliente > id)
+		responseCliente = verificarClienteActivo(idCliente);
+
+		if (!responseCliente.getSuccess())
 		{
+			cout << endl << responseCliente.getMessage() << endl;
+			_sleep(2000);
+			continue;
+		}
+		
+		if (idCliente < 1 || idCliente > id)
+		{			
 			cout << endl << "El numero de ID seleccionado no existe, seleccione un ID valido..." << endl;
 			_sleep(2000);
 			continue;
@@ -379,6 +414,7 @@ Response <Cliente> Cliente::modificarCampos(Response <Cliente> &response)
 	string nombre, apellido, direccion;
 	char razonSocial[50], email [50];
 	long long cuit;
+	int alta;
 
 	while (!continuar)
 	{
@@ -386,7 +422,7 @@ Response <Cliente> Cliente::modificarCampos(Response <Cliente> &response)
 
 		cout << "Selecciones campo que desea modificar: " << endl;
 
-		cout << "1) Nombre Cliente - 2) Apellido del Cliente - 3) CUIT - 4) Razon Social - 5) Domicilio 6) Email - 0) Atras" << endl;
+		cout << "1) Nombre Cliente - 2) Apellido del Cliente - 3) CUIT - 4) Razon Social - 5) Domicilio 6) Email - 7) Dar Alta - 0) Atras" << endl;
 
 		cin.ignore();
 		cin >> campo;
@@ -454,6 +490,24 @@ Response <Cliente> Cliente::modificarCampos(Response <Cliente> &response)
 			contador++;
 			response.setSuccess("Cliente modificado correctamente", cliente);
 			break;
+		case 7:
+			headerProductoAmodificar(response);
+			cout << endl << "Desea volver a dar de alta el cliente ? 1) Si - 2) No - 0) Atras" << endl;
+			cin >> alta;
+			switch (alta)
+			{
+			case 1: cliente.setEstado(true);
+					response.setSuccess("Cliente modificado correctamente", cliente);
+				break;
+			case 2: response.setFailure("No se ha modificado el cliente...");
+				break;
+			case 0: response.setFailure("Volviendo al menu anterior...");
+				break;
+			default:
+				break;
+			}
+			contador++;
+			break;
 		case 0:
 			continuar = true;
 			break;
@@ -507,6 +561,29 @@ void Cliente::headerProductoAmodificar(Response <Cliente> response)
 	cout << "CUIT del Cliente: \t\t" << "3) " << response.getData().getCuit() << endl;
 	cout << "Razon Social del Cliente: \t" << "4) " << response.getData().getRazonSocial() << endl;
 	cout << "Domicilio del Cliente: \t\t" << "5) " << response.getData().getDomicilio() << endl;
-	cout << "Email del Cliente: \t\t" << "6) " << response.getData().getEmail() << endl << endl;
+	cout << "Email del Cliente: \t\t" << "6) " << response.getData().getEmail() << endl;
+	cout << "Estado del Cliente: \t\t" << "7) " << response.getData().getEstado() << endl << endl;
 	cout << "----------------------------------------------" << endl << endl;
+}
+
+Response <Cliente> Cliente::verificarClienteActivo(int id)
+{
+	Archivo <Cliente> archivoCliente("clientes.dat");
+	Response <Cliente> responseCliente;
+	Cliente cliente;
+
+
+	responseCliente = archivoCliente.buscarUnRegistro(id);
+
+	if (responseCliente.getData().getEstado() == false)
+	{
+		responseCliente.setFailure("El cliente seleccionado se encuentra inactivo o no es valido... Seleccione un ID valido.");
+	}
+	else
+	{	
+		cliente = responseCliente.getData();
+		responseCliente.setSuccess("Cliente encontrado", cliente);
+	}
+
+	return responseCliente;
 }

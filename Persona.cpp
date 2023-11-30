@@ -8,7 +8,7 @@ Persona::Persona()
 	strcpy_s(_apellido, "");
 	strcpy_s(_direccion, "");
 	strcpy_s(_email, "");
-	_estado = true;
+	_estado = false;
 }
 
 

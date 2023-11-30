@@ -259,11 +259,11 @@ public:
     }
 
 
-    vector<string> generarTablaClientes(vector<Cliente> lista) {
+    vector<string> generarTablaClientes(vector<Cliente> lista, bool modificar = false) {
 
 		mostrarHeaderTabla();
         for (Cliente datos : lista) {
-            if(!_isReporte && !datos.getEstado()) continue;
+            if(!_isReporte && !datos.getEstado() && !modificar) continue;
             cout << setw(_columnas[0].ancho) << datos.getId();
             cout << setw(_columnas[1].ancho) << datos.getNombre();
             cout << setw(_columnas[2].ancho) << datos.getApellido();
