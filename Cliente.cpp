@@ -58,6 +58,9 @@ Response<Cliente> Cliente::cargarCliente()
 		response.setFailure("No se pudo crear el cliente");
 	}
 
+	cout << endl <<response.getMessage();
+	
+	_sleep(3000);
 	return response;
 }
 
@@ -166,13 +169,16 @@ Response<Cliente> Cliente::modificarOdarBajaCliente(bool modificar)
 
 			verClienteAmodificar(responseCliente);
 			
-			cliente = cliente.cargarClienteAmodificar();
-			cout << endl;
-			responseCliente.setSuccess("Cliente modificado correctamente!", cliente);
+			responseCliente = opcionModificar(responseCliente);
+
+			cliente = responseCliente.getData();
+
+			///
+
 			archivoCliente.modificarRegistroObajaRegistro(cliente, posicion);
 
 			cout << responseCliente.getMessage();
-			_sleep(2000);
+			_sleep(4000);
 			continuar = true;
 		}
 		else if (opc == 0)
@@ -307,4 +313,200 @@ Cliente Cliente::darBajaCliente(int id)
 
 		return cliente;
 	
+}
+
+//////
+
+
+Response <Cliente> Cliente::opcionModificar(Response <Cliente> &response)
+{
+	Cliente cliente;
+	Archivo <Cliente> archivoCliente("clientes.dat");
+	Response <Cliente> responseCliente;
+
+	int opc;
+	bool continuar = false;
+
+
+	while (!continuar)
+	{
+		cout << endl << "Desea modificar el registro completo o algun campo determinado?" << endl << endl;
+
+		cout << "1) Campo determinado - 2) Todo el registro - 0) Atras" << endl << endl;
+
+
+		cin >> opc;
+
+
+		switch (opc)
+		{
+		case 1:
+			system("cls");
+			response = modificarCampos(response);
+			continuar = true;
+			break;
+		case 2:
+			system("cls");
+			cliente = cargarClienteAmodificar();
+			response.setData(cliente);
+			response.setSuccess("Cliente modificado correctamente, volviendo al menu anterior...", cliente);
+			continuar = true;
+			break;
+		case 0:
+			response.setFailure("No se ha modificado ningun campo, volviendo al menu anterior...");
+			continuar = true;
+			break;
+		default:
+			break;
+		}
+
+	}
+
+	return response;
+
+}
+
+Response <Cliente> Cliente::modificarCampos(Response <Cliente> &response)
+{
+	Cliente cliente;
+	cliente = response.getData();
+
+	bool continuar = false;
+	int campo;
+	int opc = 99;
+	int contador = 0;
+
+	string nombre, apellido, direccion;
+	char razonSocial[50], email [50];
+	long long cuit;
+
+	while (!continuar)
+	{
+		headerProductoAmodificar(response);
+
+		cout << "Selecciones campo que desea modificar: " << endl;
+
+		cout << "1) Nombre Cliente - 2) Apellido del Cliente - 3) CUIT - 4) Razon Social - 5) Domicilio 6) Email - 0) Atras" << endl;
+
+		cin.ignore();
+		cin >> campo;
+		system("cls");
+
+		switch (campo)
+		{
+		case 1:
+			headerProductoAmodificar(response);
+			cout << endl << "Ingrese el nuevo nombre del Cliente: ";
+			cin.ignore();
+			getline(cin, nombre);
+			cliente.setNombre(nombre);
+			response.setData(cliente);
+			contador++;
+			response.setSuccess("Cliente modificado correctamente", cliente);
+			break;
+		case 2:
+			headerProductoAmodificar(response);
+			cout << endl << "Ingrese nuevo apellido del Cliente: ";
+			cin.ignore();
+			getline(cin, apellido);
+			cliente.setApellido(apellido);
+			response.setData(cliente);
+			contador++;
+			response.setSuccess("Cliente modificado correctamente", cliente);
+			break;
+		case 3:
+			headerProductoAmodificar(response);
+			cout << endl << "Ingrese nuevo CUIT del Cliente: ";
+			cin.ignore();
+			cin >> cuit;
+			cliente.setCuit(cuit);
+			response.setData(cliente);
+			contador++;
+			response.setSuccess("Cliente modificado correctamente", cliente);
+			break;
+		case 4:
+			headerProductoAmodificar(response);
+			cout << endl << "Ingrese nueva razon social del Cliente: ";
+			cin.ignore();
+			cin.getline(razonSocial, sizeof(razonSocial));
+			cliente.setRazonSocial(razonSocial);
+			response.setData(cliente);
+			contador++;
+			response.setSuccess("Cliente modificado correctamente", cliente);
+			break;
+		case 5:
+			headerProductoAmodificar(response);
+			cout << endl << "Ingrese nuevo domicilio del Cliente: ";
+			cin.ignore();
+			getline(cin, direccion);
+			cliente.setDomicilio(direccion);
+			response.setData(cliente);
+			contador++;
+			response.setSuccess("Cliente modificado correctamente", cliente);
+			break;
+		case 6:
+			headerProductoAmodificar(response);
+			cout << endl << "Ingrese nuevo email del Cliente: ";
+			cin.ignore();
+			cin.getline(email, sizeof(email));
+			cliente.setEmail(email);
+			response.setData(cliente);
+			contador++;
+			response.setSuccess("Cliente modificado correctamente", cliente);
+			break;
+		case 0:
+			continuar = true;
+			break;
+		default:
+			break;
+		}
+
+		system("cls");
+
+		if (contador > 0)
+		{
+
+			headerProductoAmodificar(response);
+			cout << "Desea modificar algun campo mas?" << endl;
+
+			cout << "1) Si - 2) No, Guardar y salir" << endl;
+
+			cin >> opc;
+
+			if (opc == 2)
+			{
+				continuar = true;
+			}
+
+		}
+
+
+		if (opc == 99 || campo == 0)
+		{
+			if (contador == 0)
+			{
+				headerProductoAmodificar(response);
+				response.setFailure("No se ha modificado ningun campo, volviendo al menu anterior...");
+			}
+			continuar = true;
+		}
+	}
+
+	return response;
+
+}
+
+void Cliente::headerProductoAmodificar(Response <Cliente> response)
+{
+	system("cls");
+	cout << "----------------------------------------------" << endl << endl;
+	cout << "------------ CLIENTE A MODFICAR ------------" << endl << endl;
+	cout << "ID Cliente:\t\t\t   N# " << response.getData().getId() << endl;
+	cout << "Nombre del Cliente: \t \t" << "1) " << response.getData().getNombre() << endl;
+	cout << "Apellido del Cliente: \t\t" << "2) " << response.getData().getApellido() << endl;
+	cout << "CUIT del Cliente: \t\t" << "3) " << response.getData().getCuit() << endl;
+	cout << "Razon Social del Cliente: \t" << "4) " << response.getData().getRazonSocial() << endl;
+	cout << "Domicilio del Cliente: \t\t" << "5) " << response.getData().getDomicilio() << endl;
+	cout << "Email del Cliente: \t\t" << "6) " << response.getData().getEmail() << endl << endl;
+	cout << "----------------------------------------------" << endl << endl;
 }

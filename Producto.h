@@ -42,9 +42,18 @@ public:
     Producto cargarProductos(bool inventario = false);
     void mostrarProductos();
 
-    Producto listarYSeleccionarProductoVenta();
+    Producto listarYSeleccionarProductoVenta(float margenUtilidad);
+
+    Producto listarYSeleccionarProductoCompra();
 
     void tablaProductosContenido(vector<Producto> lista, vector<int> columnas, int anchoTabla);
+
+    /// 23 - 11
+
+    Response <Producto> opcionModificar(Response <Producto> &response);
+    Response <Producto> modificarCampos(Response <Producto>& response);
+    void headerProductoAmodificar(Response <Producto> response);
+
 
 private:
 

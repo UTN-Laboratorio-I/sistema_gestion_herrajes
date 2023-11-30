@@ -136,6 +136,7 @@
     <ClCompile Include="Caja.cpp" />
     <ClCompile Include="Cliente.cpp" />
     <ClCompile Include="Compra.cpp" />
+    <ClCompile Include="Configuracion.cpp" />
     <ClCompile Include="Detalle.cpp" />
     <ClCompile Include="DetalleDto.cpp" />
     <ClCompile Include="DetalleStockDto.cpp" />
@@ -163,7 +164,6 @@
     <ClCompile Include="Venta.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Downloads\httplib.h" />
     <ClInclude Include="AdminABM.h" />
     <ClInclude Include="AdminCompra.h" />
     <ClInclude Include="AdminConfig.h" />
@@ -175,6 +175,7 @@
     <ClInclude Include="Caja.h" />
     <ClInclude Include="Cliente.h" />
     <ClInclude Include="Compra.h" />
+    <ClInclude Include="Configuracion.h" />
     <ClInclude Include="Detalle.h" />
     <ClInclude Include="DetalleDto.h" />
     <ClInclude Include="DetalleStockDto.h" />

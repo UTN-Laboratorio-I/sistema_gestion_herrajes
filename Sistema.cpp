@@ -18,6 +18,7 @@ Sistema::Sistema() {
 	_modulo = "Login";
 	_subModulo = "";
 	_usuario;
+	_config.setConfiguracion();
 }
 
 void Sistema::setEncendido(bool set) { _encendido = set; }
@@ -55,6 +56,17 @@ void Sistema::setError(string mensaje) { _error.setError(true, mensaje); }
 string Sistema::getError() { return _error.getErrorMensaje(); }
 bool Sistema::hasError() { return _error.hasError(); }
 void Sistema::limpiarError() { _error.limpiarErrores(); }
+
+void Sistema::setMargenUtilidad(float margen) { 
+	_config.setMargenUtilidad(margen);
+}
+float Sistema::getMargenUtilidad() { return _config.getMargenUtilidad(); }
+
+void Sistema::setFormatoFecha(int formato) { _config.setFormatoFecha(formato); }
+int Sistema::getFormatoFecha() { return _config.getFormatoFecha(); }
+
+void Sistema::setCarpetaBackUp(const char* carpeta) { _config.setCarpetaBackUp(carpeta); }
+const char* Sistema::getCarpetaBackUp() { return _config.getCarpetaBackUp(); }
 
 #pragma endregion
 

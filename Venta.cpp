@@ -34,12 +34,12 @@ void Venta::agregarADetalleVenta(Producto producto, int cantidad) {
 	_detalle.push_back(detalle);
 }
 
-void Venta::agregarProducto(Producto producto) {
+int Venta::agregarProducto(Producto producto) {
 	int cant;
-	cout << "¿Cuantas unidades de " << producto.getNombreProducto() << "? ";
+	cout << "Indique unidades de " << producto.getNombreProducto() << " a vender: ";
 	cin >> cant;
 
-	this->agregarADetalleVenta(producto, cant);
+	return cant;
 }
 
 void Venta::carritoDeVenta(bool ventaRealizada=false) {
@@ -47,7 +47,7 @@ void Venta::carritoDeVenta(bool ventaRealizada=false) {
 	for (Detalle detalle : _detalle) {
 		//Obtenemos el id del registro y cada detalle de la lista:
 		int id = _id;
-		DetalleDto detalleDto(detalle, id);
+		DetalleDto detalleDto(detalle, id, _tipo);
 		carrito.push_back(detalleDto);
 	}
 
@@ -74,6 +74,7 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 	//headerDinamico, y así evitar que la consola se ensucie entre pantalla y pantalla.
 	Archivo<TransaccionDto> archivoTransaccion("transacciones.dat");
 	Archivo<DetalleDto> archivoDetalle("detalles.dat");
+	//Archivo <Producto> archivoProducto("productos.dat");
 	Response<TransaccionDto> response;
 	vector<DetalleDto> detalleVenta;
 	Venta venta;
@@ -81,6 +82,7 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 	Stock stock;
 	Caja caja;
 
+	float margenUtilidad = sistema->getMargenUtilidad() * 1.0;
 	bool finalizarVenta = false;
 
 	ventas_UI.ver_CarritoVentas(detalleVenta);
@@ -88,34 +90,58 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 	while (!finalizarVenta) {
 		Producto producto;
 		char opc;
-
-
+		
 		ventas_UI.headerDinamico();
 		venta.carritoDeVenta();
 		//Obtener listado de productos disponibles para venta:
-		producto = producto.listarYSeleccionarProductoVenta();
-
-		ventas_UI.headerDinamico();
-		//Seleccionar cantidad y añadir al carrito:
-		venta.agregarProducto(producto);
-
-		ventas_UI.headerDinamico();
-		//Consultar si desea finalizar la venta:
-		cout << "Desea finalizar la venta? (s/n): ";
-		cin >> opc;
-		if (opc == 's' || opc == 'S') {
-			finalizarVenta = !finalizarVenta;
-			sistema->setSubModulo("VENTA FINALIZADA");
-			ventas_UI.headerDinamico();
-		}
+		producto = producto.listarYSeleccionarProductoVenta(margenUtilidad);
 		
+		if (producto.getNombreProducto() != "") { //En caso de que no retorne un producto vacío, se procede a agregarlo al carrito:
+			bool continuar = false;
+			bool error = false;
+
+			while (!continuar) {
+				if(error) 
+				{
+					ventas_UI.headerDinamico();
+				}
+				//Seleccionar cantidad y añadir al carrito:
+				Archivo<StockDto> archivoStock("stock.dat");
+				Response<StockDto> stockProducto = archivoStock.buscarUnRegistro(producto.getId());
+				int cantidad = venta.agregarProducto(producto);
+				int cantidadEnStock = stockProducto.getData().getCantidadTotal();
+				if (cantidad > 0 && cantidad <= cantidadEnStock) {
+					venta.agregarADetalleVenta(producto, cantidad);
+					continuar = true;
+				}
+				else {
+					sistema->setError("El stock maximo de "+ producto.getNombreProducto() + " es " + to_string(cantidadEnStock) + " unidades.");
+					error = true;
+				}
+			}
+			sistema->limpiarError();
+
+			//Consultar si desea finalizar la venta:
+			cout << "Desea finalizar la venta? (s/n): ";
+			cin >> opc;
+			if (opc == 's' || opc == 'S') {
+				finalizarVenta = !finalizarVenta;
+				sistema->setSubModulo("VENTA FINALIZADA");
+				ventas_UI.headerDinamico();
+			}
+		sistema->limpiarError();
+		}
+		else { //caso contrario, se muestra el error correspondiente:
+			sistema->setError("Seleccione un producto valido");
+		}
 	}
 	//Obtenemos el total de la venta y lo guardamos en la transacción:
 	float acumuladorTotal = 0;
 	int cantidadProductos = 0;
 	for(Detalle detalle : venta._detalle){
 		Producto prod = detalle.getProducto();
-		acumuladorTotal += detalle.getCantidad() * prod.getPrecioCosto(); //Modificar por precio venta!!!
+		float precioVenta = prod.getPrecioCosto() * margenUtilidad;
+		acumuladorTotal += detalle.getCantidad() * precioVenta; //Modificar por precio venta!!!
 		cantidadProductos += detalle.getCantidad();
 	}
 	venta.setMonto(acumuladorTotal);
@@ -141,19 +167,23 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 	for (Detalle detalle : venta._detalle) {
 		//Obtenemos el id del registro y cada detalle de la lista:
 		int id = registro.getData().getId();
-		DetalleDto detalleDto(detalle, id);
+		DetalleDto detalleDto(detalle, id, _tipo);
 
 		Response<DetalleDto> registroDetalle = archivoDetalle.grabarRegistroArchivo(detalleDto);
 
 		//Modificamos el stock del producto:
 		stock.gestionarStock(detalle.getCantidad(), detalle.getProducto().getId(), _tipo);
+		/*Producto productoAmodificar = detalle.getProducto();
+		archivoProducto.modificarRegistroObajaRegistro(productoAmodificar, productoAmodificar.getId());*/
+		
 
 				//Si algún registro falla, devolvemos false:
 		if (registroDetalle.getSuccess() == false) {
 			registroCorrecto = false;
 		}
 	}
-
+	Archivo<StockDto> archivoStock("stock.dat");
+	vector<StockDto> stockActualizado = archivoStock.listarRegistroArchivo();
 	//Si se registraron correctamente tanto detalles como transaccion, se avanza OK:
 	if (registro.getSuccess() && registroCorrecto) {
 		//caja.gestionarCaja(_monto, _tipo);

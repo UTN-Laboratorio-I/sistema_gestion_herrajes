@@ -57,7 +57,7 @@ Response<StockDto> Stock::sumarStock(int cantidad, int idProducto) {
 	cantidadActualizada = response.getData().getCantidadTotal() + cantidad;
 	}
 
-	StockDto stock(idProducto, cantidad);
+	StockDto stock(idProducto, cantidadActualizada);
 
 	auto funcionValidar = [this](int idProducto, T objetoArchivo) {return validarStock(idProducto, objetoArchivo); };
 

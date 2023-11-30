@@ -16,10 +16,12 @@ public:
 
 	void administrarModuloConfig();
 
+	void administrarConfiguracionFecha();
+
+	void administrarConfiguracionMargenUtilidad();
+
+	void administrarCarpetaDeBackups();
+
 	void realizarCopiaDeSeguridad();
-
-	void generarBackUp();
-
-
 };
 

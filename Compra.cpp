@@ -6,6 +6,7 @@
 #include "Fecha.h"
 #include "cstring"
 #include "Caja.h"
+#include "TablaDto.h"
 
 
 //CONSTRUCTOR
@@ -31,10 +32,39 @@ char Compra::getTipoTransaccion() { return _tipo; }
 
 //DESARROLLO DE METODOS------------
 
+
+void Compra::carritoDeCompra(bool compraRealizada, Producto &producto){
+	vector<DetalleDto> carrito;
+	for (Detalle detalle : _detalle) {
+		//Obtenemos el id del registro y cada detalle de la lista:
+		int id = _id;
+		DetalleDto detalleDto(detalle, id, _tipo);
+		carrito.push_back(detalleDto);
+	}
+
+	if (!_detalle.empty()) {
+		if (compraRealizada) {
+			cout << "Compra realizada con exito!" << endl;
+		}
+		else {
+			cout << "Carrito de compra: " << endl;
+		}
+		TablaDto<DetalleDto> tabla("carrito compras", carrito, false);
+		_listaTemporalCarrito.push_back(producto.getNombreProducto());
+		tabla.generarCarritoProductosCompras(carrito, producto, _listaTemporalCarrito);
+
+	}
+
+	if (compraRealizada)
+	cout << endl << endl;
+}
+
 void Compra::agregarADetalleCompra(Producto producto, int cantidad) {
 	Detalle detalle(producto, cantidad);
 	_detalle.push_back(detalle);
 }
+
+
 
 
 bool Compra::realizarCompra(Sistema* sistema)
@@ -54,6 +84,7 @@ bool Compra::realizarCompra(Sistema* sistema)
 	Fecha fecha;
 	InterfazUI subCompras_UI(sistema);
 
+	bool elijeProductoExistente;
 
 	bool continuar = true;
 
@@ -66,23 +97,21 @@ bool Compra::realizarCompra(Sistema* sistema)
 		{
 		case 1:
 			subCompras_UI.headerDinamico();
+			elijeProductoExistente = productoExistente();
 			responseProveedor = proveedor.buscarProveedor();
 			if (!responseProveedor.getSuccess()) { break; }
-			header.limpiarConsola();
 			subCompras_UI.headerDinamico();
 			//proveedor = proveedorExistente.getData();
-			registrarNuevaCompra(sistema, subCompras_UI, responseProveedor);
+			registrarNuevaCompra(sistema, subCompras_UI, responseProveedor, elijeProductoExistente);
 			break;
 		case 2:
 			subCompras_UI.headerDinamico();
+			elijeProductoExistente = productoExistente();
 			responseProveedor = proveedor.cargarProveedor();
 			//proveedor = responseNuevoProveedor.getData();
 			//responseNuevoProveedor.setData(proveedor);
-			registrarNuevaCompra(sistema, subCompras_UI, responseProveedor);
+			registrarNuevaCompra(sistema, subCompras_UI, responseProveedor, elijeProductoExistente);
 			//proveedor = responseNuevoProveedor.getData();
-			break;
-		case 3:
-			compra.mostrarCompras();
 			break;
 		case 0:
 			sistema->setModuloPantalla("Compras", 0);
@@ -99,12 +128,19 @@ bool Compra::realizarCompra(Sistema* sistema)
 	return true;
 }
 
-Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, InterfazUI interfaz, Response <Proveedor> prov)
+Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, InterfazUI interfaz, Response <Proveedor> prov, bool productoExistente)
 {
 	Archivo<TransaccionDto> archivoTransaccion("transacciones.dat");
 	Archivo<DetalleDto> archivoDetalle("detalles.dat");
+	Archivo <Producto> archivoProducto("productos.dat");
 	
-	vector <Producto> producto;
+	vector <Producto> vectorProducto;
+
+	vectorProducto = archivoProducto.listarRegistroArchivo();
+
+	TablaDto <Producto> tablaProductos("productos", vectorProducto, true, false);
+	
+
 
 	Response<TransaccionDto> response;
 	Response <Producto> responseProducto;
@@ -113,32 +149,72 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 	Helper helper;
 	Proveedor proveedor;
 	Fecha fecha;
-	Detalle detalle;
+	vector <DetalleDto>detalle;
 	Stock stock;
 	Caja caja;
 	Compra compra;
 
+	float margenUtilidad = sistema->getMargenUtilidad() * 1.0;
+
 
 
 	bool continuarCompra = true;
+	bool cancelarCompra = false;
 	int opc;
 	int contador = 1;
+	int cantidadDetalleProducto=0;
 
 
 	while (continuarCompra)
 	{
+		interfaz.headerDinamico();
+
+		interfaz.ver_CarritoCompras(detalle);
+
+		if (contador > 1)
+		{
+			compra.carritoDeCompra(false,productoAcargar);
+		}
+		
 		proveedor.ver_ProveedorEncontrado(prov);
 
-		cout << "----------- COMPRA DE PRODUCTOS -----------" << endl << endl;
+		cout << endl << "----------- COMPRA DE PRODUCTOS -----------" << endl << endl;
 
-		cout << "ITEM N: " << contador << endl;
-		
-		productoAcargar = productoAcargar.cargarProductos();
+		cout << "ITEM N: " << contador << endl << endl;
+		/*
+		if (productoExistente == false)
+		{
+			productoAcargar = productoAcargar.cargarProductos();
+			compra.agregarADetalleCompra(productoAcargar, productoAcargar.getCantidad());
+		}
+		else
+		{	//Compra de producto existente
+			productoAcargar = productoAcargar.listarYSeleccionarProductoCompra();
+			cantidadDetalleProducto = seleccionarCantidad();
+			productoAcargar = ingresarPrecioCosto(productoAcargar);
+			compra.agregarADetalleCompra(productoAcargar, cantidadDetalleProducto);
+		}
+		*/
+		productoAcargar = productoAcargar.listarYSeleccionarProductoCompra();
 
-		compra.agregarADetalleCompra(productoAcargar, productoAcargar.getCantidad());
+		switch (productoAcargar.getId()) {
+		case 0:
+			productoAcargar = productoAcargar.cargarProductos();
+			compra.agregarADetalleCompra(productoAcargar, productoAcargar.getCantidad());
+			break;
+		case -1:
+			response.setFailure("Compra cancelada");
+			return response;
+			break;
+			default:
+			cantidadDetalleProducto = seleccionarCantidad();
+			productoAcargar = ingresarPrecioCosto(productoAcargar);
+			compra.agregarADetalleCompra(productoAcargar, cantidadDetalleProducto);
+		}
 
 		cout << endl << "Desea continuar la compra ?" << endl <<"1) SI // 2): NO" << endl << endl;
 
+		
 		cin >> opc;
 
 		helper.limpiarConsola();
@@ -149,11 +225,13 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 
 		if (opc != 1)
 		{
-			cout << "Compra finalizada!" << endl;
-			_sleep(2000);
+			compra.carritoDeCompra(true, productoAcargar);
+			cout << endl << "Compra finalizada!" << endl;
+			_sleep(4000);
 			continuarCompra = false;
 		}
 
+	
 	}
 
 	float acumuladorTotal = 0;
@@ -190,11 +268,22 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 		//Obtenemos el id del registro y cada detalle de la lista:
 		int id = registro.getData().getId();
 
-		Archivo <Producto> archivoProducto("productos.dat");
-		responseProducto = archivoProducto.grabarRegistroArchivo(detalle.getProducto());
+		if (!productoExistente)
+		{
+			Archivo <Producto> archivoProducto("productos.dat");
+			responseProducto = archivoProducto.grabarRegistroArchivo(detalle.getProducto());
 
-		detalle.setIdProducto(responseProducto.getData().getId());
-		DetalleDto detalleDto(detalle, id);
+			detalle.setIdProducto(responseProducto.getData().getId());
+		}
+		
+		//Que mierda hace esto:
+		/*Producto produ = detalle.getProducto();
+		if (productoExistente)
+		{
+			archivoProducto.modificarRegistroObajaRegistro(produ, detalle.getProducto().getId());
+		}*/
+
+		DetalleDto detalleDto(detalle, id, _tipo);
 
 		Response<DetalleDto> registroDetalle = archivoDetalle.grabarRegistroArchivo(detalleDto);
 
@@ -267,4 +356,49 @@ void Compra::mostrarProductosComprados()
 	}
 
 	system("pause");
+}
+
+bool Compra::productoExistente()
+{
+	int opc;
+
+	cout << "Desea comprar un producto existente?" <<" 1) SI // 2): NO" << endl << endl;
+
+	cin >> opc;
+
+	if (opc == 1)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+int Compra::seleccionarCantidad()
+{
+	int cant;
+
+	cout << "Seleccione cantidad que desea comprar: ";
+
+	cin >> cant;
+
+	return cant;
+}
+
+Producto Compra::ingresarPrecioCosto(Producto &producto)
+{
+	float precioCosto = producto.getPrecioCosto();
+	
+	if (precioCosto == 0)
+	{
+		cout << "Ingresar precio de costo: ";
+
+		cin >> precioCosto;
+	}
+	
+	producto.setPrecioCosto(precioCosto);
+	
+	return producto;
 }

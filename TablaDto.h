@@ -11,7 +11,6 @@
 #include "TransaccionDto.h"
 
 using namespace std;
-
 #pragma once
 
 template <class T>
@@ -106,7 +105,7 @@ public:
             columnasResult.push_back({ "Descripción", 30 });
             //columnasResult.push_back({ "Precio Costo", 15 });
             columnasResult.push_back({ "Precio Venta", 15 });
-            //columnasResult.push_back({ "Cantidad", 15 });
+            columnasResult.push_back({ "Stock", 15 });
 
             break;
         case 2: //Cliente
@@ -151,7 +150,7 @@ public:
             columnasResult.push_back({ "Descripción", 30 });
             columnasResult.push_back({ "Precio Costo", 15 });
             columnasResult.push_back({ "Precio Venta", 15 });
-            columnasResult.push_back({ "Stock disponible", 15 });
+            columnasResult.push_back({ "Stock", 20 });
 			break;
         case 7: //Reporte Usuarios
             columnasResult.push_back({ "Id", 5 });
@@ -187,6 +186,18 @@ public:
             columnasResult.push_back({ "Monto", 15 });
             columnasResult.push_back({ "Total", 10 });
 			break;
+        case 12://Carrito compra
+            columnasResult.push_back({ "Item nro", 10 });
+            columnasResult.push_back({ "Nombre Producto", 20 });
+            columnasResult.push_back({ "Precio Unitario", 20 });
+            columnasResult.push_back({ "Cantidad", 10 });
+            columnasResult.push_back({ "Subtotal", 15 });
+            break;
+        case 13://Productos compras
+            columnasResult.push_back({ "Id", 5 });
+            columnasResult.push_back({ "Nombre", 30 });
+            columnasResult.push_back({ "Descripción", 30 });
+            columnasResult.push_back({ "Precio Costo", 15 });
         default:
             break;
         }
@@ -220,17 +231,34 @@ public:
     vector<string> generarTablaProductos(vector<Producto> lista) {
         mostrarHeaderTabla();
         for (Producto datos : lista) {
+            if(!_isReporte && !datos.getEstado()) continue;  //En caso de que el producto no este activo y no sea reporte, no lo mostramos.
 			cout << setw(_columnas[0].ancho) << datos.getId();
 			cout << setw(_columnas[1].ancho) << datos.getNombreProducto();
 			cout << setw(_columnas[2].ancho) << datos.getDescripcionProducto();
 			//cout << setw(_columnas[3].ancho) << datos.getPrecioCosto();
 			cout << setw(_columnas[3].ancho) << datos.getPrecioVenta();
-			//cout << setw(_columnas[5].ancho) << datos.getCantidad();
+			cout << setw(_columnas[4].ancho) << datos.getCantidad();
 			cout << endl;
 		}
         cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
         return _headers;
 	}
+
+    vector<string> generarTablaProductosCompra(vector<Producto> lista) {
+        mostrarHeaderTabla();
+        for (Producto datos : lista) {
+            cout << setw(_columnas[0].ancho) << datos.getId();
+            cout << setw(_columnas[1].ancho) << datos.getNombreProducto();
+            cout << setw(_columnas[2].ancho) << datos.getDescripcionProducto();
+            cout << setw(_columnas[3].ancho) << datos.getPrecioCosto();
+            cout << endl;
+        }
+        cout << "999) Comprar producto nuevo" << endl;
+        cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
+        return _headers;
+    }
+
+
     vector<string> generarTablaClientes(vector<Cliente> lista) {
 
 		mostrarHeaderTabla();
@@ -263,6 +291,28 @@ public:
             cout << setw(_columnas[1].ancho) << res.getData().getNombreProducto();
             cout << setw(_columnas[2].ancho) << datos.getCantidad();
             cout << setw(_columnas[3].ancho) << datos.getPrecioUnitario();
+            cout << setw(_columnas[4].ancho) << subtotal;
+            cout << endl;
+            contador++;
+        }
+        cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
+        return _headers;
+
+    }
+
+    vector<string> generarCarritoProductosCompras(vector<DetalleDto> carrito, Producto producto, vector<string> listaTemporal) {
+        Response<Producto> res;
+        Archivo<Producto> archivoProducto("productos.dat");
+
+        int contador = 1;
+        mostrarHeaderTabla();
+        for (DetalleDto datos : carrito) {
+            res = archivoProducto.buscarUnRegistro(datos.getIdProducto());
+            int subtotal = datos.getCantidad() * datos.getPrecioUnitario();
+            cout << setw(_columnas[0].ancho) << contador;
+            cout << setw(_columnas[1].ancho) << listaTemporal[contador-1];
+            cout << setw(_columnas[2].ancho) << datos.getPrecioUnitario();
+            cout << setw(_columnas[3].ancho) << datos.getCantidad();
             cout << setw(_columnas[4].ancho) << subtotal;
             cout << endl;
             contador++;
@@ -310,16 +360,23 @@ public:
 
     }
 
-    vector<string> generarReporteProductos(vector<Producto> lista) {
+    vector<string> generarReporteProductos(vector<Producto> lista,float margenUtilidad) {
+        Archivo<StockDto> archivoStock("stock.dat");
 
 		mostrarHeaderTabla();
 		for (Producto datos : lista) {
-			cout << setw(_columnas[0].ancho) << datos.getId();
-			cout << setw(_columnas[1].ancho) << datos.getNombreProducto();
-			cout << setw(_columnas[2].ancho) << datos.getDescripcionProducto();
-			cout << setw(_columnas[3].ancho) << datos.getPrecioCosto();
-			cout << setw(_columnas[4].ancho) << datos.getPrecioVenta();
-			cout << setw(_columnas[5].ancho) << datos.getCantidad();
+            //Buscamos el stock disponible del producto en cuestión:
+            if(!_isReporte && !datos.getEstado()) continue;
+			Response<StockDto> res = archivoStock.buscarUnRegistro(datos.getId());
+			int stock = res.getData().getCantidadTotal();
+            //-----------------------------------------------
+
+            cout << setw(_columnas[0].ancho) << datos.getId();
+            cout << setw(_columnas[1].ancho) << datos.getNombreProducto();
+            cout << setw(_columnas[2].ancho) << datos.getDescripcionProducto();
+            cout << setw(_columnas[3].ancho) << datos.getPrecioCosto();
+            cout << setw(_columnas[4].ancho) << datos.getPrecioCosto() * margenUtilidad;
+			cout << setw(_columnas[5].ancho) << stock;
 			cout << endl;
 		}
 		cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
@@ -369,31 +426,13 @@ public:
                     cout << setw(_columnas[7].ancho) << detalle.getSubTotal();
                     cout << endl;
                 }
-                cout << setfill('.') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
+                cout << setfill('.') << setw(_anchoTotalTabla) << "." << setfill(' ') << endl;
 		    }
 
 		cout << setfill('-') << setw(_anchoTotalTabla) << "-" << setfill(' ') << endl;
         return _headers;
 
     }
- 
-   /* void generarTablaCompras(vector<TransaccionDto> listaTransaccion, vector<Compras> listaCompras) {
-        mostrarHeaderTabla();
-
-        for (TransaccionDto transaccion : listaTransaccion) {
-            vector<Compras> comprasFiltradas;
-            cout << setw(_columnas[0].ancho) << transaccion.getId();
-
-            for(Compras compra : listaCompras) {
-				if (compra.getIdTransaccion() == transaccion.getId()) {
-                    cout << setw(_columnas[0].ancho) << datos.getRol();
-				}
-			})
-        }
-    }*/
-
-	
-	
 
 #pragma endregion contenido
     

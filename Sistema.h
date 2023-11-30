@@ -2,6 +2,7 @@
 #include <iostream>
 #include "ErrorDto.h"
 #include "Usuario.h"
+#include "Configuracion.h"
 using namespace std;
 
 class Sistema
@@ -13,6 +14,7 @@ protected:
 	string _subModulo;
 	Usuario _usuario;
 	ErrorDto _error;
+	Configuracion _config;
 public:
 #pragma region Constructor
 	Sistema();
@@ -47,6 +49,18 @@ public:
 	std::string getError();
 	bool hasError();
 	void limpiarError();
+
+	void setMargenUtilidad(float m);
+	float getMargenUtilidad();
+
+	void setFormatoFecha(int f);
+	int getFormatoFecha();
+
+	const char* getCarpetaBackUp();
+	void setCarpetaBackUp(const char* carpeta);
+
+	/*void setFormatoMoneda(int f);
+	int getFormatoMoneda();*/
 
 #pragma endregion
 

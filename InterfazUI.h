@@ -39,6 +39,9 @@ public:
 	void ver_SubMenuReportesUsuario();
 
 	void ver_MenuConfig();
+	void ver_setearMargenUtilidad();
+	void ver_seleccionFormatoFecha();
+	void ver_setearCarpetaBackUp();
 
 	void ver_MenuUsuario();
 
@@ -46,6 +49,7 @@ public:
 	void ver_MenuVentas();
 	int ver_VentasClienteExistente();
 	void ver_CarritoVentas(vector<DetalleDto> detalle);
+	void ver_CarritoCompras(vector<DetalleDto> detalle);
 
 };
 

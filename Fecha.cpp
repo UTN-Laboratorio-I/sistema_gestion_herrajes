@@ -1,8 +1,9 @@
 #pragma warning(disable : 4996) //_CRT_SECURE_NO_WARNINGS
+#include "Fecha.h"
+#include "Helper.h"
 #include <ctime>
 #include <iostream>
 #include <chrono>
-#include "fecha.h"
 
 int Fecha::getDia() {
     return _dia;
@@ -22,14 +23,9 @@ void Fecha::setMes(int mes) {
 void Fecha::setAnio(int anio) {
     _anio = anio;
 }
-///Queda por revisar la funcion localtime
+
 Fecha::Fecha() {
-    /*time_t t = time(NULL);
-    struct tm* f = localtime(&t);
-    _dia = (*f).tm_mday; // Indirecciona f y accede a tm_mday
-    _mes = f->tm_mon + 1; // Indirecciona f y accede a tm_mon
-    _anio = f->tm_year + 1900;
-    _diaSemana = f->tm_wday;*/
+
 }
 Fecha::Fecha(int dia, int mes, int anio) {
     setDia(dia);
@@ -52,6 +48,12 @@ std::string Fecha::getNombreDia() {
 }
 
 std::string Fecha::hoy() {
+    Helper helper;
+    Archivo<Configuracion> archivoConfiguracion("configuracion.dat");
+    Response<Configuracion> configuracion;
+    configuracion = archivoConfiguracion.obtenerConfiguracion();
+    int configuracionFecha = configuracion.getData().getFormatoFecha();
+
     std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
 
     // Convierte el punto de tiempo actual a un objeto de tiempo local
@@ -66,11 +68,16 @@ std::string Fecha::hoy() {
     _dia = localTime->tm_mday;           // Día del mes
 
     // Imprime la fecha actual
-    std::string fecha =""+ std::to_string(_dia) + "/" + std::to_string(_mes) + "/"+ std::to_string(_anio)+"";
+    string fecha = helper.conversorFormatoFecha(configuracionFecha, *this);
     return fecha;
 }
 
 Fecha Fecha::now() {
+    Archivo<Configuracion> archivoConfiguracion("configuracion.dat");
+    Response<Configuracion> configuracion;
+    configuracion = archivoConfiguracion.obtenerConfiguracion();
+    int configuracionFecha = configuracion.getData().getFormatoFecha();
+
     std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
 
     // Convierte el punto de tiempo actual a un objeto de tiempo local
@@ -87,4 +94,12 @@ Fecha Fecha::now() {
     Fecha fecha(_dia, _mes, _anio);
 
     return fecha;
+}
+
+void Fecha::setFormatoFecha(int formato) {
+	_formatoFecha = formato;
+}
+
+int Fecha::getFormatoFecha() {
+	return _formatoFecha;
 }

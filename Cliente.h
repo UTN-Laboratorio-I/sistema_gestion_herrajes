@@ -10,6 +10,13 @@ class Cliente : public Persona
 {
 
 public:
+	int getId();
+	char* getRazonSocial();
+	long long getCuit();
+
+	void setId(int id);
+	void setCuit(long long cuit);
+	void setRazonSocial(const char* razonSocial);
 
 	Response<Cliente> cargarCliente();
 	Cliente cargarClienteAmodificar();
@@ -22,17 +29,18 @@ public:
 	/// </summary>
 	/// <returns></returns>
 
-	int getId();
-	char* getRazonSocial();
-	long long getCuit();
-
-	void setId(int id);
-	void setCuit(long long cuit);
-	void setRazonSocial(const char* razonSocial);
 
 	Cliente listarYSeleccionarClienteExistente();
 
 	void verClienteAmodificar(Response <Cliente> responseCliente);
+
+	///
+
+	Response <Cliente> opcionModificar(Response <Cliente> &response);
+	Response <Cliente> modificarCampos(Response <Cliente> &response);
+	void headerProductoAmodificar(Response <Cliente> response);
+
+
 
 private:
 
@@ -40,4 +48,5 @@ private:
 	char _razonSocial[50];
 	long long _cuit;
 	bool modificar = true;
+	char nuevoCuit[30];
 };
