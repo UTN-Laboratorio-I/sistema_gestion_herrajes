@@ -113,9 +113,6 @@ bool Compra::realizarCompra(Sistema* sistema)
 			registrarNuevaCompra(sistema, subCompras_UI, responseProveedor, elijeProductoExistente);
 			//proveedor = responseNuevoProveedor.getData();
 			break;
-		case 3:
-			compra.mostrarCompras();
-			break;
 		case 0:
 			sistema->setModuloPantalla("Compras", 0);
 			continuar = false;
@@ -162,6 +159,7 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 
 
 	bool continuarCompra = true;
+	bool cancelarCompra = false;
 	int opc;
 	int contador = 1;
 	int cantidadDetalleProducto=0;
@@ -183,7 +181,7 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 		cout << endl << "----------- COMPRA DE PRODUCTOS -----------" << endl << endl;
 
 		cout << "ITEM N: " << contador << endl << endl;
-		
+		/*
 		if (productoExistente == false)
 		{
 			productoAcargar = productoAcargar.cargarProductos();
@@ -192,6 +190,23 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 		else
 		{	//Compra de producto existente
 			productoAcargar = productoAcargar.listarYSeleccionarProductoCompra();
+			cantidadDetalleProducto = seleccionarCantidad();
+			productoAcargar = ingresarPrecioCosto(productoAcargar);
+			compra.agregarADetalleCompra(productoAcargar, cantidadDetalleProducto);
+		}
+		*/
+		productoAcargar = productoAcargar.listarYSeleccionarProductoCompra();
+
+		switch (productoAcargar.getId()) {
+		case 0:
+			productoAcargar = productoAcargar.cargarProductos();
+			compra.agregarADetalleCompra(productoAcargar, productoAcargar.getCantidad());
+			break;
+		case -1:
+			response.setFailure("Compra cancelada");
+			return response;
+			break;
+			default:
 			cantidadDetalleProducto = seleccionarCantidad();
 			productoAcargar = ingresarPrecioCosto(productoAcargar);
 			compra.agregarADetalleCompra(productoAcargar, cantidadDetalleProducto);
@@ -216,6 +231,7 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 			continuarCompra = false;
 		}
 
+	
 	}
 
 	float acumuladorTotal = 0;

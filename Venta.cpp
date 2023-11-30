@@ -34,12 +34,12 @@ void Venta::agregarADetalleVenta(Producto producto, int cantidad) {
 	_detalle.push_back(detalle);
 }
 
-void Venta::agregarProducto(Producto producto) {
+int Venta::agregarProducto(Producto producto) {
 	int cant;
-	cout << "¿Cuantas unidades de " << producto.getNombreProducto() << "? ";
+	cout << "Indique unidades de " << producto.getNombreProducto() << " a vender: ";
 	cin >> cant;
 
-	this->agregarADetalleVenta(producto, cant);
+	return cant;
 }
 
 void Venta::carritoDeVenta(bool ventaRealizada=false) {
@@ -97,9 +97,29 @@ Response<TransaccionDto> Venta::crearNuevaVenta(Sistema* sistema) {
 		producto = producto.listarYSeleccionarProductoVenta(margenUtilidad);
 		
 		if (producto.getNombreProducto() != "") { //En caso de que no retorne un producto vacío, se procede a agregarlo al carrito:
+			bool continuar = false;
+			bool error = false;
 
-			//Seleccionar cantidad y añadir al carrito:
-			venta.agregarProducto(producto);
+			while (!continuar) {
+				if(error) 
+				{
+					ventas_UI.headerDinamico();
+				}
+				//Seleccionar cantidad y añadir al carrito:
+				Archivo<StockDto> archivoStock("stock.dat");
+				Response<StockDto> stockProducto = archivoStock.buscarUnRegistro(producto.getId());
+				int cantidad = venta.agregarProducto(producto);
+				int cantidadEnStock = stockProducto.getData().getCantidadTotal();
+				if (cantidad > 0 && cantidad <= cantidadEnStock) {
+					venta.agregarADetalleVenta(producto, cantidad);
+					continuar = true;
+				}
+				else {
+					sistema->setError("El stock maximo de "+ producto.getNombreProducto() + " es " + to_string(cantidadEnStock) + " unidades.");
+					error = true;
+				}
+			}
+			sistema->limpiarError();
 
 			//Consultar si desea finalizar la venta:
 			cout << "Desea finalizar la venta? (s/n): ";
