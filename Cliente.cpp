@@ -163,13 +163,13 @@ Response<Cliente> Cliente::modificarOdarBajaCliente(bool modificar)
 			continue;
 		}*/
 
-		/*if (idCliente < 1 || idCliente > id)
+		if (idCliente < 1 || idCliente > id)
 		{
 			
 			cout << endl << "El numero de ID seleccionado no existe, seleccione un ID valido..." << endl;
 			_sleep(2000);
 			continue;
-		}*/
+		}
 		
 		int posicion = archivoCliente.buscarPosRegistro(cliente, idCliente);
 
