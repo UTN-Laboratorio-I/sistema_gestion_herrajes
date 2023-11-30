@@ -276,7 +276,6 @@ Response <TransaccionDto> Compra::registrarNuevaCompra(Sistema *sistema, Interfa
 
 		Producto produ = detalle.getProducto();
 
-		//Que mierda hace esto:
 		if (productoExistente)
 		{	
 			Response <Producto> existente = archivoProducto.buscarUnRegistro(produ.getId());

@@ -35,9 +35,6 @@ void AdminConfig::administrarModuloConfig() {
 			administrarConfiguracionMargenUtilidad();
 			break;
 		case 3:
-			administrarCarpetaDeBackups();
-			break;
-		case 4:
 			realizarCopiaDeSeguridad();
 			break;
 		case 0:
